@@ -1,0 +1,54 @@
+﻿[
+  {
+    "Ip": "192.168.100.28",
+    "Port": 21,
+    "Uid": "xiezhu_trns",
+    "Pwd": "xiezhu_e_trns",
+    "RemoteFolder": "clm",
+    "RemoteBackupFolder": "",
+    "MessageQueuePath": "",
+    "LocalDirectory": "D:\\BatchImages\\image",
+    "LocalBackupFolder": "",
+    "NameContains": "",
+    "FileType": "_03申请信息导入",
+    "IsDirectory": false,
+    "IsEntiretyInPutMsmq": false,
+    "ThreadMillisecondsTimeout": 60000,
+    "MaxDegreeOfParallelism": 8
+  },
+  {
+
+    "Ip": "192.168.100.28",
+    "Port": 21,
+    "Uid": "xiezhu_ext_trns",
+    "Pwd": "xiezhu_2_trns",
+    "RemoteFolder": "claim_img",
+    "RemoteBackupFolder": "ClaimImageBackup",
+    "MessageQueuePath": "",
+    "LocalDirectory": "D:\\BatchImages\\image",
+    "LocalBackupFolder": "",
+    "NameContains": "_END",
+    "FileType": "_04图片导入",
+    "IsDirectory": true,
+    "IsEntiretyInPutMsmq": false,
+    "ThreadMillisecondsTimeout": 60000,
+    "MaxDegreeOfParallelism": 16
+  },
+  {
+    "Ip": "192.168.100.28",
+    "Port": 21,
+    "Uid": "xiezhu_ext_trns",
+    "Pwd": "xiezhu_2_trns",
+    "RemoteFolder": "claim_file",
+    "RemoteBackupFolder": "",
+    "MessageQueuePath": "",
+    "LocalDirectory": "D:\\BatchImages\\image",
+    "LocalBackupFolder": "",
+    "NameContains": "",
+    "FileType": "_05录入信息导入",
+    "IsDirectory": false,
+    "IsEntiretyInPutMsmq": false,
+    "ThreadMillisecondsTimeout": 60000,
+    "MaxDegreeOfParallelism": 8
+  }
+]

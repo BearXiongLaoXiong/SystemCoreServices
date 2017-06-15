@@ -1,0 +1,19 @@
+﻿[
+  {
+    "Ip": "172.16.10.27",
+    "Port": 22,
+    "Uid": "tpa1",
+    "Pwd": "ensurlink123",
+    "RemoteFolder": "AIA_OutSourcing_UAT/SPI/OUT/eclaim",
+    "RemoteBackupFolder": "",
+    "MessageQueuePath": "",
+    "LocalDirectory": "\\\\192.200.61.50\\test$\\AiaWeChat",
+    "LocalBackupFolder": "AIAWeChat",
+    "NameContains": "",
+    "FileType": "_101_WeChat_理赔_01数据导入",
+    "IsDirectory": true,
+    "IsEntiretyInPutMsmq": false,
+    "ThreadMillisecondsTimeout": 60000,
+    "MaxDegreeOfParallelism": 8
+  }
+]
