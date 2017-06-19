@@ -27,7 +27,8 @@ namespace EnterpriseSchedulerService
             JobDataMap dataMap = context.MergedJobDataMap;
             string jobSays = dataMap.GetString("jobSays");
             var myFloatValue = dataMap.GetFloat("myFloatValue");
-            Console.Error.WriteLine("Instance " + key + " of DumbJob says: " + jobSays + ", and val is: " + myFloatValue);
+            var myStateData = dataMap["myStateData"];
+            Console.Error.WriteLine("Instance " + key + " of DumbJob says: " + jobSays + ", and val is: " + myFloatValue + $",myStateData is :{myStateData}");
         }
     }
 }
