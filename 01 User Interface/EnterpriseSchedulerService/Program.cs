@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace EnterpriseSchedulerService
             LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter { Level = LogLevel.Info };
 
             ILog logger = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetName().Name);
-            
+
             Console.BackgroundColor = ConsoleColor.Red;
             Console.Write("开始..........");
             Console.BackgroundColor = ConsoleColor.Yellow;
@@ -41,23 +42,24 @@ namespace EnterpriseSchedulerService
 
                 // and start it off
                 scheduler.Start();
-
                 // define the job and tie it to our HelloJob class
                 IJobDetail job = JobBuilder.Create<HelloJob>()
                     .WithIdentity("job1", "group1")
-                    .UsingJobData("jobSays","Hello World!!!")
-                    .UsingJobData("myFloatValue",3.141F)
-                    .UsingJobData(new JobDataMap())
+                    .UsingJobData("jobSays", "Hello World!!!")
+                    .UsingJobData("myFloatValue", 3.141F)
+                    .UsingJobData(new JobDataMap(new Dictionary<string, string> { { "myStateData", "哈哈哈哈" } }))
                     .Build();
+
+
 
                 // Trigger the job to run now, and then repeat every 10 seconds
                 ITrigger trigger = TriggerBuilder.Create()
-                    .WithIdentity("trigger1", "group1")
-                    .StartNow()
-                    .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(10)
-                        .RepeatForever())
-                    .Build();
+                  .WithIdentity("trigger1", "group1")
+                  .StartNow()
+                  .WithSimpleSchedule(x => x
+                      .WithIntervalInSeconds(10)
+                      .RepeatForever())
+                  .Build();
 
                 // Tell quartz to schedule the job using our trigger
                 scheduler.ScheduleJob(job, trigger);
@@ -76,12 +78,6 @@ namespace EnterpriseSchedulerService
             Console.WriteLine("Press any key to close the application");
             Console.ReadKey();
         }
-
-    
-
-
-
+        
     }
-
-
 }

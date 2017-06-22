@@ -26,13 +26,11 @@ namespace FtpServices
 
         static void Main(string[] args)
         {
+            CopyFiles();
             //var ss = typeof(SPIN_FLFL_FILE_LOG_INFO_INSERT).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
-
-           
-
             //var ss1 = typeof(SPIN_FLFL_FILE_LOG_INFO_INSERT).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
             //Console.ReadLine();
-            //CopyFiles();
+
 
             string path = $@"{Environment.CurrentDirectory}\{ConfigurationManager.AppSettings["FtpServiceConfig"] ?? ""}";
 
@@ -129,24 +127,7 @@ namespace FtpServices
             var list = new List<string>
             {
                 "201720100036928",
-                "201720200013119",
-                "201720200013123",
-                "201720200013125",
-                "201720200013126",
-                "201720200013127",
-                "201720200013128",
-                "201720200013130",
-                "201720200013133",
-                "201720200013386",
-                "201720200013398",
-                "201720200013472",
-                "201720200013488",
-                "201720200013500",
-                "201720200013507",
-                "201720200013513",
-                "201720200013514",
-                "201720200013519",
-                "201720200013537"
+                "201720200013119"
             };
 
             //var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\05-31结案", "*", SearchOption.AllDirectories);
@@ -158,20 +139,23 @@ namespace FtpServices
             //}
 
 
-
-            var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\1", "*", SearchOption.AllDirectories);
-            foreach (var VARIABLE in files)
-            {
-                Console.WriteLine(VARIABLE);
-                File.Copy(VARIABLE, $@"C:\Users\sh179\Desktop\2\{Path.GetFileName(VARIABLE)}");
-            }
-
-
-            //for (int i = 2; i < 500; i++)
+            //int index = 228;
+            //var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\1", "*", SearchOption.AllDirectories);
+            //foreach (var VARIABLE in files)
             //{
-            //    CopyFolder(@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\1",@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\" + i);
-            //    //File.Copy(@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\1.txt", $@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\{i}.txt");
+            //    Console.WriteLine(Path.GetFileName(VARIABLE) + " ========> " + index);
+            //    File.Copy(VARIABLE, $@"C:\Users\sh179\Desktop\2\{index}.jpg");
+            //    index++;
             //}
+
+            int index = 228;
+            for (int i = 3; i < 82; i++)
+            {
+                Console.WriteLine(i + " ========> " + index);
+                //CopyFolder(@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\1", @"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\" + i);
+                File.Copy($@"C:\Users\sh179\Desktop\1\{i}.jpg", $@"C:\Users\sh179\Desktop\2\{index}.jpg");
+                index++;
+            }
             //Console.WriteLine("end-----------------------");
             Console.ReadLine();
         }
