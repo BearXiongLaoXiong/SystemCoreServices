@@ -40,7 +40,20 @@ namespace EnterpriseSchedulerManage.Controllers
             Dict.Add("SHLS", "诊疗目录");
             Dict.Add("STSP", "服务诊疗匹配");
             Dict.Add("DCDC", "药品分类");
-            return Json(new { dic = Dict }, JsonRequestBehavior.AllowGet);
+
+            string option = "<option value='HPHP'>医院码</option>";
+            option+= "<option value='DADA'>诊断码</option>";
+            option += "<option value='SPSP'>诊疗码</option>";
+            option += "<option value='SPCT'>药品码</option>";
+            option += "<option value='DIDI'>药品适应症</option>";
+            option += "<option value='DNDN'>药品码别名</option>";
+            option += "<option value='SPON'>诊疗码别名</option>";
+            option += "<option value='DODO'>剂型码</option>";
+            option += "<option value='DOOT'>剂型别名</option>";
+            option += "<option value='SHLS'>诊疗目录</option>";
+            option += "<option value='STSP'>服务诊疗匹配</option>";
+            option += "<option value='DCDC'>药品分类</option>";
+            return Json(new { Option = option }, JsonRequestBehavior.AllowGet);
         }
         #endregion 
 

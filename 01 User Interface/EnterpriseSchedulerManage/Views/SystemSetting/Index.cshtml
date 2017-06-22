@@ -10,20 +10,8 @@
         <div class="layui-inline">
             <label class="layui-form-label" style="width:86px;">同步内容</label>
             <div class="layui-input-inline">
-                <select name="quiz">
+                <select name="quiz" id="SynchronContentId">
                     <option value="-1">请选择同步内容</option>
-                    <option value="HPHP">医院码</option>
-                    <option value="DADA">诊断码</option>
-                    <option value="SPSP">诊疗码</option>
-                    <option value="SPCT">药品码</option>
-                    <option value="DIDI">药品适应症</option>
-                    <option value="DNDN">药品码别名</option>
-                    <option value="SPON">诊疗码别名</option>
-                    <option value="DODO">剂型码</option>
-                    <option value="DOOT">剂型别名</option>
-                    <option value="SHLS">诊疗目录</option>
-                    <option value="STSP">服务诊疗匹配</option>
-                    <option value="DCDC">药品分类</option>
                 </select>
             </div>
         </div>
@@ -182,4 +170,16 @@
         </table>
     </div>
 </div>
+<script src="~/Scripts/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // 加载同步内容数据
+        $.get("/SystemSetting/GetSyschronContext", function (result) {
+
+            var res = result.Option;
+
+            $("#SynchronContentId").append(res).load();
+        });
+    })
+</script>
 <script src="~/Scripts/custom/SynchronCustom.js"></script>

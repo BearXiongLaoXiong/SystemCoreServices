@@ -33,15 +33,15 @@
 
 
 $(function () {
-    // 加载同步内容数据
-    $.get("/SystemSetting/GetSyschronContext", function (result) {
+    //// 加载同步内容数据
+    //$.get("/SystemSetting/GetSyschronContext", function (result) {
 
-        var res = result.dic;
+    //    var res = result.dic;
 
-        for (var i = 0; i < res; i++) {
+    //    for (var i = 0; i < res; i++) {
 
-        }
-    });
+    //    }
+    //});
 
     // 加载目标数据源
     $.get("/SystemSetting/GetTargetData", function (result) {
