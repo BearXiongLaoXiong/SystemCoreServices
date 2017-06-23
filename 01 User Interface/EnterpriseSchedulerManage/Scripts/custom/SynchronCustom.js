@@ -33,41 +33,6 @@
 
 
 $(function () {
-    //// 加载同步内容数据
-    //$.get("/SystemSetting/GetSyschronContext", function (result) {
 
-    //    var res = result.dic;
-
-    //    for (var i = 0; i < res; i++) {
-
-    //    }
-    //});
-
-    // 加载目标数据源
-    $.get("/SystemSetting/GetTargetData", function (result) {
-
-    });
-
-    $("#SynchronSearchId").on("click", function () {
-        var index = layer.load(0, { time: 30000 });
-
-        alert("你查询什么？");
-
-        $.ajax({
-            url: "",
-            type: "",
-            data: { "": "", "": "" },
-            success: function (data) {
-
-            }
-        });
-        layer.close(index);
-    });
-
-    $("#SynchronId").on("click", function () {
-        var index = layer.load(0, { time: 30000 });
-        alert("你同步了");
-        layer.close(index);
-    });
-
+  
 });
