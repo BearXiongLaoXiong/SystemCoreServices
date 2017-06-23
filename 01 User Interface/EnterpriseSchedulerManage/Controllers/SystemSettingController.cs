@@ -51,14 +51,32 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <returns></returns>
         public JsonResult GetTargetData()
         {
-            string targetOption = "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>贤心</td><td>汉族</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>张爱玲</td><td>汉族</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>Helen Keller</td><td>拉丁美裔</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>岳飞</td><td>汉族</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>孟子</td><td>华夏族</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>李四</td><td>阿坝州</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>岳不群</td><td>武族</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>东方不败</td><td>妖族</td></tr>";
+            string targetOption = "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>初审-复星(永安)生产</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>核心-复星(永安)生产</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>初审-复星(永安)测试</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>核心-复星(永安)测试</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>初审-西安生产</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>核心-西安生产</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL初审开发环境</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL核心开发环境</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL试用环境</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL试用环境</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>中文新初审DEMO(兼太平开发)</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>中文核心DEMO(兼太平开发)</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平新初审UAT</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平核心UAT</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平新初审生产</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平核心生产</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为新初审测试</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为核心测试</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为新初审生产</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为核心生产</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>英文新初审DEMO</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>英文核心DEMO</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>云南初审开发</td><td>WorkFlow</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>云南核心开发</td><td>eHealth</td></tr>";
+            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>云南丘博核心开发</td><td>eHealth</td></tr>";
+
 
             return Json(new { TartData = targetOption }, JsonRequestBehavior.AllowGet);
         }
