@@ -39,9 +39,7 @@ namespace System.Framework.Aop
         {
             var key = BuildKey(sourceType, name);
             if (!Cache.ContainsKey(key))
-            {
                 CacheAttributeValue(sourceType, attributeValueAction, name);
-            }
             return Cache[key];
         }
 
@@ -57,9 +55,7 @@ namespace System.Framework.Aop
             lock (key + "_attributeValueLockKey")
             {
                 if (!Cache.ContainsKey(key))
-                {
                     Cache[key] = value;
-                }
             }
         }
 
@@ -74,9 +70,7 @@ namespace System.Framework.Aop
             {
                 var propertyInfo = type.GetProperty(name);
                 if (propertyInfo != null)
-                {
                     attribute = propertyInfo.GetCustomAttributes(typeof(T), false).FirstOrDefault();
-                }
 
                 var fieldInfo = type.GetField(name);
                 if (fieldInfo != null)
@@ -96,11 +90,16 @@ namespace System.Framework.Aop
             return type.FullName + "." + name;
         }
 
+        public static TAttribute GetCustomAttributes<TAttribute>(this Type type) where TAttribute : class
+        {
+            return  type.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault() as TAttribute;
+        }
 
-        //public static TAttribute GetCustomAttributes<TAttribute>(this Type type, string propertyName) where TAttribute : class
-        //{
-        //    return type.GetProperty(propertyName)?.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault() as TAttribute;
-        //}
+
+        public static TAttribute GetCustomAttributes<TAttribute>(this Type type, string propertyName) where TAttribute : class
+        {
+            return type.GetProperty(propertyName)?.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault() as TAttribute;
+        }
 
         public static TAttribute[] GetCustomAttributes<TAttribute>(this PropertyInfo propertyInfo) where TAttribute : class
         {

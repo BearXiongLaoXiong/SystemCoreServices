@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>同步码库</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link href="~/Content/ui/global/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/ui/global/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<!-- Theme style -->
+<link href="~/Content/adminlte/dist/css/AdminLTE.css" rel="stylesheet" />
+<link href="~/Content/adminlte/dist/css/AdminLTE.min.css" rel="stylesheet" />
+<link href="~/Content/adminlte/dist/css/skins/_all-skins.css" rel="stylesheet" />
+<link href="~/Content/min/css/supershopui.common.min.css" rel="stylesheet" />
+<link href="~/Content/ui/global/layer/skin/moon/style.css" rel="stylesheet" />
+<link href="~/Content/min/js/skin/default/layer.css?v=3.0.11110" rel="stylesheet" />
+
+
+<body class=" pace-done" style="position: relative; zoom: 1;">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" style="transform: translate3d(100%, 0px, 0px);" data-progress-text="100%" data-progress="99">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <section class="content-header">
+        <h1>
+            任务调度平台
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a href="#">任务调度平台</a></li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="center-Panel" style="overflow-x: hidden">
+            <div class="titlePanel">
+                <div class="title-search">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>任务状态</td>
+                                <td style="padding-left: 10px;">
+                                    <div class="btn-group " id="taskStatusCondition">
+                                        <a class="btn btn-default dropdown-text" aria-expanded="false" data-toggle="dropdown" data-value="">请选择</a>
+                                        <a class="btn btn-default dropdown-toggle" aria-expanded="true" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu " role="menu">
+                                            <li><a data-value="0">未启动</a></li>
+                                            <li><a data-value="1">启动</a></li>
+                                            <li><a data-value="2">已停止</a></li>
+                                            <li><a data-value="3">错误</a></li>
+                                            <li><a data-value="4">已完成</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td style="padding-left: 20px;">任务类型</td>
+                                <td style="padding-left: 10px;">
+                                    <div class="btn-group " id="taskTypeCondition">
+                                        <a class="btn btn-default dropdown-text" aria-expanded="false" data-toggle="dropdown" data-value="">请选择</a>
+                                        <a class="btn btn-default dropdown-toggle" aria-expanded="true" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu " role="menu">
+                                            <li><a data-value="0">单次任务</a></li>
+                                            <li><a data-value="1">重复任务</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    <a class="btn btn-primary lr-search" id="btn_Search"><i class="fa fa-search "></i>&nbsp;查询</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <a class="btn btn-default lr-replace"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+                        <a class="btn btn-default lr-add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                        <a class="btn btn-default lr-edit"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+                        <a class="btn btn-default lr-delete"><i class="fa fa-remove"></i>&nbsp;删除</a>
+                        <a class="btn btn-default lr-viewlog"><i class="fa fa-detail"></i>&nbsp;查看任务日志</a>
+                        <a class="btn btn-default lr-start"><i class="fa fa-plus"></i>&nbsp;启动</a>
+                        <a class="btn btn-default lr-stop"><i class="fa fa-trash-o"></i>&nbsp;停止</a>
+                    </div>
+                    <script></script>
+                </div>
+            </div>
+            <div class="gridPanel">
+                <div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all" id="gbox_gridTable" style="width: 1658px;" dir="ltr"><div class="ui-widget-overlay jqgrid-overlay" id="lui_gridTable"></div><div class="loading ui-state-default ui-state-active" id="load_gridTable">读取中...</div><div class="ui-jqgrid-view" id="gview_gridTable" style="width: 1658px;"><div class="ui-jqgrid-titlebar ui-jqgrid-caption ui-widget-header ui-corner-top ui-helper-clearfix" style="display: none;"><a class="ui-jqgrid-titlebar-close ui-corner-all HeaderButton" role="link" style="right: 0px;"><span class="ui-icon ui-icon-circle-triangle-n"></span></a><span class="ui-jqgrid-title"></span></div><div class="ui-state-default ui-jqgrid-hdiv" style="width: 1658px;"><div class="ui-jqgrid-hbox"><div title="编辑显示字段" class="edit_items">...</div><table class="ui-jqgrid-htable" role="grid" aria-labelledby="gbox_gridTable" style="width: 1657px;" border="0" cellspacing="0" cellpadding="0"><thead><tr class="ui-jqgrid-labels" role="rowheader"><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_rn" role="columnheader" style="width: 30px; text-align: center;"><div id="jqgh_gridTable_rn"><span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_Id" role="columnheader" style="width: 150px; display: none;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_Id">主键<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_TaskName" role="columnheader" style="width: 101px; text-align: left;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_TaskName">任务名称<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_TaskGroupName" role="columnheader" style="width: 101px; text-align: center;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_TaskGroupName">任务分组<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_JobTypeName" role="columnheader" style="width: 71px; text-align: center;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_JobTypeName">任务类型<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_TaskStatusName" role="columnheader" style="width: 71px; text-align: center;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_TaskStatusName">执行状态<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_CronDescriptor" role="columnheader" style="width: 203px; text-align: left;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_CronDescriptor">执行频率<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_AssemblyDll" role="columnheader" style="width: 152px; text-align: left;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_AssemblyDll">程序集<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_Class" role="columnheader" style="width: 253px; text-align: center;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_Class">类名<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_RecentRunTime" role="columnheader" style="width: 152px; text-align: left;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_RecentRunTime">最近运行时间<span class="s-ico"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th><th class="ui-state-default ui-th-column ui-th-ltr" id="gridTable_LastRunTime" role="columnheader" style="width: 523px; text-align: left;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_gridTable_LastRunTime">下次运行时间<span class="s-ico" style="display:none"><span class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr" sort="asc"></span><span class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr" sort="desc"></span></span></div></th></tr></thead></table></div></div><div class="ui-jqgrid-bdiv" style="width: 1658px; height: 130.6px;"><div style="position:relative;"><div></div><table tabindex="0" class="ui-jqgrid-btable" id="gridTable" role="grid" aria-multiselectable="false" aria-labelledby="gbox_gridTable" style="width: 1657px;" border="0" cellspacing="0" cellpadding="0"><tbody><tr class="jqgfirstrow" role="row" style="height:auto"><td role="gridcell" style="height:0px;width:30px;"></td><td role="gridcell" style="height:0px;width:150px;display:none;"></td><td role="gridcell" style="width: 101px; height: 0px;"></td><td role="gridcell" style="width: 101px; height: 0px;"></td><td role="gridcell" style="width: 71px; height: 0px;"></td><td role="gridcell" style="width: 71px; height: 0px;"></td><td role="gridcell" style="width: 203px; height: 0px;"></td><td role="gridcell" style="width: 152px; height: 0px;"></td><td role="gridcell" style="width: 253px; height: 0px;"></td><td role="gridcell" style="width: 152px; height: 0px;"></td><td role="gridcell" style="width: 523px; height: 0px;"></td></tr><tr tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr" id="1" role="row"><td title="1" class="ui-state-default jqgrid-rownum" role="gridcell" aria-describedby="gridTable_rn" style="text-align:center;width: 30px;">1</td><td title="a94384d0-ae83-4583-85a2-e5b79dda6f7b" role="gridcell" aria-describedby="gridTable_Id" style="display:none;">a94384d0-ae83-4583-85a2-e5b79dda6f7b</td><td title="测试爬虫任务" role="gridcell" aria-describedby="gridTable_TaskName" style="text-align:left;">测试爬虫任务</td><td title="测试" role="gridcell" aria-describedby="gridTable_TaskGroupName" style="text-align:center;">测试</td><td title="复杂任务" role="gridcell" aria-describedby="gridTable_JobTypeName" style="text-align:center;">复杂任务</td><td title="已启动" role="gridcell" aria-describedby="gridTable_TaskStatusName" style="text-align:center;"><span class="label label label-info">已启动</span></td><td title="每 59 秒, 每分钟, 每小时, 每天" role="gridcell" aria-describedby="gridTable_CronDescriptor" style="text-align:left;">每 59 秒, 每分钟, 每小时, 每天</td><td title="SuperMgr.Task" role="gridcell" aria-describedby="gridTable_AssemblyDll" style="text-align:left;">SuperMgr.Task</td><td title="SuperMgr.Task.Jobs.TestJob" role="gridcell" aria-describedby="gridTable_Class" style="text-align:center;">SuperMgr.Task.Jobs.TestJob</td><td title="2016-11-14 10:41:59" role="gridcell" aria-describedby="gridTable_RecentRunTime" style="text-align:left;">2016-11-14 10:41:59</td><td title="2016-11-14 10:41:59" role="gridcell" aria-describedby="gridTable_LastRunTime" style="text-align:left;">2016-11-14 10:41:59</td></tr></tbody></table></div></div></div><div class="ui-jqgrid-resize-mark" id="rs_mgridTable">&nbsp;</div><div class="gridPager ui-state-default ui-jqgrid-pager ui-corner-bottom" id="gridPager" style="width: 1658px;" dir="ltr"><div class="ui-pager-control" id="pg_gridPager" role="group"><table class="ui-pg-table" role="row" style="width:100%;table-layout:fixed;height:100%;" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td align="left" id="gridPager_center" style="width: 333px; white-space: pre;"><table class="ui-pg-table" style="table-layout:auto;" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="ui-pg-button ui-corner-all ui-state-disabled" id="first_gridPager"><span class="ui-icon-seek-first"><i class="fa fa-fast-backward"></i></span></td><td class="ui-pg-button ui-corner-all ui-state-disabled" id="prev_gridPager"><span class="ui-icon-seek-prev"><i class="fa fa-backward"></i></span></td><td class="ui-pg-button ui-state-disabled" style="width:4px;"><span class="ui-separator"></span></td><td dir="ltr"> 第 <input class="ui-pg-input" role="textbox" type="text" size="2" maxlength="7" value="0"> 页 / 共 <span id="sp_1_gridPager">1</span> 页 </td><td class="ui-pg-button ui-state-disabled" style="width:4px;"><span class="ui-separator"></span></td><td class="ui-pg-button ui-corner-all ui-state-disabled" id="next_gridPager"><span class="ui-icon-seek-next"><i class="fa fa-forward"></i></span></td><td class="ui-pg-button ui-corner-all ui-state-disabled" id="last_gridPager"><span class="ui-icon-seek-end"><i class="fa fa-fast-forward"></i></span></td><td dir="ltr"><select class="ui-pg-selbox" role="listbox"><option role="option" value="20">20</option><option role="option" value="50">50</option><option role="option" value="100">100</option><option role="option" value="500">500</option><option role="option" value="1000">1000</option></select></td></tr></tbody></table></td><td align="right" id="gridPager_right"></td><td align="left" id="gridPager_left" style="display:none"></td></tr></tbody></table></div></div></div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="/content/ui/global/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="/content/ui/global/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/content/min/js/supershopui.common.js"></script>
+    <script src="/content/supermgr/Base/js/common.js"></script>
+    <script src="/Content/plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="/Content/plugins/jqgrid/jqgrid.js"></script>
+    <script src="/Content/plugins/validator/validator.js"></script>
+    <script src="/Content/plugins/layout/jquery.layout.js"></script>
+    <script src="/content/plugins/wdtree/tree.js"></script>
+    <script src="/content/supermgr/Module/SchedulerMgr/SchedulerMgr.js"></script>
+    <script type="text/javascript">
+        var schedulerMgr = new SchedulerMgr();
+        schedulerMgr.initGridPage();
+        schedulerMgr.loadGrid();
+    </script>
+</body>

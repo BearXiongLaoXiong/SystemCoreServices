@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SystemSettingController.cs" />
+    <Compile Include="Controllers\TaskSchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -964,7 +965,9 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\layui.js" />
     <Content Include="Scripts\supershopui.common.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1045,6 +1048,7 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\SystemSetting\Index.cshtml" />
     <Content Include="Views\SystemSetting\PersonalInfo.cshtml" />
+    <Content Include="Views\TaskScheduler\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

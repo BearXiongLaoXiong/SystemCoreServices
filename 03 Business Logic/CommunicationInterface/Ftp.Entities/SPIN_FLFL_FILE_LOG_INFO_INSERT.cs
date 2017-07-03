@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ftp.Entities
 {
-    //[DatabaseConnection("ss")]
+    [DatabaseConnection(ConnectionEnum.CodeProd)]
     public class SPIN_FLFL_FILE_LOG_INFO_INSERT
     {
         [SqlParameter(255)] public string pFLFL_TYPE { get; set; }

@@ -16,20 +16,28 @@ namespace System.Framework.DataAccess
         private static IDbConnection CreateDbConnection()
         {
             var connectionName = typeof(T).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
-            if (string.IsNullOrEmpty(connectionName)) connectionName = nameof(ConnectionEnum.DefaultConnectionString);
-            if (!ConnectionStringCache.ContainsKey(connectionName))
+            switch (connectionName ?? "")
             {
-                //Console.WriteLine("sql取配置");
-                lock (connectionName + "ConnectionString")
-                {
+                case nameof(ConnectionEnum.CustomizeConnectionString):
+                    return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
+                default:
+                    if (string.IsNullOrEmpty(connectionName)) connectionName = nameof(ConnectionEnum.DefaultConnectionString);
                     if (!ConnectionStringCache.ContainsKey(connectionName))
                     {
-                        var connectionString = ConfigurationManager.AppSettings[connectionName] ?? "";
-                        ConnectionStringCache[connectionName] = connectionString;
+                        //Console.WriteLine("sql取配置");
+                        lock (connectionName + "ConnectionString")
+                        {
+                            if (!ConnectionStringCache.ContainsKey(connectionName))
+                            {
+                                var connectionString = ConfigurationManager.AppSettings[connectionName] ?? "";
+                                ConnectionStringCache[connectionName] = connectionString;
+                            }
+                        }
+                        if (ConnectionStringCache[connectionName] == null || ConnectionStringCache[connectionName].Length < 1) throw new ArgumentNullException(nameof(ConfigurationManager.ConnectionStrings));
                     }
-                }
-                if (ConnectionStringCache[connectionName] == null || ConnectionStringCache[connectionName].Length < 1) throw new ArgumentNullException(nameof(ConfigurationManager.ConnectionStrings));
+                    break;
             }
+
             //Console.WriteLine("sql取缓存");
             return new SqlConnection(ConnectionStringCache[connectionName]);
         }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06FF99E8-6096-4824-AA69-2C33072064B2}</ProjectGuid>
+    <ProjectGuid>{D5029B28-A4BA-41AC-BD80-AECD6191AE9A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>EnterpriseSchedulerService</RootNamespace>
-    <AssemblyName>EnterpriseSchedulerService</AssemblyName>
+    <RootNamespace>TestConsoleApp1</RootNamespace>
+    <AssemblyName>TestConsoleApp1</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,13 +33,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -47,17 +46,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Logging\System.Framework.Logging.csproj">
-      <Project>{e0b695d7-9a66-4f94-b35e-12cf326439b1}</Project>
-      <Name>System.Framework.Logging</Name>
+    <ProjectReference Include="..\..\03 Business Logic\CommunicationInterface\Ftp.BusinessLogic\Ftp.BusinessLogic.csproj">
+      <Project>{adb78795-3a0e-4644-ad59-9d4839e9b7a2}</Project>
+      <Name>Ftp.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\03 Business Logic\CommunicationInterface\Ftp.Entities\Ftp.Entities.csproj">
+      <Project>{2c1184ad-22b2-4cc4-9788-5230cfb2c15f}</Project>
+      <Name>Ftp.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Aop\System.Framework.Aop.csproj">
+      <Project>{f38fa4ca-3a5a-4641-a393-d5a6c15d1556}</Project>
+      <Name>System.Framework.Aop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.DataAccess\System.Framework.DataAccess.csproj">
+      <Project>{efd6a0e4-cb8a-4fc2-89be-e7dd18ac982f}</Project>
+      <Name>System.Framework.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
