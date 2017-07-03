@@ -10,7 +10,7 @@
         <div class="layui-inline">
             <label class="layui-form-label" style="width:86px;">同步内容</label>
             <div class="layui-input-inline">
-                <select name="quiz" id="SynchronContentId">
+                <select name="quiz" id="SynchronContentId" lay-filter="sadaS">
                     <option value="-1">请选择同步内容</option>
                 </select>
             </div>
@@ -52,69 +52,23 @@
         <table class="layui-table" style="width:100%;">
             <colgroup>
                 <col width="40">
-                <col width="150">
-                <col width="150">
+                <col width="180">
+                <col width="80">
                 <col>
             </colgroup>
             <thead>
                 <tr>
                     <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-                    <th>人物</th>
-                    <th>民族</th>
+                    <th>环境名称</th>
+                    <th>环境类型</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>贤心</td>
-                    <td>汉族</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>张爱玲</td>
-                    <td>汉族</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>Helen Keller</td>
-                    <td>拉丁美裔</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>岳飞</td>
-                    <td>汉族</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>孟子</td>
-                    <td>华夏族（汉族）</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>张三</td>
-                    <td>甘孜州（汉族）</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>李四</td>
-                    <td>阿坝州（汉族）</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>岳不群</td>
-                    <td>武族</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="" lay-skin="primary"></td>
-                    <td>东方不败</td>
-                    <td>妖族</td>
-                </tr>
-            </tbody>
+            <tbody id="targetId"></tbody>
         </table>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
-        <table class="layui-table" style="width:100%;">
-            <colgroup>
+        <table class="layui-table" style="width:100%;" id="codeValuesId">
+            @*<colgroup>
                 <col width="50">
                 <col width="150">
                 <col width="150">
@@ -166,7 +120,7 @@
                     <td>公元前-372年</td>
                     <td>猿强，则国强。国强，则猿更强！ </td>
                 </tr>
-            </tbody>
+            </tbody>*@
         </table>
     </div>
 </div>
@@ -177,9 +131,53 @@
         $.get("/SystemSetting/GetSyschronContext", function (result) {
 
             var res = result.Option;
+            $("#SynchronContentId").append(res);
 
-            $("#SynchronContentId").append(res).load();
+            var form = layui.form();
+            form.render('select');
         });
+
+
+        // 加载目标数据源
+        $.get("/SystemSetting/GetTargetData", function (result) {
+
+            var resul = result.TartData;
+            $("#targetId").append(resul);
+        });
+
+        // 获取用户选择同步的内容
+        var selectval = "";
+        var form = layui.form();
+        form.on('select(sadaS)', function (data) {
+            selectval = data.value; //得到被选中的值
+        });
+
+        // 查询
+        $("#SynchronSearchId").on("click", function () {
+            var index = layer.load(0, { time: 30000 });
+
+            var startDate = $("#dateStartId").val();
+            var endDate = $("#dateEndId").val();
+            $.ajax({
+                url: "/SystemSetting/GetSynchronValues/",
+                type: "get",
+                data: { "synchronContent": selectval, "source": "复兴-配置", "codeValue": "12335", "startDate": startDate, "endDate": endDate },
+                success: function (data) {
+                    var dat = data;
+                    $("#codeValuesId").html("");
+                    $("#codeValuesId").append(dat);
+                }
+            });
+            layer.close(index);
+        });
+
+        // 同步代码
+        $("#SynchronId").on("click", function () {
+            var index = layer.load(0, { time: 30000 });
+            alert("你同步了");
+            layer.close(index);
+        });
+
     })
 </script>
 <script src="~/Scripts/custom/SynchronCustom.js"></script>
