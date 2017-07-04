@@ -51,34 +51,14 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <returns></returns>
         public JsonResult GetTargetData()
         {
-            string targetOption = "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>初审-复星(永安)生产</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>核心-复星(永安)生产</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>初审-复星(永安)测试</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>核心-复星(永安)测试</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>初审-西安生产</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>核心-西安生产</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL初审开发环境</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL核心开发环境</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL试用环境</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>GCL试用环境</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>中文新初审DEMO(兼太平开发)</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>中文核心DEMO(兼太平开发)</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平新初审UAT</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平核心UAT</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平新初审生产</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>太平核心生产</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为新初审测试</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为核心测试</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为新初审生产</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>皓为核心生产</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>英文新初审DEMO</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>英文核心DEMO</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>云南初审开发</td><td>WorkFlow</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>云南核心开发</td><td>eHealth</td></tr>";
-            targetOption += "<tr><td><input type='checkbox' name='' lay-skin='primary'></td><td>云南丘博核心开发</td><td>eHealth</td></tr>";
-
-
-            return Json(new { TartData = targetOption }, JsonRequestBehavior.AllowGet);
+            List<TargetSource> targetSource = new List<TargetSource>();
+            targetSource.Add(new TargetSource {Ky =1, Name = "初审-复星(永安)生产", Type = "WorkFlow" });
+            targetSource.Add(new TargetSource {Ky =2, Name = "核心-复星(永安)生产", Type = "eHealth" });
+            targetSource.Add(new TargetSource { Ky = 3, Name = "初审-复星(永安)测试", Type = "WorkFlow" });
+            targetSource.Add(new TargetSource { Ky = 4, Name = "核心-复星(永安)测试", Type = "eHealth" });
+            targetSource.Add(new TargetSource { Ky = 5, Name = "初审-西安生产", Type = "WorkFlow" });
+            targetSource.Add(new TargetSource { Ky = 6, Name = "核心-西安生产", Type = "eHealth" });
+            return Json(new { TartData = targetSource }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -89,14 +69,24 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <returns></returns>
         public JsonResult GetSynchronValues(string synchronContent,string source,string codeValue,string startDate,string endDate)
         {
-            string resultStr = "";
+            object resultStr = null;
             switch (synchronContent)
             {
                 case "HPHP": // 医院码
-                    resultStr = GetHPHP_List(codeValue, startDate, endDate);
+                    List<HPHP> hphp = new List<HPHP>();
+                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312612", HPHP_Name = "东方儿童医院2", HPHP_Address = "上海浦东新区东方路666号2", HPHP_No = "15646862" });
+                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312613", HPHP_Name = "东方儿童医院3", HPHP_Address = "上海浦东新区东方路666号3", HPHP_No = "15646863" });
+                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312614", HPHP_Name = "东方儿童医院4", HPHP_Address = "上海浦东新区东方路666号4", HPHP_No = "15646864" });
+                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312615", HPHP_Name = "东方儿童医院5", HPHP_Address = "上海浦东新区东方路666号5", HPHP_No = "15646865" });
+                    resultStr = hphp;
                     break;
                 case "DADA": // 诊断码
-                    resultStr = GetDADA_List(codeValue, startDate, endDate);
+                    List<DADA> dada = new List<DADA>();
+                    dada.Add(new DADA() { DADA_ID = "DADA04214", DADA_Name = "阿莫西林测试片2", DADA_Desc = "阿莫西林测号2" });
+                    dada.Add(new DADA() { DADA_ID = "DADA04215", DADA_Name = "阿莫西林测试片3", DADA_Desc = "阿莫西林测号3" });
+                    dada.Add(new DADA() { DADA_ID = "DADA04216", DADA_Name = "阿莫西林测试片4", DADA_Desc = "阿莫西林测号4" });
+                    dada.Add(new DADA() { DADA_ID = "DADA04217", DADA_Name = "阿莫西林测试片5", DADA_Desc = "阿莫西林测号5" });
+                    resultStr = dada;
                     break;
                 case "SPSP": // 诊疗码
                     resultStr = GetSPSP_List(codeValue, startDate, endDate);
@@ -131,7 +121,7 @@ namespace EnterpriseSchedulerManage.Controllers
                 default:
                     break;
             }
-            return Json(resultStr, JsonRequestBehavior.AllowGet);
+            return Json(new { Obj = resultStr }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -365,5 +355,35 @@ namespace EnterpriseSchedulerManage.Controllers
             return targetOption;
         }
         #endregion
+
+        [HttpPost]
+        public JsonResult SynChronCodeByTarget(string[] TargetArray,string[] CodeArray)
+        {
+
+            return Json("更新成功", JsonRequestBehavior.AllowGet);
+        }
+    }
+
+
+    public class TargetSource
+    {
+        public int Ky { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+    }
+
+    public class HPHP
+    {
+        public string HPHP_ID { get; set; }
+        public string HPHP_Name { get; set; }
+        public string HPHP_Address { get; set; }
+        public string HPHP_No { get; set; }
+    }
+
+    public class DADA
+    {
+        public string DADA_ID { get; set; }
+        public string DADA_Name { get; set; }
+        public string DADA_Desc { get; set; }
     }
 }
