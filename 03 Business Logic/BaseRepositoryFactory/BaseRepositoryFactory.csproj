@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ADB78795-3A0E-4644-AD59-9D4839E9B7A2}</ProjectGuid>
+    <ProjectGuid>{CA59C38C-B2B7-4482-8242-46E91941AAB3}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ftp.BusinessLogic</RootNamespace>
-    <AssemblyName>Ftp.BusinessLogic</AssemblyName>
+    <RootNamespace>BaseRepositoryFactory</RootNamespace>
+    <AssemblyName>BaseRepositoryFactory</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,12 +23,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,38 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\DownloadBl.cs" />
-    <Compile Include="Implementation\InputDataBase.cs" />
+    <Compile Include="IBaseBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Common\System.Framework.Common.csproj">
-      <Project>{f6f7027d-285b-4bda-b868-3d01065b4cb7}</Project>
-      <Name>System.Framework.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.DataAccess\System.Framework.DataAccess.csproj">
+    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.DataAccess\System.Framework.DataAccess.csproj">
       <Project>{efd6a0e4-cb8a-4fc2-89be-e7dd18ac982f}</Project>
       <Name>System.Framework.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Ftp\System.Framework.Ftp.csproj">
-      <Project>{d1ae2f85-c999-4c22-bb2a-112582133ad8}</Project>
-      <Name>System.Framework.Ftp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Logging\System.Framework.Logging.csproj">
-      <Project>{e0b695d7-9a66-4f94-b35e-12cf326439b1}</Project>
-      <Name>System.Framework.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BusinessLogicRepository\BusinessLogicRepository.csproj">
-      <Project>{ea7b2040-1e28-4537-baed-7b7d7090e6e2}</Project>
-      <Name>BusinessLogicRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ftp.Entities\Ftp.Entities.csproj">
-      <Project>{2c1184ad-22b2-4cc4-9788-5230cfb2c15f}</Project>
-      <Name>Ftp.Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_Interface\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,7 +16,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Ftp.BusinessLogic.Implementation;
-using Ftp.BusinessLogic._Base;
 using Ftp.Entities;
 
 namespace FtpServices
@@ -46,19 +45,19 @@ namespace FtpServices
             dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
 
             //Thread.Sleep(1000);
-            var entity = new SPIN_FLFL_FILE_LOG_INFO_INSERT
-            {
-                pFLFL_STS = "2",
-                pFILE_NAME = "testname",
-                pFLFL_URL = "testurl",
-                pFLFL_TYPE = "testtype",
-                pFLFL_USUS_ID = "admin"
+            //var entity = new SPIN_FLFL_FILE_LOG_INFO_INSERT
+            //{
+            //    pFLFL_STS = "2",
+            //    pFILE_NAME = "testname",
+            //    pFLFL_URL = "testurl",
+            //    pFLFL_TYPE = "testtype",
+            //    pFLFL_USUS_ID = "admin"
 
-            };
-            ICommonBl _commonBl = new CommonBl();
-            _commonBl.Execute(entity);
-            Console.WriteLine("执行第二次");
-            _commonBl.Execute(entity);
+            //};
+            //ICommonBl _commonBl = new CommonBl();
+            //_commonBl.Execute(entity);
+            //Console.WriteLine("执行第二次");
+            //_commonBl.Execute(entity);
 
             MsmqHelper ms = new MsmqHelper();
             Stopwatch sw = new Stopwatch();

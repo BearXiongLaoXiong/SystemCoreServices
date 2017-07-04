@@ -5,15 +5,25 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Ftp.BusinessLogic._Base;
 using Ftp.Entities;
 
 namespace TestConsoleApp1
 {
     class Program
     {
+        public class Entity
+        {
+            public string name;
+            public string weight;
+        }
         static void Main(string[] args)
         {
+            List<Entity> ent = new List<Entity>()
+            {
+                new Entity() {name = "一", weight = "1"},
+                new Entity() {name = "二", weight = "2"}
+            };
+
 
             int[] number = {1, 2, 3};
             int[] n1 = new int[6];

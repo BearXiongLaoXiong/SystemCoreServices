@@ -1,7 +1,7 @@
 ﻿using System.Framework.Common;
 using System.Framework.Logging;
 using System.Threading;
-using Ftp.BusinessLogic._Base;
+using BusinessLogicRepository;
 using Ftp.Entities;
 
 namespace Ftp.BusinessLogic.Implementation
