@@ -64,10 +64,6 @@
       <Project>{e0b695d7-9a66-4f94-b35e-12cf326439b1}</Project>
       <Name>System.Framework.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\BusinessLogicRepository\BusinessLogicRepository.csproj">
-      <Project>{ea7b2040-1e28-4537-baed-7b7d7090e6e2}</Project>
-      <Name>BusinessLogicRepository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ftp.Entities\Ftp.Entities.csproj">
       <Project>{2c1184ad-22b2-4cc4-9788-5230cfb2c15f}</Project>
       <Name>Ftp.Entities</Name>
