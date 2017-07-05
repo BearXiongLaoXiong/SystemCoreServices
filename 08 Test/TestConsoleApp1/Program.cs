@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
 using Ftp.Entities;
 
 namespace TestConsoleApp1
@@ -36,6 +37,40 @@ namespace TestConsoleApp1
         //{
         //    return attributeValueAction.ToString();
         //}
+    }
+
+    public interface ITestBll
+    {
+        string GetName();
+    }
+
+    public class TestBll : ITestBll
+    {
+        public string GetName()
+        {
+            return "有熊";
+        }
+    }
+
+    public class Container
+    {
+        public static IContainer container = null;
+
+        public static T Resolve<T>()
+        {
+            if (container == null)
+            {
+                
+            }
+            return container.Resolve<T>();
+        }
+
+        public static void Initialise()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<TestBll>().As<ITestBll>();
+        }
+
     }
 }
 

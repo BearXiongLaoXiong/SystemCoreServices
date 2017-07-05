@@ -63,6 +63,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemCore.Entities", "03 B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler.Services", "05 Soa\Scheduler.Services\Scheduler.Services.csproj", "{23F8DD4A-4DAE-4792-AF19-8A9EE40C3291}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicRepository", "03 Business Logic\BusinessLogicRepository\BusinessLogicRepository.csproj", "{EA7B2040-1E28-4537-BAED-7B7D7090E6E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler.BusinessLogic", "03 Business Logic\SystemCoreServices\Scheduler.BusinessLogic\Scheduler.BusinessLogic.csproj", "{D9FFDEE7-9313-4E18-B595-5EEE32395443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +145,14 @@ Global
 		{23F8DD4A-4DAE-4792-AF19-8A9EE40C3291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F8DD4A-4DAE-4792-AF19-8A9EE40C3291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23F8DD4A-4DAE-4792-AF19-8A9EE40C3291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7B2040-1E28-4537-BAED-7B7D7090E6E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7B2040-1E28-4537-BAED-7B7D7090E6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7B2040-1E28-4537-BAED-7B7D7090E6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7B2040-1E28-4537-BAED-7B7D7090E6E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9FFDEE7-9313-4E18-B595-5EEE32395443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9FFDEE7-9313-4E18-B595-5EEE32395443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9FFDEE7-9313-4E18-B595-5EEE32395443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9FFDEE7-9313-4E18-B595-5EEE32395443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,5 +179,6 @@ Global
 		{6377C33A-A945-452B-8ABB-60031F18E181} = {8FF0CE34-70B8-4702-93B6-1AAF057F4B5D}
 		{582788CF-CB9A-41C6-92A7-32C86A9291C2} = {8FF0CE34-70B8-4702-93B6-1AAF057F4B5D}
 		{23F8DD4A-4DAE-4792-AF19-8A9EE40C3291} = {92391C8D-8DD2-49E8-8549-A6DD280FD741}
+		{EA7B2040-1E28-4537-BAED-7B7D7090E6E2} = {D17F5B1F-DE29-4676-BF1F-13F72508400C}
 	EndGlobalSection
 EndGlobal
