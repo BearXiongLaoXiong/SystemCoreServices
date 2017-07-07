@@ -91,7 +91,7 @@
             var trStr = "";
             var resul = result.TartData;
             $.each(resul, function (index, item) {
-                trStr += "<tr><td><input type='checkbox' name='ky["+ item.Ky +"]' lay-skin='primary'></td><td>" + item.Name + "</td><td>" + item.Type + "</td></tr>";
+                trStr += "<tr><td><input type='checkbox' id='" + item.Id +"' lay-skin='primary'></td><td>" + item.Name + "</td><td>" + item.Comment + "</td></tr>";
             });
 
             $("#targetId").append(trStr);
@@ -149,7 +149,7 @@
                 var i = index;
                 var m = item;
                 if (item.checked) {
-                    targetArray[index] = item.Ky+"";
+                    targetArray[index] = item.id + "";
                 }
             });
             // 2. 有没有选择要同步的码值
@@ -167,7 +167,7 @@
             } else if (codeArray.length <= 0) {
                 layer.msg("请选择要同步的码值！", { icon: 5 });
             } else {
-                $.post("/SystemSetting/SynChronCodeByTarget", { "TargetArray": targetArray, "CodeArray": codeArray }, function (data,status) {
+                $.post("/SystemSetting/SynChronCodeByTarget", { "SynChronContent": selectval, "TargetArray": targetArray, "CodeArray": codeArray }, function (data,status) {
                     var da = data;
                     if (status == "success") {
                         layer.msg(data, { icon: 6 });
@@ -193,52 +193,112 @@
             var result = "";
             switch (type) {
                 case "HPHP":  // 医院码
-                    result += "<colgroup><col width=\"40\"><col><col><col><col></colgroup><thead>";
-                    result += "<tr><th><input type=\"checkbox\" onclick=\"FlowEdit(this)\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>医院编号</th><th>医院名称</th><th>医院地址</th><th>编号</th></tr></thead><tbody>";
+                    result += "<colgroup><col width='40'><col><col width='90'><col><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" onclick=\"FlowEdit(this)\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>医院编号</th><th>医院等级</th><th>医院类型</th><th>医院名称</th><th>医院别名</th><th>医院地址</th></tr></thead><tbody>";
                     $.each(data, function (index, item) {
                         var i = index;
                         var m = item;
-                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>"+item.HPHP_ID+"</td><td>"+item.HPHP_Name+"</td><td>"+item.HPHP_Address+"</td><td>"+item.HPHP_No+"</td></tr>";
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.HPHP_ID + "</td><td>" + item.SYSV_HPHP_CLASS + "</td><td>" + item.SYSV_HPHP_TYPE + "</td><td>" + item.HPHP_NAME + "</td><td>" + item.HPHP_OTH_NAME + "</td><td>" + item.HPHP_ADDR +"</td></tr>";
                     });
                     break;
                 case "DADA":// 诊断码
-                    result += "<colgroup><col width=\"40\"><col><col><col></colgroup><thead>";
-                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>诊断编号</th><th>诊断名称</th><th>诊断地址</th></tr></thead><tbody>";
+                    result += "<colgroup><col width=\"40\"><col><col><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>诊断编号</th><th>诊断名称</th><th>性别</th><th>起始年龄</th><th>终止年龄</th></tr></thead><tbody>";
                     $.each(data, function (index, item) {
                         var i = index;
                         var m = item;
-                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.DADA_ID + "</td><td>" + item.DADA_Name + "</td><td>" + item.DADA_Desc + "</td></tr>";
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.DADA_ID + "</td><td>" + item.DADA_DESC + "</td><td>" + item.DADA_SEX_IND + "</td><td>" + item.DADA_AGE_FROM + "</td><td>" + item.DADA_AGE_TO + "</td></tr>";
                     });
                     break;
                 case "SPSP": // 诊疗码
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>诊断编号</th><th>诊疗类型</th><th>诊疗等级</th><th>诊断名称</th><th>备注</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.SPSP_ID + "</td><td>" + item.SYSV_SPSP_TYPE + "</td><td>" + item.SYSV_SPSP_LEVEL + "</td><td>" + item.SPSP_DESC + "</td><td>" + item.COMMENT + "</td></tr>";
+                    });
                     break;
                 case "SPCT": //药品码
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>药品码</th><th>药品名称</th><th>备注</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.SPCT_ID + "</td><td>" + item.SPCT_DESC + "</td><td>" + item.COMMENT + "</td></tr>";
+                    });
                     break;
                 case "DIDI": //药品适应症
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>药品适应症码</th><th>起始码</th><th>结束码</th><th>备注</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.SPCT_ID + "</td><td>" + item.DADA_FROM + "</td><td>" + item.DADA_TO + "</td><td>" + item.DIDI_COMMENT + "</td></tr>";
+                    });
                     break;
                 case "DNDN": //药品码别名
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>药品码别名码</th><th>药品码别名名称</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.SPCT_ID + "</td><td>" + item.SPCT_DESC + "</td></tr>";
+                    });
                     break;
                 case "SPON": //诊疗码别名
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>诊疗码别名码</th><th>诊疗码别名</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.SPSP_ID + "</td><td>" + item.SPON_DESC + "</td></tr>";
+                    });
                     break;
                 case "DODO": //剂型码
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>剂型码</th><th>剂型码名称</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.DODO_DESC + "</td><td>" + item.DODO_ALL_DESC + "</td></tr>";
+                    });
                     break;
                 case "DOOT": //剂型别名
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>剂型别名码</th><th>剂型别名</th><th>备注</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.DODO_KY + "</td><td>" + item.DODO_DESC + "</td><td>" + item.COMMENT + "</td></tr>";
+                    });
                     break;
                 case "SHLS": //诊疗目录
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>诊疗目录码</th><th>诊疗目录名</th><th>诊疗目录类型</th><th>备注</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.SHLS_LOW_ID + "</td><td>" + item.SHSH_KY + "</td><td>" + item.SHLS_SHIP_TYPE + "</td><td>" + item.SHLS_COMMENT + "</td></tr>";
+                    });
                     break;
                 case "STSP": //服务诊疗匹配
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>服务诊疗匹配码</th><th>服务诊疗匹配名</th><th>服务诊疗匹配名</th><th>服务诊疗匹配名</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.STCV_PFX + "</td><td>" + item.SYSV_SPSP_IND + "</td><td>" + item.SYSV_CLIV_TYPE + "</td><td>" + item.SPSP_ID_LOW + "</td></tr>";
+                    });
                     break;
                 case "DCDC": //药品分类
-                    result = "<colgroup><col><col><col><col><col></colgroup>";
+                    result = "<colgroup><col width=\"40\"><col><col><col></colgroup><thead>";
+                    result += "<tr><th><input type=\"checkbox\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>药品分类码</th><th>药品分类类型</th><th>药品分类名</th></tr></thead><tbody>";
+                    $.each(data, function (index, item) {
+                        var i = index;
+                        var m = item;
+                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>" + item.DCDC_ID + "</td><td>" + item.DCDC_TYPE + "</td><td>" + item.DCDC_DESC + "</td></tr>";
+                    });
                     break;
                 default:
                     break;

@@ -1050,6 +1050,16 @@
     <Content Include="Views\SystemSetting\PersonalInfo.cshtml" />
     <Content Include="Views\TaskScheduler\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\03 Business Logic\SystemCore\SystemCore.BusinessLogic\SystemCore.BusinessLogic.csproj">
+      <Project>{6377c33a-a945-452b-8abb-60031f18e181}</Project>
+      <Name>SystemCore.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\03 Business Logic\SystemCore\SystemCore.Entities\SystemCore.Entities.csproj">
+      <Project>{582788cf-cb9a-41c6-92a7-32c86a9291c2}</Project>
+      <Name>SystemCore.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SystemCore.BusinessLogic</RootNamespace>
     <AssemblyName>SystemCore.BusinessLogic</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,16 @@
   <ItemGroup>
     <Compile Include="SystemSetting\SynChronCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLogicRepository\BusinessLogicRepository.csproj">
+      <Project>{ea7b2040-1e28-4537-baed-7b7d7090e6e2}</Project>
+      <Name>BusinessLogicRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemCore.Entities\SystemCore.Entities.csproj">
+      <Project>{582788cf-cb9a-41c6-92a7-32c86a9291c2}</Project>
+      <Name>SystemCore.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

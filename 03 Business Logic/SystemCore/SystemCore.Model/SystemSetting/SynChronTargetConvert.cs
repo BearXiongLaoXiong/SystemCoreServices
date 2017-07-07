@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystemCore.Entities
+namespace SystemCore.Model
 {
-    public class Class1
+
+    public class SynChronTargetConvert
     {
+
     }
 }
