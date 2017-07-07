@@ -1,36 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Framework.Aop;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 using Autofac;
-using Ftp.Entities;
 
 namespace TestConsoleApp1
 {
     class Program
     {
-        public class Entity
-        {
-            public string name;
-            public string weight;
-        }
+
         static void Main(string[] args)
         {
-            List<Entity> ent = new List<Entity>()
-            {
-                new Entity() {name = "一", weight = "1"},
-                new Entity() {name = "二", weight = "2"}
-            };
+            var v1 = Container.Resolve<ITestBll>();
+
+            var v2 = Container.Resolve<ITestBll>();
 
 
-            int[] number = {1, 2, 3};
-            int[] n1 = new int[6];
-            int [,] n2 = new int[2,3];
-            var a = new[] {1, 2, 3};
-            // var result = Getvalues(x => x.ConnectionString);
+            var v3 = Container.Resolve<ITestBll>();
+            //Container.testBll.GetName();
+            v3.GetName();
         }
 
         //static string Getvalues(Expression<Func<DatabaseConnectionAttribute, string> attributeValueAction> exp)
@@ -46,6 +33,12 @@ namespace TestConsoleApp1
 
     public class TestBll : ITestBll
     {
+        public int hash = 0;
+        public TestBll()
+        {
+            hash = GetHashCode();
+            Console.WriteLine("创建实例" + hash);
+        }
         public string GetName()
         {
             return "有熊";
@@ -54,21 +47,28 @@ namespace TestConsoleApp1
 
     public class Container
     {
-        public static IContainer container = null;
+        //public static TestBll testBll = null;
+        private static IContainer _container = null;
 
         public static T Resolve<T>()
         {
-            if (container == null)
+            //if (testBll == null)
+            //{
+            //    testBll = new TestBll();
+            //}
+
+            if (_container == null)
             {
-                
+                InitializeComponent();
             }
-            return container.Resolve<T>();
+            return _container.Resolve<T>();
         }
 
-        public static void Initialise()
+        public static void InitializeComponent()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<TestBll>().As<ITestBll>();
+            builder.RegisterType<TestBll>().As<ITestBll>().InstancePerLifetimeScope();
+            _container = builder.Build();
         }
 
     }

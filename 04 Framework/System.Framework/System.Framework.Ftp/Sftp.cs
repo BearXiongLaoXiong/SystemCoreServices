@@ -41,7 +41,8 @@ namespace System.Framework.Ftp
                 new AuthenticationMethod[] {
                     new PasswordAuthenticationMethod(ftpUserId,ftpPassword)
                     //new PrivateKeyAuthenticationMethod("spi", new PrivateKeyFile[] { new PrivateKeyFile(@"C:\Users\laoxiong\Desktop\SFTP_KEY\tmp.cap", "ensurlink123") })
-                });
+                })
+            { Timeout = new TimeSpan(0, 0, 5) };
 
         }
 
@@ -53,7 +54,8 @@ namespace System.Framework.Ftp
             _connInfo = new ConnectionInfo(ftpServerIp, ftpProt, ftpUserId,
                 new AuthenticationMethod[] {
                     new PrivateKeyAuthenticationMethod(ftpUserId, new PrivateKeyFile(privateKeyFile, ftpPassword))
-                });
+                })
+            { Timeout = new TimeSpan(0, 0, 5) };
         }
         #endregion
 
