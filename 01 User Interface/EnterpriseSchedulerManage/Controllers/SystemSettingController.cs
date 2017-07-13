@@ -113,7 +113,7 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <param name="CodeArray"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult SynChronCodeByTarget(string SynChronContent,string[] TargetArray,string[] CodeArray)
+        public JsonResult SynChronCodeByTarget(string SynChronContent,string[] TargetArray,string[] CodeArray,object data)
         {
             string resultStr = "";
             switch (SynChronContent)

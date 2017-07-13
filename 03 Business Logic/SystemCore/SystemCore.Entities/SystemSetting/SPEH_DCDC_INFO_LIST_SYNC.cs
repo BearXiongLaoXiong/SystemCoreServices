@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_DCDC_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string DCDC_ID        {get;set;}
 		public string DCDC_TYPE      {get;set;}
 		public string DCDC_DESC      {get;set;}

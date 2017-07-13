@@ -20,6 +20,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_DADA_DIAGNOSIS_INFO_LIST_SYNC_RESULT
     {
+          public string SEQ { get; set; }
           public string DADA_ID          {get;set;}
           public string DADA_DESC        {get;set;}
           public string DADA_DESC_ENG    {get;set;}

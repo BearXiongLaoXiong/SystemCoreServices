@@ -19,7 +19,8 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_SPCT_INFO_LIST_SYNC_RESULT
     {
-          public string SPCT_ID          {get;set;}
+        public string SEQ { get; set; }
+        public string SPCT_ID          {get;set;}
           public string SYSV_SPCT_TYPE   {get;set;}
           public string SPCT_DESC        {get;set;}
           public string SPCT_DESC_ENG    {get;set;}

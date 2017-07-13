@@ -18,7 +18,8 @@ namespace SystemCore.Entities.SystemSetting
     }
 
     public class SPEH_DNDN_INFO_LIST_SYNC_RESULT
-    {                       
+    {
+        public string SEQ { get; set; }
         public string SPCT_ID        {get;set;}
         public string SPCT_DESC      {get;set;}
         public string DASY_KY        {get;set;}

@@ -13,6 +13,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_DASY_SYNC_CODE_LIST_RESULT
     {
+        public string SEQ { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }

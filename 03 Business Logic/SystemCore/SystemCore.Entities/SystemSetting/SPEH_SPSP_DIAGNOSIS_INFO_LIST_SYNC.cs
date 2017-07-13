@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_SPSP_DIAGNOSIS_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string SPSP_ID             {get;set;}
         public string SYSV_SPSP_TYPE      {get;set;}
         public string SYSV_SPSP_LEVEL     {get;set;}

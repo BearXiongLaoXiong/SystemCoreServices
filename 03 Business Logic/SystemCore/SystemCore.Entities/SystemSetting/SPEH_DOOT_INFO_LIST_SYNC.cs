@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_DOOT_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string DODO_KY         {get;set;}
 		public string DODO_DESC       {get;set;}
 		public string DODO_DESC_ENG   {get;set;}

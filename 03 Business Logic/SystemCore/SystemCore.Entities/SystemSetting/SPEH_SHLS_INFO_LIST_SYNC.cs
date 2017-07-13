@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_SHLS_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string SHLS_KY            {get;set;}
 		public string SHSH_KY            {get;set;}
 		public string SYSV_SVC_ID_TYPE   {get;set;}

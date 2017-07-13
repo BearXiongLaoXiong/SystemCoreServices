@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string HPHP_ID { get; set; }
         public string SYSV_HPHP_CLASS { get; set; }
         public string SYSV_HPHP_SUB_CLASS { get; set; }

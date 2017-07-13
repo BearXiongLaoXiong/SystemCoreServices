@@ -23,6 +23,8 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_SYSV_VALUE_LIST_RESULT
     {
+        public string SEQ { get; set; }
+
         public string value { get; set; }
 
         public string text { get; set; }

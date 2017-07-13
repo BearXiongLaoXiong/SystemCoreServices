@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_SPON_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string SPON_KY           {get;set;}
         public string SPSP_TYPE         {get;set;}
         public string SPSP_ID           {get;set;}

@@ -19,6 +19,7 @@ namespace SystemCore.Entities.SystemSetting
 
     public class SPEH_STSP_INFO_LIST_SYNC_RESULT
     {
+        public string SEQ { get; set; }
         public string STSP_KY        {get;set;}
 		public string STCV_PFX       {get;set;}
 		public string SYSV_SPSP_IND  {get;set;}
