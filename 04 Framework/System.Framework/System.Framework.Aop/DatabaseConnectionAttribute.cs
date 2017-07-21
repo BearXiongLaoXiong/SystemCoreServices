@@ -7,7 +7,7 @@
     public class DatabaseConnectionAttribute : System.Attribute
     {
         public string ConnectionName { get; }
-        public string ConnectionString { get; }
+        public string ConnectionString { get; set; }
 
         public DatabaseConnectionAttribute(ConnectionEnum connectionName)
         {

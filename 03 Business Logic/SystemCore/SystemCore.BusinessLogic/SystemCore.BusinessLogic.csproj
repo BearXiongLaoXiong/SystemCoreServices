@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Aop\System.Framework.Aop.csproj">
+      <Project>{f38fa4ca-3a5a-4641-a393-d5a6c15d1556}</Project>
+      <Name>System.Framework.Aop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\BusinessLogicRepository\BusinessLogicRepository.csproj">
       <Project>{ea7b2040-1e28-4537-baed-7b7d7090e6e2}</Project>
       <Name>BusinessLogicRepository</Name>

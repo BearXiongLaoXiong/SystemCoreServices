@@ -313,6 +313,44 @@
     <Content Include="Content\layui\lay\modules\tree.js" />
     <Content Include="Content\layui\lay\modules\upload.js" />
     <Content Include="Content\layui\lay\modules\util.js" />
+    <Content Include="Content\layui\ui\global\bootstrap-hover-dropdown\bootstrap-hover-dropdown.js" />
+    <Content Include="Content\layui\ui\global\bootstrap-switch\css\bootstrap-switch.css" />
+    <Content Include="Content\layui\ui\global\bootstrap-switch\js\bootstrap-switch.js" />
+    <Content Include="Content\layui\ui\global\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\layui\ui\global\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\layui\ui\global\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\layui\ui\global\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\layui\ui\global\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\layui\ui\global\bootstrap\js\npm.js" />
+    <Content Include="Content\layui\ui\global\fastclick\fastclick.js" />
+    <Content Include="Content\layui\ui\global\fastclick\fastclick.min.js" />
+    <Content Include="Content\layui\ui\global\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\layui\ui\global\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\layui\ui\global\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\layui\ui\global\jquery-blockui\jquery.blockui.min.js" />
+    <Content Include="Content\layui\ui\global\jquery-cookie\jquery.cookie.min.js" />
+    <Content Include="Content\layui\ui\global\jquery-pulsate\jquery.pulsate.min.js" />
+    <Content Include="Content\layui\ui\global\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Content\layui\ui\global\jQuery\jquery-1.9.1.min.js" />
+    <Content Include="Content\layui\ui\global\jQuery\jquery-2.2.3.min.js" />
+    <Content Include="Content\layui\ui\global\jQuery\jquery.min.js" />
+    <Content Include="Content\layui\ui\global\layer\layer.js" />
+    <Content Include="Content\layui\ui\global\layer\mobile\layer.js" />
+    <Content Include="Content\layui\ui\global\layer\mobile\need\layer.css" />
+    <Content Include="Content\layui\ui\global\layer\skin\default\icon-ext.png" />
+    <Content Include="Content\layui\ui\global\layer\skin\default\icon.png" />
+    <Content Include="Content\layui\ui\global\layer\skin\default\layer.css" />
+    <Content Include="Content\layui\ui\global\layer\skin\default\loading-0.gif" />
+    <Content Include="Content\layui\ui\global\layer\skin\default\loading-1.gif" />
+    <Content Include="Content\layui\ui\global\layer\skin\default\loading-2.gif" />
+    <Content Include="Content\layui\ui\global\layer\skin\moon\default.png" />
+    <Content Include="Content\layui\ui\global\layer\skin\moon\style.css" />
+    <Content Include="Content\layui\ui\global\moment\moment.min.js" />
+    <Content Include="Content\layui\ui\global\pace\pace.min.js" />
+    <Content Include="Content\layui\ui\global\pace\themes\pace-theme-big-counter.css" />
+    <Content Include="Content\layui\ui\global\pace\themes\pace-theme-flash.css" />
+    <Content Include="Content\layui\ui\global\slimScroll\jquery.slimscroll.js" />
+    <Content Include="Content\layui\ui\global\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="Content\min\css\supershopui.common.min.css" />
     <Content Include="Content\min\js\skin\default\icon-ext.png" />
     <Content Include="Content\min\js\skin\default\icon.png" />
@@ -1044,6 +1082,23 @@
     <Content Include="Content\ui\global\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Content\ui\global\pace\LICENSE" />
     <Content Include="Content\ui\global\pace\README.md" />
+    <Content Include="Content\layui\ui\global\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\layui\ui\global\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\layui\ui\global\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\layui\ui\global\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\layui\ui\global\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\layui\ui\global\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\layui\ui\global\bootstrap-hover-dropdown\LICENSE" />
+    <Content Include="Content\layui\ui\global\bootstrap-hover-dropdown\README.md" />
+    <Content Include="Content\layui\ui\global\bootstrap-switch\LICENSE" />
+    <Content Include="Content\layui\ui\global\bootstrap-switch\README.md" />
+    <Content Include="Content\layui\ui\global\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\layui\ui\global\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\layui\ui\global\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\layui\ui\global\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\layui\ui\global\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\layui\ui\global\pace\LICENSE" />
+    <Content Include="Content\layui\ui\global\pace\README.md" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\SystemSetting\Index.cshtml" />
@@ -1059,6 +1114,9 @@
       <Project>{582788cf-cb9a-41c6-92a7-32c86a9291c2}</Project>
       <Name>SystemCore.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
