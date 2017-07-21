@@ -13,7 +13,6 @@ namespace SystemCore.BusinessLogic
     public class SynChronCode
     {
         private readonly ICommonBl _commonBl = new CommonBl();
-        private List<SPEH_DASY_SYNC_CODE_LIST_RESULT> _cacheData = null;
         #region  获取同步目标环境
         /// <summary>
         ///  获取同步内容

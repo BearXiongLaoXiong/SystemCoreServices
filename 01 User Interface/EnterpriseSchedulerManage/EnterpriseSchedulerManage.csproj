@@ -1104,6 +1104,7 @@
     <Content Include="Views\SystemSetting\Index.cshtml" />
     <Content Include="Views\SystemSetting\PersonalInfo.cshtml" />
     <Content Include="Views\TaskScheduler\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\03 Business Logic\SystemCore\SystemCore.BusinessLogic\SystemCore.BusinessLogic.csproj">
