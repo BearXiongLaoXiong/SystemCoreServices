@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SystemCore.Entities</RootNamespace>
     <AssemblyName>SystemCore.Entities</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,8 +41,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SystemSetting\Class1.cs" />
+    <Compile Include="SystemSetting\SPEH_DADA_DIAGNOSIS_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_DASY_DATA_SYNC_INSERT.cs" />
+    <Compile Include="SystemSetting\SPEH_DASY_SYNC_CODE_LIST.cs" />
+    <Compile Include="SystemSetting\SPEH_DCDC_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_DIDI_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_DNDN_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_DODO_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_DOOT_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_HPHP_HOSPITAL_INFO_INSERT.cs" />
+    <Compile Include="SystemSetting\SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_SHLS_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_SPCT_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_SPON_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_SPSP_DIAGNOSIS_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_STSP_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_SYSV_VALUE_LIST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemSetting\TMP_HPHP_INSERT.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Aop\System.Framework.Aop.csproj">
+      <Project>{f38fa4ca-3a5a-4641-a393-d5a6c15d1556}</Project>
+      <Name>System.Framework.Aop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

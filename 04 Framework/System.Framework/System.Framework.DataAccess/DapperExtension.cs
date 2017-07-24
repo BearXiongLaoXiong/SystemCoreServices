@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
@@ -19,7 +20,9 @@ namespace System.Framework.DataAccess
             switch (connectionName ?? "")
             {
                 case nameof(ConnectionEnum.CustomizeConnectionString):
-                    return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
+                    //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
+                    return new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString);
+
                 default:
                     if (string.IsNullOrEmpty(connectionName)) connectionName = nameof(ConnectionEnum.DefaultConnectionString);
                     if (!ConnectionStringCache.ContainsKey(connectionName))
