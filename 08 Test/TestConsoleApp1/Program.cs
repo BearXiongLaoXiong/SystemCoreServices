@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Autofac;
+using Autofac.Configuration;
 
 namespace TestConsoleApp1
 {
@@ -45,32 +46,24 @@ namespace TestConsoleApp1
         }
     }
 
+
     public class Container
     {
-        //public static TestBll testBll = null;
-        private static IContainer _container = null;
-
+        private static IContainer _container;
         public static T Resolve<T>()
         {
-            //if (testBll == null)
-            //{
-            //    testBll = new TestBll();
-            //}
-
             if (_container == null)
-            {
                 InitializeComponent();
-            }
             return _container.Resolve<T>();
         }
 
         public static void InitializeComponent()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<TestBll>().As<ITestBll>().InstancePerLifetimeScope();
+            //builder.Register(c => new TestBll()).As<ITestBll>();
+            builder.RegisterModule(new ConfigurationSettingsReader("autofac"));
             _container = builder.Build();
         }
-
     }
 }
 

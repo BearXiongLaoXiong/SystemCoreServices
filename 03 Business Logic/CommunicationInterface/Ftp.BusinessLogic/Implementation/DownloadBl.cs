@@ -80,7 +80,7 @@ namespace Ftp.BusinessLogic.Implementation
             Nlog.Info(ftpConfig.FileType, $"{ftpConfig.FileType}\t开始运行...");
             //IFtp ftp = new System.Framework.Ftp.Ftp(ftpConfig.FileType, ftpConfig.Ip, ftpConfig.RemoteFolder, ftpConfig.Uid, ftpConfig.Pwd, ftpConfig.IsDirectory);
             IFtp ftp = new System.Framework.Ftp.Sftp(ftpConfig.FileType, ftpConfig.Ip, ftpConfig.Port, Path.Combine(Environment.CurrentDirectory, @"SFTP_KEY\tmp.cap"), ftpConfig.RemoteFolder, ftpConfig.Uid, ftpConfig.Pwd, ftpConfig.IsDirectory);
-            
+
             ftp.InitializeFileListStyle();
             //Thread.Sleep(5000);
 

@@ -25,12 +25,6 @@ namespace FtpServices
 
         static void Main(string[] args)
         {
-            CopyFiles();
-            //var ss = typeof(SPIN_FLFL_FILE_LOG_INFO_INSERT).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
-            //var ss1 = typeof(SPIN_FLFL_FILE_LOG_INFO_INSERT).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
-            //Console.ReadLine();
-
-
             string path = $@"{Environment.CurrentDirectory}\{ConfigurationManager.AppSettings["FtpServiceConfig"] ?? ""}";
 
             if (!File.Exists(path))
@@ -43,40 +37,6 @@ namespace FtpServices
             string config = File.ReadAllText(path).Replace("\r\n", "");
             DownloadBl dl = new DownloadBl(config);
             dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
-
-            //Thread.Sleep(1000);
-            //var entity = new SPIN_FLFL_FILE_LOG_INFO_INSERT
-            //{
-            //    pFLFL_STS = "2",
-            //    pFILE_NAME = "testname",
-            //    pFLFL_URL = "testurl",
-            //    pFLFL_TYPE = "testtype",
-            //    pFLFL_USUS_ID = "admin"
-
-            //};
-            //ICommonBl _commonBl = new CommonBl();
-            //_commonBl.Execute(entity);
-            //Console.WriteLine("执行第二次");
-            //_commonBl.Execute(entity);
-
-            MsmqHelper ms = new MsmqHelper();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            //Parallel.For(0, 1, new ParallelOptions() { MaxDegreeOfParallelism = 8 }, (i) =>
-            //{
-            //    ms.ReceiveTranMessageQueue((x) =>
-            //    {
-            //        Console.WriteLine("paht = " + x);
-            //        return true;
-            //    });
-            //});
-
-
-            sw.Stop();
-            Console.WriteLine(sw.Elapsed);
-
-
 
             Console.WriteLine("--------------------------------------");
             Console.ReadLine();
@@ -121,78 +81,9 @@ namespace FtpServices
         }
 
 
-        static void CopyFiles()
-        {
-            var list = new List<string>
-            {
-                "201720100036928",
-                "201720200013119"
-            };
-
-            //var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\05-31结案", "*", SearchOption.AllDirectories);
-
-            //foreach (var s in files)
-            //{
-            //    Console.WriteLine(s);
-            //    foreach (var l in list) if (s.Contains(l)) File.Copy(s, $@"C:\Users\sh179\Desktop\新建文件夹\{Path.GetFileName(s)}");
-            //}
-
-
-            //int index = 228;
-            //var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\1", "*", SearchOption.AllDirectories);
-            //foreach (var VARIABLE in files)
-            //{
-            //    Console.WriteLine(Path.GetFileName(VARIABLE) + " ========> " + index);
-            //    File.Copy(VARIABLE, $@"C:\Users\sh179\Desktop\2\{index}.jpg");
-            //    index++;
-            //}
-
-            int index = 228;
-            for (int i = 3; i < 82; i++)
-            {
-                Console.WriteLine(i + " ========> " + index);
-                //CopyFolder(@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\1", @"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\" + i);
-                File.Copy($@"C:\Users\sh179\Desktop\1\{i}.jpg", $@"C:\Users\sh179\Desktop\2\{index}.jpg");
-                index++;
-            }
-            //Console.WriteLine("end-----------------------");
-            Console.ReadLine();
-        }
+        
     }
 
-    public class Movie
-    {
-
-        //public int Genre { get; set; }
-    }
-
-    public class TestMoviesInsert
-    {
-        public string Title1;
-        public string Title { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public string Genre { get; set; }
-        public decimal Price { get; set; }
-        public string Rating { get; set; }
-    }
-
-    #region 文件信息结构
-    public struct FileStruct
-    {
-        public string Flags;
-        public string Owner;
-        public string Group;
-        public bool IsDirectory;
-        public DateTime CreateTime;
-        public string Name;
-    }
-    public enum FileListStyle
-    {
-        UnixStyle,
-        WindowsStyle,
-        Unknown
-    }
-    #endregion
 
 
     //public class demo

@@ -80,6 +80,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="AppConfigs\autofac.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="AppConfigs\Dev.FtpServiceConfig.JSON">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

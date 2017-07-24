@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5029B28-A4BA-41AC-BD80-AECD6191AE9A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TestConsoleApp1</RootNamespace>
-    <AssemblyName>TestConsoleApp1</AssemblyName>
+    <ProjectGuid>{62A00C54-143D-4F30-97D4-28A2605C06B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System.Framework.Autofac</RootNamespace>
+    <AssemblyName>System.Framework.Autofac</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,26 +20,24 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
+      <HintPath>..\..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Configuration, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AutofacOfConfiguration.3.3.0\lib\net40\Autofac.Configuration.dll</HintPath>
+      <HintPath>..\..\..\packages\AutofacOfConfiguration.3.3.0\lib\net40\Autofac.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,36 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\03 Business Logic\CommunicationInterface\Ftp.BusinessLogic\Ftp.BusinessLogic.csproj">
-      <Project>{adb78795-3a0e-4644-ad59-9d4839e9b7a2}</Project>
-      <Name>Ftp.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\03 Business Logic\CommunicationInterface\Ftp.Entities\Ftp.Entities.csproj">
-      <Project>{2c1184ad-22b2-4cc4-9788-5230cfb2c15f}</Project>
-      <Name>Ftp.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Aop\System.Framework.Aop.csproj">
-      <Project>{f38fa4ca-3a5a-4641-a393-d5a6c15d1556}</Project>
-      <Name>System.Framework.Aop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.DataAccess\System.Framework.DataAccess.csproj">
-      <Project>{efd6a0e4-cb8a-4fc2-89be-e7dd18ac982f}</Project>
-      <Name>System.Framework.DataAccess</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AutofacJson\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

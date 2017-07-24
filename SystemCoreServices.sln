@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 User Interface", "01 User Interface", "{4FE9AADA-79C3-4608-B415-6C3F959D4197}"
 EndProject
@@ -66,6 +66,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicRepository", "03 Business Logic\BusinessLogicRepository\BusinessLogicRepository.csproj", "{EA7B2040-1E28-4537-BAED-7B7D7090E6E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWindowsFormsApp1", "08 Test\TestWindowsFormsApp1\TestWindowsFormsApp1.csproj", "{5CF53643-0E9A-47CD-A8D6-84F9C85C9F2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Framework.Autofac", "04 Framework\System.Framework\System.Framework.Autofac\System.Framework.Autofac.csproj", "{62A00C54-143D-4F30-97D4-28A2605C06B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,10 @@ Global
 		{5CF53643-0E9A-47CD-A8D6-84F9C85C9F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CF53643-0E9A-47CD-A8D6-84F9C85C9F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CF53643-0E9A-47CD-A8D6-84F9C85C9F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62A00C54-143D-4F30-97D4-28A2605C06B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A00C54-143D-4F30-97D4-28A2605C06B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62A00C54-143D-4F30-97D4-28A2605C06B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62A00C54-143D-4F30-97D4-28A2605C06B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,5 +187,6 @@ Global
 		{23F8DD4A-4DAE-4792-AF19-8A9EE40C3291} = {92391C8D-8DD2-49E8-8549-A6DD280FD741}
 		{EA7B2040-1E28-4537-BAED-7B7D7090E6E2} = {D17F5B1F-DE29-4676-BF1F-13F72508400C}
 		{5CF53643-0E9A-47CD-A8D6-84F9C85C9F2A} = {39CDA414-63CF-40FA-8C77-97C6B27B2565}
+		{62A00C54-143D-4F30-97D4-28A2605C06B5} = {00A6A3A1-7EC9-4E3A-A945-F4C30E4705E1}
 	EndGlobalSection
 EndGlobal
