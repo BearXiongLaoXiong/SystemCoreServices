@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using Autofac;
 using Autofac.Configuration;
+using Autofac.Configuration.Core;
+using Microsoft.Extensions.Configuration;
 
 namespace TestConsoleApp1
 {
@@ -11,14 +13,24 @@ namespace TestConsoleApp1
 
         static void Main(string[] args)
         {
-            var v1 = Container.Resolve<ITestBll>();
+            //var v1 = Container.Resolve<ITestBll>();
 
-            var v2 = Container.Resolve<ITestBll>();
+            //var v2 = Container.Resolve<ITestBll>();
+            var config = new ConfigurationBuilder();
+            // config.AddJsonFile comes from Microsoft.Extensions.Configuration.Json
+            // config.AddXmlFile comes from Microsoft.Extensions.Configuration.Xml
+            config.AddJsonFile("autofac.json");
 
-
-            var v3 = Container.Resolve<ITestBll>();
+            // Register the ConfigurationModule with Autofac.
+            var module = new ConfigurationModule(config.Build());
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(module);
+            var _container = builder.Build();
+            var test = _container.Resolve<ITestBll>();
+            test.GetName();
+            //var v3 = Container.Resolve<ITestBll>();
             //Container.testBll.GetName();
-            v3.GetName();
+            //v3.GetName();
         }
 
         //static string Getvalues(Expression<Func<DatabaseConnectionAttribute, string> attributeValueAction> exp)
@@ -42,6 +54,7 @@ namespace TestConsoleApp1
         }
         public string GetName()
         {
+            Console.WriteLine("注册成功");
             return "有熊";
         }
     }
@@ -61,14 +74,29 @@ namespace TestConsoleApp1
         {
             var builder = new ContainerBuilder();
             //builder.Register(c => new TestBll()).As<ITestBll>();
-            builder.RegisterModule(new ConfigurationSettingsReader("autofac"));
+            //builder.RegisterModule(new ConfigurationSettingsReader("autofac"));
             _container = builder.Build();
         }
     }
 }
 
 
+namespace MytestDi
+{
+    public interface IMyTest
+    {
+        void go();
+    }
 
+    public class MyTest : IMyTest
+    {
+        public void go()
+        {
+            Console.WriteLine("gogogo");
+        }
+    }
+
+}
 
 
 

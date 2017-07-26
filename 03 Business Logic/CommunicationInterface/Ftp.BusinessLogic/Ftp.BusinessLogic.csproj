@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -43,11 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\DownLoadSignleBl.cs" />
+    <Compile Include="Implementation\DownLoadBatchBl.cs" />
     <Compile Include="Implementation\DownloadBl.cs" />
+    <Compile Include="Implementation\DownLoadWholeBl.cs" />
     <Compile Include="Implementation\InputDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Interface\IDownLoadBl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Autofac\System.Framework.Autofac.csproj">
+      <Project>{62a00c54-143d-4f30-97d4-28a2605c06b5}</Project>
+      <Name>System.Framework.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\04 Framework\System.Framework\System.Framework.Common\System.Framework.Common.csproj">
       <Project>{f6f7027d-285b-4bda-b868-3d01065b4cb7}</Project>
       <Name>System.Framework.Common</Name>
@@ -73,9 +84,7 @@
       <Name>Ftp.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_Interface\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

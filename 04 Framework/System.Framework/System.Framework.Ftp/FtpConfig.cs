@@ -67,12 +67,7 @@ namespace System.Framework.Ftp
         public bool IsDirectory { get; set; }
 
         /// <summary>
-        /// 仅全部下载成功情况下,才能整批导入
-        /// </summary>
-        public bool IsEntiretyInPutMsmq { get; set; }
-
-        /// <summary>
-        /// 超时时间
+        /// 循环等待时间
         /// </summary>
         public int ThreadMillisecondsTimeout { get; set; }
 

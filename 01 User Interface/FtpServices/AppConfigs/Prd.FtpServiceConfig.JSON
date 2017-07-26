@@ -12,7 +12,6 @@
     "NameContains": "",
     "FileType": "_03申请信息导入",
     "IsDirectory": false,
-    "IsEntiretyInPutMsmq": false,
     "ThreadMillisecondsTimeout": 60000,
     "MaxDegreeOfParallelism": 8
   },
@@ -30,7 +29,6 @@
     "NameContains": "_END",
     "FileType": "_04图片导入",
     "IsDirectory": true,
-    "IsEntiretyInPutMsmq": false,
     "ThreadMillisecondsTimeout": 60000,
     "MaxDegreeOfParallelism": 16
   },
@@ -47,7 +45,6 @@
     "NameContains": "",
     "FileType": "_05录入信息导入",
     "IsDirectory": false,
-    "IsEntiretyInPutMsmq": false,
     "ThreadMillisecondsTimeout": 60000,
     "MaxDegreeOfParallelism": 8
   }
