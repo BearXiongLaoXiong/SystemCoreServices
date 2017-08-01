@@ -35,8 +35,8 @@ namespace Ftp.BusinessLogic.Implementation
         {
             _listFileStruct.Clear();
             _listMessage.Clear();
-            //_msmq.InitializeMessageQueue(path);
-            //_inputDataBase.InitializeComponent(path);
+            _msmq.InitializeMessageQueue(path);
+            _inputDataBase.InitializeComponent(path);
             StringBuilder stb = new StringBuilder();
             foreach (var config in _ftpConfigs)
             {
