@@ -25,8 +25,8 @@ namespace FtpServices
             Console.WriteLine($"配置环境:{Path.GetFileName(path).Left(3)}");
             string config = File.ReadAllText(path).Replace("\r\n", "");
             var dl = Containers.Resolve<IDownLoadBl>(new NamedParameter("jsonConfig", config));
-            dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
-            //dl.InitializeComponent(@".\private$\FtpDownloadWholeServiceQueue");
+            //dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
+            dl.InitializeComponent(@".\private$\FtpDownloadWholeServiceQueue");
 
             Console.WriteLine("--------------------------------------");
         }
