@@ -52,7 +52,7 @@ namespace TestConsoleApp1
             foreach (var item in list)
                 Console.WriteLine($"{item.Key}:\t{item.Value}");
 
-            TypeDescriptor.AddAttributes(typeof(TestBll), new DatabaseConnectionAttribute("1"));
+            
             TestBll tb = new TestBll();
 
             Console.ReadLine();

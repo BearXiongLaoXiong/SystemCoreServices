@@ -15,15 +15,16 @@
             ConnectionName = connectionName.ToString();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connectionString">例:Data Source=192.168.x.x,uid=sa;pwd=xxx;...</param>
-        public DatabaseConnectionAttribute(string connectionString)
-        {
-            ConnectionName = nameof(ConnectionEnum.CustomizeConnectionString);
-            ConnectionString = connectionString;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="connectionString">例:Data Source=192.168.x.x,uid=sa;pwd=xxx;...</param>
+        //public DatabaseConnectionAttribute(string connectionString)
+        //{
+        //    ConnectionName = nameof(ConnectionEnum.CustomizeConnectionString);
+        //    ConnectionString = connectionString;
+        //}
+        //TypeDescriptor.AddAttributes(typeof(TestBll), new DatabaseConnectionAttribute("1"));
     }
 
     /// <summary>
@@ -57,8 +58,14 @@
 
     }
 
+    /// <summary>
+    /// 连接字符串
+    /// </summary>
     public interface ICustomizeConnectionString
     {
+        /// <summary>
+        /// 例:Data Source=192.168.x.x,uid=sa;pwd=xxx;...
+        /// </summary>
         string ConnectionString { get; set; }
     }
 }

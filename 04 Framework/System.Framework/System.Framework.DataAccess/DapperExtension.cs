@@ -21,13 +21,12 @@ namespace System.Framework.DataAccess
             switch (connectionName ?? "")
             {
                 case nameof(ConnectionEnum.CustomizeConnectionString):
-
-                    return t is ICustomizeConnectionString con
-                        ? new SqlConnection(con.ConnectionString)
-                        : new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString ?? "");
-                //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
-                //return new SqlConnection(typeof(T).GetProperty(nameof(ICustomizeConnectionString.ConnectionString))?.GetValue(t).ToString() ?? "");
-
+                    return t is ICustomizeConnectionString con ? new SqlConnection(con.ConnectionString) : throw new ArgumentNullException(nameof(ICustomizeConnectionString.ConnectionString));
+                    //return t is ICustomizeConnectionString con
+                    //    ? new SqlConnection(con.ConnectionString)
+                    //    : new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString ?? "");
+                    //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
+                    //return new SqlConnection(typeof(T).GetProperty(nameof(ICustomizeConnectionString.ConnectionString))?.GetValue(t).ToString() ?? "");
                 default:
                     if (string.IsNullOrEmpty(connectionName)) connectionName = nameof(ConnectionEnum.DefaultConnectionString);
                     if (!ConnectionStringCache.ContainsKey(connectionName))
