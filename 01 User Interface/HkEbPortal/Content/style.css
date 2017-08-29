@@ -1,0 +1,126 @@
+body, html{font-family:'Microsoft Yahei';color: #333;width: 100% !important;height: 100% !important;}
+h1{font-weight: 700;}
+a{color: #333;}
+a:hover, a:focus{text-decoration: none;color: #333;}
+ul, ol{list-style: none;}
+
+/* header */
+.logoId a{margin-bottom:0px;}
+.navbar-custom{background-color: #fff;margin:0;}
+.navbar-custom .navbar-brand{font-weight: 100;}
+.navbar-custom .navbar-brand .navbar-toggle{padding: 4px 6px;font-size: 16px;color: #fff;}
+.navbar-custom ul{margin-right:-32px;}
+.navbar-custom a{ font-size:15px;font-weight:300; margin-bottom:-5px; color: #6c6d70;}
+
+/* banner */
+.intro{display: table;width:100%;height: 100%;margin-top:0;padding: 0 0; text-align: center;color: #fff;background: url(Images/index.jpg) no-repeat center center;background-color: #000;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+.intro .intro-body{display: table-cell;vertical-align: middle;}
+.intro .intro-body .brand-heading{color: #F4D03F;text-transform: uppercase;letter-spacing: -2px;}
+.intro .intro-body .intro-text{font-size: 18px;}
+.navbar-brand>img{max-width: 260px;max-height:200px;margin-top:-40px;}
+
+/* main */
+#main{padding: 0px 0 0 0px;color: #333;}
+#main .section-title.center hr{background: #c1a533;}
+#main h2{color: #ddd;}
+.line a{color:#C5281C;}
+.line{padding:20px 0;line-height: 35px; height:230px}
+.line h3{font-size:30px;font-weight:600;font-family: Calibri; color:#C5281C;}
+.line span{ font-size:18px;font-weight:200;color:#C5281C;}
+.more{margin:10px 0;}
+.more > a { padding: 12px 35px 12px 25px; border: 1px solid #C5281C; font-size:18px;font-weight:100;}
+
+
+/* clild page*/
+.site-h1 {margin:0;line-height: 60px;padding-bottom: 10px;color: #393D49;border-bottom: 1px solid #eee;font-size: 28px;font-weight: 300;}
+
+/* form */
+#loginform{padding: 0px 0;background: #75c049;overflow: hidden;}
+#logininfo{padding: 0px 0;background: #75c049;overflow: hidden;}
+#loginform h3{ margin:10px 0 15px 0; font-size: 30px;font-weight: 100;color:#ffffff;}
+/*#form form{padding: 30px 0;}
+#form .fa{color: #F4D03F;margin-bottom: 10px;}
+#form .text-danger{color: #ff3333;text-align: left;}
+#form .btn{background-color: #23becf;border: 0;border-radius: 4px;padding: 10px 20px;color: #ffffff;margin-top: 15px;}
+#form .btn:hover, #form .btn:focus{background:#a4c2f4;}
+@media(min-width: 1200px){ .intro-body .form{width:37%; margin-left:62%;}}*/
+/* Footer */
+#footer{padding: 30px 0 25px 0;}
+#footer .fnav{line-height: 30px;}
+
+@media(min-width:768px){.navbar-custom{padding: 20px 0;letter-spacing: 1px;background: 0 0;}
+	.navbar-custom.top-nav-collapse{background: #fff;padding:60px 0 20px;}
+	.navbar-custom .navbar-brand{margin-top:-30px;}
+	.intro{height:700px;padding: 0;margin-top:0;}
+	.intro .intro-body H1{font-size: 70px;font-weight: 700;letter-spacing: -2px;}
+	.intro .intro-body .intro-text{font-size: 20px;text-transform: uppercase;letter-spacing: 8px;margin-bottom: 50px;}
+	.navbar-custom .nav li a:hover{color: #000;background-color: #C5281C;}
+	.navbar-custom .nav li{margin:auto 3px;width:140px;text-align: center;}
+	.navbar-custom .nav li:nth-child(1){border-bottom:5px solid #C5281C;}
+	.navbar-custom .nav li:nth-child(2){border-bottom:5px solid #C5281C;}
+	.navbar-custom .nav li:nth-child(3){border-bottom:5px solid #C5281C;}
+	.navbar-custom .nav li:nth-child(4){border-bottom:5px solid #C5281C;}
+	.navbar-custom .nav li:nth-child(5){border-bottom:5px solid #C5281C;}
+    .navbar-custom .nav li.active{border-color:#bcbdc0;}
+	.navbar-custom .nav li.active a{color:#bcbdc0;}
+
+}
+@media(max-width:768px){  .navbar-header{border-bottom:1px solid #ddd;}.navbarhide {display: none;} }
+@media(max-width:414px){ .form{width: 100%;margin:0;} .info,.info-content span{padding:0;} }
+
+/*******************/
+.info-bg{min-height:250px;padding-top:25px;padding-bottom:25px;}
+.info-box{margin-bottom:10px;}
+.info-border{border:1px solid #dddddd;overflow: hidden;margin:2px 0;/*background-color: #efefef;*/}
+.info-titles{padding:8px 12px;}
+.info-btn{cursor: pointer;}
+.info-content>div{width: 100%;padding:10px 0;overflow:hidden;}
+
+
+
+.center {
+    font-size: 0.875rem;
+    float: right;
+    border-right: 1px solid #C12017;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.myButton {
+    float: right;
+    color: #FFFFFF;
+    background-color: #c12017;
+    height: 30px;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 30px;
+    padding-left: 25px;
+    width: 100px;
+}
+.myHarf {
+    content: "";
+    background: url(/Content/Images/login_icon.png) no-repeat;
+    display: block;
+    width: 25px;
+    height: 30px;
+    color: transparent;
+    overflow-x: hidden;
+    margin-top: 5px;
+    margin-left: -12px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.layui-form-radio {
+    line-height: 20px !important;
+    margin: 0 !important;
+    padding-right: 0 !important;
+    cursor: pointer !important;
+    font-size: 0 !important;
+}
+
+

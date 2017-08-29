@@ -11,7 +11,7 @@
 
         public DatabaseConnectionAttribute(ConnectionEnum connectionName)
         {
-            if (connectionName == ConnectionEnum.CustomizeConnectionString) throw new ArgumentOutOfRangeException($"{nameof(ConnectionEnum.CustomizeConnectionString)}不可在此构造中调用");
+            //if (connectionName == ConnectionEnum.CustomizeConnectionString) throw new ArgumentOutOfRangeException($"{nameof(ConnectionEnum.CustomizeConnectionString)}不可在此构造中调用");
             ConnectionName = connectionName.ToString();
         }
 
@@ -55,5 +55,10 @@
 
         DwProd
 
+    }
+
+    public interface ICustomizeConnectionString
+    {
+        string ConnectionString { get; set; }
     }
 }

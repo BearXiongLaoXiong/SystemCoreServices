@@ -73,11 +73,10 @@ namespace Ftp.BusinessLogic.Implementation
 
             if (_listFileStruct.Count > 0 && _listFileStruct.Count(x => !x.IsSuccess) == 0)
             {
-                if (_msmq.SendTranMessageQueue(_listMessage, (result, msg) => Nlog.Info($"{_listFileStruct.Count}个 msmq {(result ? "√" : "failed")} {msg}")))
+                if (_msmq.SendTranMessageQueue(_listMessage, (result, msg) => Nlog.Info("MessageQueue", $"{_listFileStruct.Count}个 msmq {(result ? "√" : "failed")} {msg}")))
                     _ftpConfigs.ForEach(DeleteFtpFiles);
             }
             else Nlog.Info($"整包下载总数:{_listFileStruct.Count},其中失败{_listFileStruct.Count(x => !x.IsSuccess)}");
-
             _inputDataBase.BeginWork();
         }
 

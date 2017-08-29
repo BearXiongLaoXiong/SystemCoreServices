@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AttributesExtensions.cs" />
     <Compile Include="DatabaseConnectionAttribute.cs" />
+    <Compile Include="SqlDataRecordExtensions.cs" />
     <Compile Include="SqlParameterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

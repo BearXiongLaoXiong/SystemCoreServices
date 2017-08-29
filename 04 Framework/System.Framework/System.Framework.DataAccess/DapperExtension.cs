@@ -8,20 +8,25 @@ using System.Data.SqlClient;
 using System.Framework.Aop;
 using System.Linq;
 using System.Reflection;
+using Microsoft.SqlServer.Server;
 
 namespace System.Framework.DataAccess
 {
     public class DapperExtension<T> where T : class
     {
         private static readonly Dictionary<string, string> ConnectionStringCache = new Dictionary<string, string>();
-        private static IDbConnection CreateDbConnection()
+        private static IDbConnection CreateDbConnection(T t)
         {
             var connectionName = typeof(T).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
             switch (connectionName ?? "")
             {
                 case nameof(ConnectionEnum.CustomizeConnectionString):
-                    //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
-                    return new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString);
+
+                    return t is ICustomizeConnectionString con
+                        ? new SqlConnection(con.ConnectionString)
+                        : new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString ?? "");
+                //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
+                //return new SqlConnection(typeof(T).GetProperty(nameof(ICustomizeConnectionString.ConnectionString))?.GetValue(t).ToString() ?? "");
 
                 default:
                     if (string.IsNullOrEmpty(connectionName)) connectionName = nameof(ConnectionEnum.DefaultConnectionString);
@@ -46,7 +51,7 @@ namespace System.Framework.DataAccess
         }
         private static DbType ConvertToDbType(Type type)
         {
-            DbType result = DbType.String;
+            DbType result;
             if (type == typeof(int) || type.IsEnum) result = DbType.Int32;
             else if (type == typeof(long)) result = DbType.Int32;
             else if (type == typeof(double) || type == typeof(Double)) result = DbType.Decimal;
@@ -54,8 +59,11 @@ namespace System.Framework.DataAccess
             else if (type == typeof(bool)) result = DbType.Boolean;
             else if (type == typeof(string)) result = DbType.String;
             else if (type == typeof(decimal)) result = DbType.Decimal;
+            else if (type == typeof(float)) result = DbType.Single;
             else if (type == typeof(byte[])) result = DbType.Binary;
             else if (type == typeof(Guid)) result = DbType.Guid;
+            else if (type == typeof(List<SqlDataRecord>)) result = DbType.Object;
+            else if (type == typeof(DataTable)) result = DbType.Object;
             else throw new TypeLoadException(nameof(type));
             return result;
         }
@@ -69,12 +77,13 @@ namespace System.Framework.DataAccess
             {
                 var attrs = pi.GetCustomAttributes<SqlParameterAttribute>();
                 var type = ConvertToDbType(pi.PropertyType);
-                //if (attrs != null && attrs.Any()) parameters.Add(pi.Name, pi.GetValue(entity, null), type, attrs[0].Direction, attrs[0].Size);
-                //else parameters.Add(pi.Name, pi.GetValue(entity, null), type, ParameterDirection.Input, type == DbType.String ? 50 : 0);
 
-                parameters.Add(pi.Name, pi.GetValue(entity, null), type,
-                   attrs != null && attrs.Any() ? attrs[0].Direction : ParameterDirection.Input,
-                   attrs != null && attrs.Any() ? attrs[0].Size : (type == DbType.String ? 50 : 0));
+                if (pi.PropertyType == typeof(DataTable))
+                    parameters.AddDynamicParams(new Dictionary<string, object> { { pi.Name, (pi.GetValue(entity, null) as DataTable).AsTableValuedParameter() } });
+                else
+                    parameters.Add(pi.Name, pi.GetValue(entity, null), type,
+                        attrs != null && attrs.Any() ? attrs[0].Direction : ParameterDirection.Input,
+                        attrs != null && attrs.Any() ? attrs[0].Size : (type == DbType.String ? 50 : 0));
             }
             return parameters;
         }
@@ -95,6 +104,7 @@ namespace System.Framework.DataAccess
                 else if (type == typeof(double) || type == typeof(Double)) pi.SetValue(entity, parameters.Get<double>(pi.Name), null);
                 else if (type == typeof(bool)) pi.SetValue(entity, parameters.Get<bool>(pi.Name), null);
                 else if (type == typeof(decimal)) pi.SetValue(entity, parameters.Get<decimal>(pi.Name), null);
+                else if (type == typeof(float)) pi.SetValue(entity, parameters.Get<float>(pi.Name), null);
                 else if (type == typeof(byte[])) pi.SetValue(entity, parameters.Get<byte[]>(pi.Name), null);
                 else if (type == typeof(Guid)) pi.SetValue(entity, parameters.Get<Guid>(pi.Name), null);
                 else throw new TypeLoadException(nameof(type));
@@ -104,7 +114,7 @@ namespace System.Framework.DataAccess
         public static void Execute(T entity)
         {
             var parameters = GetParameter(entity);
-            using (IDbConnection cnn = CreateDbConnection())
+            using (IDbConnection cnn = CreateDbConnection(entity))
             {
                 var data = cnn.Execute(typeof(T).Name, parameters, null, null, CommandType.StoredProcedure);
                 SetParameter(parameters, entity);
@@ -115,7 +125,7 @@ namespace System.Framework.DataAccess
         {
             var parameters = GetParameter(entity);
             List<TFirst> listFirst;
-            using (IDbConnection cnn = CreateDbConnection())
+            using (IDbConnection cnn = CreateDbConnection(entity))
             {
                 listFirst = cnn.Query<TFirst>(typeof(T).Name, parameters, null, false, null, CommandType.StoredProcedure)?.ToList();
                 SetParameter(parameters, entity);
@@ -128,7 +138,7 @@ namespace System.Framework.DataAccess
             var parameters = GetParameter(entity);
             List<TFirst> listFirst;
             List<TSecond> listSecond;
-            using (IDbConnection cnn = CreateDbConnection())
+            using (IDbConnection cnn = CreateDbConnection(entity))
             {
                 var data = cnn.QueryMultiple("TestMoviesUpdate", parameters, null, null, CommandType.StoredProcedure);
                 listFirst = data.Read<TFirst>().ToList();
@@ -147,7 +157,7 @@ namespace System.Framework.DataAccess
             List<TFirst> listFirst;
             List<TSecond> listSecond;
             List<TThird> listThird;
-            using (IDbConnection cnn = CreateDbConnection())
+            using (IDbConnection cnn = CreateDbConnection(entity))
             {
                 var data = cnn.QueryMultiple("TestMoviesUpdate", parameters, null, null, CommandType.StoredProcedure);
                 listFirst = data.Read<TFirst>().ToList();
@@ -162,7 +172,7 @@ namespace System.Framework.DataAccess
         {
             DataSet ds = new XDataSet();
             var parameters = GetParameter(entity);
-            using (IDbConnection cnn = CreateDbConnection())
+            using (IDbConnection cnn = CreateDbConnection(entity))
             {
                 IDataReader reader = cnn.ExecuteReader("TestMoviesUpdate", parameters, null, null, CommandType.StoredProcedure);
                 SetParameter(parameters, entity);

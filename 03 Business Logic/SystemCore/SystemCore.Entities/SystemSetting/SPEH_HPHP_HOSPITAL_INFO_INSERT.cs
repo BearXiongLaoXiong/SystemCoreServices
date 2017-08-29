@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace SystemCore.Entities.SystemSetting
 {
-    [DatabaseConnection(@"Data Source=10.128.68.15\APP05;Initial Catalog=TPA_PROD;UID=sa;password=App05@sohu.com;Pooling=true;Max Pool Size=32767;Min Pool Size=0;")]
-    public class SPEH_HPHP_HOSPITAL_INFO_INSERT
+    [DatabaseConnection(ConnectionEnum.CustomizeConnectionString)]
+    public class SPEH_HPHP_HOSPITAL_INFO_INSERT: ICustomizeConnectionString
     {
         [SqlParameter(255)]
         public string pHPHP_ID { get; set; }
@@ -136,5 +136,7 @@ namespace SystemCore.Entities.SystemSetting
 
         [SqlParameter(direction: ParameterDirection.Output)]
         public DateTime pERR_CD { get; set; }
+
+        public string ConnectionString { get; set; }
     }
 }

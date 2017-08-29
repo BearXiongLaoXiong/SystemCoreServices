@@ -1,0 +1,60 @@
+{
+  "public.common.pleaseSelect": "請選擇",
+  "public.common.pleaseInput": "請輸入",
+
+  "footer.login": "登入",
+  "footer.menu.homepage": "主頁",
+  "footer.menu.member": "被保險人",
+  "footer.menu.policy": "保單信息",
+  "footer.menu.claims": "報銷",
+  "footer.menu.contact": "聯係我們",
+
+  "home.index.member": "被保險人",
+  "home.index.policy": "保單信息",
+  "home.index.claims": "\"報銷聯係我們",
+  "home.index.contact": "联系我们",
+
+  "user.login.signIn": "登入",
+  "user.login.signUp": "注冊",
+  "user.login.message": "登入你的賬號",
+  "user.login.policy": "保單號",
+  "user.login.member": "賬號",
+  "user.login.password": "密碼",
+  "user.login.forgotpwd": "忘記密碼?",
+
+  "Policy.index.info": "保單信息",
+  "Policy.index.status": "狀態",
+  "Policy.index.MemberName": "人員名稱",
+  "Policy.index.PolicyName": "保單名稱",
+
+  "policy.detail.benefit": "保單信息",
+  "policy.detail.total": "總金額",
+  "policy.detail.employee": "員工金額",
+  "policy.detail.target": "雇主金額",
+  "policy.detail.tax": "稅率金額",
+
+  "Reimbursement.Index.fsaClaims": "報銷",
+  "Reimbursement.Index.Applicant": "家庭成員",
+  "Reimbursement.Index.Status": "報銷狀態",
+  "Reimbursement.Index.Benefit": "福利",
+  "Reimbursement.Index.ApplyDate": "申請日",
+  "Reimbursement.Index.Invoice": "發票金額",
+  "Reimbursement.Index.ApplyAmount": "申請金額",
+  "Reimbursement.Index.Paid": "實際報銷費用",
+
+  "Reimbursement.edit.edit": "修改",
+  "Reimbursement.edit.faimily": "家庭成員",
+  "Reimbursement.edit.benefit": "福利",
+  "Reimbursement.edit.type": "發票類型",
+  "Reimbursement.edit.no": "發票號",
+  "Reimbursement.edit.service": "發票日",
+  "Reimbursement.edit.application": "申請日",
+  "Reimbursement.edit.apply": "申請金額",
+  "Reimbursement.edit.invoice": "發票金額",
+  "Reimbursement.edit.comments": "説明",
+  "Reimbursement.edit.amount": "調整金額",
+  "Reimbursement.edit.user": "調整用戶",
+  "Reimbursement.edit.reason": "調整原因",
+  "Reimbursement.edit.image": "發票信息"
+}
+

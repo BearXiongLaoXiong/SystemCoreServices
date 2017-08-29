@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Scripts/css/layui.css" rel="stylesheet" />
+
+<div class="container">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend i18n="policy.detail.benefit">保單信息</legend>
+    </fieldset>
+
+    <blockquote class="layui-elem-quote">Hospitalization Benefit+Supplementary Major Medical</blockquote>
+
+    <div class="layui-form">
+        <table class="layui-table">
+            <colgroup>
+                <col>
+                <col width="90">
+                <col width="90">
+                <col width="90">
+                <col width="90">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th i18n="policy.detail.total">總金額</th>
+                    <th i18n="policy.detail.employee">員工金額</th>
+                    <th i18n="policy.detail.target">雇主金額</th>
+                    <th i18n="policy.detail.tax">稅率金額</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><input type="radio" name="radio" title=" ">None Select</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="radio" title=" ">Lowest HOSP without SMM EMP_PLAN-1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+
+                <tr>
+                    <td><input type="radio" name="radio" title=" ">HOSP + SMM EMP_PLAN-2</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+
+                <tr>
+                    <td><input type="radio" name="radio" title=" ">Higher HOSP + SMM EMP_PLAN-3</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+
+                <tr>
+                    <td><input type="radio" name="radio" title=" ">Highest HOSP + SMM EMP_PLAN-4</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <blockquote class="layui-elem-quote">Term Life</blockquote>
+
+    <div class="layui-form">
+        <table class="layui-table">
+            <colgroup>
+                <col>
+                <col width="90">
+                <col width="90">
+                <col width="90">
+                <col width="90">
+                <col width="50">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th i18n="policy.detail.total">total</th>
+                    <th i18n="policy.detail.benefit">employee</th>
+                    <th i18n="policy.detail.benefit">target</th>
+                    <th i18n="policy.detail.benefit">tax</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><input type="radio" name="radio" title=" " /> Lowest TM EMP_PLAN-1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="radio" title=" " />Moderate TM EMP_PLAN-2</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="radio" title=" " />Higher TM EMP_PLAN-3</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="radio" title=" " />Highest TM EMP_PLAN-4</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

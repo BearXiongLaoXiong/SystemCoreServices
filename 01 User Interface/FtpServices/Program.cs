@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Ftp.BusinessLogic._Interface;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Framework.Autofac;
 using System.Framework.Common;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace System.Framework.Aop
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class SqlParameterAttribute : System.Attribute
+    public class SqlParameterAttribute : Attribute
     {
         //public SqlDbType SqlDbType { get; set; }
 
