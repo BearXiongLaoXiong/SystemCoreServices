@@ -21,12 +21,12 @@ namespace System.Framework.DataAccess
             switch (connectionName ?? "")
             {
                 case nameof(ConnectionEnum.CustomizeConnectionString):
-                    return t is ICustomizeConnectionString con ? new SqlConnection(con.ConnectionString) : throw new ArgumentNullException(nameof(ICustomizeConnectionString.ConnectionString));
-                    //return t is ICustomizeConnectionString con
-                    //    ? new SqlConnection(con.ConnectionString)
-                    //    : new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString ?? "");
-                    //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
-                    //return new SqlConnection(typeof(T).GetProperty(nameof(ICustomizeConnectionString.ConnectionString))?.GetValue(t).ToString() ?? "");
+                    return t is ICustomizeConnectionString con && con.ConnectionString.Length > 0 ? new SqlConnection(con.ConnectionString) : throw new ArgumentNullException(nameof(ICustomizeConnectionString.ConnectionString));
+                //return t is ICustomizeConnectionString con
+                //    ? new SqlConnection(con.ConnectionString)
+                //    : new SqlConnection(TypeDescriptor.GetAttributes(typeof(T)).OfType<DatabaseConnectionAttribute>().FirstOrDefault()?.ConnectionString ?? "");
+                //return new SqlConnection(typeof(T).GetCustomAttributes<DatabaseConnectionAttribute>().ConnectionString);
+                //return new SqlConnection(typeof(T).GetProperty(nameof(ICustomizeConnectionString.ConnectionString))?.GetValue(t).ToString() ?? "");
                 default:
                     if (string.IsNullOrEmpty(connectionName)) connectionName = nameof(ConnectionEnum.DefaultConnectionString);
                     if (!ConnectionStringCache.ContainsKey(connectionName))
@@ -79,7 +79,7 @@ namespace System.Framework.DataAccess
 
                 if (pi.PropertyType == typeof(DataTable))
                     parameters.AddDynamicParams(new Dictionary<string, object> { { pi.Name, (pi.GetValue(entity, null) as DataTable).AsTableValuedParameter() } });
-                else
+                else if (pi.Name != nameof(ICustomizeConnectionString.ConnectionString))
                     parameters.Add(pi.Name, pi.GetValue(entity, null), type,
                         attrs != null && attrs.Any() ? attrs[0].Direction : ParameterDirection.Input,
                         attrs != null && attrs.Any() ? attrs[0].Size : (type == DbType.String ? 50 : 0));
