@@ -9,9 +9,16 @@
         public string ConnectionName { get; }
         public string ConnectionString { get; set; }
 
-        public DatabaseConnectionAttribute(ConnectionEnum connectionName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionName"></param>
+        /// <param name="type">在ConnectionEnum.CustomizeConnectionString条件下必填type</param>
+        public DatabaseConnectionAttribute(ConnectionEnum connectionName, Type type = null)
         {
-            //if (connectionName == ConnectionEnum.CustomizeConnectionString) throw new ArgumentOutOfRangeException($"{nameof(ConnectionEnum.CustomizeConnectionString)}不可在此构造中调用");
+            if (connectionName == ConnectionEnum.CustomizeConnectionString)
+                if (type == null) throw new ArgumentException($"DatabaseConnectionAttribute.{nameof(type)}不允许为空");
+                else if (!typeof(ICustomizeConnectionString).IsAssignableFrom(type)) throw new ArgumentException($"{type.Name}必须实现接口{nameof(ICustomizeConnectionString)}");
             ConnectionName = connectionName.ToString();
         }
 
