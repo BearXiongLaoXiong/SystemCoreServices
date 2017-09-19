@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace SystemCore.Entities.SystemSetting
 {
-    [DatabaseConnection(@"Data Source=10.128.68.15\APP05;Initial Catalog=TPA_PROD;UID=sa;password=App05@sohu.com;Pooling=true;Max Pool Size=32767;Min Pool Size=0;")]
-    public class SPEH_DASY_DATA_SYNC_INSERT
+    [DatabaseConnection(ConnectionEnum.CustomizeConnectionString)]
+    public class SPEH_DASY_DATA_SYNC_INSERT: ICustomizeConnectionString
     {
         public string pDASY_KY { get; set; }
 
@@ -28,5 +28,7 @@ namespace SystemCore.Entities.SystemSetting
 
         [SqlParameter(555, ParameterDirection.Output)]
         public string pRTN_MSG { get; set; }
+
+        public string ConnectionString { get; set; }
     }
 }

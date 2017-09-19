@@ -9,21 +9,29 @@
         public string ConnectionName { get; }
         public string ConnectionString { get; set; }
 
-        public DatabaseConnectionAttribute(ConnectionEnum connectionName)
-        {
-            if (connectionName == ConnectionEnum.CustomizeConnectionString) throw new ArgumentOutOfRangeException($"{nameof(ConnectionEnum.CustomizeConnectionString)}不可在此构造中调用");
-            ConnectionName = connectionName.ToString();
-        }
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="connectionString">例:Data Source=192.168.x.x,uid=sa;pwd=xxx;...</param>
-        public DatabaseConnectionAttribute(string connectionString)
+        /// <param name="connectionName"></param>
+        /// <param name="type">在ConnectionEnum.CustomizeConnectionString条件下必填type</param>
+        public DatabaseConnectionAttribute(ConnectionEnum connectionName, Type type = null)
         {
-            ConnectionName = nameof(ConnectionEnum.CustomizeConnectionString);
-            ConnectionString = connectionString;
+            if (connectionName == ConnectionEnum.CustomizeConnectionString)
+                if (type == null) throw new ArgumentException($"DatabaseConnectionAttribute.{nameof(type)}不允许为空");
+                else if (!typeof(ICustomizeConnectionString).IsAssignableFrom(type)) throw new ArgumentException($"{type.Name}必须实现接口{nameof(ICustomizeConnectionString)}");
+            ConnectionName = connectionName.ToString();
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="connectionString">例:Data Source=192.168.x.x,uid=sa;pwd=xxx;...</param>
+        //public DatabaseConnectionAttribute(string connectionString)
+        //{
+        //    ConnectionName = nameof(ConnectionEnum.CustomizeConnectionString);
+        //    ConnectionString = connectionString;
+        //}
+        //TypeDescriptor.AddAttributes(typeof(TestBll), new DatabaseConnectionAttribute("1"));
     }
 
     /// <summary>
@@ -55,5 +63,16 @@
 
         DwProd
 
+    }
+
+    /// <summary>
+    /// 连接字符串
+    /// </summary>
+    public interface ICustomizeConnectionString
+    {
+        /// <summary>
+        /// 例:Data Source=192.168.x.x,uid=sa;pwd=xxx;...
+        /// </summary>
+        string ConnectionString { get; set; }
     }
 }

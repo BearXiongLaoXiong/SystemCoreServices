@@ -381,6 +381,7 @@ namespace SystemCore.BusinessLogic
 
                                 SPEH_DASY_DATA_SYNC_INSERT entityDasy = new SPEH_DASY_DATA_SYNC_INSERT()
                                 {
+                                    ConnectionString = first.DataBaseStr,
                                     pDASY_KY = item.DASY_KY,
                                     //pDASY_DTM = coder.DASY_DTM,
                                     pDASY_TYPE = item.DASY_TYPE,
@@ -389,16 +390,17 @@ namespace SystemCore.BusinessLogic
                                     pDASY_OPRT_USER = ""
                                 };
 
-                                TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(first.DataBaseStr));
+                                //TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(first.DataBaseStr));
                                 _commonBl.Execute(entityDasy);
 
                                 // 同步医院的增量 或者 诊疗的增量
                                 TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = item.HPHP_ID };
                             }
 
-                            TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(first.DataBaseStr));
+                            //TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(first.DataBaseStr));
                             SPEH_HPHP_HOSPITAL_INFO_INSERT entityHPHP = new SPEH_HPHP_HOSPITAL_INFO_INSERT()
                             {
+                                ConnectionString = first.DataBaseStr,
                                 pBKBK_ID = item.BKBK_ID,
                                 pENTT_LANG_ID1 = item.ENTT_LANG_ID1,
                                 pENTT_LANG_ID2 = item.ENTT_LANG_ID2,

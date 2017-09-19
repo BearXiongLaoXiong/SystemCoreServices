@@ -1,0 +1,22 @@
+﻿{
+  "defaultAssembly": "TestConsoleApp1",
+  "components": [
+    {
+      "type": "TestConsoleApp1.TestBll, TestConsoleApp1",
+      "services": [
+        {
+          "type": "TestConsoleApp1.ITestBll"
+        }
+      ]
+    },
+    {
+      "type": "MytestDi.MyTest, MytestDi",
+      "services": [
+        {
+          "type": "MytestDi.IMyTest"
+        }
+      ]
+    }
+  ]
+}
+

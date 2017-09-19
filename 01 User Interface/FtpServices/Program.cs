@@ -1,198 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Framework.Aop;
-using System.Framework.Common;
-using System.Framework.DataAccess;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using Autofac;
+using Ftp.BusinessLogic._Interface;
+using System;
 using System.Configuration;
-using System.Globalization;
-using System.Net;
-using System.Text.RegularExpressions;
+using System.Framework.Autofac;
+using System.Framework.Common;
+using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using Ftp.BusinessLogic.Implementation;
-using Ftp.Entities;
 
 namespace FtpServices
 {
     class Program
     {
-
-        static void Main(string[] args)
+        static void Main()
         {
-            CopyFiles();
-            //var ss = typeof(SPIN_FLFL_FILE_LOG_INFO_INSERT).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
-            //var ss1 = typeof(SPIN_FLFL_FILE_LOG_INFO_INSERT).GetCustomAttributeValue<DatabaseConnectionAttribute>(x => x.ConnectionName);
-            //Console.ReadLine();
-
-
-            string path = $@"{Environment.CurrentDirectory}\{ConfigurationManager.AppSettings["FtpServiceConfig"] ?? ""}";
-
+            string path = $@"{AppDomain.CurrentDomain.BaseDirectory}\{ConfigurationManager.AppSettings["FtpServiceConfig"] ?? ""}";
             if (!File.Exists(path))
             {
                 Console.WriteLine($"ftpConfig:{path}");
-                Console.WriteLine("请提供Ftp配置文件");
+                Console.WriteLine("请提供Ftp配置文件,5秒后程序将自动退出...");
+                Thread.Sleep(5000);
                 return;
             }
             Console.WriteLine($"配置环境:{Path.GetFileName(path).Left(3)}");
             string config = File.ReadAllText(path).Replace("\r\n", "");
-            DownloadBl dl = new DownloadBl(config);
-            dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
-
-            //Thread.Sleep(1000);
-            //var entity = new SPIN_FLFL_FILE_LOG_INFO_INSERT
-            //{
-            //    pFLFL_STS = "2",
-            //    pFILE_NAME = "testname",
-            //    pFLFL_URL = "testurl",
-            //    pFLFL_TYPE = "testtype",
-            //    pFLFL_USUS_ID = "admin"
-
-            //};
-            //ICommonBl _commonBl = new CommonBl();
-            //_commonBl.Execute(entity);
-            //Console.WriteLine("执行第二次");
-            //_commonBl.Execute(entity);
-
-            MsmqHelper ms = new MsmqHelper();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            //Parallel.For(0, 1, new ParallelOptions() { MaxDegreeOfParallelism = 8 }, (i) =>
-            //{
-            //    ms.ReceiveTranMessageQueue((x) =>
-            //    {
-            //        Console.WriteLine("paht = " + x);
-            //        return true;
-            //    });
-            //});
-
-
-            sw.Stop();
-            Console.WriteLine(sw.Elapsed);
-
-
+            var dl = Containers.Resolve<IDownLoadBl>(new NamedParameter("jsonConfig", config));
+            //dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
+            dl.InitializeComponent(@".\private$\FtpDownloadWholeServiceQueue");
 
             Console.WriteLine("--------------------------------------");
-            Console.ReadLine();
         }
 
-        public static void CopyFolder(string sourcePath, string destPath)
-        {
-            if (Directory.Exists(sourcePath))
-            {
-                if (!Directory.Exists(destPath))
-                {
-                    //目标目录不存在则创建
-                    try
-                    {
-                        Directory.CreateDirectory(destPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("创建目标目录失败：" + ex.Message);
-                    }
-                }
-                //获得源文件下所有文件
-                List<string> files = new List<string>(Directory.GetFiles(sourcePath));
-                files.ForEach(c =>
-                {
-                    string destFile = Path.Combine(new string[] { destPath, Path.GetFileName(c) });
-                    File.Copy(c, destFile, true);//覆盖模式
-                });
-                //获得源文件下所有目录文件
-                List<string> folders = new List<string>(Directory.GetDirectories(sourcePath));
-                folders.ForEach(c =>
-                {
-                    string destDir = Path.Combine(new string[] { destPath, Path.GetFileName(c) });
-                    //采用递归的方法实现
-                    CopyFolder(c, destDir);
-                });
-            }
-            else
-            {
-                throw new DirectoryNotFoundException("源目录不存在！");
-            }
-        }
-
-
-        static void CopyFiles()
-        {
-            var list = new List<string>
-            {
-                "201720100036928",
-                "201720200013119"
-            };
-
-            //var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\05-31结案", "*", SearchOption.AllDirectories);
-
-            //foreach (var s in files)
-            //{
-            //    Console.WriteLine(s);
-            //    foreach (var l in list) if (s.Contains(l)) File.Copy(s, $@"C:\Users\sh179\Desktop\新建文件夹\{Path.GetFileName(s)}");
-            //}
-
-
-            //int index = 228;
-            //var files = Directory.EnumerateFiles(@"C:\Users\sh179\Desktop\1", "*", SearchOption.AllDirectories);
-            //foreach (var VARIABLE in files)
-            //{
-            //    Console.WriteLine(Path.GetFileName(VARIABLE) + " ========> " + index);
-            //    File.Copy(VARIABLE, $@"C:\Users\sh179\Desktop\2\{index}.jpg");
-            //    index++;
-            //}
-
-            int index = 228;
-            for (int i = 3; i < 82; i++)
-            {
-                Console.WriteLine(i + " ========> " + index);
-                //CopyFolder(@"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\1", @"C:\Users\wayne.CPIC-DMZ02\Desktop\新建文件夹\" + i);
-                File.Copy($@"C:\Users\sh179\Desktop\1\{i}.jpg", $@"C:\Users\sh179\Desktop\2\{index}.jpg");
-                index++;
-            }
-            //Console.WriteLine("end-----------------------");
-            Console.ReadLine();
-        }
+        //public static void CopyFolder(string sourcePath, string destPath)
+        //{
+        //    if (Directory.Exists(sourcePath))
+        //    {
+        //        if (!Directory.Exists(destPath))
+        //        {
+        //            //目标目录不存在则创建
+        //            try
+        //            {
+        //                Directory.CreateDirectory(destPath);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                throw new Exception("创建目标目录失败：" + ex.Message);
+        //            }
+        //        }
+        //        //获得源文件下所有文件
+        //        List<string> files = new List<string>(Directory.GetFiles(sourcePath));
+        //        files.ForEach(c =>
+        //        {
+        //            string destFile = Path.Combine(new string[] { destPath, Path.GetFileName(c) });
+        //            File.Copy(c, destFile, true);//覆盖模式
+        //        });
+        //        //获得源文件下所有目录文件
+        //        List<string> folders = new List<string>(Directory.GetDirectories(sourcePath));
+        //        folders.ForEach(c =>
+        //        {
+        //            string destDir = Path.Combine(new string[] { destPath, Path.GetFileName(c) });
+        //            //采用递归的方法实现
+        //            CopyFolder(c, destDir);
+        //        });
+        //    }
+        //    else
+        //    {
+        //        throw new DirectoryNotFoundException("源目录不存在！");
+        //    }
+        //}
     }
 
-    public class Movie
+
+    public class Entit
     {
-
-        //public int Genre { get; set; }
+        public int Num;
     }
-
-    public class TestMoviesInsert
-    {
-        public string Title1;
-        public string Title { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public string Genre { get; set; }
-        public decimal Price { get; set; }
-        public string Rating { get; set; }
-    }
-
-    #region 文件信息结构
-    public struct FileStruct
-    {
-        public string Flags;
-        public string Owner;
-        public string Group;
-        public bool IsDirectory;
-        public DateTime CreateTime;
-        public string Name;
-    }
-    public enum FileListStyle
-    {
-        UnixStyle,
-        WindowsStyle,
-        Unknown
-    }
-    #endregion
 
 
     //public class demo

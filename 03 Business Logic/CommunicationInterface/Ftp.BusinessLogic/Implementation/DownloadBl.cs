@@ -1,6 +1,8 @@
 ﻿using Ftp.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Framework.Autofac;
 using System.Framework.Common;
 using System.Framework.Ftp;
 using System.Framework.Logging;
@@ -9,11 +11,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Autofac;
 
 namespace Ftp.BusinessLogic.Implementation
 {
+    [Obsolete("第一版downlaod,因autofac、signle、batch下载,弃用")]
     public class DownloadBl
     {
+        /*
         private readonly InputDataBase _inputDataBase = new InputDataBase();
         private readonly MsmqHelper _msmq = new MsmqHelper();
 
@@ -65,22 +70,31 @@ namespace Ftp.BusinessLogic.Implementation
                 while (true) BeginWork(f);
             }, 1)));
 
-            taskList.Add(Task.Factory.StartNew(x =>
-            {
-                while (true)
-                {
-                    _inputDataBase.BeginWork();
-                }
-            }, 1));
-            Task.WaitAll(taskList.ToArray());
+            //taskList.Add(Task.Factory.StartNew(x =>
+            //{
+            //    while (true)
+            //    {
+            //        _inputDataBase.BeginWork();
+            //    }
+            //}, 1));
+            //Task.WaitAll(taskList.ToArray());
         }
 
         private void BeginWork(FtpConfig ftpConfig)
         {
             Nlog.Info(ftpConfig.FileType, $"{ftpConfig.FileType}\t开始运行...");
             //IFtp ftp = new System.Framework.Ftp.Ftp(ftpConfig.FileType, ftpConfig.Ip, ftpConfig.RemoteFolder, ftpConfig.Uid, ftpConfig.Pwd, ftpConfig.IsDirectory);
-            IFtp ftp = new System.Framework.Ftp.Sftp(ftpConfig.FileType, ftpConfig.Ip, ftpConfig.Port, Path.Combine(Environment.CurrentDirectory, @"SFTP_KEY\tmp.cap"), ftpConfig.RemoteFolder, ftpConfig.Uid, ftpConfig.Pwd, ftpConfig.IsDirectory);
-            
+            //IFtp ftp = new System.Framework.Ftp.Sftp(ftpConfig.FileType, ftpConfig.Ip, ftpConfig.Port, Path.Combine(Environment.CurrentDirectory, @"SFTP_KEY\tmp.cap"), ftpConfig.RemoteFolder, ftpConfig.Uid, ftpConfig.Pwd, ftpConfig.IsDirectory);
+
+            var ftp = Containers.Resolve<IFtp>(
+                new NamedParameter("nLogName", ftpConfig.FileType),
+                new NamedParameter("ftpServerIp", ftpConfig.Ip),
+                new NamedParameter("ftpProt", ftpConfig.Port),
+                new NamedParameter("privateKeyFile", Path.Combine(Environment.CurrentDirectory, @"SFTP_KEY\tmp.cap")),
+                new NamedParameter("ftpRemotePath", ftpConfig.RemoteFolder),
+                new NamedParameter("ftpUserId", ftpConfig.Uid),
+                new NamedParameter("ftpPassword", ftpConfig.Pwd),
+                new NamedParameter("isdirectory", ftpConfig.IsDirectory));
             ftp.InitializeFileListStyle();
             //Thread.Sleep(5000);
 
@@ -135,5 +149,6 @@ namespace Ftp.BusinessLogic.Implementation
             Nlog.Info(ftpConfig.FileType, $"{ftpConfig.FileType}\t运行完毕...\r\n\r\n");
             Thread.Sleep(ftpConfig.ThreadMillisecondsTimeout);
         }
+        */
     }
 }

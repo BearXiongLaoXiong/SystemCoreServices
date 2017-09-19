@@ -25,6 +25,9 @@ namespace System.Framework.Ftp
         /// </summary>
         private readonly string _ftpServerIp;
 
+        private readonly int _ftpProt;
+        private readonly string _privateKeyFile;
+
         /// <summary>
         /// FTP服务器登录用户名
         /// </summary>
@@ -53,15 +56,19 @@ namespace System.Framework.Ftp
         /// 初始化
         /// </summary>
         /// <param name="nLogName"></param>
-        /// <param name="ftpServerIp">FTP连接地址</param>  
+        /// <param name="ftpServerIp">FTP连接地址</param>
+        /// <param name="ftpProt">注入属性</param>
+        /// <param name="privateKeyFile">注入属性</param>
         /// <param name="ftpRemotePath">指定FTP连接成功后的当前目录, 如果不指定即默认为根目录</param>  
         /// <param name="ftpUserId">用户名</param>  
         /// <param name="ftpPassword">密码</param>
         /// <param name="isdirectory"></param>  
-        public Ftp(string nLogName, string ftpServerIp, string ftpRemotePath, string ftpUserId, string ftpPassword, bool isdirectory = false)
+        public Ftp(string nLogName, string ftpServerIp, int ftpProt, string privateKeyFile, string ftpRemotePath, string ftpUserId, string ftpPassword, bool isdirectory = false)
         {
             _nlogName = nLogName;
             _ftpServerIp = ftpServerIp;
+            _ftpProt = ftpProt;
+            _privateKeyFile = privateKeyFile;
             _ftpUserId = ftpUserId;
             _ftpPassword = ftpPassword;
             _isDirectory = isdirectory;

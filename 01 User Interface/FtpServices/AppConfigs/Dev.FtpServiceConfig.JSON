@@ -12,7 +12,6 @@
     "NameContains": "",
     "FileType": "_101_WeChat_理赔_01数据导入",
     "IsDirectory": true,
-    "IsEntiretyInPutMsmq": false,
     "ThreadMillisecondsTimeout": 60000,
     "MaxDegreeOfParallelism": 8
   }

@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Portal";
+    ViewBag.tabindex = 0;
+}
+
+<div class="intro">
+    <div class="intro-body">
+
+    </div>
+</div>
+
+<div class="container" style="padding-top:20px;">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-color: #C5281C;">
+        <div class="col-md-12 line">
+            <h3  i18n="home.index.member" style="color:white">员工信息</h3>
+            <p><span style="color:white">我们渴望听到你的。要求对我们的产品和服务的信息，请使用下面的表格，提出问题的韦莱集团，或给我们反馈或投诉</span></p>
+            <br>
+            <p class="more">@Html.ActionLink("Read More >", "Index", "Home", new { style = "color:white;padding: 12px 35px 12px 25px; border: 1px solid white; font-size:18px;font-weight:100;" })</p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-12 line" style="background: url(../../Content/Images/pages.jpg) no-repeat top center">
+            <h3 i18n="home.index.policy">员工保单</h3>
+            <p><span></span></p><br><br><br>
+            <p class="more">@Html.ActionLink("Read More >", "Index", "Home")</p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-12 line">
+            <h3 i18n="home.index.claims">员工报销</h3>
+            <p><span>稳健保障 世界运行不息</span></p><br><br>
+            <p class="more">@Html.ActionLink("Read More >", "Index", "Home")</p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-color: #F2F2F2;margin-bottom:30px;">
+        <div class="col-md-12 line">
+            <h3  i18n="home.index.contact" style="color:#C5281C">联系我们</h3>
+            <p><span style="color:#C5281C">我们渴望听到你的。要求对我们的产品和服务的信息，请使用下面的表格，提出问题的韦莱集团，或给我们反馈或投诉</span></p>
+            <p class="more">@Html.ActionLink("Read More >", "Index", "Home")</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="height:180px; background: url(../../Content/Images/message.jpg) no-repeat center center;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;">
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="line-height:180px; text-align: center;background-color: #F2F2F2;">
+        <img src="~/Content/Images/generali-logo-big.svg" style="width:90px;height:90px;" />
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="background-color: #F2F2F2; height: 180px; text-align: center; font-family: Consolas; font-size: 15px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin: 0 auto;width:255px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;vertical-align: middle; background: url(../../Content/Images/iconList.png) 0 -1542px no-repeat; display: inline-block; top: 50px; height: 40px; font-family: Consolas; font-size: 15px;">
+                info@generali.com.hk
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;vertical-align: middle; background: url(../../Content/Images/iconList.png) 0 -1838px no-repeat; display: inline-block; top: 50px; height: 32px; font-family: Consolas; font-size: 15px;">
+                +852 2521 0707
+            </div>
+        </div>
+    </div>
+</div>

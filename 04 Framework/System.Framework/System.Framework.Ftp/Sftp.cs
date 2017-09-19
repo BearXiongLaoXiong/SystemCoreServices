@@ -104,11 +104,11 @@ namespace System.Framework.Ftp
                 if (sftpFileList?.Count > 0)
                     Nlog.Info(_nlogName, $"\r\n{string.Join("\r\n", sftpFileList.Select(x => $"{x.LastWriteTime} {x.Length.ToString().PadRight(8, ' ')}\t{x.FullName.Replace($"/{_ftpRemotePath}/", "")}"))}");
 
-                if (sftpFileList == null || sftpFileList.Any(x => x.Length == 0))
-                {
-                    Nlog.Info(_nlogName, $@"获取文件信息失败,{ftpRemotePath.Replace($"/{_ftpRemotePath}/", "")}/{sftpFileList?.FirstOrDefault(x => x.Length == 0)?.Name} size=0||size=null");
-                    return (false, new List<FileStruct>());
-                }
+                //if (sftpFileList == null || sftpFileList.Any(x => x.Length == 0))
+                //{
+                //    Nlog.Info(_nlogName, $@"获取文件信息失败,{ftpRemotePath.Replace($"/{_ftpRemotePath}/", "")}/{sftpFileList?.FirstOrDefault(x => x.Length == 0)?.Name} size=0||size=null");
+                //    return (false, new List<FileStruct>());
+                //}
 
                 return (true, sftpFileList?.Select(x => new FileStruct
                 {
@@ -174,7 +174,9 @@ namespace System.Framework.Ftp
                     sftp.Disconnect();
                     File.WriteAllBytes(localPath, byt);
                 }
-                var result = File.Exists(localPath) && new FileInfo(localPath).Length > 0;
+                //var result = File.Exists(localPath) && new FileInfo(localPath).Length > 0;
+
+                var result = File.Exists(localPath);
                 Nlog.Info(_nlogName, $"{remoteName.Replace($"/{_ftpRemotePath}/", "")} \t down {(result ? "√" : "failed")}");
                 return result;
             }

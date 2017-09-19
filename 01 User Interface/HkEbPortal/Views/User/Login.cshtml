@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    @*//Layout = "~/Views/Shared/_Layout.cshtml";*@
+}
+<link href="~/Content/User/style.css" rel="stylesheet" />
+
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter" style="margin-top:70px;">
+    <div i18n="user.login.signIn" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 textcenter textflex textright ">Sign In</div>
+    <div i18n="user.login.signUp" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 textcenter textflex textleft ">Sign Up</div>
+</div>
+<div i18n="user.login.message" class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
+    Sign in to your Generali account
+</div>
+<form class="layui-form layui-form-pane">
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
+        <input type="text" i18n="user.login.policy" i18n-only="placeholder" placeholder="Policy No." class="iconText" style="background: url(../../Content/Images/policyNo.png) center left no-repeat;">
+    </div>
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
+        <input type="text" i18n="user.login.member" i18n-only="placeholder" placeholder="Member ID" class="iconText" style="background: url(../../Content/Images/memberId.png) center left no-repeat;" />
+    </div>
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
+        <input type="text" id="txtPassword" i18n="user.login.password" i18n-only="placeholder" placeholder="密码" class="iconText" style="background: url(../../Content/Images/password.png) center left no-repeat;" />
+    </div>
+    <div i18n="user.login.forgotpwd" class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+        Forgot Password?
+    </div>
+    <div class="col-lg-2 col-lg-offset-5 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex"  style="margin-bottom:150px;">
+        <button i18n="user.login.signIn" class="layui-btn layui-btn-primary" style="background-color: #C5281C; color: white;font-size:20px;font-weight:600">Sign In</button>
+    </div>
+</form>
