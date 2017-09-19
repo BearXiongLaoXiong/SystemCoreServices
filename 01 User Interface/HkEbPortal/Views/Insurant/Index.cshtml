@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Scripts/css/layui.css" rel="stylesheet" />
 <div class="container">
     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
         <ul class="layui-tab-title">
@@ -22,4 +22,14 @@
         </div>
     </div> 
 </div>
-
+<script src="~/Scripts/layui.js"></script>
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>
