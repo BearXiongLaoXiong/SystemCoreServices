@@ -159,9 +159,13 @@
     <Content Include="Content\Images\delete.png" />
     <Content Include="Content\Images\edit.png" />
     <Content Include="Content\Images\generali-logo-big.svg" />
+    <Content Include="Content\Images\Home\Cynthia Préfointaine, Vista aerea dell%27Area Marciana, Venezia, 2015 %281%29.jpg" />
+    <Content Include="Content\Images\Home\landing_banner_2_70_0.jpg" />
+    <Content Include="Content\Images\Home\landing_prestigio.jpg" />
+    <Content Include="Content\Images\Home\landing_Sigillo-Universal-Life-Plan.jpg" />
     <Content Include="Content\Images\humb.png" />
     <Content Include="Content\Images\iconList.png" />
-    <Content Include="Content\Images\index.jpg" />
+    <Content Include="Content\Images\Home\index.jpg" />
     <Content Include="Content\Images\intro-bg.jpg" />
     <Content Include="Content\Images\login_icon.png" />
     <Content Include="Content\Images\logo-footer_0.png" />
@@ -175,6 +179,7 @@
     <Content Include="Content\Images\upload.png" />
     <Content Include="Content\layui.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\style\Home.css" />
     <Content Include="Content\User\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -220,6 +225,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\font\iconfont.svg" />
+    <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\images\face\0.gif" />
     <Content Include="Scripts\images\face\1.gif" />
     <Content Include="Scripts\images\face\10.gif" />

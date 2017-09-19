@@ -13,7 +13,7 @@ ul, ol{list-style: none;}
 .navbar-custom a{ font-size:15px;font-weight:300; margin-bottom:-5px; color: #6c6d70;}
 
 /* banner */
-.intro{display: table;width:100%;height: 100%;margin-top:0;padding: 0 0; text-align: center;color: #fff;background: url(Images/index.jpg) no-repeat center center;background-color: #000;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+.intro{display: table;width:100%;height: 100%;margin-top:0;padding: 0 0; text-align: center;}
 .intro .intro-body{display: table-cell;vertical-align: middle;}
 .intro .intro-body .brand-heading{color: #F4D03F;text-transform: uppercase;letter-spacing: -2px;}
 .intro .intro-body .intro-text{font-size: 18px;}
