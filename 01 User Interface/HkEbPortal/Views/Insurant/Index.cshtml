@@ -5,21 +5,161 @@
 }
 <link href="~/Scripts/css/layui.css" rel="stylesheet" />
 <div class="container">
-    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend i18n="Insurant.index.info">被保险人信息</legend>
+    </fieldset>
+
+    <div class="layui-tab layui-tab-card" lay-filter="docDemoTabBrief" style="min-height:600px;max-height:100%;">
         <ul class="layui-tab-title">
-            <li class="layui-this">网站设置</li>
-            <li>用户管理</li>
-            <li>权限分配</li>
-            <li>商品管理</li>
-            <li>订单管理</li>
+            <li class="layui-this" i18n="Insurant.index.memeber">员工信息</li>
+            <li i18n="Insurant.index.family">家庭成员</li>
+            <li i18n="Insurant.index.lifestyle">被保险人生活方式</li>
+            <li i18n="Insurant.index.memeberArea">被保险人地区</li>
+            <li i18n="Insurant.index.billingInformation">账单信息</li>
         </ul>
-        <div class="layui-tab-content" style="height: 100px;">
-            <div class="layui-tab-item layui-show">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
-            <div class="layui-tab-item">内容2</div>
-            <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
-            <div class="layui-tab-item">内容5</div>
-        </div>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show"> <!-- 第一个 -->
+                <table class="layui-table" lay-skin="line">
+                    <thead>
+                        <tr>
+                            <th>KEY</th>
+                            <th>员工起始日</th>
+                            <th>员工终止日</th>
+                            <th>员工月薪(￥)</th>
+                            <th>员工部门</th>
+                            <th>员工等级</th>
+                            <th>员工职务</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>贤心</td>
+                            <td>2016-11-29</td>
+                            <td>人生就像是一场修行</td>
+                            <td>人生就像是一场修行</td>
+                            <td>人生就像是一场修行</td>
+                            <td>人生就像是一场修行</td>
+                            <td>人生就像是一场修行</td>
+                            <td>人生就像是一场修行</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="layui-tab-item"> <!-- 第二个 -->
+                <table class="layui-table" lay-skin="line">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>昵称</th>
+                            <th>加入时间</th>
+                            <th>签名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>贤心</td>
+                            <td>2016-11-29</td>
+                            <td>人生就像是一场修行</td>
+                        </tr>
+                        <tr>
+                            <td>许闲心</td>
+                            <td>2016-11-28</td>
+                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="layui-tab-item"> <!-- 第三个 -->
+                <table class="layui-table" lay-skin="line">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>昵称</th>
+                            <th>加入时间</th>
+                            <th>签名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>贤心</td>
+                            <td>2016-11-29</td>
+                            <td>人生就像是一场修行</td>
+                        </tr>
+                        <tr>
+                            <td>许闲心</td>
+                            <td>2016-11-28</td>
+                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div> 
+            <div class="layui-tab-item"> <!-- 第四个 -->
+                <table class="layui-table" lay-skin="nob">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>昵称</th>
+                            <th>加入时间</th>
+                            <th>签名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>贤心</td>
+                            <td>2016-11-29</td>
+                            <td>人生就像是一场修行</td>
+                        </tr>
+                        <tr>
+                            <td>许闲心</td>
+                            <td>2016-11-28</td>
+                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                        </tr>
+                    </tbody>
+                </table>        
+            </div> 
+            <div class="layui-tab-item"> <!-- 第五个 -->
+                <table class="layui-table" lay-skin="nob">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>昵称</th>
+                            <th>加入时间</th>
+                            <th>签名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>贤心</td>
+                            <td>2016-11-29</td>
+                            <td>人生就像是一场修行</td>
+                        </tr>
+                        <tr>
+                            <td>许闲心</td>
+                            <td>2016-11-28</td>
+                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+         </div>
     </div> 
 </div>
 <script src="~/Scripts/layui.js"></script>

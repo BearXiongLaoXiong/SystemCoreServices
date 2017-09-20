@@ -22,6 +22,14 @@
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
 
+
+  "Insurant.index.info": "Insured information",
+  "Insurant.index.memeber": "Employee information",
+  "Insurant.index.family": "Family members",
+  "Insurant.index.lifestyle": "Insured life Style",
+  "Insurant.index.memeberArea": "Insured areas",
+  "Insurant.index.billingInformation": "Billing information",
+
   "Policy.index.info": "Policy Info",
   "Policy.index.status": "Status",
   "Policy.index.MemberName": "Member Name",
