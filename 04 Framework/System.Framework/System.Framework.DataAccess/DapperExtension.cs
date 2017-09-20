@@ -139,7 +139,7 @@ namespace System.Framework.DataAccess
             List<TSecond> listSecond;
             using (IDbConnection cnn = CreateDbConnection(entity))
             {
-                var data = cnn.QueryMultiple("TestMoviesUpdate", parameters, null, null, CommandType.StoredProcedure);
+                var data = cnn.QueryMultiple(typeof(T).Name, parameters, null, null, CommandType.StoredProcedure);
                 listFirst = data.Read<TFirst>().ToList();
                 listSecond = data.Read<TSecond>().ToList();
                 SetParameter(parameters, entity);
@@ -158,7 +158,7 @@ namespace System.Framework.DataAccess
             List<TThird> listThird;
             using (IDbConnection cnn = CreateDbConnection(entity))
             {
-                var data = cnn.QueryMultiple("TestMoviesUpdate", parameters, null, null, CommandType.StoredProcedure);
+                var data = cnn.QueryMultiple(typeof(T).Name, parameters, null, null, CommandType.StoredProcedure);
                 listFirst = data.Read<TFirst>().ToList();
                 listSecond = data.Read<TSecond>().ToList();
                 listThird = data.Read<TThird>().ToList();
@@ -167,13 +167,36 @@ namespace System.Framework.DataAccess
             return (listFirst, listSecond, listThird);
         }
 
+        public static (List<TFirst> ListFirst, List<TSecond> ListSecond, List<TThird> ListThird, List<TFour> ListFour) QueryMultiple<TFirst, TSecond, TThird, TFour>(T entity)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFour : class
+        {
+            var parameters = GetParameter(entity);
+            List<TFirst> listFirst;
+            List<TSecond> listSecond;
+            List<TThird> listThird;
+            List<TFour> listFour;
+            using (IDbConnection cnn = CreateDbConnection(entity))
+            {
+                var data = cnn.QueryMultiple(typeof(T).Name, parameters, null, null, CommandType.StoredProcedure);
+                listFirst = data.Read<TFirst>().ToList();
+                listSecond = data.Read<TSecond>().ToList();
+                listThird = data.Read<TThird>().ToList();
+                listFour = data.Read<TFour>().ToList();
+                SetParameter(parameters, entity);
+            }
+            return (listFirst, listSecond, listThird, listFour);
+        }
+
         public static DataSet ExecuteDataSet(T entity)
         {
             DataSet ds = new XDataSet();
             var parameters = GetParameter(entity);
             using (IDbConnection cnn = CreateDbConnection(entity))
             {
-                IDataReader reader = cnn.ExecuteReader("TestMoviesUpdate", parameters, null, null, CommandType.StoredProcedure);
+                IDataReader reader = cnn.ExecuteReader(typeof(T).Name, parameters, null, null, CommandType.StoredProcedure);
                 SetParameter(parameters, entity);
                 ds.Load(reader, LoadOption.OverwriteChanges, null, new DataTable[] { });
             }

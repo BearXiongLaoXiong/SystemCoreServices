@@ -27,6 +27,14 @@ namespace System.Framework.DataAccess
           where TSecond : class
           where TThird : class;
 
+        (List<TFirst> ListFirst, List<TSecond> ListSecond, List<TThird> ListThird, List<TFour> ListFour) QueryMultiple
+            <T, TFirst, TSecond, TThird, TFour>(T entity)
+            where T : class
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFour : class;
+
         DataSet ExecuteDataSet<T>(T entity) where T : class;
     }
 }

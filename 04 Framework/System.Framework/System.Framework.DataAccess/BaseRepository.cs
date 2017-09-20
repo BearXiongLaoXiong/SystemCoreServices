@@ -31,6 +31,15 @@ namespace System.Framework.DataAccess
           where TThird : class
              => DapperExtension<T>.QueryMultiple<TFirst, TSecond, TThird>(entity);
 
+        public (List<TFirst> ListFirst, List<TSecond> ListSecond, List<TThird> ListThird, List<TFour> ListFour) QueryMultiple
+            <T, TFirst, TSecond, TThird, TFour>(T entity)
+            where T : class
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFour : class
+            => DapperExtension<T>.QueryMultiple<TFirst, TSecond, TThird, TFour>(entity);
+
         public DataSet ExecuteDataSet<T>(T entity) where T : class
             => DapperExtension<T>.ExecuteDataSet(entity);
     }

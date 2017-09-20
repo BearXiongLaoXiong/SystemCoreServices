@@ -18,7 +18,7 @@ namespace BusinessLogicRepository
 
         public void Execute<T>(T entity) where T : class
         {
-             CurrentRepository.Execute(entity);
+            CurrentRepository.Execute(entity);
         }
 
         public List<TFirst> QuerySingle<T, TFirst>(T entity) where T : class where TFirst : class
@@ -49,6 +49,16 @@ namespace BusinessLogicRepository
         public async Task<(List<TFirst> ListFirst, List<TSecond> ListSecond, List<TThird> ListThird)> QueryMultipleAsync<T, TFirst, TSecond, TThird>(T entity) where T : class where TFirst : class where TSecond : class where TThird : class
         {
             return await Task.Run(() => QueryMultiple<T, TFirst, TSecond, TThird>(entity));
+        }
+
+        public (List<TFirst> ListFirst, List<TSecond> ListSecond, List<TThird> ListThird, List<TFour> ListFour) QueryMultiple<T, TFirst, TSecond, TThird, TFour>(T entity) where T : class where TFirst : class where TSecond : class where TThird : class where TFour : class
+        {
+            return CurrentRepository.QueryMultiple<T, TFirst, TSecond, TThird, TFour>(entity);
+        }
+
+        public async Task<(List<TFirst> ListFirst, List<TSecond> ListSecond, List<TThird> ListThird, List<TFour> ListFour)> QueryMultipleAsync<T, TFirst, TSecond, TThird, TFour>(T entity) where T : class where TFirst : class where TSecond : class where TThird : class where TFour : class
+        {
+            return await Task.Run(() => QueryMultiple<T, TFirst, TSecond, TThird, TFour>(entity));
         }
 
         public DataSet ExecuteDataSet<T>(T entity) where T : class
