@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 User Interface", "01 User Interface", "{4FE9AADA-79C3-4608-B415-6C3F959D4197}"
 EndProject
@@ -195,5 +195,8 @@ Global
 		{5CF53643-0E9A-47CD-A8D6-84F9C85C9F2A} = {39CDA414-63CF-40FA-8C77-97C6B27B2565}
 		{62A00C54-143D-4F30-97D4-28A2605C06B5} = {00A6A3A1-7EC9-4E3A-A945-F4C30E4705E1}
 		{EA5B1BF7-E7F3-4AED-83F4-E51817FE13A7} = {4FE9AADA-79C3-4608-B415-6C3F959D4197}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA31AE6C-CED4-4553-A34F-4E4E6492E0D1}
 	EndGlobalSection
 EndGlobal

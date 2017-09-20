@@ -4,7 +4,7 @@
     background-color: #000;
     width: 100%;
     height: 100%;
-    /*opacity: 0.4;*/
+    /*opacity:0.4;*/
     display: block
 }
 
@@ -40,5 +40,62 @@
     font-family: "HelveticaLight";
     position: absolute;
     bottom: 0px;
-    left: 0px
+    left: 0px;
+}
+
+.background {
+    width: 100%;
+    height: 800px;
+    background-color: #000;
+    float: left;
+    opacity: 0.5;
+    overflow: hidden;
+    position: absolute;
+}
+
+.a_home {
+    width:800px;
+    height: 800px;
+    overflow: hidden;
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    margin-left: -400px;
+}
+
+.a1 {
+    font-family: Regular,"微软雅黑";
+    font-weight: 200;
+    font-size: 48px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.a2 {
+    border-bottom: solid 1px;
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.a3 {
+    font-family: Regular,"微软雅黑";
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.a4 {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Regular,"微软雅黑";
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 24px;
+    border: solid 1px #FFFFFF;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px
 }
