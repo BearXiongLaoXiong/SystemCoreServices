@@ -358,6 +358,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HKEBPortal.BusinessLogic\HKEBPortal.BusinessLogic.csproj">
+      <Project>{29dd15ad-80c2-4d6f-a5f9-6a3573a0c7b1}</Project>
+      <Name>HKEBPortal.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HKEBPortal.Entities\HKEBPortal.Entities.csproj">
+      <Project>{91c03604-f63c-4729-9539-5f043eea56c6}</Project>
+      <Name>HKEBPortal.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
