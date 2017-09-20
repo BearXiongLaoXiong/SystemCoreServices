@@ -22,6 +22,15 @@
   "user.login.password": "密码",
   "user.login.forgotpwd": "忘记密码?",
 
+
+  "Insurant.index.info": "被保险人信息",
+  "Insurant.index.memeber": "员工信息",
+  "Insurant.index.family": "家庭成员",
+  "Insurant.index.lifestyle": "被保险人生活方式",
+  "Insurant.index.memeberArea": "被保险人地区",
+  "Insurant.index.billingInformation": "账单信息",
+
+
   "Policy.index.info": "保单信息",
   "Policy.index.status": "状态",
   "Policy.index.MemberName": "人员名称",

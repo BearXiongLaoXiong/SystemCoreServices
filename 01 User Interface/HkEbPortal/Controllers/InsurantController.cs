@@ -11,6 +11,8 @@ namespace HkEbPortal.Controllers
         // GET: Insurant
         public ActionResult Index()
         {
+            // 默认返回员工详细信息
+
             return View();
         }
     }
