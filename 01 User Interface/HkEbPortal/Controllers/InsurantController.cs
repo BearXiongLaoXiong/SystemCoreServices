@@ -1,5 +1,6 @@
-﻿using HKEBPortal.BusinessLogic;
-using HKEBPortal.Entities;
+﻿
+using BusinessLogicRepository;
+using HkEbPortal.Models.EB_PORTAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,16 @@ namespace HkEbPortal.Controllers
 {
     public class InsurantController : Controller
     {
-        private InsurantBusiness insurant = new InsurantBusiness();
+        private readonly ICommonBl _commonBl = new CommonBl();
+
         // GET: Insurant
         public ActionResult Index()
         {
             // 默认返回员工详细信息
-            List<SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT> list = insurant.GetMemberInfoList();
+            var entity = new SPEH_FMDT_FAMILY_DETL_LIST_WEB() { };
+            var list = _commonBl.QuerySingle<SPEH_FMDT_FAMILY_DETL_LIST_WEB,SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>(entity);
 
-            return View(list);
+            return View();
         }
     }
 }
