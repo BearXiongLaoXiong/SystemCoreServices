@@ -7,17 +7,15 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/style.css")
     @Styles.Render("~/Content/bootstrap.min.css")
-    @Styles.Render("~/Content/layui.css")
+    @Styles.Render("~/Scripts/css/layui.css")
+   
     @Scripts.Render("~/bundles/modernizr")
-
     @Scripts.Render("~/Scripts/jquery-3.1.1.min.js")
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/layui.js")
+    @Scripts.Render("~/Scripts/language/jquery.i18n.min.js")
+    @Scripts.Render("~/Scripts/language/laodlanguage.js")
+    @Scripts.Render("~/Scripts/jquery.cookie-1.4.1.min.js")
     @RenderSection("scripts", required: false)
-    <link href="~/Scripts/css/layui.css" rel="stylesheet" />
-    <script src="~/Scripts/language/jquery.i18n.min.js"></script>
-    <script src="~/Scripts/language/laodlanguage.js"></script>
-    <script src="~/Scripts/jquery.cookie-1.4.1.min.js"></script>
 </head>
 <body>
 

@@ -4,6 +4,6 @@
         elem: '#indexcarouselimage'
         , width: '100%'
         , height: '800px'
-        , interval: 5000
+        , interval: 500000
     });
 });
