@@ -154,7 +154,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EB_PORTAL\SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMDT_FAMILY_DETL_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_MELS_LIFESTYLE_LINK_LIST.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_MEME_MEMBER_INFO_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_MESH_SHIP_WORK_LINK_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

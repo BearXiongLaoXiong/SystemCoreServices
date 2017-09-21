@@ -5,8 +5,12 @@ using System.Web;
 
 namespace HkEbPortal.Models.EB_PORTAL
 {
+    /// <summary>
+    /// 员工信息
+    /// </summary>
     public class SPEH_FMDT_FAMILY_DETL_LIST_WEB
     {
+        public string pFMFM_KY { get; set; }
         public string pEHUSER { get; set; }
     }
 

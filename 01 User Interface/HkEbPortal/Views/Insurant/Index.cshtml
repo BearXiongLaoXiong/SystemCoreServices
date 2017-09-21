@@ -1,4 +1,5 @@
-﻿
+﻿@using HkEbPortal.Models.EB_PORTAL
+@model IEnumerable<SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,7 +24,7 @@
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
-                            <th>KEY</th>
+                            <th hidden>KEY</th>
                             <th>员工起始日</th>
                             <th>员工终止日</th>
                             <th>员工月薪(￥)</th>
@@ -34,16 +35,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>贤心</td>
-                            <td>2016-11-29</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td hidden>@item.FMFM_KY</td>
+                                <td>@item.FMDT_EFF_DT</td>
+                                <td>@item.FMDT_TERM_DT</td>
+                                <td>@item.FMFM_ANNUAL_SALARY</td>
+                                <td>@item.FMFM_DEPT</td>
+                                <td>@item.GCGC_DESC</td>
+                                <td>@item.FMFM_POSITION</td>
+                                <td>@item.FMDT_COMMENT</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
