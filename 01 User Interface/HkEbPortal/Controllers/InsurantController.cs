@@ -22,5 +22,56 @@ namespace HkEbPortal.Controllers
 
             return View(list);
         }
+
+        /// <summary>
+        /// 家庭成员
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetFamilyInfo()
+        {
+            var entity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { };
+            var list = _commonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(entity);
+            
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 被保险人生活方式
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetLifeStyle()
+        {
+            var entity = new SPEH_MELS_LIFESTYLE_LINK_LIST() { };
+            var list = _commonBl.QuerySingle<SPEH_MELS_LIFESTYLE_LINK_LIST, SPEH_MELS_LIFESTYLE_LINK_LIST_RESULT>(entity);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 被保险人地区
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetMemeberArea()
+        {
+            var entity = new SPEH_MESH_SHIP_WORK_LINK_LIST() { };
+            var list = _commonBl.QuerySingle<SPEH_MESH_SHIP_WORK_LINK_LIST, SPEH_MESH_SHIP_WORK_LINK_LIST_RESULT>(entity);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// 账单信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetBillingInfomation()
+        {
+            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() {   };
+            var list = _commonBl.QuerySingle<SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB, SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB_RESULT>(entity);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }
