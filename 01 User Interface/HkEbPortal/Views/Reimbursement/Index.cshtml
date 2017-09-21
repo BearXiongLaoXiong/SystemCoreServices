@@ -1,4 +1,5 @@
-﻿
+﻿@using HkEbPortal.Models.EB_PORTAL
+@model IEnumerable<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +10,7 @@
         <legend i18n="Reimbursement.Index.fsaClaims">報銷</legend>
     </fieldset>
 
-    <div class="layui-form">
+    <div class="layui-form" style="min-height:600px;max-height:100%;">
         <table class="layui-table">
             <colgroup>
                 <col width="90">
@@ -36,125 +37,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>孫承宗</td>
-                    <td>影像上传成功</td>
-                    <td>2013年度医疗费用(Medical Reimbursement)</td>
-                    <td>2017-01-01</td>
-                    <td>1.0</td>
-                    <td>1.0</td>
-                    <td>0.0</td>
-                    <td>
-                        <div class="layui-btn-group" style="border:0px;border-left:0px;">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;"></button>
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;"></button>
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;"></button>
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>袁崇焕</td>
-                    <td>審核不通過</td>
-                    <td>2013年度医疗费用(Medical Reimbursement)</td>
-                    <td>2017-01-01</td>
-                    <td>1.0</td>
-                    <td>300.0</td>
-                    <td>0.0</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;" />
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;" />
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;" />
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>毛文龍</td>
-                    <td>審核不通過</td>
-                    <td>2013年度医疗费用(Medical Reimbursement)</td>
-                    <td>2017-01-01</td>
-                    <td>1.0</td>
-                    <td>331.0</td>
-                    <td>0.0</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;" />
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;" />
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;" />
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>周延儒</td>
-                    <td>審核不通過</td>
-                    <td>2015小药箱福利(OTC PURCHASE)</td>
-                    <td>2017-01-01</td>
-                    <td>1.0</td>
-                    <td>1.0</td>
-                    <td>200.0</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;" />
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;" />
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;" />
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>楊嗣昌</td>
-                    <td>審核不通過</td>
-                    <td>2013年度医疗费用(Medical Reimbursement)</td>
-                    <td>2017-01-01</td>
-                    <td>1.0</td>
-                    <td>1.0</td>
-                    <td>10.0</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;" />
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;" />
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;" />
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>溫體仁</td>
-                    <td>審核不通過</td>
-                    <td>2013年度医疗费用(Medical Reimbursement)</td>
-                    <td>2017-01-01</td>
-                    <td>123.0</td>
-                    <td>1.0</td>
-                    <td>0.0</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;" />
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;" />
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;" />
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>範文程</td>
-                    <td>審核不通過</td>
-                    <td>2013年度医疗费用(Medical Reimbursement)</td>
-                    <td>2017-01-01</td>
-                    <td>1.0</td>
-                    <td>1.0</td>
-                    <td>0.0</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button onclick="add()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;" />
-                            <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;" />
-                            <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;" />
-                            <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style=" border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;" />
-                        </div>
-                    </td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FMFM_NAME</td>
+                        <td>@item.SYSV_CLIV_STS_DESC</td>
+                        <td>@item.CLIV_ADJ_EXEX_ID</td>
+                        <td>@item.CLIV_APP_DT</td>
+                        <td>@item.CLIV_CHG</td>
+                        <td>@item.CLIV_APPLY_AMT</td>
+                        <td>@item.CLIV_ALLOW_AMT</td>
+                        <td>
+                            <div class="layui-btn-group" style="border:0px;border-left:0px;">
+                                <button onclick="add(@item.CLIV_KY)" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;"></button>
+                                <button onclick="edit()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;"></button>
+                                <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;"></button>
+                                <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;"></button>
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -172,7 +74,6 @@
 
     $(function () {
         loadData($("#MemeDropDownList").val());
-
     });
 
     function loadData(memeKy) {
@@ -249,10 +150,15 @@
             btn: ['删除', '取消'],
             btnAlign: 'c',
             yes: function (i, l) {
-                //$("#lblPdName").html(result.PDPD_LONG_NAME);
-                //$("#lblPdType").html(result.PDLT_COMMENT);
-                //$("#lblQuota").html(result.PDLT_AMT);
-                //$("#lblUsedQuota").html(result.USED_AMT);
+                $.ajax({
+                    type: 'POST',
+                    url: "/Reimbursement/Delete",
+                    data: "",
+                    dataType: "json",
+                    success: function () {
+
+                    }
+                });
             }
         });
     }
