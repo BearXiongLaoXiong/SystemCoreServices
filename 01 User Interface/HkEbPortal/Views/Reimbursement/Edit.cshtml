@@ -1,145 +1,134 @@
-﻿
+﻿@using HkEbPortal.Models.EB_PORTAL
+@model SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT
 @{
-    Layout = null;
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend i18n="Reimbursement.Index.fsaClaims">編輯報銷</legend>
+    </fieldset>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <link href=" ~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href=" ~/Content/layui.css" rel="stylesheet" />
-</head>
-<body>
-    <div style="margin: 10px 10px 10px 10px;">
-        <form class="layui-form layui-form-pane" action="">
-
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.faimily" class="layui-form-label">家庭成員</label>
-                    <div class="layui-input-inline">
-                        <select name="interest" lay-filter="aihao">
-                            <option i18n="Reimbursement.edit.benefit" value="">請選擇</option>
-                            <option value="0">本人-代小武</option>
-                            <option value="1">兒子-</option>
-                            <option value="2">妻子-</option>
-                            <option value="3">女兒</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.benefit" class="layui-form-label">福利*</label>
-                    <div class="layui-input-inline">
-                        <select name="interest" lay-filter="aihao">
-                            <option i18n="public.common.pleaseSelect" value="">請選擇</option>
-                            <option value="0">福利1</option>
-                            <option value="1">福利2-</option>
-                            <option value="2">福利3-</option>
-                            <option value="3">福利4</option>
-                        </select>
-                    </div>
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.faimily" class="layui-form-label">家庭成員</label>
+                <div class="layui-input-inline">
+                    <select name="interest" lay-filter="aihao">
+                        <option i18n="Reimbursement.edit.benefit" value="">請選擇</option>
+                        <option value="0">本人-代小武</option>
+                        <option value="1">兒子-</option>
+                        <option value="2">妻子-</option>
+                        <option value="3">女兒</option>
+                    </select>
                 </div>
             </div>
-
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.type" class="layui-form-label">發票類型</label>
-                    <div class="layui-input-inline">
-                        <select name="interest" lay-filter="aihao">
-                            <option value="0" selected="">個人</option>
-                            <option value="1">公司</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.no" class="layui-form-label">發票號</label>
-                    <div class="layui-input-inline">
-                        <input type="text" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" name="text" autocomplete="off" class="layui-input" />
-                    </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.benefit" class="layui-form-label">福利*</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, "請選擇福利", new Dictionary<string, object> { { "lay-filter", "aihao" } })
                 </div>
             </div>
+        </div>
 
-
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.service" class="layui-form-label">發票日</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="date" id="date" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })" />
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.application" class="layui-form-label">申請日</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="date" id="date1" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })" />
-                    </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.type" class="layui-form-label">發票類型</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("CLIV_DropDownList", ViewData["CLIV_DropDownList"] as SelectList, "請選擇發票類型", new Dictionary<string, object> { { "lay-filter","aihao" } })
                 </div>
             </div>
-
-
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.apply" class="layui-form-label">申請金額</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="username" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.invoice" class="layui-form-label">發票金額</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="username" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.no" class="layui-form-label">發票號</label>
+                <div class="layui-input-inline">
+                    <input type="text" value="@Model.CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" name="text" autocomplete="off" class="layui-input" />
                 </div>
             </div>
+        </div>
 
-            <div class="layui-form-item layui-form-text">
-                <label i18n="Reimbursement.edit.comments" class="layui-form-label">説明</label>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.service" class="layui-form-label">發票日</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="date" value="@Model.CLIV_DT" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })" />
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.application" class="layui-form-label">申請日</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.apply" class="layui-form-label">申請金額</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.invoice" class="layui-form-label">發票金額</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" value="@Model.CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label i18n="Reimbursement.edit.comments" class="layui-form-label">説明</label>
+            <div class="layui-input-block">
+                <textarea i18n="public.common.pleaseInput" name="COMMENT" value="@Model.CLIV_COMMENT" i18n-only="placeholder" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.amount" class="layui-form-label">調整金額</label>
+                <div class="layui-input-inline">
+                    <div class="layui-form-mid layui-word-aux" style="padding-left:10px;">&nbsp;&nbsp;&nbsp;@Model.CLIV_APPLY_AMT</div>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.user" class="layui-form-label">調整用戶</label>
+                <div class="layui-input-inline">
+                    <div class="layui-form-mid layui-word-aux" style="padding-left:10px;">&nbsp;&nbsp;&nbsp;@Model.FMFM_NAME</div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.reason" class="layui-form-label">調整原因</label>
                 <div class="layui-input-block">
-                    <textarea i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <div class="layui-form-mid layui-word-aux" style="padding-left:10px;">&nbsp;&nbsp;&nbsp; @Model.CLIV_COMMENT！</div>
                 </div>
             </div>
+        </div>
 
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.amount" class="layui-form-label">調整金額</label>
-                    <div class="layui-input-inline">
-                        <div class="layui-form-mid layui-word-aux" style="padding-left:10px;">10</div>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.user" class="layui-form-label">調整用戶</label>
-                    <div class="layui-input-inline">
-                        <div class="layui-form-mid layui-word-aux" style="padding-left:10px;">用戶</div>
-                    </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.image" class="layui-form-label">發票信息</label>
+                <div class="layui-input-inline">
+                    <img src="~/Content/Images/logo-footer_0.png" style="width:120px;height:60px;padding-left:10px;"  />
                 </div>
             </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.reason" class="layui-form-label">調整原因</label>
-                    <div class="layui-input-block">
-                        <div class="layui-form-mid layui-word-aux" style="padding-left:10px;">测试测试这是测试测试这是测试测试这是测试测试这是测试测试这是测试测试</div>
-                    </div>
-                </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-radius">立即提交</button>
+                <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="history.go(-1)">返 回</button>
             </div>
-
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.image" class="layui-form-label">發票信息</label>
-                    <div class="layui-input-inline">
-                        <img src="~/Content/Images/index.jpg" style="width:120px;height:60px;padding-left:10px;" />
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+        </div>
+    </form>
+</div>
 
 
-<script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/layui.js"></script>
-<script src="~/Scripts/lay/modules/laydate.js"></script>
 <script src="~/Scripts/lay/modules/form.js"></script>
 <script src="~/Scripts/language/jquery.i18n.min.js"></script>
 <script src="~/Scripts/language/laodlanguage.js"></script>
