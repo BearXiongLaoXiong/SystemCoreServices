@@ -1,131 +1,71 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Scripts/css/layui.css" rel="stylesheet" />
 
 <div class="container">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-        <legend i18n="policy.detail.benefit">保單信息</legend>
-    </fieldset>
+    <span class="layui-breadcrumb">
+        <a href="index"><span i18n="footer.menu.policy">保單信息</span></a>
+        <a><cite i18n="footer.menu.policy">详情</cite></a>
+    </span>
 
-    <blockquote class="layui-elem-quote">Hospitalization Benefit+Supplementary Major Medical</blockquote>
+    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
+        <span class="layui-badge-rim layui-bg-orange">人员名称</span>@Model.Name &nbsp;&nbsp;
+        <span class="layui-badge-rim layui-bg-orange">保单</span>@Model.Desc
+    </blockquote>
 
-    <div class="layui-form">
-        <table class="layui-table">
-            <colgroup>
-                <col>
-                <col width="90">
-                <col width="90">
-                <col width="90">
-                <col width="90">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th i18n="policy.detail.total">總金額</th>
-                    <th i18n="policy.detail.employee">員工金額</th>
-                    <th i18n="policy.detail.target">雇主金額</th>
-                    <th i18n="policy.detail.tax">稅率金額</th>
-                </tr>
-            </thead>
-            <tbody>
+    @{
+        foreach (var item in Model.PlplList)
+        {
+            <i class="layui-icon" style="font-size: 15px; color: red;">&#xe60a;</i>
+            @item.PDCT_NAME
+            <hr class="layui-bg-red">
+            <div class="layui-form" style="margin-bottom:30px;">
+                <table class="layui-table">
+                    <colgroup>
+                        <col>
+                        <col width="70">
+                        <col width="130">
+                        <col width="195">
+                        <col width="170">
+                        <col width="150">
+                        <col width="50">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th i18n="policy.detail.total">總金額</th>
+                            <th i18n="policy.detail.employee">員工金額</th>
+                            <th i18n="policy.detail.target">雇主金額</th>
+                            <th i18n="policy.detail.tax">稅率金額</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var info in Model.PlplInfoList)
+                            {
+                                <tr>
+                                    <td><input type="radio" name="radio" title=" ">@info.PDPD_NAME</td>
+                                    <td><span class="layui-badge">默认</span></td>
+                                    <td>@info.PLME_AMT</td>
+                                    <td>@info.EMP_AMT</td>
+                                    <td>@info.EMPYEE_AMT</td>
+                                    <td>@info.TXTX_AMT</td>
+                                    <td style="padding: 0;text-align:center" data-off="true">
+                                        <div class="layui-table-cell laytable-cell-1-4">
+                                            <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail">查看</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
 
-                <tr>
-                    <td><input type="radio" name="radio" title=" ">None Select</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="radio" title=" ">Lowest HOSP without SMM EMP_PLAN-1</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-
-                <tr>
-                    <td><input type="radio" name="radio" title=" ">HOSP + SMM EMP_PLAN-2</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-
-                <tr>
-                    <td><input type="radio" name="radio" title=" ">Higher HOSP + SMM EMP_PLAN-3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-
-                <tr>
-                    <td><input type="radio" name="radio" title=" ">Highest HOSP + SMM EMP_PLAN-4</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <blockquote class="layui-elem-quote">Term Life</blockquote>
-
-    <div class="layui-form">
-        <table class="layui-table">
-            <colgroup>
-                <col>
-                <col width="90">
-                <col width="90">
-                <col width="90">
-                <col width="90">
-                <col width="50">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th i18n="policy.detail.total">total</th>
-                    <th i18n="policy.detail.benefit">employee</th>
-                    <th i18n="policy.detail.benefit">target</th>
-                    <th i18n="policy.detail.benefit">tax</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-                    <td><input type="radio" name="radio" title=" " /> Lowest TM EMP_PLAN-1</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="radio" title=" " />Moderate TM EMP_PLAN-2</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="radio" title=" " />Higher TM EMP_PLAN-3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="radio" title=" " />Highest TM EMP_PLAN-4</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+                            }
+    }
 </div>
+<script src="~/Scripts/Policy/Detail.js"></script>

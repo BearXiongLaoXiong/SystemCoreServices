@@ -4,20 +4,12 @@
 }
 
 <div class="container">
-    <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">保單信息</a>
-        <a href="">亚太地区</a>
-        <a><cite>保單信息</cite></a>
-    </span>
-
-    <form class="layui-form " action="">
-
-        <div class="layui-form-item" style="margin-bottom: 0px;">
-            <fieldset class="layui-elem-field">
-                <legend>状态</legend>
+    <form class="layui-form " action="#">
+        <div class="layui-form-item" style="margin-bottom: 0;">
+            <fieldset class="layui-elem-field" >
+                <legend i18n="Policy.index.status">状态</legend>
                 <div class="layui-field-box">
-                    <div class="layui-inline" style="margin-bottom: 0px;">
+                    <div class="layui-inline" style="margin-bottom: 0;">
                         <div class="layui-form-mid">
                             <input type="radio" name="radioStatus" value="O" title="开放" checked>
                         </div>
@@ -33,210 +25,38 @@
                     </div>
                 </div>
             </fieldset>
-
         </div>
     </form>
+    <fieldset class="layui-elem-field site-demo-button">
+        <legend i18n="Policy.index.MemberName">人員名稱</legend>
+        <div class="layui-inline" style="margin-bottom: 0;">
+            <div class="layui-field-box" id="divMemberNames"></div>
+        </div>
+    </fieldset>
 
-    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-        <ul class="layui-tab-title">
-            <li class="layui-this">网站设置</li>
-            <li>用户管理</li>
-            <li>权限分配</li>
-            <li>商品管理</li>
-            <li>订单管理</li>
-        </ul>
-        <div class="layui-tab-content"></div>
-    </div>
 
     <div class="layui-form">
-        <table class="layui-table" lay-size="sm">
+
+        <table class="layui-table">
             <colgroup>
+                <col width="30">
                 <col width="150">
                 <col>
-                <col width="50">
+                <col width="80">
+                <col width="80">
             </colgroup>
             <thead>
                 <tr>
-                    <th i18n="Policy.index.MemberName">人員名稱</th>
-                    <th i18n="Policy.index.info">PolicyName</th>
+                    <th></th>
+                    <th i18n="Policy.index.MemberName"><span>人員名稱</span></th>
+                    <th i18n="Policy.index.info"><span>保單信息</span></th>
+                    <th i18n="Policy.index.status"><span>状态</span></th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>代爱武和</td>
-                    <td>2017 Hospitalization and Supplementary Major Medical</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <a class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border: 0; width: 22px; height: 20px; background: url(../../Content/Images/edit.png) center center no-repeat;" href="../Policy/Detail" target="_blank"></a>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="memberTableBody"></tbody>
         </table>
     </div>
 </div>
 
-<script type="text/javascript">
-    layui.use(['layer', 'form'], function () { });
-    layui.use('element', function () { });
-
-    layui.use('form', function () {
-        var form = layui.form;
-        form.on('radio', function (data) {
-            console.log(data.elem); //得到radio原始DOM对象
-            console.log(data.value); //被点击的radio的value值
-            $.get("FindView", { status: "O" },
-                function (data) {
-                    alert("Data Loaded: " + data);
-                });
-        });
-    });
-    function add(clivKy) {
-        layer.open({
-            id: 'one',
-            resize: true,
-            //shade: 0,
-            area: ['675px', '530px'],
-            type: 2,
-            title: '新增',
-            content: 'Reimbursement/Add',
-            btn: ['保存', '取消'],
-            btnAlign: 'c',
-            yes: function (i, l) {
-                //$("#lblPdName").html(result.PDPD_LONG_NAME);
-                //$("#lblPdType").html(result.PDLT_COMMENT);
-                //$("#lblQuota").html(result.PDLT_AMT);
-                //$("#lblUsedQuota").html(result.USED_AMT);
-            },
-            btn2: function (i, l) {
-
-            },
-            cancel: function (i, l) {
-                //$("#QuotaMessageBox").addClass("layui-hide");
-                //$("#lblPdName").html("");
-                //$("#lblPdType").html("");
-                //$("#lblQuota").html("");
-                //$("#lblUsedQuota").html("");
-            }
-        });
-    }
-
-</script>
+<script src="~/Scripts/Policy/Index.js"></script>

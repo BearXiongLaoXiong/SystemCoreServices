@@ -1,6 +1,9 @@
 {
   "public.common.pleaseSelect": "請選擇",
   "public.common.pleaseInput": "請輸入",
+  "public.common.detail": "查看",
+  "public.common.edit": "编辑",
+  "public.common.delete": "删除",
 
   "footer.login": "登入",
   "footer.menu.homepage": "主頁",

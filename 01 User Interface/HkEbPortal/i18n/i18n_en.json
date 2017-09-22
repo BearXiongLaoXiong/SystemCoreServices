@@ -1,6 +1,9 @@
 {
   "public.common.pleaseSelect": "Please select",
   "public.common.pleaseInput": "Please input",
+  "public.common.detail": "Detail",
+  "public.common.edit": "Edit",
+  "public.common.delete": "Delete",
 
   "footer.login": "Login",
   "footer.menu.homepage": "HOME PAGE",
@@ -50,7 +53,6 @@
   "Reimbursement.Index.ApplyAmount": "Apply Amount",
   "Reimbursement.Index.Paid": "Paid Amount",
 
-  "Reimbursement.edit.edit": "Edit",
   "Reimbursement.edit.faimily": "Family Member",
   "Reimbursement.edit.benefit": "Benefit",
   "Reimbursement.edit.type": "Invoice Type",
