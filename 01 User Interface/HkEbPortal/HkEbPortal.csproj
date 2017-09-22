@@ -154,8 +154,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_EBEB_VALUE_LIST.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMDT_FAMILY_DETL_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_MELS_LIFESTYLE_LINK_LIST.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_MEME_MEMBER_INFO_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_MESH_SHIP_WORK_LINK_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_SYSV_VALUE_LIST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

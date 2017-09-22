@@ -1,4 +1,5 @@
-﻿
+﻿@using HkEbPortal.Models.EB_PORTAL
+@model IEnumerable<SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,7 +24,7 @@
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
-                            <th>KEY</th>
+                            <th hidden>KEY</th>
                             <th>员工起始日</th>
                             <th>员工终止日</th>
                             <th>员工月薪(￥)</th>
@@ -34,129 +35,82 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>贤心</td>
-                            <td>2016-11-29</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                            <td>人生就像是一场修行</td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td hidden>@item.FMFM_KY</td>
+                                <td>@item.FMDT_EFF_DT</td>
+                                <td>@item.FMDT_TERM_DT</td>
+                                <td>@item.FMFM_ANNUAL_SALARY</td>
+                                <td>@item.FMFM_DEPT</td>
+                                <td>@item.GCGC_DESC</td>
+                                <td>@item.FMFM_POSITION</td>
+                                <td>@item.FMDT_COMMENT</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
             <div class="layui-tab-item"> <!-- 第二个 -->
                 <table class="layui-table" lay-skin="line">
-                    <colgroup>
-                        <col width="150">
-                        <col width="200">
-                        <col>
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th>昵称</th>
-                            <th>加入时间</th>
-                            <th>签名</th>
+                            <th hidden>KEY</th>
+                            <th>关系</th>
+                            <th>姓名</th>
+                            <th>证件号</th>
+                            <th>性别</th>
+                            <th>生日</th>
+                            <th>手机</th>
+                            <th>电子邮件</th>
+                            <th>邮政编码</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>贤心</td>
-                            <td>2016-11-29</td>
-                            <td>人生就像是一场修行</td>
-                        </tr>
-                        <tr>
-                            <td>许闲心</td>
-                            <td>2016-11-28</td>
-                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="familyId"></tbody>
                 </table>
             </div>
             <div class="layui-tab-item"> <!-- 第三个 -->
                 <table class="layui-table" lay-skin="line">
-                    <colgroup>
-                        <col width="150">
-                        <col width="200">
-                        <col>
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th>昵称</th>
-                            <th>加入时间</th>
-                            <th>签名</th>
+                            <th hidden>KEY</th>
+                            <th>生效日</th>
+                            <th>终止日</th>
+                            <th>生活方式</th>
+                            <th>备 注</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>贤心</td>
-                            <td>2016-11-29</td>
-                            <td>人生就像是一场修行</td>
-                        </tr>
-                        <tr>
-                            <td>许闲心</td>
-                            <td>2016-11-28</td>
-                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="lifestyleId"></tbody>
                 </table>    
             </div> 
             <div class="layui-tab-item"> <!-- 第四个 -->
                 <table class="layui-table" lay-skin="nob">
-                    <colgroup>
-                        <col width="150">
-                        <col width="200">
-                        <col>
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th>昵称</th>
-                            <th>加入时间</th>
-                            <th>签名</th>
+                            <th hidden>key</th>
+                            <th>地区类型</th>
+                            <th>地区</th>
+                            <th>生效日</th>
+                            <th>终止日</th>
+                            <th>备注</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>贤心</td>
-                            <td>2016-11-29</td>
-                            <td>人生就像是一场修行</td>
-                        </tr>
-                        <tr>
-                            <td>许闲心</td>
-                            <td>2016-11-28</td>
-                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="MemberAreaId"></tbody>
                 </table>        
             </div> 
             <div class="layui-tab-item"> <!-- 第五个 -->
                 <table class="layui-table" lay-skin="nob">
-                    <colgroup>
-                        <col width="150">
-                        <col width="200">
-                        <col>
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th>昵称</th>
-                            <th>加入时间</th>
-                            <th>签名</th>
+                            <th hidden>key</th>
+                            <th>账单日期</th>
+                            <th>账单类型</th>
+                            <th>当前金额(￥)</th>
+                            <th>账单</th>
+                            <th>备 注</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>贤心</td>
-                            <td>2016-11-29</td>
-                            <td>人生就像是一场修行</td>
-                        </tr>
-                        <tr>
-                            <td>许闲心</td>
-                            <td>2016-11-28</td>
-                            <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="BillingInformationId"></tbody>
                 </table>
             </div> 
          </div>
@@ -166,10 +120,99 @@
 <script>
     layui.use('element', function () {
         var $ = layui.jquery,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-        
+
         $('.site-demo-active').on('click', function () {
             var othis = $(this), type = othis.data('type');
             active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/Insurant/GetFamilyInfo",
+            data: "",
+            dataType: "json",
+            success: function (data, status) {
+                var familyStr = "";
+                $.each(data, function (i, row) {
+                    familyStr += "<tr>";
+                    familyStr += "<td hidden>" + row.FMFM_KY + "</td>";
+                    familyStr += "<td>" + row.SYSV_MEME_REL_CD_DESC + "</td>";
+                    familyStr += "<td>" + row.MEME_NAME + "</td>";
+                    familyStr += "<td>" + row.MEME_CERT_ID_NUM + "</td>";
+                    familyStr += "<td>" + row.SYSV_SEX_DESC + "</td>";
+                    familyStr += "<td>" + row.MEME_BIRTH_DT + "</td>";
+                    familyStr += "<td>" + row.MEME_HOM_PHONE + "</td>";
+                    familyStr += "<td>" + row.MEME_EMAIL + "</td>";
+                    familyStr += "<td>" + row.MEME_ZIP + "</td>";
+                    familyStr += "</tr>";
+                });
+
+                $("#familyId").html(familyStr);
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "/Insurant/GetLifeStyle",
+            data: "",
+            dataType: "json",
+            success: function (dat, status) {
+                var lifeStyleStr = "";
+                $.each(dat, function (i,row) {
+                    lifeStyleStr += "<tr>";
+                    lifeStyleStr += "<td hidden>" + row.MELS_KY + "</td>";
+                    lifeStyleStr += "<td>" + row.MELS_EFF_DT + "</td>";
+                    lifeStyleStr += "<td>" + row.MELS_END_DT + "</td>";
+                    lifeStyleStr += "<td>" + row.SYSV_LSTY_CD_DESC + "</td>";
+                    lifeStyleStr += "<td>" + row.MELS_COMMENT + "</td>";
+                    lifeStyleStr += "</tr>";
+                });
+                $("#lifestyleId").html(lifeStyleStr)
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "/Insurant/GetMemeberArea",
+            data: "",
+            dataType: "json",
+            success: function (dat, status) {
+                var areaStr = "";
+                $.each(dat, function (i,row) {
+                    areaStr += "<tr>";
+                    areaStr += "<td hidden>" + row.MESH_KY + "</td>";
+                    areaStr += "<td>" + row.SYSV_MESH_TYPE_DESC + "</td>";
+                    areaStr += "<td>" + row.SHSH_NAME + "</td>";
+                    areaStr += "<td>" + row.MESH_EFF_DT + "</td>";
+                    areaStr += "<td>" + row.MESH_END_DT + "</td>";
+                    areaStr += "<td>" + row.MESH_COMMENT + "</td>";
+                    areaStr += "</tr>";
+                });
+                $("#MemberAreaId").html(areaStr);
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "/Insurant/GetBillingInfomation",
+            data: "",
+            dataType: "json",
+            success: function (dat, status) {
+                var billingInfoStr = "";
+                $.each(dat, function (i, row) {
+                    billingInfoStr += "<tr>";
+                    billingInfoStr += "<td hidden>" + row.FMAC_KY + "</td>";
+                    billingInfoStr += "<td>" + row.FMAC_DTM + "</td>";
+                    billingInfoStr += "<td>" + row.POST_TYPE_DESC + "</td>";
+                    billingInfoStr += "<td>" + row.FMFM_CUR_AMT + "</td>";
+                    billingInfoStr += "<td>" + row.SYSV_BILL_FREQ_DESC + "</td>";
+                    billingInfoStr += "<td>" + row.COMMENT + "</td>";
+                    billingInfoStr += "</tr>";
+                });
+                $("#BillingInformationId").html(billingInfoStr);
+            }
         });
     });
 </script>
