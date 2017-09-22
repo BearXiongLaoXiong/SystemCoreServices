@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,20 +20,36 @@ namespace HkEbPortal.Controllers
             return View();
         }
 
-        public JsonResult FindView(string status)
+        [HttpGet]
+        public JsonResult FindView(string status, string name)
         {
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
                 pEHUSER = "fmfm",
                 pSYSV_PLPL_STS = status
             };
-            var list = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0,SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1,SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2> (entity);
-            return Json(list, JsonRequestBehavior.AllowGet);
+            var result = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
+            return Json(new { names = result.ListSecond.GroupBy(g => g.MEME_NAME).Select(x => new { Name = x.Key, Count = x.Count() }), table = result.ListSecond.Where(x => x.MEME_NAME == name) }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Detail()
+        public ActionResult Detail(string plplKy, string memeKy)
         {
-            return View();
+            var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
+            {
+                pEHUSER = "fmfm",
+                pPLPL_KY = plplKy,
+                pMEME_KY = memeKy
+            };
+            var result = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
+
+            dynamic model = new ExpandoObject();
+            model.Name = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.MEME_NAME;
+            model.Desc = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_DESC;
+            model.PlplList = result.ListThird;
+            model.PlplInfoList = result.ListFour.Take(5);
+            return View(model);
         }
+
+
     }
 }
