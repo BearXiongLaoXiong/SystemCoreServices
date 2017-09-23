@@ -68,6 +68,7 @@ namespace HkEbPortal.Controllers
 
             return RedirectToAction("Index");
         }
+
         public ActionResult Edit(string clivKy)
         {
             if (string.IsNullOrEmpty(clivKy)) return View();
@@ -128,6 +129,18 @@ namespace HkEbPortal.Controllers
             _commonBl.Execute(del);
 
             return Json(del.pRTN_MSG, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Upload(string CLIV_KY)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult UploadImg()
+        {
+
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }
