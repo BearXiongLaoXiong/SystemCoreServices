@@ -4,8 +4,10 @@ using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using BusinessLogicRepository;
 using HkEbPortal.Models.EB_PORTAL;
+using Newtonsoft.Json;
 
 namespace HkEbPortal.Controllers
 {
@@ -41,15 +43,21 @@ namespace HkEbPortal.Controllers
                 pMEME_KY = memeKy
             };
             var result = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
+            var pdctIdList = result.ListThird.Select(x => x.PDCT_ID);
 
             dynamic model = new ExpandoObject();
             model.Name = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.MEME_NAME;
             model.Desc = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_DESC;
             model.PlplList = result.ListThird;
-            model.PlplInfoList = result.ListFour.Take(5);
+            model.PlplInfoList = result.ListFour.Where(x => pdctIdList.Contains(x.PDCT_ID));
             return View(model);
         }
 
-
+        [HttpPost]
+        public string Detail(string data)
+        {
+            var json  =JsonConvert.DeserializeObject<List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>>(data);
+            return data;
+        }
     }
 }
