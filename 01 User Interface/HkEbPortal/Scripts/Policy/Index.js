@@ -10,17 +10,17 @@
 
 layui.use('form', function () {
     var form = layui.form;
-    search('', "代爱武");
+    search('', "代爱武", 0);
     form.on('radio', function (data) {
         console.log(data.elem); //得到radio原始DOM对象
         console.log(data.value); //被点击的radio的value值
-        search('', "代爱武");
+        search('', "代爱武", 0);
     });
 
 });
 
 
-function search(status, name) {
+function search(status, name, index) {
     layer.msg('laoding.....', {
         width: '100px',
         icon: 16,
@@ -35,10 +35,10 @@ function search(status, name) {
             //追加人员名称
             $("#divMemberNames").empty();
             $.each(data.names, function (key, value) {
-                $("#divMemberNames").append('<button class="layui-btn layui-btn-primary" onclick="search(\'\',\'' + value.Name + '\')">' + value.Name + '<span class="layui-badge">' + value.Count + '</span></button>');
+                console.log(key);
+                $("#divMemberNames").append('<button name="btnMemberName" class="layui-btn ' + (index !== key ? "layui-btn-primary" : "") + '" onclick="search(\'\',\'' + value.Name + '\',' + key + ')">' + value.Name + '</button>');
             });
 
-            //表格
             $("#memberTableBody").empty();
             $.each(data.table, function (key, value) {
                 var html = "";

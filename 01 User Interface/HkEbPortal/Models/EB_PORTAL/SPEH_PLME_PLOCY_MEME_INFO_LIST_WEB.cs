@@ -48,9 +48,13 @@ namespace HkEbPortal.Models.EB_PORTAL
 
     public class SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4
     {
-        
+        public string MEME_KY { get; set; }
+        public string PLPL_KY { get; set; }
+        public string PDPD_ID { get; set; }
         public string PDCT_ID { get; set; }
         public string PDPD_NAME { get; set; }
+        public string PLPD_DEF_IND { get; set; }
+        public string DFF_IND { get; set; }
         public string PLME_AMT { get; set; }
         public string EMP_AMT { get; set; }
         public string EMPYEE_AMT { get; set; }

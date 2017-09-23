@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Newtonsoft.Json
+@{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,62 +11,82 @@
     </span>
 
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <span class="layui-badge-rim layui-bg-orange">人员名称</span>@Model.Name &nbsp;&nbsp;
-        <span class="layui-badge-rim layui-bg-orange">保单</span>@Model.Desc
+        <span class="layui-badge-rim layui-bg-orange">人员名称</span>&nbsp;@Model.Name &nbsp;&nbsp;
+        <span class="layui-badge-rim layui-bg-orange">保单</span>&nbsp;@Model.Desc
     </blockquote>
+    <form class="layui-form" action="">
+        @{
+            foreach (var item in Model.PlplList)
+            {
+                <div>
+                    <i class="layui-icon" style="float: left;font-size: 30px;">&#xe60a;</i><div style="float: left;line-height:30px">@item.PDCT_NAME</div>
+                </div>
+                <hr class="layui-bg-red">
+                <div class="layui-form" style="margin-bottom:30px;">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col>
+                            <col width="70">
+                            <col width="130">
+                            <col width="195">
+                            <col width="170">
+                            <col width="150">
+                            <col width="50">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th i18n="policy.detail.total">總金額</th>
+                                <th i18n="policy.detail.employee">員工金額</th>
+                                <th i18n="policy.detail.target">雇主金額</th>
+                                <th i18n="policy.detail.tax">稅率金額</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var info in Model.PlplInfoList)
+                                {
+                                    if (info.PDCT_ID != item.PDCT_ID) { continue; }
+                                    <tr>
+                                        @{var check = info.DFF_IND == "Y" ? "checked" : "";}
+                                        @{var _default = info.DFF_IND == "Y" ? "<span class='layui-badge layui-bg-orange'>默认</span>" : "";}
+                                        <td><input type="radio" id="ids" name="radio@(new HtmlString(info.PDCT_ID))" title=" " value="@JsonConvert.SerializeObject(info)" @check>@info.PDPD_NAME</td>
+                                        <td>@(new HtmlString(_default))</td>
+                                        <td>@info.PLME_AMT</td>
+                                        <td>@info.EMP_AMT</td>
+                                        <td>@info.EMPYEE_AMT</td>
+                                        <td>@info.TXTX_AMT</td>
+                                        <td style="padding: 0; text-align: center" data-off="true">
+                                            <div class="layui-table-cell laytable-cell-1-4">
+                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail">查看</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                            }
 
-    @{
-        foreach (var item in Model.PlplList)
-        {
-            <i class="layui-icon" style="font-size: 15px; color: red;">&#xe60a;</i>
-            @item.PDCT_NAME
-            <hr class="layui-bg-red">
-            <div class="layui-form" style="margin-bottom:30px;">
-                <table class="layui-table">
-                    <colgroup>
-                        <col>
-                        <col width="70">
-                        <col width="130">
-                        <col width="195">
-                        <col width="170">
-                        <col width="150">
-                        <col width="50">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th i18n="policy.detail.total">總金額</th>
-                            <th i18n="policy.detail.employee">員工金額</th>
-                            <th i18n="policy.detail.target">雇主金額</th>
-                            <th i18n="policy.detail.tax">稅率金額</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            foreach (var info in Model.PlplInfoList)
-                            {
-                                <tr>
-                                    <td><input type="radio" name="radio" title=" ">@info.PDPD_NAME</td>
-                                    <td><span class="layui-badge">默认</span></td>
-                                    <td>@info.PLME_AMT</td>
-                                    <td>@info.EMP_AMT</td>
-                                    <td>@info.EMPYEE_AMT</td>
-                                    <td>@info.TXTX_AMT</td>
-                                    <td style="padding: 0;text-align:center" data-off="true">
-                                        <div class="layui-table-cell laytable-cell-1-4">
-                                            <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail">查看</a>
-                                        </div>
-                                    </td>
-                                </tr>
                             }
-
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    
+        
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">文本域</label>
+            <div class="layui-input-block">
+                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
-                            }
-    }
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    
 </div>
 <script src="~/Scripts/Policy/Detail.js"></script>
