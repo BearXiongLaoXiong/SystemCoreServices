@@ -15,8 +15,9 @@
         <ul class="layui-tab-title">
             <li class="layui-this" i18n="Insurant.index.memeber">员工信息</li>
             <li i18n="Insurant.index.family">家庭成员</li>
-            <li i18n="Insurant.index.lifestyle">被保险人生活方式</li>
-            <li i18n="Insurant.index.memeberArea">被保险人地区</li>
+            <li>新增待定</li>
+            @*<li i18n="Insurant.index.lifestyle">被保险人生活方式</li>
+            <li i18n="Insurant.index.memeberArea">被保险人地区</li>*@
             <li i18n="Insurant.index.billingInformation">账单信息</li>
         </ul>
         <div class="layui-tab-content">
@@ -69,7 +70,21 @@
                     <tbody id="familyId"></tbody>
                 </table>
             </div>
-            <div class="layui-tab-item"> <!-- 第三个 -->
+            <div class="layui-tab-item">
+                <table class="layui-table" lay-skin="line">
+                    <thead>
+                        <tr>
+                            <th hidden>KEY</th>
+                            <th>生效日</th>
+                            <th>终止日</th>
+                            <th>生活方式</th>
+                            <th>备 注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lifestyleId"></tbody>
+                </table>
+            </div> 
+            @*<div class="layui-tab-item"> <!-- 第三个 -->
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
@@ -97,7 +112,7 @@
                     </thead>
                     <tbody id="MemberAreaId"></tbody>
                 </table>        
-            </div> 
+            </div>*@ 
             <div class="layui-tab-item"> <!-- 第五个 -->
                 <table class="layui-table" lay-skin="nob">
                     <thead>
