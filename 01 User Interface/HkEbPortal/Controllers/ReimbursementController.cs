@@ -34,11 +34,6 @@ namespace HkEbPortal.Controllers
             var selectFMlist = new SelectList(fmfmlist, "CLIV_KY", "FMFM_NAME");
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
             var selectIVlist = new SelectList(ivlist, "value", "text");
-            var dic = new Dictionary<string, string>();
-            dic.Add("0", "本人-代小武");
-            dic.Add("1", "兒子");
-            dic.Add("2", "妻子");
-            dic.Add("3", "女兒");
             ViewData["FMFM_DropDownList"] = selectFMlist;
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;
@@ -57,11 +52,19 @@ namespace HkEbPortal.Controllers
             string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"]; 
             string comment = form["COMMENT"];
-            //var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT()
-            //{
-
-            //};
-            //_commonBl.Execute(entity);
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT()
+            {
+                pMEME_KY = meme_ky,
+                pEBEB_KY = ebeb_ky,
+                pCLIV_KY =cliv_ky,
+                pCLIV_ID = cliv_id1,
+                pCLIV_APP_DT = date,
+                pCLIV_STS_DTM = date1,
+                pCLIV_APPLY_AMT = apply_amt,
+                pCLIV_CHG = cliv_chg,
+                pCLIV_COMMENT = comment
+            };
+            _commonBl.Execute(entity);
             if (string.IsNullOrEmpty(comment))
             {
                 return null;
@@ -76,12 +79,14 @@ namespace HkEbPortal.Controllers
             var list = _commonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = _commonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
+            var selectFMlist = new SelectList(fmfmlist, "CLIV_KY", "FMFM_NAME");
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
             var selectIVlist = new SelectList(ivlist,"value","text");
+            ViewData["FMFM_DropDownList"] = selectFMlist;
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;
 
-            var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT(){ pCLIV_KY = "8365270" };
+            var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT(){ pCLIV_KY = clivKy };
             var result = _commonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity);
             return View(result?.First());
         }
@@ -96,12 +101,12 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult Delete()
+        public JsonResult Delete(string CLIV_KY)
         {
-            var del = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE() { };
+            var del = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE() { pCLIV_KY = CLIV_KY };
             _commonBl.Execute(del);
 
-            return Json("",JsonRequestBehavior.AllowGet);
+            return Json(del.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }
     }
 }

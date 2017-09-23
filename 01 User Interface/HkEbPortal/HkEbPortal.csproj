@@ -343,6 +343,7 @@
     <Content Include="Scripts\Policy\Detail.js" />
     <Content Include="Scripts\Policy\Index.datatable - 复制.js" />
     <Content Include="Scripts\Policy\Index.js" />
+    <Content Include="Scripts\Reimbursement\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -381,6 +382,10 @@
     <ProjectReference Include="..\..\03 Business Logic\BusinessLogicRepository\BusinessLogicRepository.csproj">
       <Project>{ea7b2040-1e28-4537-baed-7b7d7090e6e2}</Project>
       <Name>BusinessLogicRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Aop\System.Framework.Aop.csproj">
+      <Project>{f38fa4ca-3a5a-4641-a393-d5a6c15d1556}</Project>
+      <Name>System.Framework.Aop</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Common\System.Framework.Common.csproj">
       <Project>{f6f7027d-285b-4bda-b868-3d01065b4cb7}</Project>

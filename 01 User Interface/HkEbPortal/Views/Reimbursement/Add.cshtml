@@ -8,64 +8,52 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend i18n="Reimbursement.Index.fsaClaims">新增報銷</legend>
     </fieldset>
-
-    <form class="layui-form layui-form-pane" action="Add" method="post">
+    <form class="layui-form" action="Add" method="post">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.faimily" class="layui-form-label">家庭成</label>
+                <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width:120px;">家庭成</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "請選擇", new Dictionary<string, object>() { { "layui-filter", "fmfm_ky" } })
+                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "請選擇", new Dictionary<string, object>() { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.benefit" class="layui-form-label">福利*</label>
+                <label i18n="Reimbursement.edit.benefit" class="layui-form-label" style="min-width:120px;">福利*</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, "請選擇福利", new Dictionary<string, object>() { { "layui-filter", "fmfm_ky" } })
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label i18n="Reimbursement.edit.type" class="layui-form-label">發票類型</label>
-                <div class="layui-input-inline">
-                    @Html.DropDownList("CLIV_DropDownList", ViewData["CLIV_DropDownList"] as SelectList, "請選擇發票類型", new Dictionary<string, object>() { { "layui-filter", "fmfm_ky" } })
+                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, "請選擇福利", new Dictionary<string, object>() { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.no" class="layui-form-label">發票號</label>
+                <label i18n="Reimbursement.edit.type" class="layui-form-label" style="min-width:120px;">發票類型</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input" />
-                </div>
-            </div>
-        </div>
-
-
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label i18n="Reimbursement.edit.service" class="layui-form-label">發票日</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="date" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })" />
+                    @Html.DropDownList("CLIV_DropDownList", ViewData["CLIV_DropDownList"] as SelectList, "請選擇發票類型", new Dictionary<string, object>() { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.application" class="layui-form-label">申請日</label>
+                <label i18n="Reimbursement.edit.no" class="layui-form-label" style="min-width:120px;">發票號</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="date1" autocomplete="off" class="layui-input" onclick="layui.laydate({ elem: this })" />
+                    <input type="text" name="CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input" />
                 </div>
             </div>
-        </div>
-
-
-        <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.apply" class="layui-form-label">申請金額</label>
+                <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:120px;">發票日</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="CLIV_Date" autocomplete="off" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" />
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.application" class="layui-form-label" style="min-width:120px;">申請日</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Apply_Date" autocomplete="off" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" />
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label i18n="Reimbursement.edit.apply" class="layui-form-label" style="min-width:120px;">申請金額</label>
                 <div class="layui-input-inline">
                     <input type="text" name="APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.invoice" class="layui-form-label">發票金額</label>
+                <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width:120px;">發票金額</label>
                 <div class="layui-input-inline">
                     <input type="text" name="CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
@@ -75,12 +63,12 @@
         <div class="layui-form-item layui-form-text">
             <label i18n="Reimbursement.edit.comments" class="layui-form-label">説明</label>
             <div class="layui-input-block">
-                <textarea name="COMMENT" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" class="layui-textarea"></textarea>
+                <textarea name="COMMENT" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入"autocomplete="off" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-radius">立即提交</button>
+                <button class="layui-btn layui-btn-radius" lay-submit="" lay-filter="demo1" id="submitId">立即提交</button>
                 <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="history.go(-1)">返 回</button>
             </div>
         </div>
@@ -91,6 +79,20 @@
 <script src="~/Scripts/language/laodlanguage.js"></script>
 <script src="~/Scripts/jquery.cookie-1.4.1.min.js"></script>
 <script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#CLIV_Date', //指定元素
+        });
+        laydate.render({
+            elem: '#Apply_Date' //指定元素
+        });
+    });
     $(function () {
         laodlanguage();
     });

@@ -14,6 +14,7 @@
         <table class="layui-table">
             <thead>
                 <tr>
+                    <th style="width:50px;"></th>
                     <th i18n="Reimbursement.Index.Applicant">家庭成員</th>
                     <th i18n="Reimbursement.Index.Status">報銷狀態</th>
                     <th i18n="Reimbursement.Index.Benefit">福利</th>
@@ -21,13 +22,13 @@
                     <th i18n="Reimbursement.Index.Invoice">發票金額</th>
                     <th i18n="Reimbursement.Index.ApplyAmount">申請金額</th>
                     <th i18n="Reimbursement.Index.Paid">實際報銷費用</th>
-                    <th width="120px;"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td><input type="radio" name="selectName" data-clivKy="@item.CLIV_KY" title=" "/></td>
                         <td>@item.FMFM_NAME</td>
                         <td>@item.SYSV_CLIV_STS_DESC</td>
                         <td>@item.CLIV_ADJ_EXEX_ID</td>
@@ -35,129 +36,20 @@
                         <td>@item.CLIV_CHG</td>
                         <td>@item.CLIV_APPLY_AMT</td>
                         <td>@item.CLIV_ALLOW_AMT</td>
-                        <td>
-                            <div class="layui-btn-group" style="border:0px;border-left:0px;">
-                                <button onclick="add(@item.CLIV_KY)" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/add.png) center center no-repeat;"></button>
-                                <button onclick="edit(@item.CLIV_KY)" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/edit.png) center center no-repeat;"></button>
-                                <button onclick="delet()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/delete.png) center center no-repeat;"></button>
-                                <button onclick="upload()" class="layui-btn layui-btn-mini layui-btn-primary layui-btn-small" style="border:0;width: 22px; height: 22px;background: url(../../Content/Images/upload.png) center center no-repeat;"></button>
-                            </div>
-                        </td>
                     </tr>
                 }
             </tbody>
         </table>
+        <div class="layui-upload">
+            <button class="layui-btn layui-btn-radius" id="AddId">新 增</button>
+            <button class="layui-btn layui-btn-warm layui-btn-radius" id="UpdateId">編 輯</button>
+            <button class="layui-btn layui-btn-danger   layui-btn-radius" id="DeleteId">刪 除</button>
+            <button class="layui-btn layui-btn-normal layui-btn-radius" id="UploadId">上 傳</button>
+            @*<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                预览图：
+                <div class="layui-upload-list" id="demo2"></div>
+            </blockquote>*@
+        </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    layui.use('form',
-        function () {
-            var form = layui.form();
-            form.on('select(memeInfo)',
-                function (data) {
-                    loadData(data.value);
-                });
-        });
-
-    $(function () {
-        loadData($("#MemeDropDownList").val());
-    });
-
-    function loadData(memeKy) {
-
-    }
-
-    function add(clivKy) {
-        location.href = "../Reimbursement/Add";
-        //layer.open({
-        //    id: 'one',
-        //    resize: true,
-        //    //shade: 0,
-        //    area: ['700px', '580px'],
-        //    type: 1,
-        //    title: '新增',
-        //    content: '../Reimbursement/Add',
-        //    btn: ['保存', '取消'],
-        //    btnAlign: 'c',
-        //    yes: function (i, l) {
-        //        alert("第一个：" + i + ";第二个：" + l);
-        //        //$.ajax({
-        //        //    type: 'POST',
-        //        //    url: "/Reimbursement/AddSave",
-        //        //    data: "",
-        //        //    dataType: "json",
-        //        //    success: function (data,status) {
-
-        //        //    }
-        //        //});
-        //    },
-        //    btn2: function (i, l) {
-        //    },
-        //    cancel: function (i, l) {
-        //    }
-        //});
-    }
-
-    function edit(clivKy) {
-        location.href = "../Reimbursement/Edit?iv_ky=" + clivKy;
-        //layer.open({
-        //    id: 'one',
-        //    resize: true,
-        //    //shade: 0,
-        //    area: ['675px', '730px'],
-        //    type: 2,
-        //    title: '修改',
-        //    content: '../Reimbursement/Edit',
-        //    btn: ['保存', '取消'],
-        //    btnAlign: 'c',
-        //    yes: function (i, l) {
-        //    },
-        //    btn2: function (i, l) {
-        //    },
-        //    cancel: function (i, l) {
-        //    }
-        //});
-    }
-
-    function delet() {
-        layer.open({
-            id: 'one',
-            //shade: 0,
-            type: 0,
-            title: '删除提示',
-            content: '您确定要删除这条数据吗?',
-            btn: ['删除', '取消'],
-            btnAlign: 'c',
-            yes: function (i, l) {
-                $.ajax({
-                    type: 'POST',
-                    url: "/Reimbursement/Delete",
-                    data: "",
-                    dataType: "json",
-                    success: function () {
-
-                    }
-                });
-            }
-        });
-    }
-
-    function upload() {
-        layer.open({
-            id: 'one',
-            //shade: 0,
-            type: 0,
-            title: '上传',
-            content: '上传?',
-            btn: ['上传', '取消'],
-            btnAlign: 'c',
-            yes: function (i, l) {
-                //$("#lblPdName").html(result.PDPD_LONG_NAME);
-                //$("#lblPdType").html(result.PDLT_COMMENT);
-                //$("#lblQuota").html(result.PDLT_AMT);
-                //$("#lblUsedQuota").html(result.USED_AMT);
-            }
-        });
-    }
-</script>
+<script src="~/Scripts/Reimbursement/Index.js"></script>
