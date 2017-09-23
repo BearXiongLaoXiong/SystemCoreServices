@@ -52,11 +52,19 @@ namespace HkEbPortal.Controllers
             string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"]; 
             string comment = form["COMMENT"];
-            //var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT()
-            //{
-
-            //};
-            //_commonBl.Execute(entity);
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT()
+            {
+                pMEME_KY = meme_ky,
+                pEBEB_KY = ebeb_ky,
+                pCLIV_KY =cliv_ky,
+                pCLIV_ID = cliv_id1,
+                pCLIV_APP_DT = date,
+                pCLIV_STS_DTM = date1,
+                pCLIV_APPLY_AMT = apply_amt,
+                pCLIV_CHG = cliv_chg,
+                pCLIV_COMMENT = comment
+            };
+            _commonBl.Execute(entity);
             if (string.IsNullOrEmpty(comment))
             {
                 return null;

@@ -36,6 +36,7 @@
                         data: { "CLIV_KY": val },
                         dataType: "json",
                         success: function (data) {
+                            location.reload();
                             layer.msg(data);
                         }
                     });
