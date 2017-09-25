@@ -33,31 +33,32 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.no" class="layui-form-label" style="min-width:110px;">發票號</label>
                 <div class="layui-input-inline">
-                    <input type="text" value="@Model.CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" class="layui-input" />
+                    <input type="text" name="CLIV_ID" value="@Model.CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" class="layui-input" />
+                    <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY"/>
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:110px;">發票日</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="CLIV_Date" value="@Model.CLIV_DT" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" />
+                    <input type="text" id="CLIV_Date" name="CLIV_Date" value="@Model.CLIV_DT" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" />
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.application" class="layui-form-label" style="min-width:110px;">申請日</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd"/>
+                    <input type="text" id="Apply_Date" name="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd"/>
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.apply" class="layui-form-label" style="min-width:110px;">申請金額</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="username" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="ApplyAMT" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width:110px;">發票金額</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="username" value="@Model.CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="CLIV_CHG" value="@Model.CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -73,19 +74,19 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.amount" class="layui-form-label" style="min-width:110px;">調整金額</label>
                 <div class="layui-input-inline">
-                    <div class="layui-form-mid layui-word-aux">@Model.CLIV_APPLY_AMT</div>
+                    <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_AMT</div>
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.user" class="layui-form-label" style="min-width:110px;">調整用戶</label>
                 <div class="layui-input-inline">
-                    <div class="layui-form-mid layui-word-aux">@Model.FMFM_NAME</div>
+                    <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_USUS_ID</div>
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.reason" class="layui-form-label" style="min-width:110px;">調整原因</label>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">@Model.CLIV_COMMENT！</div>
+                    <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_EXEX_ID！</div>
                 </div>
             </div>
         </div>

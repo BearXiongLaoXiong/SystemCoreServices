@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>發票上傳</legend>
+    </fieldset>
+
+    <blockquote class="layui-elem-quote">流水號: 這裏是選擇的值</blockquote>
+
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="selectId">多图片選擇</button>
+        <textarea id="imgPathId" placeholder="這裏將顯示影響路徑" class="layui-textarea"></textarea>
+    </div>
+    <hr />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-normal layui-btn-radius" id="UploadId">上 傳</button>
+            <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="history.go(-1)">返回</button>
+        </div>
+    </div>
+
+    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+        预览图：
+        <div class="layui-upload-list" id="demo2"></div>
+    </blockquote>
+
+    <div class="layui-item">
+        <div class="layui-inline">
+            <label class="layui-label" style="min-width:110px;">上次發票信息</label>
+            <div class="layui-input-inline">
+                <img src="~/Content/Images/logo-footer_0.png" style="width:320px;height:150px;padding-left:10px;" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    layui.use(['upload', 'form', 'layer'], function () {
+        var $ = layui.jquery, upload = layui.upload, form = layui.form, layer = layui.layer;
+
+        //多图片上传
+        upload.render({
+            elem: '#selectId'
+            , url: '/Reimbursement/UploadImg'
+            , multiple: true
+            , accept: "images"
+            , auto: false
+            , bindAction:"#UploadId"
+            , choose: function (obj) {
+                //将每次选择的文件追加到文件队列
+                var files = obj.pushFile();
+
+                //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                obj.preview(function (index, file, result) {
+                    console.log(index); //得到文件索引
+                    console.log(file); //得到文件对象
+                    console.log(result); //得到文件base64编码，比如图片
+                    $("#imgPathId").val($("#imgPathId").val() + file.name + ";");
+                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '"  class="layui-upload-img">')
+                    //这里还可以做一些 append 文件列表 DOM 的操作
+
+                    //obj.upload(index, file); //对上传失败的单个文件重新上传，一般在某个事件中使用
+                    //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
+                });
+            }, done: function (res, index, upload) {
+                alert("sdb");
+                if (res.code == 0) {
+
+                }
+                alert(res + "-----" + this.item);
+            }, error: function (index, upload) {
+                alert("asdbsdgas");
+                layer.closeAll('loading');
+            }
+        });
+    });
+</script>

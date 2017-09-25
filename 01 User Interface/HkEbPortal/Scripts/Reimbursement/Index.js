@@ -45,21 +45,10 @@
         }
     });
 
-    //多图片上传
-    upload.render({
-        elem: '#UploadId'
-        , url: '/upload/'
-        , multiple: true
-        , before: function (obj) {
-            //预读本地文件示例，不支持ie8
-            obj.preview(function (index, file, result) {
-                $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
-            });
-        }
-        , done: function (res) {
-            //上传完毕
-        }
+    $("#UploadId").on("click", function () {
+         location.href = "../Reimbursement/Upload";
     });
+    
 })
 
 
