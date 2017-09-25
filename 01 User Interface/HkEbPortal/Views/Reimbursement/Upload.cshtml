@@ -67,11 +67,12 @@
                     //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
                 });
             }, done: function (res, index, upload) {
-                alert("sdb");
-                if (res.code == 0) {
-
+                alert("sdb" + res.filename);
+                if (res.result == 0) {
+                    layer.msg(res.message);
+                } else {
+                    layer.msg("上传失败！");
                 }
-                alert(res + "-----" + this.item);
             }, error: function (index, upload) {
                 alert("asdbsdgas");
                 layer.closeAll('loading');

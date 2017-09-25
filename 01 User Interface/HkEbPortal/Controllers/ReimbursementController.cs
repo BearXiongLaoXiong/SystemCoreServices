@@ -139,8 +139,8 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult UploadImg()
         {
-
-            return Json("success", JsonRequestBehavior.AllowGet);
+            string Str = "{\"result\":-1,\"message\":\"提交成功\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}";
+            return Json(Str, JsonRequestBehavior.AllowGet);
         }
     }
 }
