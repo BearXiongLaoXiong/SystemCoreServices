@@ -93,13 +93,14 @@ ul, ol{list-style: none;}
     color: #FFFFFF;
     background-color: #c12017;
     height: 30px;
+    padding:0 0 0 25px;
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
     line-height: 30px;
-    padding-left: 25px;
     width: 100px;
 }
+
 .myHarf {
     content: "";
     background: url(/Content/Images/login_icon.png) no-repeat;
@@ -134,3 +135,10 @@ ul, ol{list-style: none;}
     height: 240px;
     width: 70%;
 }
+
+.tdtextalign {
+    text-align: right;
+}
+body .layui-tree-skin-shihuang .layui-tree-branch {
+    color: #EDCA50;
+} 

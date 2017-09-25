@@ -166,6 +166,8 @@
     <Compile Include="Models\EB_PORTAL\SPEH_MELS_LIFESTYLE_LINK_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MEME_MEMBER_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MESH_SHIP_WORK_LINK_LIST.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_PDPD_PRODUCTBASIC_SELECTcs.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_PLME_MEM_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_SYSV_VALUE_LIST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,6 +210,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\css\layui.css" />
     <Content Include="Scripts\css\layui.mobile.css" />
     <Content Include="Scripts\css\modules\code.css" />
@@ -371,6 +374,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Insurant\Index.cshtml" />
+    <Content Include="Views\Policy\Information.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
