@@ -2,6 +2,7 @@
 using HkEbPortal.Models.EB_PORTAL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,10 +16,9 @@ namespace HkEbPortal.Controllers
         // GET: Reimbursement
         public ActionResult Index()
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB()
-            {
+            string cliv_ky = Request["clivKy"];
 
-            };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() {  };
             var list = _commonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
             return View(list);
         }
@@ -131,15 +131,54 @@ namespace HkEbPortal.Controllers
             return Json(del.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Upload(string CLIV_KY)
+        public ActionResult Upload()
         {
+            string CLIV_KY = Request["clivKy"];
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = CLIV_KY };
+            var list = _commonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity);
+            ViewBag.LiuNo = CLIV_KY;
+            ViewBag.ImagePath = list.Count > 0 ? list?.First().CLIV_IMG_PATH : "";
             return View();
         }
 
         [HttpPost]
         public JsonResult UploadImg()
         {
-            string Str = "{\"result\":-1,\"message\":\"提交成功\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}";
+            string Str = "{\"result\":0,\"message\":\"全部提交成功\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}";
+
+            //前台页面通过 < file name = "img" > 标签数组上传图片，后台根据Request.Files["img"]来接收前台上传的图片。
+            System.Web.HttpFileCollection files = System.Web.HttpContext.Current.Request.Files;
+            if (files.Count == 0)
+                return Json("{\"result\":-1,\"message\":\"提交失败\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}", JsonRequestBehavior.AllowGet);
+
+            for (int i = 0; i < files.AllKeys.Count(); i++)
+            {
+                if (files.AllKeys[i] != "img")
+                {
+                    if (files[i].FileName.Length > 0)
+                    {
+                        System.Web.HttpPostedFile postedfile = files[i];
+                        string filePath = "";
+                        var ext = Path.GetExtension(postedfile.FileName);
+                        var fileName = DateTime.Now.Ticks.ToString() + ext;
+                        // 组合文件存储的相对路径
+                        filePath = "/Upload/images/" + fileName;
+                        if (!Directory.Exists(HttpRuntime.AppDomainAppPath + "/Upload/images/"))
+                        {
+                            Directory.CreateDirectory(HttpRuntime.AppDomainAppPath + "/Upload/images/");
+                        }
+                        // 将相对路径转换成物理路径
+                        var path = Server.MapPath(filePath);
+                        postedfile.SaveAs(path);
+                        string fex = Path.GetExtension(postedfile.FileName);
+                    }
+                }
+                else
+                {
+                    return Json("{\"result\":-1,\"message\":\"提交失败\",\"filename\":\""+ files[i].FileName + "\",\"fileext\":\""+ Path.GetExtension(files[i].FileName) + "\"}", JsonRequestBehavior.AllowGet);
+                }
+            }
+
             return Json(Str, JsonRequestBehavior.AllowGet);
         }
     }
