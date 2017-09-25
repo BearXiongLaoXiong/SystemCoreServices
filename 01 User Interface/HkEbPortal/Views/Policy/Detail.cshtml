@@ -50,8 +50,8 @@
                                 {
                                     if (info.PDCT_ID != item.PDCT_ID) { continue; }
                                     <tr>
-                                        @{var check = info.DFF_IND == "Y" ? "checked" : "";}
-                                        @{var _default = info.DFF_IND == "Y" ? "<span class='layui-badge layui-bg-orange'>默认</span>" : "";}
+                                        @{var check = info.PLPD_DEF_IND == "Y" ? "checked" : "";}
+                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange'>默认</span>" : "";}
                                         <td><input type="radio" id="ids" name="radio@(new HtmlString(info.PDCT_ID))" title=" " value="@JsonConvert.SerializeObject(info)" @check>@info.PDPD_NAME</td>
                                         <td>@(new HtmlString(_default))</td>
                                         <td>@info.PLME_AMT</td>
@@ -60,7 +60,7 @@
                                         <td>@info.TXTX_AMT</td>
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
-                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail">查看</a>
+                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -73,20 +73,15 @@
             }
         }
     
-        
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">文本域</label>
+        <div style="text-align: right;">
             <div class="layui-input-block">
-                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <button class="layui-btn" lay-submit lay-filter="submitDetailRadio">保存</button>
+                <a class="layui-btn layui-btn-primary" onclick="returnbackurl()">返回</a>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-            </div>
+            
         </div>
     </form>
     
 </div>
+<script src="~/Scripts/common.js"></script>
 <script src="~/Scripts/Policy/Detail.js"></script>

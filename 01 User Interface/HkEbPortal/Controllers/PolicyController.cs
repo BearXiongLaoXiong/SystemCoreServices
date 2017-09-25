@@ -23,7 +23,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpGet]
-        public JsonResult FindView(string status, string name)
+        public JsonResult FindView(string status, string memeKy)
         {
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
@@ -31,8 +31,9 @@ namespace HkEbPortal.Controllers
                 pSYSV_PLPL_STS = status
             };
             var result = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
-            return Json(new { names = result.ListSecond.GroupBy(g => g.MEME_NAME).Select(x => new { Name = x.Key, Count = x.Count() }), table = result.ListSecond.Where(x => x.MEME_NAME == name) }, JsonRequestBehavior.AllowGet);
+            return Json(new { names = result.ListSecond.Select(x => new { MemeKy = x.MEME_KY, Name = x.MEME_NAME }).Distinct(), table = result.ListSecond.Where(x => memeKy.Length > 0 ? x.MEME_KY == memeKy : x.MEME_KY == result.ListSecond.FirstOrDefault()?.MEME_KY) }, JsonRequestBehavior.AllowGet);
         }
+
 
         public ActionResult Detail(string plplKy, string memeKy)
         {
@@ -56,8 +57,57 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public string Detail(string data)
         {
-            var json  =JsonConvert.DeserializeObject<List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>>(data);
-            return data;
+            string result = "";
+            var json = JsonConvert.DeserializeObject<List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>>(data);
+
+            foreach (var item in json)
+            {
+                var insert = new SPEH_AQHT_HTML_INFO_INSERT
+                {
+                    pMEME_KY = int.Parse(item.MEME_KY),
+                    pPLPL_KY = int.Parse(item.PLPL_KY),
+                    pPDPD_ID = item.PDPD_ID,
+                    pEHUSER = "fmfm"
+                };
+                _commonBl.Execute(insert);
+                if (insert.ReturnValue == 0)
+                {
+                    var update = new SPEH_PLME_MEM_UPDATE
+                    {
+                        pMEME_KY = int.Parse(item.MEME_KY),
+                        pPLPL_KY = int.Parse(item.PLPL_KY),
+                        pPDCT_ID = item.PDCT_ID,
+                        pPDPD_ID = item.PDPD_ID,
+                        pEHUSER = "fmfm"
+                    };
+                    _commonBl.Execute(update);
+                }
+                result = insert.pRTN_MSG;
+            }
+
+            return result;
         }
+
+
+        public ActionResult Information(string pdpdId = "PD010135")
+        {
+            var entity = new SPEH_PDPD_PRODUCTBASIC_SELECT { pPDPD_ID = pdpdId };
+            var result = _commonBl.QueryMultiple<SPEH_PDPD_PRODUCTBASIC_SELECT, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT1, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT2, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT3, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT4>(entity);
+            dynamic model = new ExpandoObject();
+            model.BasicInfo = result.ListFirst.FirstOrDefault();
+            model.PdfInfo = result.ListSecond;
+
+            var dict = new Dictionary<string, int>();
+            foreach (var item in result.ListFour)
+            {
+                if (dict.Keys.Contains(item.TITLE)) item.TITLE = "";
+                else dict.Add(item.TITLE, 1);
+            }
+            model.TreeInfo = result.ListFour;
+            model.DescInfo = result.ListThird;
+            return View(model);
+        }
+
+
     }
 }
