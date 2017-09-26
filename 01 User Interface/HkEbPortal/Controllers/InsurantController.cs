@@ -19,7 +19,7 @@ namespace HkEbPortal.Controllers
             // 默认返回员工详细信息
             var entity = new SPEH_FMDT_FAMILY_DETL_LIST_WEB() { pFMFM_KY = UserInfo.FMFM_KY };
             var list = CommonBl.QuerySingle<SPEH_FMDT_FAMILY_DETL_LIST_WEB,SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>(entity);
-
+            ViewData["GPGPName"] = list?.First()?.GCGC_DESC;
             return View(list);
         }
 
@@ -30,7 +30,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetFamilyInfo()
         {
-            var entity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { };
+            var entity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(entity);
             
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -43,7 +43,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetLifeStyle()
         {
-            var entity = new SPEH_MELS_LIFESTYLE_LINK_LIST() { };
+            var entity = new SPEH_MELS_LIFESTYLE_LINK_LIST() { pMEME_KY = UserInfo.MEME_KY, pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_MELS_LIFESTYLE_LINK_LIST, SPEH_MELS_LIFESTYLE_LINK_LIST_RESULT>(entity);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -76,7 +76,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetBillingInfomation()
         {
-            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() {   };
+            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB, SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB_RESULT>(entity);
 
             return Json(list, JsonRequestBehavior.AllowGet);

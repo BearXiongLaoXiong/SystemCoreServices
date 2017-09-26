@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Framework.Aop;
 using System.Linq;
 using System.Web;
 
@@ -11,7 +12,11 @@ namespace HkEbPortal.Models.EB_PORTAL
     public class SPEH_EBEB_VALUE_LIST
     {
         public string pGPGP_KY { get; set; }
+
+        [SqlParameter(55)]
         public string pEHUSER { get; set; }
+
+        [SqlParameter(15)]
         public string lang { get; set; }
     }
 

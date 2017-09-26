@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Framework.Aop;
 using System.Linq;
 using System.Web;
 
@@ -10,9 +12,15 @@ namespace HkEbPortal.Models.EB_PORTAL
     /// </summary>
     public class SPEH_MEME_MEMBER_INFO_LIST_WEB
     {
+        [SqlParameter(255)]
         public string pEHUSER { get; set; }
-        public string pRTN_CD { get; set; }
+
+        [SqlParameter(0, ParameterDirection.Output)]
+        public int pRTN_CD { get; set; }
+
+        [SqlParameter(555, ParameterDirection.Output)]
         public string pRTN_MSG { get; set; }
+
         public string pERR_CD { get; set; }
     }
 

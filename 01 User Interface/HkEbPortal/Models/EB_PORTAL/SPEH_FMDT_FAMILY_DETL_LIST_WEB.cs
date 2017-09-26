@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Framework.Aop;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,9 @@ namespace HkEbPortal.Models.EB_PORTAL
     /// </summary>
     public class SPEH_FMDT_FAMILY_DETL_LIST_WEB
     {
+        [SqlParameter(255)]
         public string pFMFM_KY { get; set; }
+        [SqlParameter(255)]
         public string pEHUSER { get; set; }
     }
 

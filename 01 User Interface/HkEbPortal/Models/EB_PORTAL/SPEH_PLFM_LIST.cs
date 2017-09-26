@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Framework.Aop;
 using System.Linq;
 using System.Web;
 
@@ -9,9 +11,15 @@ namespace HkEbPortal.Models.EB_PORTAL
     {
         public string pFMFM_KY { get; set; }
         public string pMEME_KY { get; set; }
+
+        [SqlParameter(15)]
         public string pEHUSER { get; set; }
-        public string pRTN_CD { get; set; }
-        public string pERR_CD { get; set; }
+
+        [SqlParameter(0,ParameterDirection.Output)]
+        public int pRTN_CD { get; set; }
+        public DateTime pERR_CD { get; set; }
+
+        [SqlParameter(555, ParameterDirection.Output)]
         public string pRTN_MSG { get; set; }
     }
 

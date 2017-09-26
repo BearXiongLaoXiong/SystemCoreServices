@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Framework.Aop;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,9 @@ namespace HkEbPortal.Models.EB_PORTAL
     /// </summary>
     public class SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB
     {
+        [SqlParameter(55)]
         public string pEHUSER { get; set; }
+        [SqlParameter(15)]
         public string lang { get; set; }
     }
 
