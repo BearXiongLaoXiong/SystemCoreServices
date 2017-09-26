@@ -69,6 +69,15 @@
   "Reimbursement.edit.amount": "調整金額",
   "Reimbursement.edit.user": "調整用戶",
   "Reimbursement.edit.reason": "調整原因",
-  "Reimbursement.edit.image": "發票信息"
+  "Reimbursement.edit.image": "發票信息",
+
+
+  "Reimbursement.Upload.image": "發票上傳",
+  "Reimbursement.Upload.serialnumber": "流水號",
+  "Reimbursement.Upload.imageselect": "多圖片選擇",
+  "Reimbursement.Upload.imageupload": "上傳",
+  "Reimbursement.Upload.cancel": "返回",
+  "Reimbursement.Upload.previewdiagram": "預覽圖",
+  "Reimbursement.Upload.lastinvoiceInfo": "上次發票資訊"
 }
 
