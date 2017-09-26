@@ -1,4 +1,5 @@
 ﻿using BusinessLogicRepository;
+using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using System;
 using System.Collections.Generic;
@@ -10,28 +11,27 @@ using System.Web.Mvc;
 
 namespace HkEbPortal.Controllers
 {
-    public class ReimbursementController : Controller
+    [Authorization]
+    public class ReimbursementController : BaseController
     {
-        private readonly ICommonBl _commonBl = new CommonBl();
-
         // GET: Reimbursement
         public ActionResult Index()
         {
             string cliv_ky = Request["clivKy"];
 
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() {  };
-            var list = _commonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
+            var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
             return View(list);
         }
 
         public ActionResult Add()
         {
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { }; // 家庭成员
-            var fmfmlist = _commonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
+            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
             var entity = new SPEH_EBEB_VALUE_LIST() { };
-            var list = _commonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
+            var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
-            var ivlist = _commonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
+            var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
             fmfmlist.ForEach(x=> { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC +"-"+ x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME");
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
@@ -66,7 +66,7 @@ namespace HkEbPortal.Controllers
                 pCLIV_CHG = cliv_chg,
                 pCLIV_COMMENT = comment
             };
-            _commonBl.Execute(entity);
+            CommonBl.Execute(entity);
 
             return RedirectToAction("Index");
         }
@@ -75,13 +75,13 @@ namespace HkEbPortal.Controllers
         {
             if (string.IsNullOrEmpty(clivKy)) return View();
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { }; // 家庭成员
-            var fmfmlist = _commonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
+            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
             var entity = new SPEH_EBEB_VALUE_LIST() { };
-            var list = _commonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
+            var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
-            var ivlist = _commonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
+            var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
             var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = clivKy };
-            var result = _commonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity);
+            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity);
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.First()?.MEME_KY);
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC", result?.First()?.EBEB_KY);
@@ -120,7 +120,7 @@ namespace HkEbPortal.Controllers
                 pCLIV_APP_DT = appdate,
                 pCLIV_COMMENT= comment
             };
-            _commonBl.Execute(entity);
+            CommonBl.Execute(entity);
 
             return RedirectToAction("Index");
         }
@@ -129,7 +129,7 @@ namespace HkEbPortal.Controllers
         public JsonResult Delete(string CLIV_KY)
         {
             var del = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE() { pCLIV_KY = CLIV_KY };
-            _commonBl.Execute(del);
+            CommonBl.Execute(del);
 
             return Json(del.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }
@@ -138,7 +138,7 @@ namespace HkEbPortal.Controllers
         {
             string CLIV_KY = Request["clivKy"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = CLIV_KY };
-            var list = _commonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity);
+            var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity);
             ViewBag.LiuNo = CLIV_KY;
 
             //Image pic = Image.FromFile("");
