@@ -53,6 +53,10 @@
             location.href = "../Reimbursement/Upload?clivKy=" + val;
         }
     });
+
+    $("#submitId").on("click", function () {
+        layer.msg("提交成功！");
+    });
     
 })
 

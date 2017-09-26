@@ -8,7 +8,7 @@
         <legend i18n="Reimbursement.Upload.image">發票上傳</legend>
     </fieldset>
 
-    <blockquote class="layui-elem-quote layui-quote-nm" i18n ="Reimbursement.Upload.serialnumber">流水號 :  @ViewBag.LiuNo</blockquote>
+    <blockquote class="layui-elem-quote layui-quote-nm"><span i18n ="Reimbursement.Upload.serialnumber">流水號</span>:  @ViewBag.LiuNo</blockquote>
 
     <div class="layui-upload">
         <button type="button" class="layui-btn" id="selectId" i18n="Reimbursement.Upload.imageselect">多图片選擇</button>
@@ -49,6 +49,7 @@
             , multiple: true
             , accept: "images"
             , auto: false
+            , data: {"CLIV_KY":@ViewBag.LiuNo}
             , bindAction:"#UploadId"
             , choose: function (obj) {
                 var files = obj.pushFile();

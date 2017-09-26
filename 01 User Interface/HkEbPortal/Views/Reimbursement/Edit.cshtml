@@ -95,7 +95,7 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.image" class="layui-form-label" style="min-width:110px;">發票信息</label>
                 <div class="layui-input-inline">
-                    <img src="~/Content/Images/logo-footer_0.png" style="width:320px;height:150px;padding-left:10px;"  />
+                    <img src="@Model.CLIV_IMG_PATH" style="width:320px;height:150px;padding-left:10px;"  />
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@
         form.on('select(fmfmId)', function (data) {
             if (data.value) {
                // layer.msg("哈哈哈哈！你点击我干嘛！看到你了");
-                $("#EBEB_DropDownList").val();
+                $("#EBEB_DropDownList").val("8358822");
                 //刷新select选择框渲染
                 form.render('select'); 
             } else {

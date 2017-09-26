@@ -57,6 +57,7 @@ namespace HkEbPortal.Controllers
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT()
             {
                 pMEME_KY = meme_ky,
+                pFMFM_KY = meme_ky,
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
@@ -151,7 +152,7 @@ namespace HkEbPortal.Controllers
 
             //string imgPath = @"\Upload\images\"+ pic;
 
-            ViewBag.ImagePath = @"\Upload\images\636419550599400523.jpg"; //list.Count > 0 ? imgPath : "";
+            ViewBag.ImagePath = list.Count > 0 ? list?.First()?.CLIV_IMG_PATH : "";
             return View();
         }
 
@@ -172,7 +173,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult UploadImg()
+        public JsonResult UploadImg(string CLIV_KY)
         {
             string Str = "{\"result\":0,\"message\":\"全部提交成功\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}";
 
@@ -201,6 +202,9 @@ namespace HkEbPortal.Controllers
                         var path = Server.MapPath(filePath);
                         postedfile.SaveAs(path);
                         string fex = Path.GetExtension(postedfile.FileName);
+
+                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath ,pCLIV_KY= CLIV_KY };
+                        CommonBl.Execute(entiy);
                     }
                 }
                 else
