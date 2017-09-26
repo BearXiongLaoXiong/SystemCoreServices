@@ -60,6 +60,14 @@ namespace HkEbPortal.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GetPolicyInfo ()
+        {
+            var entity = new SPEH_PLFM_LIST() { };
+            var list = _commonBl.QuerySingle<SPEH_PLFM_LIST, SPEH_PLFM_LIST_RESULT>(entity);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// 账单信息

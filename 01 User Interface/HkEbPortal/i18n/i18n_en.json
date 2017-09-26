@@ -27,10 +27,12 @@
 
 
   "Insurant.index.info": "Insured information",
+  "Insurant.index.gpgpinfo": "GPGP Name",
   "Insurant.index.memeber": "Employee information",
   "Insurant.index.family": "Family members",
   "Insurant.index.lifestyle": "Insured life Style",
   "Insurant.index.memeberArea": "Insured areas",
+  "Insurant.index.policyInfo": "Policy Info",
   "Insurant.index.billingInformation": "Billing information",
 
   "Policy.index.info": "Policy Info",
@@ -65,5 +67,13 @@
   "Reimbursement.edit.amount": "Adjusted Amount",
   "Reimbursement.edit.user": "Adjusted By",
   "Reimbursement.edit.reason": "Reason of Adjustment",
-  "Reimbursement.edit.image": "Invoice Image"
+  "Reimbursement.edit.image": "Invoice Image",
+
+  "Reimbursement.Upload.image": "Invoice Upload",
+  "Reimbursement.Upload.serialnumber": "Serial number",
+  "Reimbursement.Upload.imageselect": "Multi-Picture selection",
+  "Reimbursement.Upload.imageupload": "Upload",
+  "Reimbursement.Upload.cancel": "Cancel",
+  "Reimbursement.Upload.previewdiagram": "Preview",
+  "Reimbursement.Upload.lastinvoiceInfo": "Last Invoice info"
 }

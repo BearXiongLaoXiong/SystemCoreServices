@@ -27,10 +27,12 @@
 
 
   "Insurant.index.info": "被保险人信息",
+  "Insurant.index.gpgpinfo": "团体名称",
   "Insurant.index.memeber": "员工信息",
   "Insurant.index.family": "家庭成员",
   "Insurant.index.lifestyle": "被保险人生活方式",
   "Insurant.index.memeberArea": "被保险人地区",
+  "Insurant.index.policyInfo": "保单信息",
   "Insurant.index.billingInformation": "账单信息",
 
 
@@ -67,5 +69,15 @@
   "Reimbursement.edit.amount": "调整金额",
   "Reimbursement.edit.user": "调整用户",
   "Reimbursement.edit.reason": "调整原因",
-  "Reimbursement.edit.image": "发票信息"
+  "Reimbursement.edit.image": "发票信息",
+
+
+  "Reimbursement.Upload.image": "发票上传",
+  "Reimbursement.Upload.serialnumber": "流水号",
+  "Reimbursement.Upload.imageselect": "多图片选择",
+  "Reimbursement.Upload.imageupload": "上传",
+  "Reimbursement.Upload.cancel": "返回",
+  "Reimbursement.Upload.previewdiagram": "预览图",
+  "Reimbursement.Upload.lastinvoiceInfo": "上次发票信息"
+
 }
