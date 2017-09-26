@@ -1,5 +1,6 @@
 ﻿
 using BusinessLogicRepository;
+using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Web.Mvc;
 
 namespace HkEbPortal.Controllers
 {
-    public class InsurantController : Controller
+    [Authorization]
+    public class InsurantController : BaseController
     {
         private readonly ICommonBl _commonBl = new CommonBl();
 
@@ -17,7 +19,7 @@ namespace HkEbPortal.Controllers
         public ActionResult Index()
         {
             // 默认返回员工详细信息
-            var entity = new SPEH_FMDT_FAMILY_DETL_LIST_WEB() { pFMFM_KY = "10001" };
+            var entity = new SPEH_FMDT_FAMILY_DETL_LIST_WEB() { pFMFM_KY = UserInfo.FMFM_KY };
             var list = _commonBl.QuerySingle<SPEH_FMDT_FAMILY_DETL_LIST_WEB,SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>(entity);
 
             return View(list);
@@ -63,7 +65,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetPolicyInfo ()
         {
-            var entity = new SPEH_PLFM_LIST() { };
+            var entity = new SPEH_PLFM_LIST() { pFMFM_KY = UserInfo.FMFM_KY };
             var list = _commonBl.QuerySingle<SPEH_PLFM_LIST, SPEH_PLFM_LIST_RESULT>(entity);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
