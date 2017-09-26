@@ -67,26 +67,4 @@ layui.use('element', function () {
     });
 });
 
-layui.use('tree', function () {
-    layui.tree({
-        skin: 'shihuang',
-        elem: '#TreeInfo' //传入元素选择器
-        , nodes: [{ //节点
-            name: '父节点1',
-            spread: true
-            , children: [{
-                name: '子节点11'
-            }, {
-                name: '子节点12'
-            }]
-        }, {
-            name: '父节点2（可以点左侧箭头，也可以双击标题）'
-            , children: [{
-                name: '子节点21'
-                , children: [{
-                    name: '子节点211'
-                }]
-            }]
-        }]
-    });
-});
+

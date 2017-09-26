@@ -6,14 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using BusinessLogicRepository;
+using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using Newtonsoft.Json;
 
 namespace HkEbPortal.Controllers
 {
-    public class PolicyController : Controller
+    [Authorization]
+    public class PolicyController : BaseController
     {
-        private readonly ICommonBl _commonBl = new CommonBl();
         // GET: Policy
         public ActionResult Index(int memeKy = 0)
         {
@@ -27,28 +28,29 @@ namespace HkEbPortal.Controllers
         {
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
-                pEHUSER = "fmfm",
+                pEHUSER = UserInfo.USUS_ID,
                 pSYSV_PLPL_STS = status
             };
-            var result = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
-            return Json(new { names = result.ListSecond.Select(x => new { MemeKy = x.MEME_KY, Name = x.MEME_NAME }).Distinct(), table = result.ListSecond.Where(x => memeKy.Length > 0 ? x.MEME_KY == memeKy : x.MEME_KY == result.ListSecond.FirstOrDefault()?.MEME_KY) }, JsonRequestBehavior.AllowGet);
+            var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
+            return Json(new { names = result.ListSecond.Select(x => new { MemeKy = x.MEME_KY, Name = x.MEME_NAME }).Distinct(), table = result.ListThird.Where(x => memeKy.Length > 0 ? x.MEME_KY == memeKy : x.MEME_KY == result.ListSecond.FirstOrDefault()?.MEME_KY) }, JsonRequestBehavior.AllowGet);
         }
 
 
-        public ActionResult Detail(string plplKy, string memeKy)
+        public ActionResult Detail(string plplKy, string memeKy, string pdctId)
         {
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
                 pEHUSER = "fmfm",
                 pPLPL_KY = plplKy,
-                pMEME_KY = memeKy
+                pMEME_KY = memeKy,
+                pPDCT_ID = pdctId
             };
-            var result = _commonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
+            var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
             var pdctIdList = result.ListThird.Select(x => x.PDCT_ID);
 
             dynamic model = new ExpandoObject();
             model.Name = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.MEME_NAME;
-            model.Desc = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_DESC;
+            model.Desc = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_ID;
             model.PlplList = result.ListThird;
             model.PlplInfoList = result.ListFour.Where(x => pdctIdList.Contains(x.PDCT_ID));
             return View(model);
@@ -69,7 +71,7 @@ namespace HkEbPortal.Controllers
                     pPDPD_ID = item.PDPD_ID,
                     pEHUSER = "fmfm"
                 };
-                _commonBl.Execute(insert);
+                CommonBl.Execute(insert);
                 if (insert.ReturnValue == 0)
                 {
                     var update = new SPEH_PLME_MEM_UPDATE
@@ -80,7 +82,7 @@ namespace HkEbPortal.Controllers
                         pPDPD_ID = item.PDPD_ID,
                         pEHUSER = "fmfm"
                     };
-                    _commonBl.Execute(update);
+                    CommonBl.Execute(update);
                 }
                 result = insert.pRTN_MSG;
             }
@@ -92,7 +94,7 @@ namespace HkEbPortal.Controllers
         public ActionResult Information(string pdpdId = "PD010135")
         {
             var entity = new SPEH_PDPD_PRODUCTBASIC_SELECT { pPDPD_ID = pdpdId };
-            var result = _commonBl.QueryMultiple<SPEH_PDPD_PRODUCTBASIC_SELECT, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT1, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT2, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT3, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT4>(entity);
+            var result = CommonBl.QueryMultiple<SPEH_PDPD_PRODUCTBASIC_SELECT, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT1, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT2, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT3, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT4>(entity);
             dynamic model = new ExpandoObject();
             model.BasicInfo = result.ListFirst.FirstOrDefault();
             model.PdfInfo = result.ListSecond;

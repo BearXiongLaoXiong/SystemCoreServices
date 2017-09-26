@@ -14,7 +14,7 @@
 </div>
 <form class="layui-form" action="">
     <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
-        <input type="text" id="txtPolicy" name="txtPolicy" required lay-verify="required" i18n="user.login.policy" i18n-only="placeholder" placeholder="Policy No." class="iconText" style="background: url(../../Content/Images/policyNo.png) center left no-repeat;">
+        <input type="text" id="txtPolicy" lay-verify="required" i18n="user.login.policy" i18n-only="placeholder" placeholder="Policy No." class="iconText" style="background: url(../../Content/Images/policyNo.png) center left no-repeat;">
     </div>
     <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
         <input type="text" id="txtMember" name="txtMember" required lay-verify="required" i18n="user.login.member" i18n-only="placeholder" placeholder="Member ID" class="iconText" style="background: url(../../Content/Images/memberId.png) center left no-repeat;" />
@@ -27,14 +27,8 @@
     </div>
 
     <div class="col-lg-2 col-lg-offset-5 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex" style="margin-bottom:150px;">
-        <button  lay-submit lay-filter="aadfohasfsadf" class="layui-btn layui-btn-primary" i18n="user.login.signIn" style="background-color: #C5281C; color: white;font-size:20px;font-weight:600">Sign In</button>
+        <button  lay-submit lay-filter="btnLogin" class="layui-btn layui-btn-primary" i18n="user.login.signIn" style="background-color: #C5281C; color: white;font-size:20px;font-weight:600">Sign In</button>
     </div>
 </form>
 
-<form class="layui-form" action="">
-        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" class="layui-input">
-
-            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-    
-</form>
 <script src="~/Scripts/Home/Home.js"></script>

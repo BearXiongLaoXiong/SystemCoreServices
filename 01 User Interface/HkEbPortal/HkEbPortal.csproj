@@ -146,11 +146,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsurantController.cs" />
     <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Controllers\ReimbursementController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\AuthorizationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +165,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_EBEB_VALUE_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMDT_FAMILY_DETL_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_FMFM_LOGIN.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MELS_LIFESTYLE_LINK_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MEME_MEMBER_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MESH_SHIP_WORK_LINK_LIST.cs" />
@@ -374,9 +377,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Insurant\Index.cshtml" />
+    <Content Include="Views\Policy\Information.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
