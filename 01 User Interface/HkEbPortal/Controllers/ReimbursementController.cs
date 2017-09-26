@@ -19,16 +19,16 @@ namespace HkEbPortal.Controllers
         {
             string cliv_ky = Request["clivKy"];
 
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() {  };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
             return View(list);
         }
 
         public ActionResult Add()
         {
-            var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { }; // 家庭成员
+            var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID}; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { };
+            var entity = new SPEH_EBEB_VALUE_LIST() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
