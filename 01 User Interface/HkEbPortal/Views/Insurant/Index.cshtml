@@ -12,7 +12,9 @@
     </fieldset>
     
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <span i18n="Insurant.index.gpgpinfo">团体名称</span>: @ViewData["GPGPName"]
+        <span i18n="Insurant.index.memename">主被保险人</span>：@ViewData["NAME"]; 
+        <span i18n="Insurant.index.gpgpname">团体名称</span>：@ViewData["GPGP_NAME"]; 
+        <span i18n="Insurant.index.employeelevel">员工等级</span>：@ViewData["GCGC_DESC"]
     </blockquote>
 
     <div class="layui-tab layui-tab-card" lay-filter="docDemoTabBrief" style="min-height:600px;max-height:100%;">
@@ -154,7 +156,7 @@
                 var policyInfoStr = "";
                 $.each(dat, function (i,row) {
                     policyInfoStr += "<tr>";
-                    policyInfoStr += "<td hidden>" + row.PLPL_ID + "</td>";
+                    policyInfoStr += "<td>" + row.PLPL_ID + "</td>";
                     policyInfoStr += "<td>" + row.SYSV_PLPL_STS + "</td>";
                     policyInfoStr += "<td>" + row.PLME_STR_DT + "</td>";
                     policyInfoStr += "<td>" + row.PLPL_END_DT + "</td>";

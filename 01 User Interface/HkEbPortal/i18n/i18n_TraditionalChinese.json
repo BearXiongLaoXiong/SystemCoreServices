@@ -27,7 +27,9 @@
 
 
   "Insurant.index.info": "被保險人資訊",
-  "Insurant.index.gpgpinfo": "團體名稱",
+  "Insurant.index.gpgpname": "團體名稱",
+  "Insurant.index.memename": "主被保險人",
+  "Insurant.index.employeelevel": "員工等級",
   "Insurant.index.memeber": "員工資訊",
   "Insurant.index.family": "家庭成員",
   "Insurant.index.lifestyle": "被保險人生活方式",

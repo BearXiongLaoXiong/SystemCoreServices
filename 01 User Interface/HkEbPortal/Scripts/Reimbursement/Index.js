@@ -55,7 +55,21 @@
     });
 
     $("#submitId").on("click", function () {
-        layer.msg("提交成功！");
+        var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        if (val == null) {
+            layer.msg("请选择要提交的数据！");
+        } else {
+            $.ajax({
+                type:"POST",
+                url: "/Reimbursement/UpdateCLIVSTS",
+                data: { "CLIV_KY": val },
+                dataType:"json",
+                success: function (dat,status) {
+                    layer.msg(dat);
+                }
+            });
+        }
+       
     });
     
 })

@@ -29,5 +29,6 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string GCGC_DESC { get; set; }
         public string FMFM_POSITION { get; set; }
         public string FMDT_COMMENT { get; set; }
+        public string TITLE { get; set; }
     }
 }

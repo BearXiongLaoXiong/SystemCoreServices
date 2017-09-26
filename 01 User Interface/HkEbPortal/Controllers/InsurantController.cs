@@ -19,7 +19,9 @@ namespace HkEbPortal.Controllers
             // 默认返回员工详细信息
             var entity = new SPEH_FMDT_FAMILY_DETL_LIST_WEB() { pFMFM_KY = UserInfo.FMFM_KY };
             var list = CommonBl.QuerySingle<SPEH_FMDT_FAMILY_DETL_LIST_WEB,SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>(entity);
-            ViewData["GPGPName"] = list?.First()?.GCGC_DESC;
+            ViewData["GPGP_NAME"] = UserInfo.GPGP_NAME;
+            ViewData["NAME"] = UserInfo.NAME;
+            ViewData["GCGC_DESC"] = UserInfo.GCGC_DESC;
             return View(list);
         }
 

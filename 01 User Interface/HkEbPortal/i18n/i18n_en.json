@@ -27,7 +27,9 @@
 
 
   "Insurant.index.info": "Insured information",
-  "Insurant.index.gpgpinfo": "GPGP Name",
+  "Insurant.index.gpgpname": "Group name",
+  "Insurant.index.memename": "Principal Insured",
+  "Insurant.index.employeelevel": "Employee level",
   "Insurant.index.memeber": "Employee information",
   "Insurant.index.family": "Family members",
   "Insurant.index.lifestyle": "Insured life Style",

@@ -15,19 +15,19 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width:110px;">家庭成員</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "請選擇", new Dictionary<string, object>() { { "lay-verify", "required" }, { "lay-filter", "fmfmId" } })
+                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, new Dictionary<string, object>() { { "lay-verify", "required" }, { "lay-filter", "fmfmId" } })
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.benefit" class="layui-form-label" style="min-width:110px;">福利*</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, "請選擇福利", new Dictionary<string, object> { { "lay-verify", "required" } })
+                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, new Dictionary<string, object> { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.type" class="layui-form-label" style="min-width:110px;">發票類型</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("CLIV_DropDownList", ViewData["CLIV_DropDownList"] as SelectList, "請選擇發票類型", new Dictionary<string, object> { { "lay-verify", "required" } })
+                    @Html.DropDownList("CLIV_DropDownList", ViewData["CLIV_DropDownList"] as SelectList,  new Dictionary<string, object> { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
