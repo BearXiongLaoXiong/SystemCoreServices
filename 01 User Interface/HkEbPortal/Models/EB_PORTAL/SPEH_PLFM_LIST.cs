@@ -17,7 +17,8 @@ namespace HkEbPortal.Models.EB_PORTAL
 
         [SqlParameter(0,ParameterDirection.Output)]
         public int pRTN_CD { get; set; }
-        public DateTime pERR_CD { get; set; }
+
+        public string pERR_CD { get; set; }
 
         [SqlParameter(555, ParameterDirection.Output)]
         public string pRTN_MSG { get; set; }
