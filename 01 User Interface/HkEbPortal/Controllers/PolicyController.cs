@@ -38,21 +38,22 @@ namespace HkEbPortal.Controllers
 
         public ActionResult Detail(string plplKy, string memeKy, string pdctId)
         {
-            var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
+            var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2
             {
-                pEHUSER = "fmfm",
+                pEHUSER = UserInfo.USUS_ID,
                 pPLPL_KY = plplKy,
                 pMEME_KY = memeKy,
                 pPDCT_ID = pdctId
             };
-            var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
-            var pdctIdList = result.ListThird.Select(x => x.PDCT_ID);
+            var result = CommonBl.QuerySingle<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
+            var pdctIdList = result.Select(x => x.PDCT_ID);
 
             dynamic model = new ExpandoObject();
-            model.Name = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.MEME_NAME;
-            model.Desc = result.ListSecond.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_ID;
-            model.PlplList = result.ListThird;
-            model.PlplInfoList = result.ListFour.Where(x => pdctIdList.Contains(x.PDCT_ID));
+            model.PdctName = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PDCT_NAME;
+            model.Name = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.MEME_NAME;
+            model.Desc = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_ID;
+            //model.PlplList = result.ListThird;
+            model.PlplInfoList = result.Where(x => pdctIdList.Contains(x.PDCT_ID));
             return View(model);
         }
 
@@ -69,7 +70,7 @@ namespace HkEbPortal.Controllers
                     pMEME_KY = int.Parse(item.MEME_KY),
                     pPLPL_KY = int.Parse(item.PLPL_KY),
                     pPDPD_ID = item.PDPD_ID,
-                    pEHUSER = "fmfm"
+                    pEHUSER = UserInfo.USUS_ID
                 };
                 CommonBl.Execute(insert);
                 if (insert.ReturnValue == 0)
@@ -80,7 +81,7 @@ namespace HkEbPortal.Controllers
                         pPLPL_KY = int.Parse(item.PLPL_KY),
                         pPDCT_ID = item.PDCT_ID,
                         pPDPD_ID = item.PDPD_ID,
-                        pEHUSER = "fmfm"
+                        pEHUSER = UserInfo.USUS_ID
                     };
                     CommonBl.Execute(update);
                 }

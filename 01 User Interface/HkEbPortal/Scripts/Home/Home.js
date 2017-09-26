@@ -18,7 +18,10 @@ layui.use('form', function () {
         $.post("Login",
             { txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
             function (result) {
-                layer.msg(result.Msg);
+                if (result.Code === 0)
+                    window.location.href = "../Insurant/Index";
+                else
+                    layer.msg(result.Msg);
             });
         return false;
     });
