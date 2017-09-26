@@ -27,12 +27,45 @@
 
 
   "Insurant.index.info": "被保险人信息",
+  "Insurant.index.gpgpinfo": "团体名称",
   "Insurant.index.memeber": "员工信息",
   "Insurant.index.family": "家庭成员",
   "Insurant.index.lifestyle": "被保险人生活方式",
   "Insurant.index.memeberArea": "被保险人地区",
+  "Insurant.index.policyInfo": "保单信息",
   "Insurant.index.billingInformation": "账单信息",
 
+  "Insurant.table1.employeestartdate": "员工起始日",
+  "Insurant.table1.employeeenddate": "员工终止日",
+  "Insurant.table1.employeemonthly": "员工月薪(￥)",
+  "Insurant.table1.employeestaffdep": "员工部门",
+  "Insurant.table1.employeelevel": "员工等级",
+  "Insurant.table1.employeestaffpositions": "员工职位",
+  "Insurant.table1.employeecomment": "说明",
+
+  "Insurant.table2.Relationship": "关系",
+  "Insurant.table2.Name": "姓名",
+  "Insurant.table2.IDnumber": "证件号",
+  "Insurant.table2.Gender": "性别",
+  "Insurant.table2.Birthday": "生日",
+  "Insurant.table2.Phone": "手机",
+  "Insurant.table2.Email": "电子邮件",
+  "Insurant.table2.Zipcode": "邮政编码",
+
+  "Insurant.table3.policystatus": "保单状态",
+  "Insurant.table3.startdate": "生效日",
+  "Insurant.table3.enddate": "终止日",
+  "Insurant.table3.memename": "被保险人",
+  "Insurant.table3.relationship": "关系",
+  "Insurant.table3.idnumber": "证件号",
+  "Insurant.table3.numberprefix": "证件号前缀",
+  "Insurant.table3.type": "类型",
+
+  "Insurant.table4.BillingDate": "账单日期",
+  "Insurant.table4.Billingtype": "账单类型",
+  "Insurant.table4.CurrentAmount": "当前金额(￥)",
+  "Insurant.table4.Bill": "账单",
+  "Insurant.table4.Comment": "备注",
 
   "Policy.index.info": "保单信息",
   "Policy.index.status": "状态",
@@ -67,5 +100,15 @@
   "Reimbursement.edit.amount": "调整金额",
   "Reimbursement.edit.user": "调整用户",
   "Reimbursement.edit.reason": "调整原因",
-  "Reimbursement.edit.image": "发票信息"
+  "Reimbursement.edit.image": "发票信息",
+
+
+  "Reimbursement.Upload.image": "发票上传",
+  "Reimbursement.Upload.serialnumber": "流水号",
+  "Reimbursement.Upload.imageselect": "多图片选择",
+  "Reimbursement.Upload.imageupload": "上传",
+  "Reimbursement.Upload.cancel": "返回",
+  "Reimbursement.Upload.previewdiagram": "预览图",
+  "Reimbursement.Upload.lastinvoiceInfo": "上次发票信息"
+
 }

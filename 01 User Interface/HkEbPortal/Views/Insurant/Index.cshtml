@@ -12,31 +12,29 @@
     </fieldset>
     
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        团体名称：XXXX团体名称；被保人名称：爱大悟
+        <span i18n="Insurant.index.gpgpinfo">团体名称</span>: @ViewData["GPGPName"]
     </blockquote>
 
     <div class="layui-tab layui-tab-card" lay-filter="docDemoTabBrief" style="min-height:600px;max-height:100%;">
         <ul class="layui-tab-title">
             <li class="layui-this" i18n="Insurant.index.memeber">员工信息</li>
             <li i18n="Insurant.index.family">家庭成员</li>
-            <li>新增待定</li>
-            @*<li i18n="Insurant.index.lifestyle">被保险人生活方式</li>
-            <li i18n="Insurant.index.memeberArea">被保险人地区</li>*@
+            <li i18n="Insurant.index.policyInfo">保单信息</li>
             <li i18n="Insurant.index.billingInformation">账单信息</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show"> <!-- 第一个 -->
+            <div class="layui-tab-item layui-show"> 
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
                             <th hidden>KEY</th>
-                            <th>员工起始日</th>
-                            <th>员工终止日</th>
-                            <th>员工月薪(￥)</th>
-                            <th>员工部门</th>
-                            <th>员工等级</th>
-                            <th>员工职务</th>
-                            <th>说明</th>
+                            <th i18n="Insurant.table1.employeestartdate">员工起始日</th>
+                            <th i18n="Insurant.table1.employeeenddate">员工终止日</th>
+                            <th i18n="Insurant.table1.employeemonthly">员工月薪(￥)</th>
+                            <th i18n="Insurant.table1.employeestaffdep">员工部门</th>
+                            <th i18n="Insurant.table1.employeelevel">员工等级</th>
+                            <th i18n="Insurant.table1.employeestaffpositions">员工职务</th>
+                            <th i18n="Insurant.table1.employeecomment">说明</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,19 +54,19 @@
                     </tbody>
                 </table>
             </div>
-            <div class="layui-tab-item"> <!-- 第二个 -->
+            <div class="layui-tab-item"> 
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
                             <th hidden>KEY</th>
-                            <th>关系</th>
-                            <th>姓名</th>
-                            <th>证件号</th>
-                            <th>性别</th>
-                            <th>生日</th>
-                            <th>手机</th>
-                            <th>电子邮件</th>
-                            <th>邮政编码</th>
+                            <th i18n="Insurant.table2.Relationship">关系</th>
+                            <th i18n="Insurant.table2.Name">姓名</th>
+                            <th i18n="Insurant.table2.IDnumber">证件号</th>
+                            <th i18n="Insurant.table2.Gender">性别</th>
+                            <th i18n="Insurant.table2.Birthday">生日</th>
+                            <th i18n="Insurant.table2.Phone">手机</th>
+                            <th i18n="Insurant.table2.Email">电子邮件</th>
+                            <th i18n="Insurant.table2.Zipcode">邮政编码</th>
                         </tr>
                     </thead>
                     <tbody id="familyId"></tbody>
@@ -79,54 +77,29 @@
                     <thead>
                         <tr>
                             <th hidden>KEY</th>
-                            <th>生效日</th>
-                            <th>终止日</th>
-                            <th>生活方式</th>
-                            <th>备 注</th>
+                            <th i18n="Insurant.table3.policystatus">保单状态</th>
+                            <th i18n="Insurant.table3.startdate">生效日</th>
+                            <th i18n="Insurant.table3.enddate">终止日</th>
+                            <th i18n="Insurant.table3.memename">被保险人</th>
+                            <th i18n="Insurant.table3.relationship">关系</th>
+                            <th i18n="Insurant.table3.idnumber">证件号</th>
+                            <th i18n="Insurant.table3.numberprefix">证件号前缀</th>
+                            <th i18n="Insurant.table3.type">类型</th>
                         </tr>
                     </thead>
-                    <tbody id="lifestyleId"></tbody>
+                    <tbody id="policyInfoId"></tbody>
                 </table>
             </div> 
-            @*<div class="layui-tab-item"> <!-- 第三个 -->
-                <table class="layui-table" lay-skin="line">
-                    <thead>
-                        <tr>
-                            <th hidden>KEY</th>
-                            <th>生效日</th>
-                            <th>终止日</th>
-                            <th>生活方式</th>
-                            <th>备 注</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lifestyleId"></tbody>
-                </table>    
-            </div> 
-            <div class="layui-tab-item"> <!-- 第四个 -->
+            <div class="layui-tab-item"> 
                 <table class="layui-table" lay-skin="nob">
                     <thead>
                         <tr>
                             <th hidden>key</th>
-                            <th>地区类型</th>
-                            <th>地区</th>
-                            <th>生效日</th>
-                            <th>终止日</th>
-                            <th>备注</th>
-                        </tr>
-                    </thead>
-                    <tbody id="MemberAreaId"></tbody>
-                </table>        
-            </div>*@ 
-            <div class="layui-tab-item"> <!-- 第五个 -->
-                <table class="layui-table" lay-skin="nob">
-                    <thead>
-                        <tr>
-                            <th hidden>key</th>
-                            <th>账单日期</th>
-                            <th>账单类型</th>
-                            <th>当前金额(￥)</th>
-                            <th>账单</th>
-                            <th>备 注</th>
+                            <th i18n="Insurant.table4.BillingDate">账单日期</th>
+                            <th i18n="Insurant.table4.Billingtype">账单类型</th>
+                            <th i18n="Insurant.table4.CurrentAmount">当前金额(￥)</th>
+                            <th i18n="Insurant.table4.Bill">账单</th>
+                            <th i18n="Insurant.table4.Comment">备 注</th>
                         </tr>
                     </thead>
                     <tbody id="BillingInformationId"></tbody>
@@ -174,44 +147,29 @@
 
         $.ajax({
             type: 'POST',
-            url: "/Insurant/GetLifeStyle",
+            url: "/Insurant/GetPolicyInfo",
             data: "",
             dataType: "json",
             success: function (dat, status) {
-                var lifeStyleStr = "";
+                var policyInfoStr = "";
                 $.each(dat, function (i,row) {
-                    lifeStyleStr += "<tr>";
-                    lifeStyleStr += "<td hidden>" + row.MELS_KY + "</td>";
-                    lifeStyleStr += "<td>" + row.MELS_EFF_DT + "</td>";
-                    lifeStyleStr += "<td>" + row.MELS_END_DT + "</td>";
-                    lifeStyleStr += "<td>" + row.SYSV_LSTY_CD_DESC + "</td>";
-                    lifeStyleStr += "<td>" + row.MELS_COMMENT + "</td>";
-                    lifeStyleStr += "</tr>";
+                    policyInfoStr += "<tr>";
+                    policyInfoStr += "<td hidden>" + row.PLPL_ID + "</td>";
+                    policyInfoStr += "<td>" + row.SYSV_PLPL_STS + "</td>";
+                    policyInfoStr += "<td>" + row.PLME_STR_DT + "</td>";
+                    policyInfoStr += "<td>" + row.PLPL_END_DT + "</td>";
+                    policyInfoStr += "<td>" + row.MEME_NAME + "</td>";
+                    policyInfoStr += "<td>" + row.SYSV_MEME_REL_CD + "</td>";
+                    policyInfoStr += "<td>" + row.Cert_No + "</td>";
+                    policyInfoStr += "<td>" + row.Cert_Prefix + "</td>";
+                    policyInfoStr += "<td>" + row.CLASS + "</td>";
+                    policyInfoStr += "</tr>";
                 });
-                $("#lifestyleId").html(lifeStyleStr)
+                $("#policyInfoId").html(policyInfoStr)
             }
         });
 
-        $.ajax({
-            type: 'POST',
-            url: "/Insurant/GetMemeberArea",
-            data: "",
-            dataType: "json",
-            success: function (dat, status) {
-                var areaStr = "";
-                $.each(dat, function (i,row) {
-                    areaStr += "<tr>";
-                    areaStr += "<td hidden>" + row.MESH_KY + "</td>";
-                    areaStr += "<td>" + row.SYSV_MESH_TYPE_DESC + "</td>";
-                    areaStr += "<td>" + row.SHSH_NAME + "</td>";
-                    areaStr += "<td>" + row.MESH_EFF_DT + "</td>";
-                    areaStr += "<td>" + row.MESH_END_DT + "</td>";
-                    areaStr += "<td>" + row.MESH_COMMENT + "</td>";
-                    areaStr += "</tr>";
-                });
-                $("#MemberAreaId").html(areaStr);
-            }
-        });
+
 
         $.ajax({
             type: 'POST',

@@ -170,6 +170,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_MEME_MEMBER_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MESH_SHIP_WORK_LINK_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PDPD_PRODUCTBASIC_SELECTcs.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_PLFM_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_MEM_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2.cs" />
@@ -378,6 +379,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Insurant\Index.cshtml" />
+    <Content Include="Views\Reimbursement\Upload.cshtml" />
     <Content Include="Views\Policy\Information.cshtml" />
   </ItemGroup>
   <ItemGroup>
