@@ -46,7 +46,12 @@
     });
 
     $("#UploadId").on("click", function () {
-         location.href = "../Reimbursement/Upload";
+        var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        if (val == null) {
+            layer.msg("请选择要操作的数据！");
+        } else {
+            location.href = "../Reimbursement/Upload?clivKy=" + val;
+        }
     });
     
 })

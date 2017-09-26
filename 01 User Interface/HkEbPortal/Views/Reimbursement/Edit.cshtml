@@ -15,7 +15,7 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width:110px;">家庭成員</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "請選擇", new Dictionary<string, object>() { { "lay-verify", "required" } })
+                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "請選擇", new Dictionary<string, object>() { { "lay-verify", "required" }, { "lay-filter", "fmfmId" } })
                 </div>
             </div>
             <div class="layui-inline">
@@ -128,6 +128,17 @@
         });
         laydate.render({
             elem: '#Apply_Date' //指定元素
+        });
+
+        form.on('select(fmfmId)', function (data) {
+            if (data.value) {
+                layer.msg("哈哈哈哈！你点击我干嘛！看到你了");
+                $("#EBEB_DropDownList").val();
+                //刷新select选择框渲染
+                form.render('select'); 
+            } else {
+                layer.msg("哈哈哈哈！都没用改变值，你想骗我？");
+            }
         });
     });
 
