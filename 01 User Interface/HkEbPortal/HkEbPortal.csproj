@@ -172,6 +172,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_PDPD_PRODUCTBASIC_SELECTcs.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_MEM_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_SYSV_VALUE_LIST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

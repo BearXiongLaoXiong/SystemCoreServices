@@ -27,8 +27,61 @@
     </div>
 
     <div class="col-lg-2 col-lg-offset-5 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex" style="margin-bottom:150px;">
-        <button  lay-submit lay-filter="btnLogin" class="layui-btn layui-btn-primary" i18n="user.login.signIn" style="background-color: #C5281C; color: white;font-size:20px;font-weight:600">Sign In</button>
+        <button lay-submit lay-filter="btnLogin" class="layui-btn layui-btn-primary" i18n="user.login.signIn" style="background-color: #C5281C; color: white;font-size:20px;font-weight:600">Sign In</button>
     </div>
+
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+        <div class="vertical-align-middle">
+            <div class="brand visible-xs text-center">
+                <img class="brand-img" src="/public/images/logo.svg" height="50" alt="Admui">
+            </div>
+            <h3 class="hidden-xs">登录 Admui</h3>
+            <p class="hidden-xs">Admui 在线演示系统</p>
+         
+               
+                <div class="form-group has-feedback">
+                    <label class="sr-only" for="username">用户名</label>
+                    <input type="text" class="layui-input" id="username" name="loginName" placeholder="请输入用户名" data-fv-field="loginName"><i class="form-control-feedback" data-fv-icon-for="loginName" style="display: none;"></i>
+                    <small class="help-block" data-fv-validator="notEmpty" data-fv-for="loginName" data-fv-result="NOT_VALIDATED" style="display: none;">用户名不能为空</small>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="sr-only" for="password">密码</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" data-fv-field="password"><i class="form-control-feedback" data-fv-icon-for="password" style="display: none;"></i>
+                    <small class="help-block" data-fv-validator="notEmpty" data-fv-for="password" data-fv-result="NOT_VALIDATED" style="display: none;">密码不能为空</small><small class="help-block" data-fv-validator="stringLength" data-fv-for="password" data-fv-result="NOT_VALIDATED" style="display: none;">密码必须大于6且小于30个字符</small>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="sr-only" for="password">验证码</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="validCode" placeholder="请输入验证码" data-fv-field="validCode">
+                        <a class="input-group-addon padding-0 reload-vify" href="javascript:;">
+                            <img src="/system/captcha" height="40">
+                        </a>
+                    </div><i class="form-control-feedback fv-bootstrap-icon-input-group" data-fv-icon-for="validCode" style="display: none;"></i>
+                    <small class="help-block" data-fv-validator="notEmpty" data-fv-for="validCode" data-fv-result="NOT_VALIDATED" style="display: none;">验证码不能为空</small>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">自动登录</label>
+                    </div>
+                    <div class="pull-right">
+                        <a href="http://www.admui.com/?sendUrl=http%3A%2F%2Fdemo.admui.com%2Flogin#register" target="_blank">注册账号</a>
+                        ·
+                        <a class="collapsed" data-toggle="collapse" href="#forgetPassword" aria-expanded="false" aria-controls="forgetPassword">
+                            找回密码
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse" id="forgetPassword" aria-expanded="true">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        请返回官网点击登录按钮找回密码
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block margin-top-30">立即登录</button>
+         
+        </div>
+    </div>
+
 </form>
 
 <script src="~/Scripts/Home/Home.js"></script>

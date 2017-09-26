@@ -76,7 +76,7 @@ ul, ol{list-style: none;}
 .info-btn{cursor: pointer;}
 .info-content>div{width: 100%;padding:10px 0;overflow:hidden;}
 
-
+.tableheight{height:600px;}
 
 .center {
     font-size: 0.875rem;

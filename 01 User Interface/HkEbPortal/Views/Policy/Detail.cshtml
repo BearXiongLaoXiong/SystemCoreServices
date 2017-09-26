@@ -14,12 +14,12 @@
         <span class="layui-badge-rim layui-bg-orange">人员名称</span>&nbsp;@Model.Name &nbsp;&nbsp;
         <span class="layui-badge-rim layui-bg-orange">保单</span>&nbsp;@Model.Desc
     </blockquote>
-    <form class="layui-form" action="">
+    <form class="layui-form tableheight" action="">
         @{
-            foreach (var item in Model.PlplList)
+            //foreach (var item in Model.PlplList)
             {
                 <div>
-                    <i class="layui-icon" style="float: left;font-size: 30px;">&#xe60a;</i><div style="float: left;line-height:30px">@item.PDCT_NAME</div>
+                    <i class="layui-icon" style="float: left;font-size: 30px;">&#xe60a;</i><div style="float: left;line-height:30px">@Model.PdctName</div>
                 </div>
                 <hr class="layui-bg-red">
                 <div class="layui-form" style="margin-bottom:30px;">
@@ -50,9 +50,9 @@
                             @{
                                 foreach (var info in Model.PlplInfoList)
                                 {
-                                    if (info.PDCT_ID != item.PDCT_ID) { continue; }
+                                    //if (info.PDCT_ID != item.PDCT_ID) { continue; }
                                     <tr>
-                                        @{var check = info.PLPD_DEF_IND == "Y" ? "checked" : "";}
+                                        @{var check = info.SELECTED == "Y" ? "checked" : "";}
                                         @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange'>默认</span>" : "";}
                                         <td><input type="radio" id="ids" name="radio@(new HtmlString(info.PDCT_ID))" title=" " value="@JsonConvert.SerializeObject(info)" @check>@info.PDPD_NAME</td>
                                         <td>@(new HtmlString(_default))</td>
@@ -73,18 +73,18 @@
                         </tbody>
                     </table>
                 </div>
-            }
+                                            }
         }
-    
+
         <div style="text-align: right;">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="submitDetailRadio">保存</button>
                 <a class="layui-btn layui-btn-primary" onclick="returnbackurl()">返回</a>
             </div>
-            
+
         </div>
     </form>
-    
+
 </div>
 <script src="~/Scripts/common.js"></script>
 <script src="~/Scripts/Policy/Detail.js"></script>
