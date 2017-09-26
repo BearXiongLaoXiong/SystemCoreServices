@@ -13,14 +13,15 @@ layui.use('carousel', function () {
 layui.use('form', function () {
     var form = layui.form;
 
-    form.on('submit(aadfohasfsadf)', function (data) {
+    form.on('submit(btnLogin)', function (data) {
         layer.msg(JSON.stringify(data.field));
+        $.post("Login",
+            { txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
+            function (result) {
+                layer.msg(result.Msg);
+            });
         return false;
     });
 
-    form.on('submit(formDemo)', function (data) {
-        layer.msg(JSON.stringify(data.field));
-        return false;
-    });
 });
 

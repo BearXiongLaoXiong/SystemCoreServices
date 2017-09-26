@@ -44,18 +44,17 @@ function laodview(status, memeKy) {
             $.each(data.table, function (key, value) {
                 var html = "";
                 html += '<tr>';
-                html += '<td>' + (key + 1) + '</td>';
-                html += '<td>' + value.MEME_NAME + '</td>';
-                html += '<td>' + value.PLPL_DESC + '</td>';
-                var statu = "";
-                switch (value.SYSV_PLPL_STS) {
-                    case "O": statu = '<span class="layui-badge layui-bg-orange">开放</span>'; break;
-                    case "A": statu = '<span class="layui-badge layui-bg-green">有效</span>'; break;
-                    case "T": statu = '<span class="layui-badge">停止</span>'; break;
-                    default: statu = '<span class="layui-badge layui-bg-blue">全部</span>';; break;
+                html += '<td>' + value.PDCT_NAME + '</td>';
+                html += '<td>' + value.PLAN_DESC + '</td>';
+
+                var defaultInd = "";
+                switch (value.DEFAULT_IND) {
+                    case "Y": defaultInd = '<span class="layui-badge layui-bg-orange">默认</span>'; break;
+                    default: defaultInd = '<span class="layui-badge layui-bg-blue">x</span>';; break;
                 }
-                html += '<td>' + statu + '</td>';
-                html += '<td style="padding: 0px;" align="center" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail" i18n="public.common.detail">查看</a> <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del" i18n="public.common.edit" href="../Policy/Detail?plplKy=' + value.PLPL_KY + '&memeKy=' + value.MEME_KY + '">编辑</a> </div></td>';
+                html += '<td>' + defaultInd + '</td>';
+                html += '<td>' + value.LEVEL_IND + '</td>';
+                html += '<td style="padding: 0px;" align="center" data-off="true"> <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del" i18n="public.common.edit" href="../Policy/Detail?plplKy=' + value.PLPL_KY + '&memeKy=' + value.MEME_KY + '&pdctId=' + value.PDCT_ID + '">选择</a> </div></td>';
                 html += '</tr>';
                 $("#memberTableBody").append(html);
             });
