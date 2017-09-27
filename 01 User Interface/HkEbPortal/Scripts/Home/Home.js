@@ -14,12 +14,12 @@ layui.use('form', function () {
     var form = layui.form;
 
     form.on('submit(btnLogin)', function (data) {
-        layer.msg(JSON.stringify(data.field));
+        //layer.msg(JSON.stringify(data.field));
         $.post("Login",
             { txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
             function (result) {
                 if (result.Code === 0)
-                    window.location.href = "../Insurant/Index";
+                    window.location.href = "../Home/Index";
                 else
                     layer.msg(result.Msg);
             });
