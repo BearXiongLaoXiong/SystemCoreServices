@@ -4,7 +4,7 @@ layui.use('carousel', function () {
     carousel.render({
         elem: '#indexcarouselimage'
         , width: '100%'
-        , height: '800px'
+        , height: '750px'
         , interval: 500000
     });
 });
