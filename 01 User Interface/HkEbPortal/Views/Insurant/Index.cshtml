@@ -93,15 +93,17 @@
                 </table>
             </div> 
             <div class="layui-tab-item"> 
-                <table class="layui-table" lay-skin="nob">
+                <table class="layui-table" lay-skin="line" lay-filter="demoEvent">
                     <thead>
                         <tr>
-                            <th hidden>key</th>
-                            <th i18n="Insurant.table4.BillingDate">账单日期</th>
-                            <th i18n="Insurant.table4.Billingtype">账单类型</th>
-                            <th i18n="Insurant.table4.CurrentAmount">当前金额(￥)</th>
-                            <th i18n="Insurant.table4.Bill">账单</th>
-                            <th i18n="Insurant.table4.Comment">备 注</th>
+                            <th hidden lay-data="{field:'id', width:80}">key</th>
+                            <th i18n="Insurant.table4.PolicyID">保单号</th>
+                            <th i18n="Insurant.table4.BillingDate">起始日</th>
+                            <th i18n="Insurant.table4.Billingtype">终止日</th>
+                            <th i18n="Insurant.table4.CurrentAmount">起始分数</th>
+                            <th i18n="Insurant.table4.Bill">当前分数</th>
+                            <th i18n="Insurant.table4.Comment">备注</th>
+                            <th lay-data="{field:'sign', width:177, event: 'setSign', style:'cursor: pointer;'}">查看</th>
                         </tr>
                     </thead>
                     <tbody id="BillingInformationId"></tbody>
@@ -110,10 +112,15 @@
          </div>
     </div> 
 </div>
+<script>
+    $(function () {
+
+    });
+</script>
 <script src="~/Scripts/layui.js"></script>
 <script>
-    layui.use('element', function () {
-        var $ = layui.jquery,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+    layui.use(['element', 'form'], function () {
+        var $ = layui.jquery, element = layui.element;
 
         $('.site-demo-active').on('click', function () {
             var othis = $(this), type = othis.data('type');
@@ -125,7 +132,6 @@
         $.ajax({
             type: 'POST',
             url: "/Insurant/GetFamilyInfo",
-            data: "",
             dataType: "json",
             success: function (data, status) {
                 var familyStr = "";
@@ -150,7 +156,6 @@
         $.ajax({
             type: 'POST',
             url: "/Insurant/GetPolicyInfo",
-            data: "",
             dataType: "json",
             success: function (dat, status) {
                 var policyInfoStr = "";
@@ -171,27 +176,41 @@
             }
         });
 
-
-
         $.ajax({
             type: 'POST',
             url: "/Insurant/GetBillingInfomation",
-            data: "",
             dataType: "json",
             success: function (dat, status) {
                 var billingInfoStr = "";
                 $.each(dat, function (i, row) {
                     billingInfoStr += "<tr>";
                     billingInfoStr += "<td hidden>" + row.FMAC_KY + "</td>";
-                    billingInfoStr += "<td>" + row.FMAC_DTM + "</td>";
-                    billingInfoStr += "<td>" + row.POST_TYPE_DESC + "</td>";
-                    billingInfoStr += "<td>" + row.FMFM_CUR_AMT + "</td>";
-                    billingInfoStr += "<td>" + row.SYSV_BILL_FREQ_DESC + "</td>";
-                    billingInfoStr += "<td>" + row.COMMENT + "</td>";
+                    billingInfoStr += "<td>" + row.Policy_ID + "</td>";
+                    billingInfoStr += "<td>" + row.Start_Date + "</td>";
+                    billingInfoStr += "<td>" + row.End_Date + "</td>";
+                    billingInfoStr += "<td>" + row.Initial_Amout + "</td>";
+                    billingInfoStr += "<td>" + row.Current_Points + "</td>";
+                    billingInfoStr += "<td>" + row.Comment + "</td>";
+                    billingInfoStr += "<td><a href='javascript:'void(0)'' class='layui-btn layui-btn-danger layui-btn-mini' onclick='ShowDetail(" + row.FMAC_KY+")'>查看</a></td>";
                     billingInfoStr += "</tr>";
                 });
                 $("#BillingInformationId").html(billingInfoStr);
             }
         });
+
     });
+
+    function ShowDetail(fmacky) {
+        layer.open({
+            type: 2,
+            title: 'BillingInfomationDetail',
+            skin: 'layui-layer-demo', //样式类名
+            area: ['800px', '600px'],
+            closeBtn: 1, 
+            shadeClose: true, //开启遮罩关闭
+            content: ['BillingInfomationDetail?FMAC_KY=' + fmacky, 'no'],
+            btnAlign: 'c'
+        });
+
+    }
 </script>

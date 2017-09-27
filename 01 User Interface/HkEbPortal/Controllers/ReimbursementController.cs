@@ -28,7 +28,7 @@ namespace HkEbPortal.Controllers
         {
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER =UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { pEHUSER = UserInfo.USUS_ID };
+            var entity = new SPEH_EBEB_VALUE_LIST() { pGPGP_KY = UserInfo.GPGP_KY };
             var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
@@ -77,7 +77,7 @@ namespace HkEbPortal.Controllers
             if (string.IsNullOrEmpty(clivKy)) return View();
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { };
+            var entity = new SPEH_EBEB_VALUE_LIST() { pGPGP_KY = UserInfo.GPGP_KY };
             var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);

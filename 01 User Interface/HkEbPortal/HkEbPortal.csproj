@@ -164,6 +164,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_EBEB_VALUE_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_FMAD_ACCOUNT_DET_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMDT_FAMILY_DETL_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMFM_LOGIN.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MELS_LIFESTYLE_LINK_LIST.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Views\Insurant\Index.cshtml" />
     <Content Include="Views\Reimbursement\Upload.cshtml" />
     <Content Include="Views\Policy\Information.cshtml" />
+    <Content Include="Views\Insurant\BillingInfomationDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

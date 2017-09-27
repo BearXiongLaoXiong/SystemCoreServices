@@ -78,10 +78,17 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetBillingInfomation()
         {
-            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
+            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() { pFMFM_KY = UserInfo.FMFM_KY };
             var list = CommonBl.QuerySingle<SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB, SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB_RESULT>(entity);
 
             return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult BillingInfomationDetail(string FMAC_KY)
+        {
+            var entity = new SPEH_FMAD_ACCOUNT_DET_LIST() { pFMAC_KY = FMAC_KY };
+            var list = CommonBl.QuerySingle<SPEH_FMAD_ACCOUNT_DET_LIST, SPEH_FMAD_ACCOUNT_DET_LIST_RESULT>(entity);
+            return View(list);
         }
     }
 }
