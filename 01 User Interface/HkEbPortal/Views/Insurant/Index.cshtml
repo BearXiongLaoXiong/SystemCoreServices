@@ -103,7 +103,7 @@
                             <th i18n="Insurant.table4.CurrentAmount">起始分数</th>
                             <th i18n="Insurant.table4.Bill">当前分数</th>
                             <th i18n="Insurant.table4.Comment">备注</th>
-                            <th lay-data="{field:'sign', width:177, event: 'setSign', style:'cursor: pointer;'}">查看</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="BillingInformationId"></tbody>
@@ -191,7 +191,7 @@
                     billingInfoStr += "<td>" + row.Initial_Amout + "</td>";
                     billingInfoStr += "<td>" + row.Current_Points + "</td>";
                     billingInfoStr += "<td>" + row.Comment + "</td>";
-                    billingInfoStr += "<td><a href='javascript:'void(0)'' class='layui-btn layui-btn-danger layui-btn-mini' onclick='ShowDetail(" + row.FMAC_KY+")'>查看</a></td>";
+                    billingInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.edit' onclick='ShowDetail(" + row.FMAC_KY+")'>查看</a></td>";
                     billingInfoStr += "</tr>";
                 });
                 $("#BillingInformationId").html(billingInfoStr);
