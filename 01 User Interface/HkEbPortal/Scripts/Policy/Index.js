@@ -50,7 +50,7 @@ function laodview(status, memeKy) {
                 
                 var defaultInd = "";
                 switch (value.DEFAULT_IND) {
-                    case "Y": defaultInd = '<span class="layui-badge layui-bg-orange">默认</span>'; break;
+                    case "Y": defaultInd = '<span class="layui-badge layui-bg-orange" i18n="public.common.Default">默认</span>'; break;
                     default: defaultInd = '<span class="layui-badge layui-bg-blue">x</span>';; break;
                 }
                 html += '<td>' + defaultInd + '</td>';

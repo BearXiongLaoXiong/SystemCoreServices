@@ -1,9 +1,11 @@
 {
   "public.common.pleaseSelect": "Please select",
   "public.common.pleaseInput": "Please input",
-  "public.common.detail": "Detail",
-  "public.common.edit": "Edit",
-  "public.common.delete": "Delete",
+  "public.common.detail": "detail",
+  "public.common.edit": "edit",
+  "public.common.delete": "delete",
+  "public.common.select": "select",
+  "public.common.Default": "default",
 
   "footer.login": "Login",
   "footer.menu.homepage": "HOME PAGE",
@@ -81,7 +83,13 @@
   "Policy.index.status": "Status",
   "Policy.index.MemberName": "Member Name",
   "Policy.index.PolicyName": "Policy Name",
+  "Policy.index.Product": "Product",
+  "Policy.index.Plan": "Plan",
+  "Policy.index.Points": "Points",
+  "Policy.index.Level": "Level",
 
+  "Policy.detail.Plan": "Plan",
+  "Policy.detail.Level": "Level",
   "policy.detail.benefit": "Benefit Plan",
   "policy.detail.total": "Total Premium",
   "policy.detail.employee": "Employee's Responsibility",
