@@ -87,7 +87,6 @@ namespace HkEbPortal.Controllers
                 }
                 result = insert.pRTN_MSG;
             }
-
             return result;
         }
 

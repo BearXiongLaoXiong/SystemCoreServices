@@ -15,24 +15,24 @@ layui.use('form', function () {
             }
         }
         ShowMsg();
-        $.post("Detail",
-            {
-                data: JSON.stringify(array)
-            },
-            function (msg) {
-                setTimeout(function () {
-                    layer.closeAll();
-                    layer.open({
-                        type: 1,
-                        skin: 'layui-layer-demo', //样式类名
-                        closeBtn: 0, //不显示关闭按钮
-                        shadeClose: true, //开启遮罩关闭
-                        content: '<div style="padding: 20px 100px;">' + msg + '</div>',
-                        btnAlign: 'c'
-                    });
-                }, 300);
-
-            });
+        $.post("Detail",{ data: JSON.stringify(array) }, function (dat,status) {
+            if (status == "success") {
+                    returnbackurl();
+                } else {
+                    layer.msg(dat);
+                }
+                //setTimeout(function () {
+                //    layer.closeAll();
+                //    layer.open({
+                //        type: 1,
+                //        skin: 'layui-layer-demo', //样式类名
+                //        closeBtn: 0, //不显示关闭按钮
+                //        shadeClose: true, //开启遮罩关闭
+                //        content: '<div style="padding: 20px 100px;">' + msg + '</div>',
+                //        btnAlign: 'c'
+                //    });
+                //}, 300);
+        });
         return false;
     });
     CloseMsg();

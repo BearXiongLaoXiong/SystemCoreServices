@@ -53,6 +53,24 @@
             location.href = "../Reimbursement/Upload?clivKy=" + val;
         }
     });
+
+    $("#submitId").on("click", function () {
+        var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        if (val == null) {
+            layer.msg("请选择要提交的数据！");
+        } else {
+            $.ajax({
+                type:"POST",
+                url: "/Reimbursement/UpdateCLIVSTS",
+                data: { "CLIV_KY": val },
+                dataType:"json",
+                success: function (dat,status) {
+                    layer.msg(dat);
+                }
+            });
+        }
+       
+    });
     
 })
 
