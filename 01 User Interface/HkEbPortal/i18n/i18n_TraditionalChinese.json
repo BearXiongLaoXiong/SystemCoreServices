@@ -6,6 +6,8 @@
   "public.common.delete": "删除",
   "public.common.select": "選擇",
   "public.common.default": "默認",
+  "public.common.info": "詳情",
+
 
   "footer.login": "登入",
   "footer.menu.homepage": "主頁",
@@ -86,11 +88,13 @@
   "Policy.index.Product": "產品",
   "Policy.index.Plan": "計劃",
   "Policy.index.Points": "積分",
-  "Policy.index.Default": "默認",
   "Policy.index.Level": "級別",
 
+
+  "Policy.detail.memberName": "人員名稱",
+  "Policy.detail.policy": "保單",
   "Policy.detail.Plan": "計劃",
-  "Policy.detail.Level": "級別",
+  "Policy.detail.Level": "級別1",
   "policy.detail.benefit": "保單信息",
   "policy.detail.total": "總積分",
   "policy.detail.employee": "員工積分",

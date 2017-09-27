@@ -16,7 +16,7 @@ layui.use('form', function () {
         }
         ShowMsg();
         $.post("Detail",{ data: JSON.stringify(array) }, function (dat,status) {
-            if (status == "success") {
+            if (status === "success") {
                     returnbackurl();
                 } else {
                     layer.msg(dat);

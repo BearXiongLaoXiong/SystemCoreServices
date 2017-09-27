@@ -7,12 +7,12 @@
 <div class="container">
     <span class="layui-breadcrumb">
         <a href="index"><span i18n="footer.menu.policy">保單信息</span></a>
-        <a><cite i18n="footer.menu.policy">详情</cite></a>
+        <a><cite i18n="public.common.info">详情</cite></a>
     </span>
 
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <span class="layui-badge-rim layui-bg-orange">人员名称</span>&nbsp;@Model.Name &nbsp;&nbsp;
-        <span class="layui-badge-rim layui-bg-orange">保单</span>&nbsp;@Model.Desc
+        <span class="layui-badge-rim layui-bg-orange" i18n="policy.detail.memberName">人员名称</span>&nbsp;@Model.Name &nbsp;&nbsp;
+        <span class="layui-badge-rim layui-bg-orange" i18n="policy.detail.policy">保单</span>&nbsp;@Model.Desc
     </blockquote>
     <form class="layui-form tableheight" action="">
         @{
@@ -36,9 +36,9 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Plan</th>
-                                <th>Default</th>
-                                <th>Level</th>
+                                <th i18n="policy.detail.Plan">計劃</th>
+                                <th i18n="public.common.default">默認</th>
+                                <th i18n="policy.detail.Level">級別</th>
                                 <th i18n="policy.detail.total">總金額</th>
                                 <th i18n="policy.detail.employee">員工金額</th>
                                 <th i18n="policy.detail.target">雇主金額</th>
@@ -53,7 +53,7 @@
                                     //if (info.PDCT_ID != item.PDCT_ID) { continue; }
                                     <tr>
                                         @{var check = info.SELECTED == "Y" ? "checked" : "";}
-                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange'>默认</span>" : "";}
+                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange i18n='public.common.default'>默认</span>" : "";}
                                         <td><input type="radio" id="ids" name="radio@(new HtmlString(info.PDCT_ID))" title=" " value="@JsonConvert.SerializeObject(info)" @check>@info.PDPD_NAME</td>
                                         <td>@(new HtmlString(_default))</td>
                                         <td>@info.PDPD_LEVEL</td>
