@@ -64,10 +64,11 @@
   "Insurant.table3.numberprefix": "家庭碼",
   "Insurant.table3.type": "等級",
 
-  "Insurant.table4.BillingDate": "帳單日期",
-  "Insurant.table4.Billingtype": "帳單類型",
-  "Insurant.table4.CurrentAmount": "當前金額(￥)",
-  "Insurant.table4.Bill": "帳單",
+  "Insurant.table4.PolicyID": "保單號",
+  "Insurant.table4.BillingDate": "起始日",
+  "Insurant.table4.Billingtype": "終止日",
+  "Insurant.table4.CurrentAmount": "起始分數",
+  "Insurant.table4.Bill": "當前分數",
   "Insurant.table4.Comment": "備註",
 
   "Policy.index.info": "保單信息",

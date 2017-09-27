@@ -64,10 +64,11 @@
   "Insurant.table3.numberprefix": "Home Code",
   "Insurant.table3.type": "Level",
 
-  "Insurant.table4.BillingDate": "Billing Date",
-  "Insurant.table4.Billingtype": "Billing type",
-  "Insurant.table4.CurrentAmount": "Current Amount",
-  "Insurant.table4.Bill": "Bill",
+  "Insurant.table4.PolicyID": "Policy number",
+  "Insurant.table4.BillingDate": "Start day",
+  "Insurant.table4.Billingtype": "End Day",
+  "Insurant.table4.CurrentAmount": "Starting score",
+  "Insurant.table4.Bill": "Current score",
   "Insurant.table4.Comment": "Notes",
 
   "Policy.index.info": "Policy Info",
