@@ -67,9 +67,15 @@
   "Insurant.table4.PolicyID": "Policy number",
   "Insurant.table4.BillingDate": "Start day",
   "Insurant.table4.Billingtype": "End Day",
-  "Insurant.table4.CurrentAmount": "Starting score",
-  "Insurant.table4.Bill": "Current score",
+  "Insurant.table4.CurrentAmount": "Starting Points",
+  "Insurant.table4.Bill": "Current Points",
   "Insurant.table4.Comment": "Notes",
+
+  "Insurant.BillingInfomationDetail.date": "Date",
+  "Insurant.BillingInfomationDetail.type": "Type",
+  "Insurant.BillingInfomationDetail.points": "Points",
+  "Insurant.BillingInfomationDetail.currentpoints": "Current Points",
+  "Insurant.BillingInfomationDetail.comment": "Comment",
 
   "Policy.index.info": "Policy Info",
   "Policy.index.status": "Status",

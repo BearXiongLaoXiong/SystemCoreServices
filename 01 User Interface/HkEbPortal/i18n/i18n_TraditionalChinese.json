@@ -71,6 +71,12 @@
   "Insurant.table4.Bill": "當前分數",
   "Insurant.table4.Comment": "備註",
 
+  "Insurant.BillingInfomationDetail.date": "日期",
+  "Insurant.BillingInfomationDetail.type": "類型",
+  "Insurant.BillingInfomationDetail.points": "分數",
+  "Insurant.BillingInfomationDetail.currentpoints": "當前分數",
+  "Insurant.BillingInfomationDetail.comment": "備註",
+
   "Policy.index.info": "保單信息",
   "Policy.index.status": "狀態",
   "Policy.index.MemberName": "人員名稱",
