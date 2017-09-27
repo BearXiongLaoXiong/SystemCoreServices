@@ -89,6 +89,11 @@
   "Reimbursement.Index.Invoice": "發票金額",
   "Reimbursement.Index.ApplyAmount": "申請金額",
   "Reimbursement.Index.Paid": "實際報銷費用",
+  "Reimbursement.Index.Add": "新增",
+  "Reimbursement.Index.Edit": "編輯",
+  "Reimbursement.Index.Delete": "删除",
+  "Reimbursement.Index.Image": "影像",
+  "Reimbursement.Index.Submit": "提交",
 
   "Reimbursement.edit.edit": "修改",
   "Reimbursement.edit.faimily": "家庭成員",

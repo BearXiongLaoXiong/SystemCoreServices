@@ -89,6 +89,11 @@
   "Reimbursement.Index.Invoice": "Invoice Amount",
   "Reimbursement.Index.ApplyAmount": "Apply Amount",
   "Reimbursement.Index.Paid": "Paid Amount",
+  "Reimbursement.Index.Add": "New",
+  "Reimbursement.Index.Edit": "Edit",
+  "Reimbursement.Index.Delete": "Delete",
+  "Reimbursement.Index.Image": "Image",
+  "Reimbursement.Index.Submit": "Submitted",
 
   "Reimbursement.edit.faimily": "Family Member",
   "Reimbursement.edit.benefit": "Benefit",
