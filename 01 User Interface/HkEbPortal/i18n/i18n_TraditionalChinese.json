@@ -4,6 +4,8 @@
   "public.common.detail": "查看",
   "public.common.edit": "编辑",
   "public.common.delete": "删除",
+  "public.common.select": "選擇",
+  "public.common.default": "默認",
 
   "footer.login": "登入",
   "footer.menu.homepage": "主頁",
@@ -14,7 +16,7 @@
 
   "home.index.member": "被保險人",
   "home.index.policy": "保單信息",
-  "home.index.claims": "\"報銷聯係我們",
+  "home.index.claims": "報銷",
   "home.index.contact": "联系我们",
 
   "user.login.signIn": "登入",
@@ -75,12 +77,20 @@
   "Policy.index.status": "狀態",
   "Policy.index.MemberName": "人員名稱",
   "Policy.index.PolicyName": "保單名稱",
+  "Policy.index.Product": "產品",
+  "Policy.index.Plan": "計劃",
+  "Policy.index.Points": "積分",
+  "Policy.index.Default": "默認",
+  "Policy.index.Level": "級別",
 
+  "Policy.detail.Plan": "計劃",
+  "Policy.detail.Level": "級別",
   "policy.detail.benefit": "保單信息",
-  "policy.detail.total": "總金額",
-  "policy.detail.employee": "員工金額",
-  "policy.detail.target": "雇主金額",
-  "policy.detail.tax": "稅率金額",
+  "policy.detail.total": "總積分",
+  "policy.detail.employee": "員工積分",
+  "policy.detail.target": "雇主積分",
+  "policy.detail.tax": "稅率積分",
+
 
   "Reimbursement.Index.fsaClaims": "報銷",
   "Reimbursement.Index.Applicant": "家庭成員",
