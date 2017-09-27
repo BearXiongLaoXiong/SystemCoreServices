@@ -5,7 +5,11 @@
 
 
 <div class="container">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <span class="layui-breadcrumb">
+        <a href="index"><span i18n="Reimbursement.Index.fsaClaims">报销</span></a>
+        <a><cite i18n="Reimbursement.Index.Add">新增</cite></a>
+    </span>
+    <fieldset class="layui-elem-field layui-field-title">
         <legend i18n="Reimbursement.Index.fsaClaims">新增報銷</legend>
     </fieldset>
     <form class="layui-form" action="Add" method="post">
@@ -79,7 +83,7 @@
 <script src="~/Scripts/language/laodlanguage.js"></script>
 <script src="~/Scripts/jquery.cookie-1.4.1.min.js"></script>
 <script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate'], function () {
+    layui.use(['form', 'layedit', 'laydate','element'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
