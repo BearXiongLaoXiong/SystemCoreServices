@@ -41,6 +41,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string PDCT_ID { get; set; }
         public string PDCT_NAME { get; set; }
         public string PLAN_DESC { get; set; }
+        public string PLME_AMT { get; set; }
         public string LEVEL_IND { get; set; }
         public string DEFAULT_IND { get; set; }
     }
@@ -51,5 +52,5 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string MEME_KY { get; set; }
     }
 
-    
+
 }

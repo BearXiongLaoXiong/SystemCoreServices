@@ -5,7 +5,7 @@ layui.use('carousel', function () {
         elem: '#indexcarouselimage'
         , width: '100%'
         , height: '750px'
-        , interval: 500000
+        , interval: 5000
     });
 });
 

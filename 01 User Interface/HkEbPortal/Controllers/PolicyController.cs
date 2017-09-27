@@ -91,7 +91,7 @@ namespace HkEbPortal.Controllers
         }
 
 
-        public ActionResult Information(string pdpdId = "PD010135")
+        public ActionResult Information(string pdpdId)
         {
             var entity = new SPEH_PDPD_PRODUCTBASIC_SELECT { pPDPD_ID = pdpdId };
             var result = CommonBl.QueryMultiple<SPEH_PDPD_PRODUCTBASIC_SELECT, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT1, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT2, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT3, SPEH_PDPD_PRODUCTBASIC_SELECT_RESULT4>(entity);
