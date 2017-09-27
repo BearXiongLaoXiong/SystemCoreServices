@@ -46,7 +46,8 @@ function laodview(status, memeKy) {
                 html += '<tr>';
                 html += '<td>' + value.PDCT_NAME + '</td>';
                 html += '<td>' + value.PLAN_DESC + '</td>';
-
+                html += '<td>' + value.PLME_AMT + '</td>';
+                
                 var defaultInd = "";
                 switch (value.DEFAULT_IND) {
                     case "Y": defaultInd = '<span class="layui-badge layui-bg-orange">默认</span>'; break;

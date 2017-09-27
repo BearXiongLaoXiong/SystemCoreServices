@@ -1,9 +1,9 @@
 ﻿.textcenter {
     height: 55px;
     text-align: center;
-    color: #C5281C;
-    font-size:20px;
-    font-family:Calibri
+    color: #C21B17;
+    font-size: 20px;
+    font-family: Helvetica
 }
 .textflex {
     display: flex;
@@ -21,7 +21,7 @@
 .iconText {
     padding-left: 30px;
     border: none;
-    border-bottom: 1px solid #C5281C
+    border-bottom: 1px solid #C21B17
 }
 
 

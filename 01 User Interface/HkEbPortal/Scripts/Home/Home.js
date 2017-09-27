@@ -4,8 +4,8 @@ layui.use('carousel', function () {
     carousel.render({
         elem: '#indexcarouselimage'
         , width: '100%'
-        , height: '800px'
-        , interval: 500000
+        , height: '750px'
+        , interval: 5000
     });
 });
 
