@@ -7,6 +7,8 @@
   "public.common.select": "select",
   "public.common.default": "default",
   "public.common.info": "Info",
+  "public.common.save": "Save",
+  "public.common.back": "Back",
 
   "footer.login": "Login",
   "footer.menu.homepage": "HOME PAGE",
@@ -27,7 +29,6 @@
   "user.login.member": "Member ID",
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
-
 
   "Insurant.index.info": "Insured information",
   "Insurant.index.gpgpname": "Group name",
@@ -89,10 +90,10 @@
   "Policy.index.Points": "Points",
   "Policy.index.Level": "Level",
 
-  "Policy.detail.memberName": "Member Name",
-  "Policy.detail.policy": "Policy",
-  "Policy.detail.Plan": "Plan",
-  "Policy.detail.Level": "Level1",
+  "policy.detail.membername": "Member Name",
+  "policy.detail.policy": "Policy",
+  "policy.detail.Plan": "Plan",
+  "policy.detail.level": "Level",
   "policy.detail.benefit": "Benefit Plan",
   "policy.detail.total": "Total Points",
   "policy.detail.employee": "Employee's Responsibility",
@@ -123,6 +124,7 @@
   "Reimbursement.edit.invoice": "Invoice Amount",
   "Reimbursement.edit.comments": "Comments",
   "Reimbursement.edit.amount": "Adjusted Amount",
+  "Reimbursement.edit.payamount": "Pay Amount",
   "Reimbursement.edit.user": "Adjusted By",
   "Reimbursement.edit.reason": "Reason of Adjustment",
   "Reimbursement.edit.image": "Invoice Image",

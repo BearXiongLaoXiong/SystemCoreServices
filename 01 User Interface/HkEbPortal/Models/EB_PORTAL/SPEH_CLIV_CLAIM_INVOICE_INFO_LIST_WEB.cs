@@ -19,7 +19,7 @@ namespace HkEbPortal.Models.EB_PORTAL
     {
         public string CLIV_KY { get; set; }
         public string EBHK_EB_KY { get; set; }
-        public string EBHK_EB_DESC { get; set; }
+        public string EBEB_DESC { get; set; }
         public string FMFM_KY { get; set; }
         public string FMFM_NAME { get; set; }
         public string GPGP_KY { get; set; }

@@ -26,13 +26,13 @@ namespace HkEbPortal.Controllers
 
         public ActionResult Add()
         {
-            var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER =UserInfo.USUS_ID }; // 家庭成员
+            var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
             var entity = new SPEH_EBEB_VALUE_LIST() { pGPGP_KY = UserInfo.GPGP_KY };
             var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
-            fmfmlist.ForEach(x=> { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC +"-"+ x.MEME_NAME; });
+            fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME");
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
             var selectIVlist = new SelectList(ivlist, "value", "text");
@@ -52,16 +52,17 @@ namespace HkEbPortal.Controllers
             string clivDate = form["CLIV_Date"];
             string applyDate = form["Apply_Date"];
             string apply_amt = form["APPLY_AMT"];
-            string cliv_chg = form["CLIV_CHG"]; 
+            string cliv_chg = form["CLIV_CHG"];
             string comment = form["COMMENT"];
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT()
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT
             {
                 pMEME_KY = meme_ky,
                 pFMFM_KY = meme_ky,
+                pGPGP_KY = UserInfo.GPGP_KY,
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
-                pCLIV_DT= clivDate,
+                pCLIV_DT = clivDate,
                 pCLIV_APP_DT = applyDate,
                 pCLIV_APPLY_AMT = apply_amt,
                 pCLIV_CHG = cliv_chg,
@@ -97,7 +98,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public ActionResult EditUpdate(FormCollection form)
         {
-            if(string.IsNullOrEmpty(form["CLIV_KY"]))return Json("失敗！", JsonRequestBehavior.AllowGet);
+            if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json("失敗！", JsonRequestBehavior.AllowGet);
             string cliv_ky = form["CLIV_KY"];
             string meme = form["FMFM_DropDownList"];
             string ebeb = form["EBEB_DropDownList"];
@@ -110,16 +111,16 @@ namespace HkEbPortal.Controllers
             string comment = form["COMMENT"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE()
             {
-                pCLIV_KY= cliv_ky,
+                pCLIV_KY = cliv_ky,
                 pMEME_KY = meme,
                 pEBEB_KY = ebeb,
                 pSYSV_CLIV_TYPE = ivtype,
                 pCLIV_ID = ivid,
                 pCLIV_CHG = ivchg,
-                pCLIV_APPLY_AMT= appAMT,
+                pCLIV_APPLY_AMT = appAMT,
                 pCLIV_DT = ivdate,
                 pCLIV_APP_DT = appdate,
-                pCLIV_COMMENT= comment
+                pCLIV_COMMENT = comment
             };
             CommonBl.Execute(entity);
 
@@ -203,13 +204,13 @@ namespace HkEbPortal.Controllers
                         postedfile.SaveAs(path);
                         string fex = Path.GetExtension(postedfile.FileName);
 
-                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath ,pCLIV_KY= CLIV_KY };
+                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath, pCLIV_KY = CLIV_KY };
                         CommonBl.Execute(entiy);
                     }
                 }
                 else
                 {
-                    return Json("{\"result\":-1,\"message\":\"提交失败\",\"filename\":\""+ files[i].FileName + "\",\"fileext\":\""+ Path.GetExtension(files[i].FileName) + "\"}", JsonRequestBehavior.AllowGet);
+                    return Json("{\"result\":-1,\"message\":\"提交失败\",\"filename\":\"" + files[i].FileName + "\",\"fileext\":\"" + Path.GetExtension(files[i].FileName) + "\"}", JsonRequestBehavior.AllowGet);
                 }
             }
 
@@ -218,7 +219,7 @@ namespace HkEbPortal.Controllers
 
         public JsonResult UpdateCLIVSTS(string CLIV_KY)
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pSYSV_CLIV_STS="02",pCLIV_KY= CLIV_KY };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pSYSV_CLIV_STS = "02", pCLIV_KY = CLIV_KY };
             CommonBl.Execute(entity);
             return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }

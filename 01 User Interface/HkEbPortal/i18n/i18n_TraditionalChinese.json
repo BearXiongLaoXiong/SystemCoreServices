@@ -7,7 +7,8 @@
   "public.common.select": "選擇",
   "public.common.default": "默認",
   "public.common.info": "詳情",
-
+  "public.common.save": "保存",
+  "public.common.back": "返回",
 
   "footer.login": "登入",
   "footer.menu.homepage": "主頁",
@@ -28,7 +29,6 @@
   "user.login.member": "賬號",
   "user.login.password": "密碼",
   "user.login.forgotpwd": "忘記密碼?",
-
 
   "Insurant.index.info": "被保險人資訊",
   "Insurant.index.gpgpname": "團體名稱",
@@ -90,17 +90,15 @@
   "Policy.index.Points": "積分",
   "Policy.index.Level": "級別",
 
-
-  "Policy.detail.memberName": "人員名稱",
-  "Policy.detail.policy": "保單",
-  "Policy.detail.Plan": "計劃",
-  "Policy.detail.Level": "級別1",
+  "policy.detail.membername": "人員名稱",
+  "policy.detail.policy": "保單",
+  "policy.detail.Plan": "計劃",
+  "policy.detail.level": "級別",
   "policy.detail.benefit": "保單信息",
   "policy.detail.total": "總積分",
   "policy.detail.employee": "員工積分",
   "policy.detail.target": "雇主積分",
   "policy.detail.tax": "稅率積分",
-
 
   "Reimbursement.Index.fsaClaims": "報銷",
   "Reimbursement.Index.Applicant": "家庭成員",
@@ -127,6 +125,7 @@
   "Reimbursement.edit.invoice": "發票金額",
   "Reimbursement.edit.comments": "説明",
   "Reimbursement.edit.amount": "調整金額",
+  "Reimbursement.edit.payamount": "报销费用",
   "Reimbursement.edit.user": "調整用戶",
   "Reimbursement.edit.reason": "調整原因",
   "Reimbursement.edit.image": "發票信息",
@@ -140,4 +139,3 @@
   "Reimbursement.Upload.previewdiagram": "預覽圖",
   "Reimbursement.Upload.lastinvoiceInfo": "上次發票資訊"
 }
-

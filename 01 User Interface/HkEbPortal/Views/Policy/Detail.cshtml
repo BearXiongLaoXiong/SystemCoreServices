@@ -11,7 +11,7 @@
     </span>
 
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <span class="layui-badge-rim layui-bg-orange" i18n="policy.detail.memberName">人员名称</span>&nbsp;@Model.Name &nbsp;&nbsp;
+        <span class="layui-badge-rim layui-bg-orange" i18n="policy.detail.membername">人员名称</span>&nbsp;@Model.Name &nbsp;&nbsp;
         <span class="layui-badge-rim layui-bg-orange" i18n="policy.detail.policy">保单</span>&nbsp;@Model.Desc
     </blockquote>
     <form class="layui-form tableheight" action="">
@@ -38,7 +38,7 @@
                             <tr>
                                 <th i18n="policy.detail.Plan">計劃</th>
                                 <th i18n="public.common.default">默認</th>
-                                <th i18n="policy.detail.Level">級別</th>
+                                <th i18n="policy.detail.level">級別</th>
                                 <th i18n="policy.detail.total">總金額</th>
                                 <th i18n="policy.detail.employee">員工金額</th>
                                 <th i18n="policy.detail.target">雇主金額</th>
@@ -67,19 +67,18 @@
                                             </div>
                                         </td>
                                     </tr>
-                                            }
-
+                                }
                             }
                         </tbody>
                     </table>
                 </div>
-                                            }
+            }
         }
 
         <div style="text-align: right;">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="submitDetailRadio">保存</button>
-                <a class="layui-btn layui-btn-primary" onclick="returnbackurl()">返回</a>
+                <button class="layui-btn" lay-submit lay-filter="submitDetailRadio"i18n="public.common.save">保存</button>
+                <a class="layui-btn layui-btn-primary" onclick="returnbackurl()" i18n="public.common.back">返回</a>
             </div>
 
         </div>
