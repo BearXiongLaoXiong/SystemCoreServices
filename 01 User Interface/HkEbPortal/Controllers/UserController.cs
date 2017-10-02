@@ -60,12 +60,9 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult ForgotPassword(string policyNo,string memberId)
         {
-            string policy = Request["policyNo"];
-            string memeber = Request["memberId"];
-            if (string.IsNullOrEmpty(policy) || string.IsNullOrEmpty(memeber)) return Json(new { Data = 9, Msg = "请输入保单号/被保人" }, JsonRequestBehavior.AllowGet);
             var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo ,pMEME_ID = memberId };
             var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
-
+            
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }
     }

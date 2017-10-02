@@ -16,7 +16,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string pMEME_ID { get; set; }
 
         [SqlParameter(0,ParameterDirection.Output)]
-        public string pRTN_CD { get; set; }
+        public int pRTN_CD { get; set; }
 
         [SqlParameter(555, ParameterDirection.Output)]
         public string pRTN_MSG { get; set; }
