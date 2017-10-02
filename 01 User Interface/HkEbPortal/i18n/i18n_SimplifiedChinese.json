@@ -25,6 +25,10 @@
   "user.login.password": "密码",
   "user.login.forgotpwd": "忘记密码?",
 
+  "user.forgot.headtitle": "请输入需要找回密码的保单号/被保人号",
+  "user.forgot.policyNo": "保单号",
+  "user.forgot.memberId": "被保险人号",
+  "user.forgot.submit": "提交",
 
   "Insurant.index.info": "被保险人信息",
   "Insurant.index.gpgpname": "团体名称",
