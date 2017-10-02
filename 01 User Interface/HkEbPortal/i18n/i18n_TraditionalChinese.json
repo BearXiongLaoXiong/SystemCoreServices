@@ -24,7 +24,8 @@
 
   "user.login.signIn": "登入",
   "user.login.signUp": "注冊",
-  "user.login.message": "登入你的賬號",
+  "user.login.in": "登入你的賬號",
+  "user.login.up": "注冊你的賬號",
   "user.login.policy": "保單號",
   "user.login.member": "賬號",
   "user.login.password": "密碼",

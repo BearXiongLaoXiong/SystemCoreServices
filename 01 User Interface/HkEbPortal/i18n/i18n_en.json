@@ -24,7 +24,8 @@
 
   "user.login.signIn": "Sign In",
   "user.login.signUp": "Sign Up",
-  "user.login.message": "Sign in to your Generali account",
+  "user.login.in": "Sign in to your Generali account",
+  "user.login.up": "Sign up to your Generali account",
   "user.login.policy": "Policy No.",
   "user.login.member": "Member ID",
   "user.login.password": "Password",
