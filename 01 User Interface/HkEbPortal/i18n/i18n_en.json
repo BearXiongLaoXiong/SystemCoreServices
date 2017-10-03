@@ -11,6 +11,7 @@
   "public.common.back": "Back",
 
   "footer.login": "Login",
+  "footer.logout": "Safe logout",
   "footer.menu.homepage": "HOME PAGE",
   "footer.menu.member": "MEMBER",
   "footer.menu.policy": "POLICY",

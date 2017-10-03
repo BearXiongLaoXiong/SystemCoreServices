@@ -11,6 +11,7 @@
   "public.common.back": "返回",
 
   "footer.login": "登入",
+  "footer.logout": "安全退出",
   "footer.menu.homepage": "主頁",
   "footer.menu.member": "被保險人",
   "footer.menu.policy": "保單信息",
@@ -31,7 +32,7 @@
   "user.login.password": "密碼",
   "user.login.forgotpwd": "忘記密碼?",
 
-  "user.forgot.headtitle" :"請輸入需要搵返埋晒密碼嘅保單/被保人號",
+  "user.forgot.headtitle": "請輸入需要搵返埋晒密碼嘅保單/被保人號",
   "user.forgot.policyNo": "保單號",
   "user.forgot.memberId": "被保險人號",
   "user.forgot.submit": "提交",
