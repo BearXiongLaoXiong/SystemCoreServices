@@ -20,7 +20,7 @@
 
     <form id="signInForm" class="layui-form" action="">
         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
-            <input type="text" id="txtPolicy" name="txtPolicy" required lay-verify="required" i18n="user.login.policy" i18n-only="placeholder" placeholder="Policy No." class="iconText layui-input" style="background: url(../../Content/Images/policyNo.png) center left no-repeat;">
+            <input type="text" id="txtpolicyNo" name="txtpolicyNo" required lay-verify="required" i18n="user.login.policy" i18n-only="placeholder" placeholder="Policy No." class="iconText layui-input" style="background: url(../../Content/Images/policyNo.png) center left no-repeat;">
         </div>
         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
             <input type="text" id="txtMember" name="txtMember" required lay-verify="required" i18n="user.login.member" i18n-only="placeholder" placeholder="Member ID" class="iconText layui-input" style="font-family: Helvetica; background: url(../../Content/Images/memberId.png) center left no-repeat;" />
@@ -44,7 +44,9 @@
         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex">
             <input type="text" id="txtMemberUp" name="txtMemberUp" required lay-verify="required" i18n="user.login.member" i18n-only="placeholder" placeholder="Member ID" class="iconText layui-input" style="font-family: Helvetica; background: url(../../Content/Images/memberId.png) center left no-repeat;" />
         </div>
-
+        <div id="emailDiv"class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex" style="display:none;">
+            <input type="text" id="txtEmailUp" name="txtEmailUp" i18n="user.login.member" i18n-only="placeholder" placeholder="Member ID" class="iconText layui-input" style="font-family: Helvetica; background: url(../../Content/Images/memberId.png) center left no-repeat;" />
+        </div>
         <div class="col-lg-2 col-lg-offset-5 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 textcenter textflex" style="margin-bottom: 150px;padding-top:20px;">
             <button lay-submit lay-filter="btnLoginUp" class="layui-btn layui-btn-primary" i18n="user.login.signUp" style="font-family: Helvetica; background-color: #C21B17; color: white; font-size: 20px; font-weight: 600">Sign Up</button>
         </div>

@@ -9,6 +9,7 @@ namespace HkEbPortal.Models.EB_PORTAL
 {
     public class SPEH_FMFM_LOGIN
     {
+        public string @pPOLICYNO { get; set; }
         public string pUSUS_ID { get; set; }
         public string pUSUS_PSWD { get; set; }
 
