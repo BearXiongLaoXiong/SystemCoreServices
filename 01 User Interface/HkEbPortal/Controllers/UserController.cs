@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,13 +11,18 @@ namespace HkEbPortal.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly string _from = ConfigurationManager.AppSettings["EmailFrom"];
+        private readonly string _userName = ConfigurationManager.AppSettings["EmailUsername"];
+        private readonly string _passWord = ConfigurationManager.AppSettings["EmailPassword"];
+        private readonly string[] _ccs = { };
+
         private readonly ICommonBl _commonBl = new CommonBl();
         // GET: User
         public ActionResult Index()
         {
             return View();
         }
-
 
         public ActionResult Login()
         {
@@ -84,15 +90,12 @@ namespace HkEbPortal.Controllers
                     pEmail = txtEmailUp
                 };
                 _commonBl.Execute(insert);
-                EmailHelper.SendSmtpMail("bear.xiong@ensurlink.com.cn",
-                    "bear.xiong@ensurlink.com.cn",
-                    "!QAZ2wsx",
-                    new[] { "164470250@qq.com" },
-                    new string[] { },
-                    "主题:HK_Portal 注册",
-                    "征文:你的密码是11122333",
-                    new string[] { },
-                    out string result);
+
+                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { userInfo.USUS_EMAIL }, _ccs,
+                                        "主题:HK_Portal 注册",
+                                        "征文:你的密码是11122333",
+                                        new string[] { }, out string result);
+
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
             }
 
@@ -106,7 +109,12 @@ namespace HkEbPortal.Controllers
                     pEmail = txtEmailUp
                 };
                 _commonBl.Execute(update);
-                //todo 发送邮件
+
+                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { userInfo.USUS_EMAIL }, _ccs,
+                                        "主题:HK_Portal 注册",
+                                        "征文:你的密码是11122333",
+                                        new string[] { }, out string result);
+
                 return Json(new { Code = update.ReturnValue, Msg = update.ReturnValue == 1 ? "注册邮箱成功!" : "注册邮箱失败!" }, JsonRequestBehavior.DenyGet);
             }
             return Json(new { Code = "999", Msg = "出现错误!" });
