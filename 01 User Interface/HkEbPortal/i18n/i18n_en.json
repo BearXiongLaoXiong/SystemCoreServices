@@ -31,6 +31,11 @@
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
 
+  "user.forgot.headtitle": "Please enter the policy number/insured number to retrieve the password",
+  "user.forgot.policyNo": "Policy number",
+  "user.forgot.memberId": "Insured number",
+  "user.forgot.submit": "Submitted",
+
   "Insurant.index.info": "Insured information",
   "Insurant.index.gpgpname": "Group name",
   "Insurant.index.memename": "Principal Insured",

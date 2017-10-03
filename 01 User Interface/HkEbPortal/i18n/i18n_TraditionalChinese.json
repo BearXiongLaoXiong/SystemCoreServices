@@ -31,6 +31,11 @@
   "user.login.password": "密碼",
   "user.login.forgotpwd": "忘記密碼?",
 
+  "user.forgot.headtitle" :"請輸入需要搵返埋晒密碼嘅保單/被保人號",
+  "user.forgot.policyNo": "保單號",
+  "user.forgot.memberId": "被保險人號",
+  "user.forgot.submit": "提交",
+
   "Insurant.index.info": "被保險人資訊",
   "Insurant.index.gpgpname": "團體名稱",
   "Insurant.index.memename": "主被保險人",
