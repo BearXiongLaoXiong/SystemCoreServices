@@ -20,7 +20,6 @@ namespace HkEbPortal.Controllers
         private readonly string _from = ConfigurationManager.AppSettings["EmailFrom"];
         private readonly string _userName = ConfigurationManager.AppSettings["EmailUsername"];
         private readonly string _passWord = ConfigurationManager.AppSettings["EmailPassword"];
-        private readonly string[] _ccs = { };
 
         private readonly ICommonBl _commonBl = new CommonBl();
         // GET: User
@@ -45,7 +44,13 @@ namespace HkEbPortal.Controllers
             };
             var userInfo = _commonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
             if (userInfo == null)
-                return Json(new { Code = 1, Msg = "您输入的账号不存在或者密码错误!", }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 1, Msg = "您输入的账号不存在或者密码错误!" }, JsonRequestBehavior.DenyGet);
+
+            if (userInfo.USUS_EMAIL.Length == 0)
+                return Json(new { Code = 2, Msg = "没有发现您的邮箱,请到注册界面激活邮箱!" }, JsonRequestBehavior.DenyGet);
+
+            if (userInfo.USUS_EMAIL_ISACTIVE == "0")
+                return Json(new { Code = 3, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
             Session.RemoveAll();
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
@@ -62,6 +67,19 @@ namespace HkEbPortal.Controllers
             Session[FormsAuthentication.FormsCookieName] = userInfo;
 
             return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME } }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ConfirmEmail(string txtpolicyNo, string txtMember, string txtPassword)
+        {
+            var entity = new SPEH_USUS_EMAIL_ISACTIVE_UPDATE
+            {
+                pPolicy_NO = txtpolicyNo,
+                pCert_No = txtMember,
+                pPassWord = txtPassword
+            };
+            _commonBl.Execute(entity);
+
+            return Json(new { Code = entity.ReturnValue , Msg = "Success"}, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -96,7 +114,7 @@ namespace HkEbPortal.Controllers
                 };
                 _commonBl.Execute(insert);
 
-                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { userInfo.USUS_EMAIL }, _ccs,
+                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
                                         "主题:HK_Portal 注册",
                                         "征文:你的密码是11122333",
                                         new string[] { }, out string result);
@@ -115,7 +133,7 @@ namespace HkEbPortal.Controllers
                 };
                 _commonBl.Execute(update);
 
-                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { userInfo.USUS_EMAIL }, _ccs,
+                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
                                         "主题:HK_Portal 注册",
                                         "征文:你的密码是11122333",
                                         new string[] { }, out string result);
