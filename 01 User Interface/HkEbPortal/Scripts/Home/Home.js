@@ -16,10 +16,23 @@ layui.use(['form', 'carousel'], function () {
     form.on('submit(btnLogin)', function (data) {
         //layer.msg(JSON.stringify(data.field));
         $.post("Login",
-            { txtpolicyNo: data.field.txtpolicyNo,txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
+            { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
             function (result) {
                 if (result.Code === 0)
                     window.location.href = "../Home/Index";
+                else if (result.Code === 3) {
+                    layer.confirm('first login,please confirm your Email:</br>' + result.Msg, {
+                        title: "Confirm",
+                        btn: ['OK', 'Cancel'] //按钮
+                    }, function () {
+                        $.post("ConfirmEmail",
+                            { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
+                            function (result) {
+                                layer.msg(result.Msg, { icon: 1 });
+                            });
+                        
+                    });
+                }
                 else
                     layer.msg(result.Msg);
             });
@@ -34,7 +47,7 @@ layui.use(['form', 'carousel'], function () {
                 if (result.Code === 3) {
                     layer.msg(result.Msg);
                     $("#txtEmailUp").attr("lay-verify", "required");
-                    $("#emailDiv").show(); 
+                    $("#emailDiv").show();
                 }
                 else
                     layer.msg(result.Msg);
