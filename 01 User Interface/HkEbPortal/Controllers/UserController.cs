@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BusinessLogicRepository;
 using HkEbPortal.Models.EB_PORTAL;
+using System.IO;
+using System.Net;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
 
 namespace HkEbPortal.Controllers
 {
@@ -128,13 +133,147 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult ForgotPassword(string policyNo, string memberId)
         {
-            string policy = Request["policyNo"];
-            string memeber = Request["memberId"];
-            if (string.IsNullOrEmpty(policy) || string.IsNullOrEmpty(memeber)) return Json(new { Data = 9, Msg = "请输入保单号/被保人" }, JsonRequestBehavior.AllowGet);
             var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId };
             var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
 
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult HTMLConvertPDF()
+        {
+            string path = System.Web.HttpContext.Current.Server.MapPath("~/UploadPdf");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            WebClient wc = new WebClient();
+            // 从网上下载html字符串
+            wc.Encoding = System.Text.Encoding.UTF8;
+            string htmlText = getWebContent();
+
+            byte[] pdfFile = this.ConvertHtmlTextToPDF(htmlText);
+
+            string fileId = "/file_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".pdf";
+            System.IO.File.WriteAllBytes(path + fileId, pdfFile);
+
+            return Json("",JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取网站内容，包含了 HTML+CSS+JS
+        /// </summary>
+        /// <returns>String返回网页信息</returns>
+        public string getWebContent()
+        {
+            try
+            {
+                string INPATH = System.Web.HttpContext.Current.Server.MapPath("~/bin/Index.html");
+                WebClient MyWebClient = new WebClient();
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;
+                //获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                Byte[] pageData = MyWebClient.DownloadData(INPATH);
+                Byte[] pageData2 = System.Text.Encoding.UTF8.GetBytes("<html><style>body{font-family:pingfang sc light;}</style><body><table><tr><td style='color:red;'>sadsdb阿萨德</td></tr></table>第一页1p开始<p style='font-size:28px;color:yellow;'>傻大个</p></body></html>");
+                //从指定网站下载数据
+                string pageHtml = System.Text.Encoding.UTF8.GetString(pageData2);
+                //如果获取网站页面采用的是GB2312，则使用这句       
+                bool isBool = isMessyCode(pageHtml);//判断使用哪种编码 读取网页信息
+                if (!isBool)
+                {
+                    string pageHtml1 = System.Text.Encoding.UTF8.GetString(pageData2);
+                    pageHtml = pageHtml1;
+                }
+                else
+                {
+                    string pageHtml2 = System.Text.Encoding.Default.GetString(pageData2);
+                    pageHtml = pageHtml2;
+                }
+                return pageHtml;
+            }
+
+            catch (WebException webEx)
+            {
+                Console.WriteLine(webEx.Message.ToString());
+                return webEx.Message;
+            }
+        }
+        /// <summary>
+        /// 判断是否有乱码
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns></returns>
+        public bool isMessyCode(string txt)
+        {
+            var bytes = System.Text.Encoding.UTF8.GetBytes(txt);            //239 191 189            
+            for (var i = 0; i < bytes.Length; i++)
+            {
+                if (i < bytes.Length - 3)
+                    if (bytes[i] == 239 && bytes[i + 1] == 191 && bytes[i + 2] == 189)
+                    {
+                        return true;
+                    }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 将Html文字 输出到PDF档里
+        /// </summary>
+        /// <param name="htmlText"></param>
+        /// <returns></returns>
+        public byte[] ConvertHtmlTextToPDF(string htmlText)
+        {
+            if (string.IsNullOrEmpty(htmlText))
+            {
+                return null;
+            }
+            //避免当htmlText无任何html tag标签的纯文字时，转PDF时会挂掉，所以一律加上<p>标签
+            htmlText = "<p>" + htmlText + "</p>";
+
+            MemoryStream outputStream = new MemoryStream();//要把PDF写到哪个串流
+            byte[] data = System.Text.Encoding.UTF8.GetBytes(htmlText);//字串转成byte[]
+            MemoryStream msInput = new MemoryStream(data);
+            Document doc = new Document();//要写PDF的文件，建构子没填的话预设直式A4
+            PdfWriter writer = PdfWriter.GetInstance(doc, outputStream);
+            //指定文件预设开档时的缩放为100%
+
+            PdfDestination pdfDest = new PdfDestination(PdfDestination.XYZ, 0, doc.PageSize.Height, 1f);
+            //开启Document文件 
+            doc.Open();
+            //使用XMLWorkerHelper把Html parse到PDF档里
+            //XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msInput, null, System.Text.Encoding.UTF8, new UnicodeFontFactory());
+
+            XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msInput, null, System.Text.Encoding.UTF8, new UnicodeFontFactory());
+
+            //将pdfDest设定的资料写到PDF档
+            PdfAction action = PdfAction.GotoLocalPage(1, pdfDest, writer);
+            writer.SetOpenAction(action);
+            doc.Close();
+            msInput.Close();
+            outputStream.Close();
+            //回传PDF档案 
+            return outputStream.ToArray();
+
+        }
+
+        //设置字体类
+        public class UnicodeFontFactory : FontFactoryImp
+        {
+            private static readonly string arialFontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arialuni.ttf");//arial unicode MS是完整的unicode字型。
+            private static readonly string 标楷体Path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "KAIU.TTF");//标楷体
+
+            public override Font GetFont(string fontname, string encoding, bool embedded, float size, int style, BaseColor color, bool cached)
+            {
+                // 也可以使用 TTF 字体
+                BaseFont bf0 = BaseFont.CreateFont("C:/WINDOWS/Fonts/SIMYOU.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                BaseFont bfChiness = BaseFont.CreateFont(@"C:\Windows\Fonts\SIMSUN.TTC,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                //可用Arial或标楷体，自己选一个
+                BaseFont baseFont = BaseFont.CreateFont(arialFontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+                return new Font(bfChiness, size, style, color);
+            }
+        }
+
     }
 }
