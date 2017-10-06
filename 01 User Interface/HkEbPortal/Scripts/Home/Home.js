@@ -3,8 +3,8 @@ layui.use(['form', 'carousel'], function () {
     var form = layui.form;
     var carousel = layui.carousel;
 
-    $("#txtPolicyUp").val("30000272");
-    $("#txtMemberUp").val("000000001995");
+    //$("#txtPolicyUp").val("30000272");
+    //$("#txtMemberUp").val("000000001995");
     //轮播
     carousel.render({
         elem: '#indexcarouselimage'
