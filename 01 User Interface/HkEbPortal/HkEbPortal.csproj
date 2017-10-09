@@ -396,6 +396,8 @@
     <Content Include="Views\Policy\Information.cshtml" />
     <Content Include="Views\Insurant\BillingInfomationDetail.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
+    <Content Include="Text\Tems and Condition_English20141231.doc" />
+    <Content Include="Text\Privacy Policy for portal English2014.docx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
