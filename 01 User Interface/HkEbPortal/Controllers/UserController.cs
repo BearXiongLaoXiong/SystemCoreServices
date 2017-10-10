@@ -79,7 +79,7 @@ namespace HkEbPortal.Controllers
             };
             _commonBl.Execute(entity);
 
-            return Json(new { Code = entity.ReturnValue , Msg = "Success"}, JsonRequestBehavior.AllowGet);
+            return Json(new { Code = entity.ReturnValue, Msg = "Success" }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -143,6 +143,13 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = "999", Msg = "出现错误!" });
         }
 
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            return Redirect("../Home/Index");
+        }
+
         public ActionResult ForgotPassword()
         {
             return View();
@@ -176,7 +183,7 @@ namespace HkEbPortal.Controllers
             string fileId = "/file_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".pdf";
             System.IO.File.WriteAllBytes(path + fileId, pdfFile);
 
-            return Json("",JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
