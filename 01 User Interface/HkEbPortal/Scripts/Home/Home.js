@@ -1,11 +1,16 @@
 ﻿
-layui.use(['form', 'carousel'], function () {
+layui.use(['form', 'carousel', 'laydate'], function () {
     var form = layui.form;
+    var laydate = layui.laydate;
     var carousel = layui.carousel;
 
     //$("#txtPolicyUp").val("30000272");
     //$("#txtMemberUp").val("000000001995");
     //轮播
+    laydate.render({
+        elem: '#txtDate'
+    });
+
     carousel.render({
         elem: '#indexcarouselimage'
         , width: '100%'
