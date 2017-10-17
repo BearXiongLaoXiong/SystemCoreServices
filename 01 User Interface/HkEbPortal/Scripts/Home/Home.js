@@ -49,11 +49,16 @@ layui.use(['form', 'carousel', 'laydate'], function () {
     form.on('submit(btnLoginUp)', function (data) {
         //layer.msg(JSON.stringify(data.field));
         $.post("SignUp",
-            { txtPolicyUp: data.field.txtPolicyUp, txtMemberUp: data.field.txtMemberUp, txtEmailUp: data.field.txtEmailUp },
+            { txtPolicyUp: data.field.txtPolicyUp, txtMemberUp: data.field.txtMemberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp },
             function (result) {
                 if (result.Code === 3) {
                     layer.msg(result.Msg);
                     $("#txtEmailUp").attr("lay-verify", "required");
+                    $("#emailDiv").show();
+                }
+                else if (result.Code ===4) {
+                    $("#txtEmailUp").attr("lay-verify", "required");
+                    $("#txtEmailUp").val(result.Msg)
                     $("#emailDiv").show();
                 }
                 else

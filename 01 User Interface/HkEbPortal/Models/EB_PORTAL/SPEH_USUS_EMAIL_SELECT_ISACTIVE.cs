@@ -13,6 +13,7 @@ namespace HkEbPortal.Models.EB_PORTAL
 
     public class SPEH_USUS_EMAIL_ISACTIVE_RESULT
     {
+        public string MEME_KY { get; set; }
         public string USUS_ID { get; set; }
         public string USUS_EMAIL { get; set; }
         public string USUS_EMAIL_ISACTIVE { get; set; }
