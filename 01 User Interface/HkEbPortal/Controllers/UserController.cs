@@ -19,6 +19,7 @@ namespace HkEbPortal.Controllers
 
         private readonly string _from = ConfigurationManager.AppSettings["EmailFrom"];
         private readonly string _userName = ConfigurationManager.AppSettings["EmailUsername"];
+        private readonly string _host = ConfigurationManager.AppSettings["EmailHost"];
         private readonly string _passWord = ConfigurationManager.AppSettings["EmailPassword"];
 
         private readonly ICommonBl _commonBl = new CommonBl();
@@ -114,9 +115,9 @@ namespace HkEbPortal.Controllers
                 };
                 _commonBl.Execute(insert);
 
-                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
+                EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
                                         "主题:HK_Portal 注册",
-                                        "征文:你的密码是11122333",
+                                        "征文:您的密码是123456",
                                         new string[] { }, out string result);
 
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
@@ -133,9 +134,9 @@ namespace HkEbPortal.Controllers
                 };
                 _commonBl.Execute(update);
 
-                EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
+                EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
                                         "主题:HK_Portal 注册",
-                                        "征文:你的密码是11122333",
+                                        "征文:您的密码是123456",
                                         new string[] { }, out string result);
 
                 return Json(new { Code = update.ReturnValue, Msg = update.ReturnValue == 1 ? "注册邮箱成功!" : "注册邮箱失败!" }, JsonRequestBehavior.DenyGet);
@@ -147,7 +148,7 @@ namespace HkEbPortal.Controllers
         {
             Session.RemoveAll();
             Session.Clear();
-            return Redirect("../Home/Index");
+            return Redirect("../eflexi/Home/Index");
         }
 
         public ActionResult ForgotPassword()

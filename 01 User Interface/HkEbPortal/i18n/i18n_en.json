@@ -1,4 +1,4 @@
-{
+﻿{
   "public.common.pleaseSelect": "Please select",
   "public.common.pleaseInput": "Please input",
   "public.common.detail": "detail",
@@ -17,6 +17,10 @@
   "footer.menu.policy": "POLICY",
   "footer.menu.claims": "FSA CLAIMS",
   "footer.menu.contact": "CONTACT US",
+  "footer.menu.legal": "LEGAL INFORMATION",
+  "footer.menu.privacy": "PRIVACY",
+  "footer.menu.company": "Copyright © 2016 GENERALI LIFE (HONG KONG) LIMITED &ASSICURAZIONI GENERALI S.p.A. – HONG KONG BRANCH",
+  "footer.menu.reserved": "All rights reserved",
 
   "home.index.member": "MEMBER",
   "home.index.policy": "POLICY",

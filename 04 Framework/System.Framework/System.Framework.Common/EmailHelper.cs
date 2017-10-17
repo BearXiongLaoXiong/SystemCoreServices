@@ -111,11 +111,11 @@ namespace System.Framework.Common
             bool mode;
             result = "";
 
-            MailMessage mailMessage = SetMailMessage(from, tos, ccs, subject, context, files);
+            MailMessage mailMessage = SetMailMessage("eFlexiPortal_admin@generali.com.hk", tos, ccs, subject, context, files);
             using (SmtpClient smtpClient = new SmtpClient
             {
-                Host = host,
-                Port = port,
+                Host = "202.76.48.38",
+                Port = 25,
                 Credentials = new NetworkCredential(userName, passWord)
             })
             {

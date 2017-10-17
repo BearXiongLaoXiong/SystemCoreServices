@@ -6,17 +6,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/style.css")
-    @Styles.Render("~/Content/bootstrap.min.css")
-    @Styles.Render("~/Scripts/css/layui.css")
-
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/jquery-3.1.1.min.js")
-    @Scripts.Render("~/Scripts/layui.js")
-    @Scripts.Render("~/Scripts/language/jquery.i18n.min.js")
-    @Scripts.Render("~/Scripts/language/laodlanguage.js")
-    @Scripts.Render("~/Scripts/jquery.cookie-1.4.1.min.js")
-    @RenderSection("scripts", required: false)
+    
+    <link href="../Content/style.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Scripts/css/layui.css" rel="stylesheet" />
+            
+    <script src="../bundles/modernizr"></script>
+    <script src="../Scripts/jquery-3.1.1.min.js"></script>
+    <script src="../Scripts/layui.js"></script>
+    <script src="../Scripts/language/jquery.i18n.min.js"></script>
+    <script src="../Scripts/language/laodlanguage.js"></script>
+    <script src="../Scripts/jquery.cookie-1.4.1.min.js"></script>
+    <link href="../Content/User/style.css" rel="stylesheet" />
+   
+   
 </head>
 <body>
 
@@ -38,7 +41,7 @@
                     <a i18n="footer.login" style="color: #FFFFFF; padding-right: 10px;">登入</a>
                 </div>
                 <div @IsHide class="center" style="border-right: none; padding-right: 10px;">
-                    <a style="background: url(../../Content/Images/iconList.png) 2px -1713px no-repeat; width: 25px; height: 30px; display: block;"></a>
+                    <a style="background: url(../Content/Images/iconList.png) 2px -1713px no-repeat; width: 25px; height: 30px; display: block;"></a>
                 </div>
 
                 @*<div id="SimplifiedChinese" class="center" style="cursor: pointer;">简</div>*@
@@ -47,18 +50,18 @@
             </div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"><img src="~/Content/Images/humb.png" alt=""></i>
+                    <i class="fa fa-bars"><img src="../Content/Images/humb.png" alt=""></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="" style="background: url(/Content/Images/generali-logo-big.svg) no-repeat; float: right; width: 100px; height: 80px; border: 0; display: block;"></a>
+                <a class="navbar-brand page-scroll" href="" style="background: url(../Content/Images/generali-logo-big.svg) no-repeat; float: right; width: 100px; height: 80px; border: 0; display: block;"></a>
             </div>
 
             <div class="collapse navbar-collapse navbar-left navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="../Home/Index" i18n="footer.menu.homepage">主頁</a></li>
-                    <li @IsShow><a href="../Insurant/Index" i18n="footer.menu.member">被保險人</a></li>
-                    <li @IsShow><a href="../Policy/Index" i18n="footer.menu.policy">保單信息</a></li>
-                    <li @IsShow><a href="../Reimbursement/Index" i18n="footer.menu.claims">報銷</a></li>
-                    <li @IsShow><a href="../Home/Contact" i18n="footer.menu.contact">聯係我們</a></li>
+                    <li id="linkHome"><a href="../Home/Index" i18n="footer.menu.homepage">主頁</a></li>
+                    <li id="linkInsurant" @IsShow><a href="../Insurant/Index" i18n="footer.menu.member">被保險人</a></li>
+                    <li id="linkPolicy" @IsShow><a href="../Policy/Index" i18n="footer.menu.policy">保單信息</a></li>
+                    <li id="linkReim" @IsShow><a href="../Reimbursement/Index" i18n="footer.menu.claims">報銷</a></li>
+                    <li id="linkContact" @IsShow><a href="../Home/Contact" i18n="footer.menu.contact">聯係我們</a></li>
                 </ul>
             </div>
 
@@ -78,31 +81,35 @@
     <nav id="footer">
         <div class="container">
             <hr style="background-color: #C21B17;height:2px;" />
-            <div class="fnav text-center" style="width:100%;">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align:left; height:200px;line-height:75px;">
-                    <a href="~/Text/Tems and Condition_English20141231.doc" target="_blank">法律信息</a> | 
-                    <a href="~/Text/Privacy Policy for portal English2014.docx" target="_blank">隐私保护</a>
+            <div class="fnav text-center" style="width: 100%;">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div  style="text-align: left;">
+                        <a href="../Text/Tems and Condition_English20141231.doc" target="_blank"i18n="footer.menu.legal">法律信息</a> |
+                        <a href="../Text/Privacy Policy for portal English2014.docx" target="_blank" i18n="footer.menu.privacy">隱私保護</a>
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align:right;height:30px;line-height:20px;"><img src="~/Content/Images/logo-footer_0.png" style="width:143px;height:20px;" /></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align:right;height:30px;line-height:20px;font-size:16px">版权 © 2017 忠意人寿(香港)有限公司及忠意保险有限公司 (香港分行)</div>
-                @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align:right;height:30px;line-height:20px;font-size:16px">忠意保险有限公司 (香港分行)</div>*@
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align:right;height:30px;line-height:20px;font-size:16px">版权所有</div>
-                @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align:right;height:30px;line-height:20px;font-size:16px;color:#C12017">忠意集团成员</div>*@
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right;"><img src="../Content/Images/logo-footer_0.png" style="width: 143px; height: 20px;"/></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; font-size: 16px" i18n="footer.menu.company">版权 © 2017 忠意人寿(香港)有限公司及忠意保险有限公司 (香港分行)</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; font-size: 16px" i18n="footer.menu.reserved">版權所有</div>
+                </div>
+                
+                
             </div>
         </div>
     </nav>
     <script type="text/javascript">
-
-
         $(function () {
             var index = 1;
             //$(".navbar-nav>li").eq(index).addClass("active");
             // $("#btnLogin").click(Login);
-
             var date = new Date();
             date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
             laodlanguage();
-            $("#SimplifiedChinese").click(function () { $("[i18n]").i18n({ defaultLang: "SimplifiedChinese" }); $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date }); });
+            $("#SimplifiedChinese").click(function() {
+                $("[i18n]").i18n({ defaultLang: "SimplifiedChinese" });
+                $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date });
+            });
             $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
             $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
         });
@@ -164,6 +171,7 @@
             //    content: $("#loginView")
             //});
         }
+
 
         function Logout() {
             window.location.href = "../User/Logout";

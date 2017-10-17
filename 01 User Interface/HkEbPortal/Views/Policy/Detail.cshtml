@@ -1,7 +1,7 @@
 ﻿@using Newtonsoft.Json
 @{
     ViewBag.Title = "Detail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
@@ -85,5 +85,10 @@
     </form>
 
 </div>
-<script src="~/Scripts/common.js"></script>
-<script src="~/Scripts/Policy/Detail.js"></script>
+<script src="../Scripts/common.js"></script>
+<script src="../Scripts/Policy/Detail.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#linkPolicy").addClass("navbarCheckIn");
+    });
+</script>

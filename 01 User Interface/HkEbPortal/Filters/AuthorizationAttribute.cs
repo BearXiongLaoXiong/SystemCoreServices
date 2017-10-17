@@ -29,7 +29,7 @@ namespace HkEbPortal.Filters
         {
             String authUrl = ConfigurationManager.AppSettings["AuthUrl"];
 
-            _authUrl = String.IsNullOrEmpty(authUrl) ? "~/User/Login" : authUrl;
+            _authUrl = String.IsNullOrEmpty(authUrl) ? "../eflexi/User/Login" : authUrl;
         }
 
         /// <inheritdoc />

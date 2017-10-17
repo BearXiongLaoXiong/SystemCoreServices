@@ -45,9 +45,11 @@ namespace HkEbPortal
         /// <param name="files">附加到此电子邮件的数据的附件集合</param>
         /// <param name="result">错误信息,仅仅在出现异常时有用</param>
         /// <returns></returns>
-        public static bool SendSmtpMail(string from, string userName, string passWord, string[] tos, string[] ccs, string subject, string context, string[] files, out string result)
+        public static bool SendSmtpMail(string host,string from, string userName, string passWord, string[] tos, string[] ccs, string subject, string context, string[] files, out string result)
         {
-            return SendMail("smtp." + @from.Substring(@from.IndexOf("@", StringComparison.Ordinal) + 1), 25, from, userName, passWord, tos, ccs, subject, context, files, out result);
+            
+            return SendMail(host, 25, from, userName, passWord, tos, ccs, subject, context, files, out result);
+            //return SendMail("smtp." + @from.Substring(@from.IndexOf("@", StringComparison.Ordinal) + 1), 25, from, userName, passWord, tos, ccs, subject, context, files, out result);
         }
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace HkEbPortal
             MailMessage mailMessage = SetMailMessage(from, tos, ccs, subject, context, files);
             using (SmtpClient smtpClient = new SmtpClient
             {
-                Host = host,
+                Host = "202.76.48.38",
                 Port = port,
                 Credentials = new NetworkCredential(userName, passWord)
             })

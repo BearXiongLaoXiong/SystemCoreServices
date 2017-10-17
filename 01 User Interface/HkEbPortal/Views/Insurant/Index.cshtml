@@ -2,9 +2,9 @@
 @model IEnumerable<SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Scripts/css/layui.css" rel="stylesheet" />
+<link href="../Scripts/css/layui.css" rel="stylesheet" />
 <div class="container">
     
     <fieldset class="layui-elem-field layui-field-title">
@@ -117,11 +117,12 @@
 
     });
 </script>
-<script src="~/Scripts/layui.js"></script>
+<script src="../Scripts/layui.js"></script>
 <script>
     layui.use(['element', 'form'], function () {
         var $ = layui.jquery, element = layui.element;
 
+        $("#linkInsurant").addClass("navbarCheckIn");
         $('.site-demo-active').on('click', function () {
             var othis = $(this), type = othis.data('type');
             active[type] ? active[type].call(this, othis) : '';
@@ -131,7 +132,7 @@
     $(function () {
         $.ajax({
             type: 'POST',
-            url: "/Insurant/GetFamilyInfo",
+            url: "../Insurant/GetFamilyInfo",
             dataType: "json",
             success: function (data, status) {
                 var familyStr = "";
@@ -155,7 +156,7 @@
 
         $.ajax({
             type: 'POST',
-            url: "/Insurant/GetPolicyInfo",
+            url: "../Insurant/GetPolicyInfo",
             dataType: "json",
             success: function (dat, status) {
                 var policyInfoStr = "";
@@ -172,13 +173,13 @@
                     policyInfoStr += "<td>" + row.CLASS + "</td>";
                     policyInfoStr += "</tr>";
                 });
-                $("#policyInfoId").html(policyInfoStr)
+                $("#policyInfoId").html(policyInfoStr);
             }
         });
 
         $.ajax({
             type: 'POST',
-            url: "/Insurant/GetBillingInfomation",
+            url: "../Insurant/GetBillingInfomation",
             dataType: "json",
             success: function (dat, status) {
                 var billingInfoStr = "";

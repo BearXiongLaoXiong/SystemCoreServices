@@ -1,12 +1,12 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <form class="layui-form " action="#">
         <div class="layui-form-item" style="margin-bottom: 0;">
-            <fieldset class="layui-elem-field" >
+            <fieldset class="layui-elem-field">
                 <legend i18n="Policy.index.status">状态</legend>
                 <div class="layui-field-box">
                     <div class="layui-inline" style="margin-bottom: 0;">
@@ -36,34 +36,39 @@
 
 
     <div class="layui-form tableheight">
-        
+
         @*product 产品
-            PLAN_DESC 计划/Plan
-        LEVEL_IND 计划级别/Plan Level
-        DEFAULT_IND 默认/Default*@
+                PLAN_DESC 计划/Plan
+            LEVEL_IND 计划级别/Plan Level
+            DEFAULT_IND 默认/Default*@
         <table class="layui-table">
             <colgroup>
                 <col width="350">
-                <col >
+                <col>
                 <col width="100">
                 <col width="80">
                 <col width="80">
                 <col width="50">
             </colgroup>
             <thead>
-            <tr>
-                <th i18n="Policy.index.Product">产品</th>
-                <th i18n="Policy.index.Plan">计划</th>
-                <th i18n="Policy.index.Points"><span>积分</span></th>
-                <th i18n="public.common.default"><span>默认</span></th>
-                <th i18n="Policy.index.Level"><span>级别</span></th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th i18n="Policy.index.Product">产品</th>
+                    <th i18n="Policy.index.Plan">计划</th>
+                    <th i18n="Policy.index.Points"><span>积分</span></th>
+                    <th i18n="public.common.default"><span>默认</span></th>
+                    <th i18n="Policy.index.Level"><span>级别</span></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody id="memberTableBody"></tbody>
         </table>
     </div>
 </div>
 
-<script src="~/Scripts/common.js"></script>
-<script src="~/Scripts/Policy/Index.js"></script>
+<script src="../Scripts/common.js"></script>
+<script src="../Scripts/Policy/Index.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#linkPolicy").addClass("navbarCheckIn");
+    });
+</script>

@@ -4,6 +4,8 @@ layui.use(['form', 'carousel', 'laydate'], function () {
     var laydate = layui.laydate;
     var carousel = layui.carousel;
 
+    $("#linkHome").addClass("navbarCheckIn");
+
     //$("#txtPolicyUp").val("30000272");
     //$("#txtMemberUp").val("000000001995");
     //轮播

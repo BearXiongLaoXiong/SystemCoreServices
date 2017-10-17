@@ -2,7 +2,7 @@
 @model SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
@@ -116,25 +116,25 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button class="layui-btn layui-btn-primary" onclick="history.go(-1)">返 回</button>
+                <a class="layui-btn layui-btn-primary" onclick="window.location.href = 'index'" i18n="public.common.back">返回</a>
             </div>
         </div>
     </form>
 </div>
 
 
-<script src="~/Scripts/lay/modules/form.js"></script>
-<script src="~/Scripts/language/jquery.i18n.min.js"></script>
-<script src="~/Scripts/language/laodlanguage.js"></script>
-<script src="~/Scripts/jquery.cookie-1.4.1.min.js"></script>
-<script src="~/Scripts/Reimbursement/Edit.js"></script>
+<script src="../Scripts/lay/modules/form.js"></script>
+<script src="../Scripts/language/jquery.i18n.min.js"></script>
+<script src="../Scripts/language/laodlanguage.js"></script>
+<script src="../Scripts/jquery.cookie-1.4.1.min.js"></script>
+<script src="../Scripts/Reimbursement/Edit.js"></script>
 <script type="text/javascript">
     layui.use(['form', 'layedit', 'laydate', 'element'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
-
+        $("#linkReim").addClass("navbarCheckIn");
         //执行一个laydate实例
         laydate.render({
             elem: '#CLIV_Date', //指定元素

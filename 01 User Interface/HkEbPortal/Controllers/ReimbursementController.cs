@@ -70,7 +70,7 @@ namespace HkEbPortal.Controllers
             };
             CommonBl.Execute(entity);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("../eflexi/Reimbursement/Index");
         }
 
         public ActionResult Edit(string clivKy)
@@ -124,7 +124,7 @@ namespace HkEbPortal.Controllers
             };
             CommonBl.Execute(entity);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("../eflexi/Reimbursement/Index");
         }
 
         [HttpPost]

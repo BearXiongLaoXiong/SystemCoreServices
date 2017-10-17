@@ -1,10 +1,14 @@
-﻿layui.use('element', function () {
+﻿layui.use(['form','element'], function () {
+    var form = layui.form;
     var element = layui.element;
 
-});
 
-layui.use('form', function () {
-    var form = layui.form;
+    //监听Tab切换，以改变地址hash值
+    element.on('tab(tabInformation)', function () {
+        location.hash = 'tabInformation=' + this.getAttribute('lay-id');
+        //alert(this.getAttribute('lay-id'));
+    });
+
     ShowMsg();
 
     form.on('submit(submitDetailRadio)', function (data) {
@@ -54,17 +58,5 @@ function showInformation(pdpdId) {
         btnAlign: 'c'
     });
 }
-
-
-layui.use('element', function () {
-    var element = layui.element;
-
-
-    //监听Tab切换，以改变地址hash值
-    element.on('tab(tabInformation)', function () {
-        location.hash = 'tabInformation=' + this.getAttribute('lay-id');
-        //alert(this.getAttribute('lay-id'));
-    });
-});
 
 

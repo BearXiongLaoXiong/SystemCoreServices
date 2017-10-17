@@ -1,6 +1,8 @@
 ﻿layui.use(['upload', 'form', 'layer'], function () {
+
     var $ = layui.jquery, upload = layui.upload, form = layui.form, layer = layui.layer;
 
+    $("#linkReim").addClass("navbarCheckIn");
     $("#AddId").on("click", function () {
         location.href = "../Reimbursement/Add";
     });

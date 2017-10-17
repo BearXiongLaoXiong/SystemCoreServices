@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Upload";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
     <span class="layui-breadcrumb">
@@ -22,7 +22,7 @@
     <div class="layui-form-item">
         <div class="layui-inline">
             <button class="layui-btn layui-btn-normal  layui-btn-small" id="UploadId" i18n="Reimbursement.Upload.imageupload">上 傳</button>
-            <button class="layui-btn layui-btn-primary  layui-btn-small" onclick="history.go(-1)" i18n="Reimbursement.Upload.cancel">返回</button>
+            <a class="layui-btn layui-btn-primary" onclick="window.location.href = 'index'" i18n="public.common.back">返回</a>
         </div>
     </div>
 
@@ -46,6 +46,7 @@
     layui.use(['upload', 'form', 'layer', 'element'], function () {
         var $ = layui.jquery, upload = layui.upload, form = layui.form, layer = layui.layer;
 
+        $("#linkReim").addClass("navbarCheckIn");
         //多图片上传
         upload.render({
             elem: '#selectId'
