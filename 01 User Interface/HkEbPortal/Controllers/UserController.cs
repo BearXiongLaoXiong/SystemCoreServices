@@ -108,7 +108,7 @@ namespace HkEbPortal.Controllers
             var resultdate = _commonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_SELECT, SPEH_MEME_MEMBER_INFO_SELECT_RESULT>(validate).FirstOrDefault();
 
             if (string.IsNullOrEmpty(resultdate.MEME_BIRTH_DT) || !Convert.ToDateTime(resultdate.MEME_BIRTH_DT).ToString("yyyy-MM-dd").Trim().Equals(txtBirthday.Trim()))
-                return Json(new { Code = 1, Msg = "您输入的账号不存在!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 1, Msg = "无此被保险人，请联系团体HR!" }, JsonRequestBehavior.DenyGet);
 
             if(resultdate.MEME_EMAIL.Trim().Length <= 0 && txtEmailUp.Length == 0)
                 return Json(new { Code = 4, Msg = resultdate.MEME_EMAIL }, JsonRequestBehavior.DenyGet);

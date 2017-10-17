@@ -8,7 +8,7 @@
   "footer.login": "登入",
   "footer.menu.homepage": "主页",
   "footer.menu.member": "被保险人",
-  "footer.menu.policy": "保单信息",
+  "footer.menu.policy": "福利选择",
   "footer.menu.claims": "报销",
   "footer.menu.contact": "联系我们",
 
@@ -38,8 +38,8 @@
   "Insurant.index.family": "家庭成员",
   "Insurant.index.lifestyle": "被保险人生活方式",
   "Insurant.index.memeberArea": "被保险人地区",
-  "Insurant.index.policyInfo": "保单信息",
-  "Insurant.index.billingInformation": "账单信息",
+  "Insurant.index.policyInfo": "福利信息",
+  "Insurant.index.billingInformation": "交易记录",
 
   "Insurant.table1.employeestartdate": "员工起始日",
   "Insurant.table1.employeeenddate": "员工终止日",
