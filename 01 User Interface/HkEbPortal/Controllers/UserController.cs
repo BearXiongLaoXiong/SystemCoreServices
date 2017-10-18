@@ -97,23 +97,24 @@ namespace HkEbPortal.Controllers
             if (userInfo == null)
                 return Json(new { Code = 1, Msg = "您输入的账号不存在!" }, JsonRequestBehavior.DenyGet);
 
-            if (string.IsNullOrEmpty(txtBirthday))
+            if (string.IsNullOrWhiteSpace(txtBirthday))
                 return Json(new { Code = 2,Msg = "请输入日期!"}, JsonRequestBehavior.DenyGet);
 
             //在HK_EB_DATE中找到了对应的数据 且ususID已注册 且email已注册过
             if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_SIGNUP_ISACTIVE.Equals("1"))
                 return Json(new { Code = 2, Msg = "您的账号已注册!" }, JsonRequestBehavior.DenyGet);
 
-            if (string.IsNullOrEmpty(userInfo.DOB) || !userInfo.DOB.Equals(txtBirthday.Trim()))
+            if (string.IsNullOrWhiteSpace(userInfo.DOB) || !userInfo.DOB.Equals(txtBirthday.Trim()))
                 return Json(new { Code = 1, Msg = "无此被保险人，请联系团体HR!" }, JsonRequestBehavior.DenyGet);
 
-            if(string.IsNullOrEmpty(userInfo.USUS_EMAIL))
+            txtEmailUp = string.IsNullOrEmpty(txtEmailUp) ? userInfo.USUS_EMAIL : txtEmailUp;
+
+            if (string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && string.IsNullOrWhiteSpace(txtEmailUp))
                 return Json(new { Code = 3, Msg = "请输入你的邮件" }, JsonRequestBehavior.DenyGet);
-            else if (!string.IsNullOrEmpty(userInfo.USUS_EMAIL) && userInfo.USUS_EMAIL_ISACTIVE =="0")
+            else if (!string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && userInfo.USUS_EMAIL_ISACTIVE =="0")
                 return Json(new { Code = 4, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
             //在HK_EB_DATE中找到了对应的数据 但userId未注册
-            txtEmailUp = string.IsNullOrEmpty(txtEmailUp) ? userInfo.USUS_EMAIL : txtEmailUp;
             if (userInfo.USUS_ID.Length > 0)
             {
                 var insert = new SPEH_USUS_EMAIL_INSERT
