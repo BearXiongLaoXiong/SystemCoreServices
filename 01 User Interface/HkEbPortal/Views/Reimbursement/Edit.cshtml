@@ -44,13 +44,13 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:110px;">發票日</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="CLIV_Date" name="CLIV_Date" value="@Model.CLIV_DT" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" />
+                    <input type="text" id="CLIV_Date" name="CLIV_Date" value="@Model.CLIV_DT" class="layui-input" lay-verify="date" placeholder="DD/MM/YYYY" />
                 </div>
             </div>
-            <div class="layui-inline">
+            @*<div class="layui-inline">
                 <label i18n="Reimbursement.edit.application" class="layui-form-label" style="min-width:110px;">申請日</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="Apply_Date" name="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" />
+                    <input type="text" id="Apply_Date" name="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="DD/MM/YYYY" />
                 </div>
             </div>
             <div class="layui-inline">
@@ -58,7 +58,7 @@
                 <div class="layui-input-inline">
                     <input type="text" name="ApplyAMT" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
-            </div>
+            </div>*@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width:110px;">發票金額</label>
                 <div class="layui-input-inline">
@@ -138,10 +138,12 @@
         //执行一个laydate实例
         laydate.render({
             elem: '#CLIV_Date', //指定元素
+            format: 'dd/MM/yyyy'
         });
-        laydate.render({
-            elem: '#Apply_Date' //指定元素
-        });
+        //laydate.render({
+        //    elem: '#Apply_Date', //指定元素
+        //    format: 'dd/MM/yyyy'
+        //});
 
         form.on('select(fmfmId)', function (data) {
             if (data.value) {

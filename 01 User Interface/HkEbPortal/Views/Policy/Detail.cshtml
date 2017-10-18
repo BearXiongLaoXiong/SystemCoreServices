@@ -40,8 +40,8 @@
                                 <th i18n="public.common.default">默認</th>
                                 <th i18n="policy.detail.level">級別</th>
                                 <th i18n="policy.detail.total">總金額</th>
-                                <th i18n="policy.detail.employee">員工金額</th>
-                                <th i18n="policy.detail.target">雇主金額</th>
+                                @*<th i18n="policy.detail.employee">員工金額</th>
+                                <th i18n="policy.detail.target">雇主金額</th>*@
                                 <th i18n="policy.detail.tax">稅率金額</th>
                                 <th></th>
                             </tr>
@@ -58,12 +58,15 @@
                                         <td>@(new HtmlString(_default))</td>
                                         <td>@info.PDPD_LEVEL</td>
                                         <td>@info.PLME_AMT</td>
-                                        <td>@info.EMP_AMT</td>
-                                        <td>@info.EMPYEE_AMT</td>
+                                        @*<td>@info.EMP_AMT</td>
+                                        <td>@info.EMPYEE_AMT</td>*@
                                         <td>@info.TXTX_AMT</td>
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
                                                 <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>
+                                            </div>
+                                            <div class="layui-table-cell laytable-cell-1-4">
+                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="" onclick="showInformation('@info.PDPD_ID')">PDF</a>
                                             </div>
                                         </td>
                                     </tr>

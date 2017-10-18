@@ -12,10 +12,10 @@
     </fieldset>
     
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <span i18n="Insurant.index.memename">主被保险人</span>：@ViewData["NAME"]; 
-        <span i18n="Insurant.index.gpgpname">团体名称</span>：@ViewData["GPGP_NAME"]; 
-        <span i18n="Insurant.index.employeelevel">员工等级</span>：@ViewData["GCGC_DESC"]
-    </blockquote>
+        <p><span i18n="Insurant.index.memename">主被保险人</span>：@ViewData["NAME"]; </p>
+        <p><span i18n="Insurant.index.gpgpname">团体名称</span>：@ViewData["GPGP_NAME"];</p>
+        <p> <span i18n="Insurant.index.employeelevel">员工等级</span>：@ViewData["GCGC_DESC"]</p>
+</blockquote>
 
     <div class="layui-tab layui-tab-card" lay-filter="docDemoTabBrief" style="min-height:600px;max-height:100%;">
         <ul class="layui-tab-title">
@@ -35,8 +35,8 @@
                             <th i18n="Insurant.table1.employeemonthly">员工月薪(￥)</th>
                             <th i18n="Insurant.table1.employeestaffdep">员工部门</th>
                             <th i18n="Insurant.table1.employeelevel">员工等级</th>
-                            <th i18n="Insurant.table1.employeestaffpositions">员工职务</th>
-                            <th i18n="Insurant.table1.employeecomment">说明</th>
+                            @*<th i18n="Insurant.table1.employeestaffpositions">员工职务</th>*@
+                            @*<th i18n="Insurant.table1.employeecomment">说明</th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -49,8 +49,8 @@
                                 <td>@item.FMFM_ANNUAL_SALARY</td>
                                 <td>@item.FMFM_DEPT</td>
                                 <td>@item.GCGC_DESC</td>
-                                <td>@item.FMFM_POSITION</td>
-                                <td>@item.FMDT_COMMENT</td>
+                                @*<td>@item.FMFM_POSITION</td>*@
+                                @*<td>@item.FMDT_COMMENT</td>*@
                             </tr>
                         }
                     </tbody>
@@ -66,9 +66,9 @@
                             <th i18n="Insurant.table2.IDnumber">证件号</th>
                             <th i18n="Insurant.table2.Gender">性别</th>
                             <th i18n="Insurant.table2.Birthday">生日</th>
-                            <th i18n="Insurant.table2.Phone">手机</th>
+                            @*<th i18n="Insurant.table2.Phone">手机</th>*@
                             <th i18n="Insurant.table2.Email">电子邮件</th>
-                            <th i18n="Insurant.table2.Zipcode">邮政编码</th>
+                            @*<th i18n="Insurant.table2.Zipcode">邮政编码</th>*@
                         </tr>
                     </thead>
                     <tbody id="familyId"></tbody>
@@ -85,7 +85,7 @@
                             <th i18n="Insurant.table3.memename">姓名</th>
                             <th i18n="Insurant.table3.relationship">家庭关系</th>
                             <th i18n="Insurant.table3.idnumber">被保险人号</th>
-                            <th i18n="Insurant.table3.numberprefix">家庭码</th>
+                            @*<th i18n="Insurant.table3.numberprefix">家庭码</th>*@
                             <th i18n="Insurant.table3.type">等级</th>
                         </tr>
                     </thead>
@@ -144,9 +144,9 @@
                     familyStr += "<td>" + row.MEME_CERT_ID_NUM + "</td>";
                     familyStr += "<td>" + row.SYSV_SEX_DESC + "</td>";
                     familyStr += "<td>" + row.MEME_BIRTH_DT + "</td>";
-                    familyStr += "<td>" + row.MEME_HOM_PHONE + "</td>";
+                    //familyStr += "<td>" + row.MEME_HOM_PHONE + "</td>";
                     familyStr += "<td>" + row.MEME_EMAIL + "</td>";
-                    familyStr += "<td>" + row.MEME_ZIP + "</td>";
+                    //familyStr += "<td>" + row.MEME_ZIP + "</td>";
                     familyStr += "</tr>";
                 });
 
@@ -168,8 +168,8 @@
                     policyInfoStr += "<td>" + row.PLPL_END_DT + "</td>";
                     policyInfoStr += "<td>" + row.MEME_NAME + "</td>";
                     policyInfoStr += "<td>" + row.SYSV_MEME_REL_CD + "</td>";
-                    policyInfoStr += "<td>" + row.Cert_No + "</td>";
-                    policyInfoStr += "<td>" + row.Cert_Prefix + "</td>";
+                    policyInfoStr += "<td>" + row.Cert_No + "-" + row.Cert_Prefix+ "</td>";
+                    //policyInfoStr += "<td>" +  + "</td>";
                     policyInfoStr += "<td>" + row.CLASS + "</td>";
                     policyInfoStr += "</tr>";
                 });

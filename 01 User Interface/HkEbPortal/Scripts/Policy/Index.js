@@ -47,13 +47,12 @@ function laodview(status, memeKy) {
                 html += '<td>' + value.PDCT_NAME + '</td>';
                 html += '<td>' + value.PLAN_DESC + '</td>';
                 html += '<td>' + value.PLME_AMT + '</td>';
-                
-                var defaultInd = "";
-                switch (value.DEFAULT_IND) {
-                    case "Y": defaultInd = '<span class="layui-badge layui-bg-orange" i18n="public.common.default">默认</span>'; break;
-                    default: defaultInd = '<span class="layui-badge layui-bg-blue">x</span>';; break;
-                }
-                html += '<td>' + defaultInd + '</td>';
+                //var defaultInd = "";
+                //switch (value.DEFAULT_IND) {
+                //    case "Y": defaultInd = '<span class="layui-badge layui-bg-orange" i18n="public.common.default">默认</span>'; break;
+                //    default: defaultInd = '<span class="layui-badge layui-bg-blue">x</span>';; break;
+                //}
+                //html += '<td>' + defaultInd + '</td>';
                 html += '<td>' + value.LEVEL_IND + '</td>';
                 html += '<td style="padding: 0px;" align="center" data-off="true"> <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del" i18n="public.common.select" href="../Policy/Detail?plplKy=' + value.PLPL_KY + '&memeKy=' + value.MEME_KY + '&pdctId=' + value.PDCT_ID + '">选择</a> </div></td>';
                 html += '</tr>';
