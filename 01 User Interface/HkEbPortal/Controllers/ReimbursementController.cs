@@ -50,8 +50,8 @@ namespace HkEbPortal.Controllers
             string clivType = form["CLIV_DropDownList"];
             string clivID = form["CLIV_ID"];
             string clivDate = form["CLIV_Date"];
-            string applyDate = form["Apply_Date"];
-            string apply_amt = form["APPLY_AMT"];
+            //string applyDate = form["Apply_Date"];
+            //string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"];
             string comment = form["COMMENT"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT
@@ -63,8 +63,8 @@ namespace HkEbPortal.Controllers
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
                 pCLIV_DT = clivDate,
-                pCLIV_APP_DT = applyDate,
-                pCLIV_APPLY_AMT = apply_amt,
+                //pCLIV_APP_DT = applyDate,
+                //pCLIV_APPLY_AMT = apply_amt,
                 pCLIV_CHG = cliv_chg,
                 pCLIV_COMMENT = comment
             };
@@ -105,9 +105,9 @@ namespace HkEbPortal.Controllers
             string ivtype = form["CLIV_DropDownList"];
             string ivid = form["CLIV_ID"];
             string ivdate = form["CLIV_Date"];
-            string appAMT = form["ApplyAMT"];
+            //string appAMT = form["ApplyAMT"];
             string ivchg = form["CLIV_CHG"];
-            string appdate = form["Apply_Date"];
+            //string appdate = form["Apply_Date"];
             string comment = form["COMMENT"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE()
             {
@@ -117,9 +117,9 @@ namespace HkEbPortal.Controllers
                 pSYSV_CLIV_TYPE = ivtype,
                 pCLIV_ID = ivid,
                 pCLIV_CHG = ivchg,
-                pCLIV_APPLY_AMT = appAMT,
+                //pCLIV_APPLY_AMT = appAMT,
                 pCLIV_DT = ivdate,
-                pCLIV_APP_DT = appdate,
+                //pCLIV_APP_DT = appdate,
                 pCLIV_COMMENT = comment
             };
             CommonBl.Execute(entity);
