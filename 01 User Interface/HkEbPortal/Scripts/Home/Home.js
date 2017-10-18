@@ -48,18 +48,24 @@ layui.use(['form', 'carousel', 'laydate'], function () {
 
     form.on('submit(btnLoginUp)', function (data) {
         //layer.msg(JSON.stringify(data.field));
+        var policyUp = data.field.txtPolicyUp;
+        var meberUp = data.field.txtMemberUp;
         $.post("SignUp",
-            { txtPolicyUp: data.field.txtPolicyUp, txtMemberUp: data.field.txtMemberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp },
+            { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp },
             function (result) {
                 if (result.Code === 3) {
                     layer.msg(result.Msg);
                     $("#txtEmailUp").attr("lay-verify", "required");
                     $("#emailDiv").show();
                 }
-                else if (result.Code ===4) {
-                    $("#txtEmailUp").attr("lay-verify", "required");
-                    $("#txtEmailUp").val(result.Msg)
-                    $("#emailDiv").show();
+                else if (result.Code === 4) {
+                    layer.confirm('first login,please confirm your Email:' + result.Msg, { title: "Confirm", btn: ['OK', 'Cancel']}, function () {
+                        $.post("ConfirmEmail",
+                            { txtpolicyNo: policyUp, txtMember: meberUp, txtPassword: data.field.txtPassword },
+                            function (result) {
+                                layer.msg(result.Msg, { icon: 1 });
+                            });
+                    });
                 }
                 else
                     layer.msg(result.Msg);

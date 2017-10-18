@@ -80,7 +80,7 @@ namespace HkEbPortal.Controllers
             };
             _commonBl.Execute(entity);
 
-            return Json(new { Code = entity.ReturnValue, Msg = "Success" }, JsonRequestBehavior.AllowGet);
+            return Json(new { Code = entity.ReturnValue, Msg = entity.ReturnValue == 1 ? "邮箱激活成功!" : "邮箱激活失败!" }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -97,26 +97,24 @@ namespace HkEbPortal.Controllers
             if (userInfo == null)
                 return Json(new { Code = 1, Msg = "您输入的账号不存在!" }, JsonRequestBehavior.DenyGet);
 
-            //在HK_EB_DATE中找到了对应的数据 且ususID已注册 且email已注册过
-            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_EMAIL.Length > 0)
-                return Json(new { Code = 2, Msg = "您的账号已存在!" }, JsonRequestBehavior.DenyGet);
-
             if (string.IsNullOrEmpty(txtBirthday))
                 return Json(new { Code = 2,Msg = "请输入日期!"}, JsonRequestBehavior.DenyGet);
 
-            var validate = new SPEH_MEME_MEMBER_INFO_SELECT() { pMEME_KY = userInfo.MEME_KY };
-            var resultdate = _commonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_SELECT, SPEH_MEME_MEMBER_INFO_SELECT_RESULT>(validate).FirstOrDefault();
+            //在HK_EB_DATE中找到了对应的数据 且ususID已注册 且email已注册过
+            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_SIGNUP_ISACTIVE.Equals("1"))
+                return Json(new { Code = 2, Msg = "您的账号已注册!" }, JsonRequestBehavior.DenyGet);
 
-            if (string.IsNullOrEmpty(resultdate.MEME_BIRTH_DT) || !Convert.ToDateTime(resultdate.MEME_BIRTH_DT).ToString("yyyy-MM-dd").Trim().Equals(txtBirthday.Trim()))
+            if (string.IsNullOrEmpty(userInfo.DOB) || !userInfo.DOB.Equals(txtBirthday.Trim()))
                 return Json(new { Code = 1, Msg = "无此被保险人，请联系团体HR!" }, JsonRequestBehavior.DenyGet);
 
-            if(resultdate.MEME_EMAIL.Trim().Length <= 0 && txtEmailUp.Length == 0)
-                return Json(new { Code = 4, Msg = resultdate.MEME_EMAIL }, JsonRequestBehavior.DenyGet);
-            else if (txtEmailUp.Length == 0)
-                return Json(new { Code = 3, Msg = "请输入你的邮件!" }, JsonRequestBehavior.DenyGet);
+            if(string.IsNullOrEmpty(userInfo.USUS_EMAIL))
+                return Json(new { Code = 3, Msg = "请输入你的邮件" }, JsonRequestBehavior.DenyGet);
+            else if (!string.IsNullOrEmpty(userInfo.USUS_EMAIL) && userInfo.USUS_EMAIL_ISACTIVE =="0")
+                return Json(new { Code = 4, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
             //在HK_EB_DATE中找到了对应的数据 但userId未注册
-            if (userInfo.USUS_ID.Length == 0)
+            txtEmailUp = string.IsNullOrEmpty(txtEmailUp) ? userInfo.USUS_EMAIL : txtEmailUp;
+            if (userInfo.USUS_ID.Length > 0)
             {
                 var insert = new SPEH_USUS_EMAIL_INSERT
                 {
@@ -135,23 +133,7 @@ namespace HkEbPortal.Controllers
             }
 
 
-            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_EMAIL.Length == 0)
-            {
-                var update = new SPEH_USUS_EMAIL_UPDATE
-                {
-                    pPolicy_NO = txtPolicyUp,
-                    pCert_No = txtMemberUp,
-                    pEmail = txtEmailUp
-                };
-                _commonBl.Execute(update);
-
-                EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
-                                        "主题:HK_Portal 注册",
-                                        "征文:您的密码是123456",
-                                        new string[] { }, out string result);
-
-                return Json(new { Code = update.ReturnValue, Msg = update.ReturnValue == 1 ? "注册邮箱成功!" : "注册邮箱失败!" }, JsonRequestBehavior.DenyGet);
-            }
+            
             return Json(new { Code = "999", Msg = "出现错误!" });
         }
 

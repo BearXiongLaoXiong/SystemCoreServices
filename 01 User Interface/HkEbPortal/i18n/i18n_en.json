@@ -35,6 +35,7 @@
   "user.login.member": "Member ID",
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
+  "user.login.email": "e-mail address",
 
   "user.forgot.headtitle": "Please enter the policy number/insured number to retrieve the password",
   "user.forgot.policyNo": "Policy number",

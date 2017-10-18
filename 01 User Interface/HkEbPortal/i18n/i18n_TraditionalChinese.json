@@ -35,6 +35,7 @@
   "user.login.member": "賬號",
   "user.login.password": "密碼",
   "user.login.forgotpwd": "忘記密碼?",
+  "user.login.email": "Email地址",
 
   "user.forgot.headtitle": "請輸入需要搵返埋晒密碼嘅保單/被保人號",
   "user.forgot.policyNo": "保單號",

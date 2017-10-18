@@ -24,6 +24,7 @@
   "user.login.member": "账号",
   "user.login.password": "密码",
   "user.login.forgotpwd": "忘记密码?",
+  "user.login.email": "Email地址",
 
   "user.forgot.headtitle": "请输入需要找回密码的保单号/被保人号",
   "user.forgot.policyNo": "保单号",
