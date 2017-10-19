@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Framework.Aop;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -21,8 +23,10 @@ namespace HkEbPortal.Models.EB_PORTAL
     {
         public string FMDT_KY { get; set; }
         public string FMFM_KY { get; set; }
-        public string FMDT_EFF_DT { get; set; }
-        public string FMDT_TERM_DT { get; set; }
+        private string fmdt_end_dt;
+        public string FMDT_EFF_DT { get { return Convert.ToDateTime(fmdt_end_dt).ToString("dd/MM/yyyy"); } set { fmdt_end_dt = value; } }
+        private string fmdt_term_dt;
+        public string FMDT_TERM_DT { get{ return Convert.ToDateTime(fmdt_term_dt).ToString("dd/MM/yyyy"); } set { fmdt_term_dt = value; } }
         public string FMFM_ANNUAL_SALARY { get; set; }
         public string FMFM_DEPT { get; set; }
         public string GCGC_KY { get; set; }
