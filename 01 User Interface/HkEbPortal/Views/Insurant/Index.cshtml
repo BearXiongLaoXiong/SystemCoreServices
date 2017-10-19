@@ -12,8 +12,8 @@
     </fieldset>
     
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <p><span i18n="Insurant.index.memename">主被保险人</span>：@ViewData["NAME"]; </p>
-        <p><span i18n="Insurant.index.gpgpname">团体名称</span>：@ViewData["GPGP_NAME"];</p>
+        <p><span i18n="Insurant.index.memename">主被保险人</span>：@ViewData["NAME"]</p>
+        <p><span i18n="Insurant.index.gpgpname">团体名称</span>：@ViewData["GPGP_NAME"]</p>
         <p> <span i18n="Insurant.index.employeelevel">员工等级</span>：@ViewData["GCGC_DESC"]</p>
 </blockquote>
 
@@ -31,7 +31,7 @@
                         <tr>
                             <th hidden>KEY</th>
                             <th i18n="Insurant.table1.employeestartdate">员工起始日</th>
-                            <th i18n="Insurant.table1.employeeenddate">员工终止日</th>
+                            @*<th i18n="Insurant.table1.employeeenddate">员工终止日</th>*@
                             <th i18n="Insurant.table1.employeemonthly">员工月薪(￥)</th>
                             <th i18n="Insurant.table1.employeestaffdep">员工部门</th>
                             <th i18n="Insurant.table1.employeelevel">员工等级</th>
@@ -45,7 +45,7 @@
                             <tr>
                                 <td hidden>@item.FMFM_KY</td>
                                 <td>@item.FMDT_EFF_DT</td>
-                                <td>@item.FMDT_TERM_DT</td>
+                                @*<td>@item.FMDT_TERM_DT</td>*@
                                 <td>@item.FMFM_ANNUAL_SALARY</td>
                                 <td>@item.FMFM_DEPT</td>
                                 <td>@item.GCGC_DESC</td>
