@@ -10,7 +10,8 @@ layui.use(['form', 'carousel', 'laydate'], function () {
     //$("#txtMemberUp").val("000000001995");
     //轮播
     laydate.render({
-        elem: '#txtDate'
+        elem: '#txtDate',
+        format: 'dd/MM/yyyy'
     });
 
     carousel.render({

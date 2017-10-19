@@ -27,6 +27,13 @@
   "home.index.claims": "FSA CLAIMS",
   "home.index.contact": "CONTACT US",
 
+  "home.contact.title": "ASSICURAZIONI GENERALI S.p.A. – HONG KONG BRANCH",
+  "home.contact.webAddress": "Website：",
+  "home.contact.AddressName": "Address ：",
+  "home.contact.workphone": "P ：",
+  "home.contact.customline": "Medical Insurance Customer Service Hotline",
+  "home.contact.email": "E-mail：",
+
   "user.login.signIn": "Sign In",
   "user.login.signUp": "Sign Up",
   "user.login.in": "Sign in to your Generali We Care - Flexi Account",

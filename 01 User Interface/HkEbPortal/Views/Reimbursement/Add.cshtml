@@ -41,7 +41,7 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:120px;">發票日</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="CLIV_Date" name="CLIV_Date" autocomplete="off" class="layui-input" lay-verify="date" placeholder="YYYY-MM-DD" />
+                    <input type="text" id="CLIV_Date" name="CLIV_Date" autocomplete="off" class="layui-input" lay-verify="required" placeholder="DD/MM/YYYY" />
                 </div>
             </div>
             @*<div class="layui-inline">
@@ -91,8 +91,8 @@
         $("#linkReim").addClass("navbarCheckIn");
         //执行一个laydate实例
         laydate.render({
-            elem: '#CLIV_Date' //指定元素
-            //format:'dd/MM/yyyy'
+            elem: '#CLIV_Date', //指定元素
+            format:'dd/MM/yyyy'
         });
         //laydate.render({
         //    elem: '#Apply_Date', //指定元素
