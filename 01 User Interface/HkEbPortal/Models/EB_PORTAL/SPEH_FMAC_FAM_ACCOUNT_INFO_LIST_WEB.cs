@@ -22,8 +22,29 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string FMAC_KY { get; set; }
         public string PLPL_KY { get; set; }
         public string Policy_ID { get; set; }
-        public string Start_Date { get; set; }
-        public string End_Date { get; set; }
+        private string start_date;
+        public string Start_Date
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(start_date))
+                    return "";
+                else
+                    return Convert.ToDateTime(start_date).ToString("dd/MM/yyyy");
+            }
+            set { start_date = value; }
+        }
+        private string end_date;
+        public string End_Date {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(end_date))
+                    return "";
+                else
+                    return Convert.ToDateTime(end_date).ToString("dd/MM/yyyy");
+            }
+            set { end_date = value; }
+        }
         public string Initial_Amout { get; set; }
         public string Current_Points { get; set; }
         public string Comment { get; set; }

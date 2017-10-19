@@ -35,7 +35,17 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string SYSV_CLIV_STS_DESC { get; set; }
         public string CLIV_STS_RSN { get; set; }
         public string CLIV_STS_DTM { get; set; }
-        public string CLIV_DT { get; set; }
+        private string cliv_dt;
+        public string CLIV_DT {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(cliv_dt))
+                    return "";
+                else
+                    return Convert.ToDateTime(cliv_dt).ToString("dd/MM/yyyy");
+            }
+            set { cliv_dt = value; }
+        }
         public string CLIV_APP_DT { get; set; }
         public string CLIV_FINL_DT { get; set; }
         public string CLIV_CHG { get; set; }

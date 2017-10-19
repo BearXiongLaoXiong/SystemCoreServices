@@ -24,9 +24,26 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string FMDT_KY { get; set; }
         public string FMFM_KY { get; set; }
         private string fmdt_end_dt;
-        public string FMDT_EFF_DT { get { return Convert.ToDateTime(fmdt_end_dt).ToString("dd/MM/yyyy"); } set { fmdt_end_dt = value; } }
+        public string FMDT_EFF_DT {
+            get {
+                if (string.IsNullOrWhiteSpace(fmdt_end_dt))
+                    return "";
+                else
+                    return Convert.ToDateTime(fmdt_end_dt).ToString("dd/MM/yyyy");
+            }
+            set { fmdt_end_dt = value; }
+        }
         private string fmdt_term_dt;
-        public string FMDT_TERM_DT { get{ return Convert.ToDateTime(fmdt_term_dt).ToString("dd/MM/yyyy"); } set { fmdt_term_dt = value; } }
+        public string FMDT_TERM_DT {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(fmdt_term_dt))
+                    return "";
+                else
+                    return Convert.ToDateTime(fmdt_term_dt).ToString("dd/MM/yyyy");
+            }
+            set { fmdt_term_dt = value; }
+        }
         public string FMFM_ANNUAL_SALARY { get; set; }
         public string FMFM_DEPT { get; set; }
         public string GCGC_KY { get; set; }

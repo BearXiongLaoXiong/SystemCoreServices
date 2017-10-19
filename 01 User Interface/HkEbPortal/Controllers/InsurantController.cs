@@ -65,7 +65,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetPolicyInfo ()
         {
-            var entity = new SPEH_PLFM_LIST() { pFMFM_KY = UserInfo.FMFM_KY };
+            var entity = new SPEH_PLFM_LIST() { pFMFM_KY = UserInfo.USUS_KY };
             var list = CommonBl.QuerySingle<SPEH_PLFM_LIST, SPEH_PLFM_LIST_RESULT>(entity);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -78,7 +78,7 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult GetBillingInfomation()
         {
-            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() { pFMFM_KY = UserInfo.FMFM_KY };
+            var entity = new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB() { pFMFM_KY = UserInfo.USUS_KY };
             var list = CommonBl.QuerySingle<SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB, SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB_RESULT>(entity);
 
             return Json(list, JsonRequestBehavior.AllowGet);

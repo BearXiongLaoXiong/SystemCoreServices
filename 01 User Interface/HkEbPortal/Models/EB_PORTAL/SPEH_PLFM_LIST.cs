@@ -28,8 +28,29 @@ namespace HkEbPortal.Models.EB_PORTAL
     {
         public string PLPL_ID { get; set; }
         public string SYSV_PLPL_STS { get; set; }
-        public string PLME_STR_DT { get; set; }
-        public string PLPL_END_DT { get; set; }
+        private string plme_str_dt;
+        public string PLME_STR_DT {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(plme_str_dt))
+                    return "";
+                else
+                    return Convert.ToDateTime(plme_str_dt).ToString("dd/MM/yyyy");
+            }
+            set { plme_str_dt = value; }
+        }
+        private string plpl_end_dt;
+        public string PLPL_END_DT
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(plpl_end_dt))
+                    return "";
+                else
+                    return Convert.ToDateTime(plpl_end_dt).ToString("dd/MM/yyyy");
+            }
+            set { plpl_end_dt = value; }
+        }
         public string MEME_NAME { get; set; }
         public string SYSV_MEME_REL_CD { get; set; }
         public string Cert_No { get; set; }

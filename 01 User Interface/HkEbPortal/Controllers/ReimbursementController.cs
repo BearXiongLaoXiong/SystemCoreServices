@@ -35,7 +35,7 @@ namespace HkEbPortal.Controllers
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME");
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
-            var selectIVlist = new SelectList(ivlist, "value", "text", "I");
+            var selectIVlist = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", "I");
             ViewData["FMFM_DropDownList"] = selectFMlist;
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;
@@ -87,7 +87,7 @@ namespace HkEbPortal.Controllers
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.First()?.MEME_KY);
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC", result?.First()?.EBEB_KY);
-            var selectIVlist = new SelectList(ivlist, "value", "text", result?.First()?.SYSV_CLIV_TYPE ?? "I");
+            var selectIVlist = new SelectList(ivlist.Where(x=>x.value== "I"), "value", "text", result?.First()?.SYSV_CLIV_TYPE ?? "I");
             ViewData["FMFM_DropDownList"] = selectFMlist;
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;

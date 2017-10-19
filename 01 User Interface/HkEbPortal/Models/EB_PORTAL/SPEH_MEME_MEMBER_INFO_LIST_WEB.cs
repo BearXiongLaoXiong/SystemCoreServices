@@ -43,7 +43,16 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string MEME_CERT_ID_NUM { get; set; }
         public string SYSV_SEX { get; set; }
         public string SYSV_SEX_DESC { get; set; }
-        public string MEME_BIRTH_DT { get; set; }
+        private string meme_birth_dt;
+        public string MEME_BIRTH_DT {
+            get {
+                if (string.IsNullOrWhiteSpace(meme_birth_dt))
+                    return "";
+                else
+                    return Convert.ToDateTime(meme_birth_dt).ToString("dd/MM/yyyy");
+            }
+            set { meme_birth_dt = value; }
+        }
         public string MEME_WRK_PHONE { get; set; }
         public string MEME_CEL_PHONE { get; set; }
         public string MEME_HOM_PHONE { get; set; }
