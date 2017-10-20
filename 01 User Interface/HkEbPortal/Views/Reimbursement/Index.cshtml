@@ -28,7 +28,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td><input type="radio" name="selectName" data-clivKy="@item.CLIV_KY" title=" "/></td>
+                        <td><input type="radio" name="selectName" data-clivKy="@item.CLIV_KY" data-plplky="@item.GPGP_KY" title=" "/></td>
                         <td>@item.MEME_NAME</td>
                         <td>@item.SYSV_CLIV_STS_DESC</td>
                         <td>@item.EBEB_DESC</td>
@@ -42,7 +42,7 @@
         </table>
     </div>
     <div class="layui-upload">
-        <button class="layui-btn  layui-btn-small" id="AddId" i18n="Reimbursement.Index.Add">新 增</button>
+        <button class="layui-btn  layui-btn-small" id="AddId" i18n="Reimbursement.Index.Add" data-plplky="@ViewData["PLPL_KY"]">新 增</button>
         <button class="layui-btn layui-btn-warm  layui-btn-small" id="UpdateId" i18n="Reimbursement.Index.Edit">編 輯</button>
         <button class="layui-btn layui-btn-danger  layui-btn-small" id="DeleteId" i18n="Reimbursement.Index.Delete">刪 除</button>
         <button class="layui-btn layui-btn-normal  layui-btn-small" id="UploadId" i18n="Reimbursement.Index.Image">影 像</button>

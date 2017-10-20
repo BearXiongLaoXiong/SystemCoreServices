@@ -4,16 +4,18 @@
 
     $("#linkReim").addClass("navbarCheckIn");
     $("#AddId").on("click", function () {
-        location.href = "../Reimbursement/Add";
+        var plplky = $(this).attr("data-plplky");
+        location.href = "../Reimbursement/Add?plpl_ky=" + plplky;
     });
 
     // 檢查
     $("#UpdateId").on("click", function () {
         var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        var plplky = $("input:radio[name='selectName']:checked").attr("data-plplky");
         if (val == null) {
             layer.msg("请选择要操作的数据！");
         } else {
-            location.href = "../Reimbursement/Edit?clivKy=" + val;
+            location.href = "../Reimbursement/Edit?clivKy=" + val + "&plpl_ky=" + plplky;
         }
     });
 

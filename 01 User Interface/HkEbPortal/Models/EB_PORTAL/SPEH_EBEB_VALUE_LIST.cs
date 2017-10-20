@@ -11,7 +11,7 @@ namespace HkEbPortal.Models.EB_PORTAL
     /// </summary>
     public class SPEH_EBEB_VALUE_LIST
     {
-        public string pGPGP_KY { get; set; }
+        public string pPLPL_KY { get; set; }
 
         [SqlParameter(55)]
         public string pEHUSER { get; set; }
