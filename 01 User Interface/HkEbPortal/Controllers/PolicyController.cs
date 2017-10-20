@@ -9,6 +9,7 @@ using BusinessLogicRepository;
 using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace HkEbPortal.Controllers
 {
@@ -54,6 +55,7 @@ namespace HkEbPortal.Controllers
             model.Desc = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_ID;
             //model.PlplList = result.ListThird;
             model.PlplInfoList = result.Where(x => pdctIdList.Contains(x.PDCT_ID));
+            model.PlgpPath = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLGP_PATH;
             return View(model);
         }
 
@@ -110,6 +112,14 @@ namespace HkEbPortal.Controllers
             return View(model);
         }
 
-
+        public FileStreamResult ReadPDF(string fName = "")
+        {
+            if (fName.Length > 0 && System.IO.File.Exists(fName))
+            {
+                FileStream fs = new FileStream(fName, FileMode.Open, FileAccess.Read);
+                return File(fs, "application/pdf");
+            }
+            return null;
+        }
     }
 }

@@ -63,10 +63,8 @@
                                         @*<td>@info.TXTX_AMT</td>*@
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
-                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>
-                                            </div>
-                                            <div class="layui-table-cell laytable-cell-1-4">
-                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="" onclick="showInformation('@info.PDPD_ID')">PDF</a>
+                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>&nbsp;&nbsp;
+                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n=""  href="../Policy/ReadPDF?fName='@info.PlgpPath'" target="_blank"  title="查看PDF">PDF</a>
                                             </div>
                                         </td>
                                     </tr>

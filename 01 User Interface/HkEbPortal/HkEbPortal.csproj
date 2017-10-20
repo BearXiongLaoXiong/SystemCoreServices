@@ -401,6 +401,7 @@
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Text\Tems and Condition_English20141231.doc" />
     <Content Include="Text\Privacy Policy for portal English2014.docx" />
+    <Content Include="Views\Policy\ReadPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -449,7 +450,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" />
+      <UserProperties i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

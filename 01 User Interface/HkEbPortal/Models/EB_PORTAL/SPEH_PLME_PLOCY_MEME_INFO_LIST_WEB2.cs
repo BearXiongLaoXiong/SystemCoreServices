@@ -33,5 +33,6 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string EMPYEE_AMT { get; set; }
         public string TXTX_AMT { get; set; }
         public string SELECTED { get; set; }
+        public string PLGP_PATH { get; set; }
     }
 }
