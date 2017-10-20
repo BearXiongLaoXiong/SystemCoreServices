@@ -52,9 +52,9 @@ function showInformation(pdpdId) {
         title: 'Information',
         skin: 'layui-layer-demo', //样式类名
         area: ['800px', '600px'],
-        closeBtn: 0, //不显示关闭按钮
+        closeBtn: 1, 
         shadeClose: true, //开启遮罩关闭
-        content: ['Information?pdpdId=' + pdpdId, 'no'],
+        content: 'Information?pdpdId=' + pdpdId,
         btnAlign: 'c'
     });
 }
