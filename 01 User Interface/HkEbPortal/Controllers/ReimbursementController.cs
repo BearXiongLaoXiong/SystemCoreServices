@@ -21,15 +21,14 @@ namespace HkEbPortal.Controllers
 
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
-            ViewData["PLPL_KY"] = list.FirstOrDefault()?.GPGP_KY;
             return View(list);
         }
 
-        public ActionResult Add(string plpl_ky)
+        public ActionResult Add()
         {
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { pPLPL_KY = UserInfo.USUS_KY };
+            var entity = new SPEH_EBEB_VALUE_LIST() { pMEME_KY = UserInfo.USUS_KY };
             var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
@@ -50,7 +49,6 @@ namespace HkEbPortal.Controllers
             string ebeb_ky = form["EBEB_DropDownList"];
             string clivType = form["CLIV_DropDownList"];
             string clivID = form["CLIV_ID"];
-            string plpl_ky = form["plpl_ky"]; 
             string clivDate =DateTime.ParseExact(form["CLIV_Date"], "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd");
             //string applyDate = form["Apply_Date"];
             //string apply_amt = form["APPLY_AMT"];
@@ -60,7 +58,6 @@ namespace HkEbPortal.Controllers
             {
                 pMEME_KY = meme_ky,
                 pFMFM_KY = meme_ky,
-                pGPGP_KY = plpl_ky,
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
@@ -80,7 +77,7 @@ namespace HkEbPortal.Controllers
             if (string.IsNullOrEmpty(clivKy)) return View();
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { pPLPL_KY = UserInfo.USUS_KY };
+            var entity = new SPEH_EBEB_VALUE_LIST() { pMEME_KY = UserInfo.USUS_KY };
             var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
