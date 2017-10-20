@@ -112,6 +112,7 @@
             });
             $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
             $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
+            $("[i18n]").i18n({ defaultLang: "TraditionalChinese" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date });
         });
 
         //layui.use('form',

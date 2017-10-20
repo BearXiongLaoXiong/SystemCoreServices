@@ -21,7 +21,7 @@ namespace HkEbPortal.Controllers
 
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
-            ViewData["PLPL_KY"] = list?.First().GPGP_KY;
+            ViewData["PLPL_KY"] = list.FirstOrDefault()?.GPGP_KY;
             return View(list);
         }
 
