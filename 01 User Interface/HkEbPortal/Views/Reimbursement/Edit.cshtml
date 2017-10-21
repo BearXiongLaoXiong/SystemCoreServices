@@ -160,7 +160,6 @@
     $(function () {
         laodlanguage();
         $("#btnsubmitId").on("click", function () {
-
             $.ajax({
                 type: 'POST',
                 url: "/Reimbursement/EditUpdate",
@@ -174,6 +173,7 @@
                     }
                 }
             });
+            return false;
         });
     });
 </script>
