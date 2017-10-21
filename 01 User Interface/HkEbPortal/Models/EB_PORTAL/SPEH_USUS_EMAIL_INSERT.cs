@@ -11,6 +11,7 @@ namespace HkEbPortal.Models.EB_PORTAL
     {
         public string pPolicy_NO { get; set; }
         public string pCert_No { get; set; }
+        public string pPassword { get; set; }
         public string pEmail { get; set; }
         [SqlParameter(direction: ParameterDirection.ReturnValue)] public int ReturnValue { get; set; }
     }

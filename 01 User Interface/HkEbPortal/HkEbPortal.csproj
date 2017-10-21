@@ -160,6 +160,7 @@
     <Compile Include="Controllers\ReimbursementController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\AuthorizationAttribute.cs" />
+    <Compile Include="Filters\Des.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -450,7 +451,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" />
+      <UserProperties i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

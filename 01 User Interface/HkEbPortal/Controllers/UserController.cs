@@ -11,6 +11,7 @@ using System.Net;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using iTextSharp.tool.xml;
+using HkEbPortal.Filters;
 
 namespace HkEbPortal.Controllers
 {
@@ -41,7 +42,7 @@ namespace HkEbPortal.Controllers
             {
                 pPOLICYNO = txtpolicyNo,
                 pUSUS_ID = txtMember,
-                pUSUS_PSWD = txtPassword
+                pUSUS_PSWD = Des.Encrypt(txtPassword)
             };
             var userInfo = _commonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
             if (userInfo == null)
@@ -76,7 +77,7 @@ namespace HkEbPortal.Controllers
             {
                 pPolicy_NO = txtpolicyNo,
                 pCert_No = txtMember,
-                pPassWord = txtPassword
+                pPassWord = Des.Encrypt(txtPassword)
             };
             _commonBl.Execute(entity);
 
@@ -117,27 +118,34 @@ namespace HkEbPortal.Controllers
             //在HK_EB_DATE中找到了对应的数据 但userId未注册
             if (userInfo.USUS_ID.Length > 0)
             {
+                string strDes = Des.GetDesStr();
                 var insert = new SPEH_USUS_EMAIL_INSERT
                 {
                     pPolicy_NO = txtPolicyUp,
                     pCert_No = txtMemberUp,
+                    pPassword = Des.Encrypt(strDes),
                     pEmail = txtEmailUp
                 };
                 _commonBl.Execute(insert);
 
-                EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
-                                        "主题:HK_Portal 注册",
-                                        "征文:您的密码是123456",
-                                        new string[] { }, out string result);
+                if (insert.ReturnValue == 1)
+                {
+                    EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
+                                            "主题:HK_Portal 注册",
+                                            "征文:您的密码是：" + strDes,
+                                            new string[] { }, out string result);
+                    //EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
+                    //                       "主题:HK_Portal 注册",
+                    //                       "征文:您的密码是：" + strDes,
+                    //                        null,out string result);
+                }
 
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
             }
 
-
-
             return Json(new { Code = "999", Msg = "出现错误!" });
-        }
-
+        }        
+        
         public ActionResult Logout()
         {
             Session.RemoveAll();
