@@ -43,7 +43,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(FormCollection form)
+        public JsonResult Add(FormCollection form)
         {
             string meme_ky = form["FMFM_DropDownList"];
             string ebeb_ky = form["EBEB_DropDownList"];
@@ -69,7 +69,7 @@ namespace HkEbPortal.Controllers
             };
             CommonBl.Execute(entity);
 
-            return RedirectToAction("../eflexi/Reimbursement/Index");
+            return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
 
         public ActionResult Edit(string clivKy,string plpl_ky)
@@ -95,7 +95,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUpdate(FormCollection form)
+        public JsonResult EditUpdate(FormCollection form)
         {
             if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json("失敗！", JsonRequestBehavior.AllowGet);
             string cliv_ky = form["CLIV_KY"];
@@ -124,7 +124,7 @@ namespace HkEbPortal.Controllers
             };
             CommonBl.Execute(entity);
 
-            return RedirectToAction("../eflexi/Reimbursement/Index");
+            return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
