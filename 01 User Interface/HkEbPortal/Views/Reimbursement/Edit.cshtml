@@ -14,7 +14,7 @@
         <legend i18n="Reimbursement.Index.fsaClaims">編輯報銷</legend>
     </fieldset>
 
-    <form class="layui-form" action="EditUpdate" method="post">
+    <form class="layui-form">
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width:110px;">家庭成員</label>
@@ -160,7 +160,20 @@
     $(function () {
         laodlanguage();
         $("#btnsubmitId").on("click", function () {
-
+            $.ajax({
+                type: 'POST',
+                url: "/Reimbursement/EditUpdate",
+                data: $(".layui-form").serialize(),
+                dataType: "json",
+                success: function (data, status) {
+                    if (data.Code === 0) {
+                        location.href = "../eflexi/Reimbursement/Index";
+                    } else if (data.Code === 2) { } else {
+                        layer.msg(data.Msg);
+                    }
+                }
+            });
+            return false;
         });
     });
 </script>

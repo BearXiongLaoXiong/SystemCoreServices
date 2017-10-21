@@ -55,7 +55,7 @@ namespace HkEbPortal.Controllers
             model.Desc = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_ID;
             //model.PlplList = result.ListThird;
             model.PlplInfoList = result.Where(x => pdctIdList.Contains(x.PDCT_ID));
-            model.PlgpPath = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLGP_PATH;
+            model.PLGP_PATH = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLGP_PATH;
             return View(model);
         }
 
