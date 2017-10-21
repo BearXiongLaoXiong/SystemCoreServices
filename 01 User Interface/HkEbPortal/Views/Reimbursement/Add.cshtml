@@ -109,7 +109,7 @@
         $("#submitId").on("click", function () {
             $.ajax({
                 type: 'POST',
-                url: "/Reimbursement/Add",
+                url: "../Reimbursement/Add",
                 data: $(".layui-form").serialize(),
                 dataType: "json",
                 success: function (data, status) {

@@ -162,7 +162,7 @@
         $("#btnsubmitId").on("click", function () {
             $.ajax({
                 type: 'POST',
-                url: "/Reimbursement/EditUpdate",
+                url: "../Reimbursement/EditUpdate",
                 data: $(".layui-form").serialize(),
                 dataType: "json",
                 success: function (data, status) {
