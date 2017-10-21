@@ -130,14 +130,7 @@ namespace HkEbPortal.Controllers
 
                 if (insert.ReturnValue == 1)
                 {
-                    EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
-                                            "主题:HK_Portal 注册",
-                                            "征文:您的密码是：" + strDes,
-                                            new string[] { }, out string result);
-                    //EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
-                    //                       "主题:HK_Portal 注册",
-                    //                       "征文:您的密码是：" + strDes,
-                    //                        null,out string result);
+                    SendEmail(strDes, txtEmailUp);
                 }
 
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
@@ -146,6 +139,18 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = "999", Msg = "出现错误!" });
         }        
         
+        private void SendEmail(string strDes,string txtEmailUp)
+        {
+            EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
+                                            "主题:HK_Portal 注册",
+                                            "征文:您的密码是：" + strDes,
+                                            new string[] { }, out string result);
+            //EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
+            //                       "主题:HK_Portal 注册",
+            //                       "征文:您的密码是：" + strDes,
+            //                        null,out string result);
+        }
+
         public ActionResult Logout()
         {
             Session.RemoveAll();
@@ -161,9 +166,13 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult ForgotPassword(string policyNo, string memberId)
         {
-            var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId };
+            string des = Des.GetDesStr();
+            var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(des) };
             var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
-
+            if (list.Count > 0 && entity.pRTN_CD ==0)
+            {
+                SendEmail(des, list.FirstOrDefault().USUS_EMAIL);
+            }
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }
 
