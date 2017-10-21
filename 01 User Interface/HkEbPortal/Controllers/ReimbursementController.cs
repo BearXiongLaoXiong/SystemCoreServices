@@ -49,11 +49,15 @@ namespace HkEbPortal.Controllers
             string ebeb_ky = form["EBEB_DropDownList"];
             string clivType = form["CLIV_DropDownList"];
             string clivID = form["CLIV_ID"];
-            string clivDate =DateTime.ParseExact(form["CLIV_Date"], "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd");
-            //string applyDate = form["Apply_Date"];
+            string clivDate = form["CLIV_Date"]; 
+            string applyDate = DateTime.Now.ToString("yyyy-MM-dd");
             //string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"];
             string comment = form["COMMENT"];
+            if (string.IsNullOrWhiteSpace(meme_ky) || string.IsNullOrWhiteSpace(ebeb_ky) || string.IsNullOrWhiteSpace(clivType) || string.IsNullOrWhiteSpace(clivID) || string.IsNullOrWhiteSpace(clivDate) || string.IsNullOrWhiteSpace(cliv_chg))
+            {
+                return Json(new { Code=2,Msg =""},JsonRequestBehavior.DenyGet);
+            }
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT
             {
                 pMEME_KY = meme_ky,
@@ -61,8 +65,8 @@ namespace HkEbPortal.Controllers
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
-                pCLIV_DT = clivDate,
-                //pCLIV_APP_DT = applyDate,
+                pCLIV_DT = DateTime.ParseExact(clivDate, "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd"),
+                pCLIV_APP_DT = applyDate,
                 //pCLIV_APPLY_AMT = apply_amt,
                 pCLIV_CHG = cliv_chg,
                 pCLIV_COMMENT = comment
@@ -97,17 +101,21 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult EditUpdate(FormCollection form)
         {
-            if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json("失敗！", JsonRequestBehavior.AllowGet);
+            if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json(new { Code = 2, Msg = "Fail" }, JsonRequestBehavior.AllowGet);
             string cliv_ky = form["CLIV_KY"];
             string meme = form["FMFM_DropDownList"];
             string ebeb = form["EBEB_DropDownList"];
             string ivtype = form["CLIV_DropDownList"];
             string ivid = form["CLIV_ID"];
-            string ivdate = DateTime.ParseExact(form["CLIV_Date"], "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd");
+            string ivdate = form["CLIV_Date"];
             //string appAMT = form["ApplyAMT"];
             string ivchg = form["CLIV_CHG"];
             //string appdate = form["Apply_Date"];
             string comment = form["COMMENT"];
+            if (string.IsNullOrWhiteSpace(meme) || string.IsNullOrWhiteSpace(ebeb) || string.IsNullOrWhiteSpace(ivtype) || string.IsNullOrWhiteSpace(ivid) || string.IsNullOrWhiteSpace(ivdate) || string.IsNullOrWhiteSpace(ivchg))
+            {
+                return Json(new { Code = 2, Msg = "" }, JsonRequestBehavior.DenyGet);
+            }
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE()
             {
                 pFMFM_KY = UserInfo.USUS_KY,
@@ -118,7 +126,7 @@ namespace HkEbPortal.Controllers
                 pCLIV_ID = ivid,
                 pCLIV_CHG = ivchg,
                 //pCLIV_APPLY_AMT = appAMT,
-                pCLIV_DT = string.IsNullOrWhiteSpace(ivdate) ? "1900-01-01" : Convert.ToDateTime(ivdate).ToString("yyyy-MM-dd"),
+                pCLIV_DT = DateTime.ParseExact(ivdate, "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd"),
                 //pCLIV_APP_DT = appdate,
                 pCLIV_COMMENT = comment
             };

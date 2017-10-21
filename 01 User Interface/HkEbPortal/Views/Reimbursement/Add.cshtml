@@ -115,7 +115,7 @@
                 success: function (data, status) {
                     if (data.Code === 0) {
                         location.href = "../eflexi/Reimbursement/Index";
-                    } else {
+                    } else if (data.Code === 2) { } else {
                         layer.msg(data.Msg);
                     }
                 }

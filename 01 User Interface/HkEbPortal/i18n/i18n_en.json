@@ -123,6 +123,7 @@
   "Reimbursement.Index.Applicant": "Applicant",
   "Reimbursement.Index.Status": "Status",
   "Reimbursement.Index.Benefit": "Benefit",
+  "Reimbursement.Index.CLIVDate": "Invoice Date",
   "Reimbursement.Index.ApplyDate": "Apply Date",
   "Reimbursement.Index.Invoice": "Invoice Amount",
   "Reimbursement.Index.ApplyAmount": "Apply Amount",
