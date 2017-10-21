@@ -57,7 +57,7 @@ namespace HkEbPortal.Controllers
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT
             {
                 pMEME_KY = meme_ky,
-                pFMFM_KY = meme_ky,
+                pFMFM_KY = UserInfo.USUS_KY,
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
@@ -110,6 +110,7 @@ namespace HkEbPortal.Controllers
             string comment = form["COMMENT"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE()
             {
+                pFMFM_KY = UserInfo.USUS_KY,
                 pCLIV_KY = cliv_ky,
                 pMEME_KY = meme,
                 pEBEB_KY = ebeb,
