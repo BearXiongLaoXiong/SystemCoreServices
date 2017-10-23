@@ -108,6 +108,7 @@
   "Policy.index.Plan": "Plan",
   "Policy.index.Points": "Points Required",
   "Policy.index.Level": "Level",
+  "Policy.index.CurrentPoints": "Current Points",
 
   "policy.detail.membername": "Member Name",
   "policy.detail.policy": "Policy",

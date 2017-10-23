@@ -21,6 +21,7 @@ namespace HkEbPortal.Controllers
         {
             var selectList = new SelectList(new[] { "开放", "有效", "终止", "全部" });
             ViewData["MemeDropDownList"] = selectList;
+            ViewData["FMFM_CUR_AMT"] = UserInfo?.FMFM_CUR_AMT;
             return View();
         }
 

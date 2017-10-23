@@ -108,6 +108,7 @@
   "Policy.index.Plan": "計劃",
   "Policy.index.Points": "需要積分",
   "Policy.index.Level": "級別",
+  "Policy.index.CurrentPoints": "當前積分",
 
   "policy.detail.membername": "人員名稱",
   "policy.detail.policy": "保單",
