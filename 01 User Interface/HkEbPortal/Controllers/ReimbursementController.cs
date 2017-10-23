@@ -54,10 +54,6 @@ namespace HkEbPortal.Controllers
             //string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"];
             string comment = form["COMMENT"];
-            if (string.IsNullOrWhiteSpace(meme_ky) || string.IsNullOrWhiteSpace(ebeb_ky) || string.IsNullOrWhiteSpace(clivType) || string.IsNullOrWhiteSpace(clivDate) || string.IsNullOrWhiteSpace(cliv_chg))
-            {
-                return Json(new { Code=2,Msg =""},JsonRequestBehavior.DenyGet);
-            }
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT
             {
                 pMEME_KY = meme_ky,
@@ -113,10 +109,6 @@ namespace HkEbPortal.Controllers
             string ivchg = form["CLIV_CHG"];
             //string appdate = form["Apply_Date"];
             string comment = form["COMMENT"];
-            if (string.IsNullOrWhiteSpace(meme) || string.IsNullOrWhiteSpace(ebeb) || string.IsNullOrWhiteSpace(ivtype) || string.IsNullOrWhiteSpace(ivdate) || string.IsNullOrWhiteSpace(ivchg))
-            {
-                return Json(new { Code = 2, Msg = "" }, JsonRequestBehavior.DenyGet);
-            }
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE()
             {
                 pFMFM_KY = UserInfo.USUS_KY,

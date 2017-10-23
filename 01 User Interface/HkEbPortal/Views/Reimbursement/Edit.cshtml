@@ -122,45 +122,20 @@
         </div>
     </form>
 </div>
-
-
-<script src="../Scripts/lay/modules/form.js"></script>
 <script src="../Scripts/language/jquery.i18n.min.js"></script>
 <script src="../Scripts/language/laodlanguage.js"></script>
 <script src="../Scripts/jquery.cookie-1.4.1.min.js"></script>
-<script src="../Scripts/Reimbursement/Edit.js"></script>
 <script type="text/javascript">
     layui.use(['form', 'layedit', 'laydate', 'element'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
+        var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
         $("#linkReim").addClass("navbarCheckIn");
         //执行一个laydate实例
         laydate.render({
             elem: '#CLIV_Date', //指定元素
             format: 'dd/MM/yyyy'
         });
-        //laydate.render({
-        //    elem: '#Apply_Date', //指定元素
-        //    format: 'dd/MM/yyyy'
-        //});
-
-        form.on('select(fmfmId)', function (data) {
-            if (data.value) {
-                // layer.msg("哈哈哈哈！你点击我干嘛！看到你了");
-                //$("#EBEB_DropDownList").val("8358822");
-                //刷新select选择框渲染
-                form.render('select');
-            } else {
-                //layer.msg("哈哈哈哈！都没用改变值，你想骗我？");
-            }
-        });
-    });
-
-    $(function () {
-        laodlanguage();
-        $("#btnsubmitId").on("click", function () {
+       
+        form.on('submit(demo1)', function (data) {
             $.ajax({
                 type: 'POST',
                 url: "../Reimbursement/EditUpdate",
@@ -169,12 +144,16 @@
                 success: function (data, status) {
                     if (data.Code === 0) {
                         location.href = "../Reimbursement/Index";
-                    } else if (data.Code === 2) { } else {
+                    } else {
                         layer.msg(data.Msg);
                     }
                 }
             });
             return false;
         });
+    });
+
+    $(function () {
+        laodlanguage();
     });
 </script>
