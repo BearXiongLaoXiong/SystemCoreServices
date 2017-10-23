@@ -191,6 +191,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_INSERT.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_USER_PWD_INFO_SELECT.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_USUS_USER_PWD_INFO_UPDATE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -405,6 +406,7 @@
     <Content Include="Text\Privacy Policy for portal English2014.docx" />
     <Content Include="Views\Policy\ReadPDF.cshtml" />
     <Content Include="Views\Insurant\BenefitDetail.cshtml" />
+    <Content Include="Views\User\ModifyPwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

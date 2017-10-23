@@ -12,6 +12,7 @@
 
   "footer.login": "Login",
   "footer.logout": "Safe logout",
+  "footer.Editpwd": "Modify PWD",
   "footer.menu.homepage": "HOME PAGE",
   "footer.menu.member": "MEMBER",
   "footer.menu.policy": "BENEFIT SELECTION",
@@ -40,6 +41,7 @@
   "user.login.up": "Sign up to your Generali We Care - Flexi Account",
   "user.login.policy": "Policy No.",
   "user.login.member": "Member ID",
+  "user.login.DateBirth": "Date of Birth （DD/MM/YYYY)",
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
   "user.login.email": "e-mail address",

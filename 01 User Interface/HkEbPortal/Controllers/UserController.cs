@@ -15,7 +15,7 @@ using HkEbPortal.Filters;
 
 namespace HkEbPortal.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
 
         private readonly string _from = ConfigurationManager.AppSettings["EmailFrom"];
@@ -157,6 +157,31 @@ namespace HkEbPortal.Controllers
             Session.Clear();
             return Redirect("../eflexi/Home/Index");
         }
+
+        [Authorization]
+        public ActionResult ModifyPwd()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorization]
+        public JsonResult ModifyPwd(FormCollection form)
+        {
+            string oldpwd = form["oldPassword"];
+            string newpwd = form["newPassword"];
+            string confirmpwd = form["confirmPassword"];
+            var entity = new SPEH_USUS_USER_PWD_INFO_UPDATE()
+            {
+                pUSUS_ID = UserInfo.USUS_ID,
+                pPassword = Des.Encrypt(oldpwd),
+                pConfirmPassword= Des.Encrypt(confirmpwd)
+            };
+            _commonBl.Execute(entity);
+
+            return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
+        }
+
 
         public ActionResult ForgotPassword()
         {
