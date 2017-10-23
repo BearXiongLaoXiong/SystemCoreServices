@@ -12,6 +12,7 @@
 
   "footer.login": "登入",
   "footer.logout": "登出",
+  "footer.Editpwd": "修改密碼",
   "footer.menu.homepage": "主頁",
   "footer.menu.member": "受保人資料",
   "footer.menu.policy": "福利選擇",
@@ -40,6 +41,7 @@
   "user.login.up": "註冊你的賬號",
   "user.login.policy": "保單號碼",
   "user.login.member": "會員編號",
+  "user.login.DateBirth": "出生日期（DD/MM/YYYY)",
   "user.login.password": "密碼",
   "user.login.forgotpwd": "忘記密碼?",
   "user.login.email": "Email地址",
@@ -48,6 +50,15 @@
   "user.forgot.policyNo": "保單號",
   "user.forgot.memberId": "被保險人號",
   "user.forgot.submit": "提交",
+
+  "user.modify.oldpwdtitle": "原密碼",
+  "user.modify.oldpwdprom": "請輸入原密碼",
+  "user.modify.newpwdtitle": "新密碼",
+  "user.modify.newpwdprom": "請輸入新密碼",
+  "user.modify.comfirmpwdtitle": "確認密碼",
+  "user.modify.confirmpwdprom": "請再次輸入新密碼",
+  "user.modify.submit": "立即提交",
+  "user.modify.reset": "重置",
 
   "Insurant.index.info": "被保險人資訊",
   "Insurant.index.gpgpname": "保單持有人",

@@ -33,8 +33,9 @@
         <div class="container">
 
             <div class="navbarhide" style="height: 50px; text-align: right; line-height: 30px; font-size: 15px;">
-                <div @IsShow id="btnLogout" class="myButton" style="width:130px;background-color: #FFFFFF;border-right: none; padding:0; cursor: pointer;" onclick="Logout();">
+                <div @IsShow id="btnLogout" class="myButton" style="width:230px;background-color: #FFFFFF;border-right: none; padding:0; cursor: pointer;" onclick="Logout();">
                     <a i18n="footer.logout" style="padding-right: 10px;">安全退出</a>
+                    <a href="../User/ModifyPwd" i18n="footer.Editpwd" style="padding-right: 10px;">修改密碼</a>
                 </div>
                 <div @IsHide id="btnLogin" class="myButton" style="border-right: none; padding-right: 10px; cursor: pointer;" onclick="window.open('../User/Login', '_self')">
                     <a class="myHarf" style=""></a>
