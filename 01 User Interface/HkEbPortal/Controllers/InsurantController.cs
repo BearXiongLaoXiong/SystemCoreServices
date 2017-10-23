@@ -90,5 +90,16 @@ namespace HkEbPortal.Controllers
             var list = CommonBl.QuerySingle<SPEH_FMAD_ACCOUNT_DET_LIST, SPEH_FMAD_ACCOUNT_DET_LIST_RESULT>(entity);
             return View(list);
         }
+
+        public ActionResult BenefitDetail(string PLPL_KY,string MEME_KY)
+        {
+            var entity = new SPEH_PLFM_DET_LIST()
+            {
+                pPLPL_KY = PLPL_KY,
+                pMEME_KY = MEME_KY
+            };
+            var list = CommonBl.QuerySingle<SPEH_PLFM_DET_LIST, SPEH_PLFM_DET_LIST_RESULT>(entity);
+            return View(list);
+        }
     }
 }

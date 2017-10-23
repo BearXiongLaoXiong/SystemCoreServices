@@ -180,6 +180,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_MEME_MEMBER_INFO_SELECT.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_MESH_SHIP_WORK_LINK_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PDPD_PRODUCTBASIC_SELECTcs.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_PLFM_DET_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLFM_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_MEM_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
@@ -403,6 +404,7 @@
     <Content Include="Text\Tems and Condition_English20141231.doc" />
     <Content Include="Text\Privacy Policy for portal English2014.docx" />
     <Content Include="Views\Policy\ReadPDF.cshtml" />
+    <Content Include="Views\Insurant\BenefitDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -451,7 +453,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" />
+      <UserProperties i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

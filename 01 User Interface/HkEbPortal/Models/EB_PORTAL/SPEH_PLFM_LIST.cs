@@ -26,6 +26,8 @@ namespace HkEbPortal.Models.EB_PORTAL
 
     public class SPEH_PLFM_LIST_RESULT
     {
+        public string PLPL_KY { get; set; }
+        public string MEME_KY { get; set; }
         public string PLPL_ID { get; set; }
         public string SYSV_PLPL_STS { get; set; }
         private string plme_str_dt;

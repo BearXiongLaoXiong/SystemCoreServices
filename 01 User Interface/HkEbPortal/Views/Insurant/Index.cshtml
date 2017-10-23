@@ -87,6 +87,7 @@
                             <th i18n="Insurant.table3.idnumber">被保险人号</th>
                             @*<th i18n="Insurant.table3.numberprefix">家庭码</th>*@
                             <th i18n="Insurant.table3.type">等级</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="policyInfoId"></tbody>
@@ -171,6 +172,7 @@
                     policyInfoStr += "<td>" + row.Cert_No + "-" + row.Cert_Prefix+ "</td>";
                     //policyInfoStr += "<td>" +  + "</td>";
                     policyInfoStr += "<td>" + row.CLASS + "</td>";
+                    policyInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.edit' onclick='ShowBenefitInfo(" + row.PLPL_KY + "," + row.MEME_KY+")'>查看</a></td>";
                     policyInfoStr += "</tr>";
                 });
                 $("#policyInfoId").html(policyInfoStr);
@@ -212,6 +214,18 @@
             content: 'BillingInfomationDetail?FMAC_KY=' + fmacky,
             btnAlign: 'c'
         });
+    }
 
+    function ShowBenefitInfo(plplky, memeky) {
+        layer.open({
+            type: 2,
+            title: 'BenefitDetail',
+            skin: 'layui-layer-demo', //样式类名
+            area: ['900px', '600px'],
+            closeBtn: 1,
+            shadeClose: true, //开启遮罩关闭
+            content: 'BenefitDetail?PLPL_KY=' + plplky + '&MEME_KY=' + memeky,
+            btnAlign: 'c'
+        });
     }
 </script>
