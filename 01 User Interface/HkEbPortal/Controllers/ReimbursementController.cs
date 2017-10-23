@@ -62,6 +62,7 @@ namespace HkEbPortal.Controllers
             {
                 pMEME_KY = meme_ky,
                 pFMFM_KY = UserInfo.USUS_KY,
+                pGPGP_KY = UserInfo.GPGP_KY,
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
                 pCLIV_ID = clivID,
@@ -120,6 +121,7 @@ namespace HkEbPortal.Controllers
             {
                 pFMFM_KY = UserInfo.USUS_KY,
                 pCLIV_KY = cliv_ky,
+                pGPGP_KY = UserInfo.GPGP_KY,
                 pMEME_KY = meme,
                 pEBEB_KY = ebeb,
                 pSYSV_CLIV_TYPE = ivtype,
