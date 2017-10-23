@@ -45,6 +45,7 @@
                 <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:110px;">發票日</label>
                 <div class="layui-input-inline">
                     <input type="text" id="CLIV_Date" name="CLIV_Date" value="@Model.CLIV_DT" class="layui-input" lay-verify="required" placeholder="DD/MM/YYYY" />
+                    <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY" />
                 </div>
             </div>
             @*<div class="layui-inline">

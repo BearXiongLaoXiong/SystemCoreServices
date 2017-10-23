@@ -15,17 +15,12 @@
     <blockquote class="layui-elem-quote layui-quote-nm"><span i18n ="Reimbursement.Upload.serialnumber">流水號</span>:  @ViewBag.LiuNo</blockquote>
 
     <div class="layui-upload">
-        <button type="button" class="layui-btn" id="selectId" i18n="Reimbursement.Upload.imageselect">多图片選擇</button>
+        <button type="button" class="layui-btn" id="selectId" i18n="Reimbursement.Upload.imageselect">多图片選擇</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="layui-btn layui-btn-normal layui-btn-small" id="UploadId" i18n="Reimbursement.Upload.imageupload">上 傳</button>
+        <button class="layui-btn layui-btn-primary layui-btn-small" onclick="window.location.href = 'index'" i18n="public.common.back">返回</button>
         <textarea id="imgPathId" placeholder="這裏將顯示影響路徑" readonly class="layui-textarea"></textarea>
     </div>
     <hr />
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <button class="layui-btn layui-btn-normal  layui-btn-small" id="UploadId" i18n="Reimbursement.Upload.imageupload">上 傳</button>
-            <a class="layui-btn layui-btn-primary" onclick="window.location.href = 'index'" i18n="public.common.back">返回</a>
-        </div>
-    </div>
-
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
         Preview：
         <div class="layui-upload-list" id="demo2"></div>
