@@ -48,13 +48,13 @@ namespace HkEbPortal.Controllers
             string meme_ky = form["FMFM_DropDownList"];
             string ebeb_ky = form["EBEB_DropDownList"];
             string clivType = form["CLIV_DropDownList"];
-            string clivID = form["CLIV_ID"];
+            //string clivID = form["CLIV_ID"];
             string clivDate = form["CLIV_Date"]; 
             string applyDate = DateTime.Now.ToString("yyyy-MM-dd");
             //string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"];
             string comment = form["COMMENT"];
-            if (string.IsNullOrWhiteSpace(meme_ky) || string.IsNullOrWhiteSpace(ebeb_ky) || string.IsNullOrWhiteSpace(clivType) || string.IsNullOrWhiteSpace(clivID) || string.IsNullOrWhiteSpace(clivDate) || string.IsNullOrWhiteSpace(cliv_chg))
+            if (string.IsNullOrWhiteSpace(meme_ky) || string.IsNullOrWhiteSpace(ebeb_ky) || string.IsNullOrWhiteSpace(clivType) || string.IsNullOrWhiteSpace(clivDate) || string.IsNullOrWhiteSpace(cliv_chg))
             {
                 return Json(new { Code=2,Msg =""},JsonRequestBehavior.DenyGet);
             }
@@ -65,7 +65,7 @@ namespace HkEbPortal.Controllers
                 pGPGP_KY = UserInfo.GPGP_KY,
                 pEBEB_KY = ebeb_ky,
                 pSYSV_CLIV_TYPE = clivType,
-                pCLIV_ID = clivID,
+                //pCLIV_ID = clivID,
                 pCLIV_DT = DateTime.ParseExact(clivDate, "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd"),
                 pCLIV_APP_DT = applyDate,
                 //pCLIV_APPLY_AMT = apply_amt,
@@ -107,13 +107,13 @@ namespace HkEbPortal.Controllers
             string meme = form["FMFM_DropDownList"];
             string ebeb = form["EBEB_DropDownList"];
             string ivtype = form["CLIV_DropDownList"];
-            string ivid = form["CLIV_ID"];
+            //string ivid = form["CLIV_ID"];
             string ivdate = form["CLIV_Date"];
             //string appAMT = form["ApplyAMT"];
             string ivchg = form["CLIV_CHG"];
             //string appdate = form["Apply_Date"];
             string comment = form["COMMENT"];
-            if (string.IsNullOrWhiteSpace(meme) || string.IsNullOrWhiteSpace(ebeb) || string.IsNullOrWhiteSpace(ivtype) || string.IsNullOrWhiteSpace(ivid) || string.IsNullOrWhiteSpace(ivdate) || string.IsNullOrWhiteSpace(ivchg))
+            if (string.IsNullOrWhiteSpace(meme) || string.IsNullOrWhiteSpace(ebeb) || string.IsNullOrWhiteSpace(ivtype) || string.IsNullOrWhiteSpace(ivdate) || string.IsNullOrWhiteSpace(ivchg))
             {
                 return Json(new { Code = 2, Msg = "" }, JsonRequestBehavior.DenyGet);
             }
@@ -125,7 +125,7 @@ namespace HkEbPortal.Controllers
                 pMEME_KY = meme,
                 pEBEB_KY = ebeb,
                 pSYSV_CLIV_TYPE = ivtype,
-                pCLIV_ID = ivid,
+                //pCLIV_ID = ivid,
                 pCLIV_CHG = ivchg,
                 //pCLIV_APPLY_AMT = appAMT,
                 pCLIV_DT = DateTime.ParseExact(ivdate, "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd"),

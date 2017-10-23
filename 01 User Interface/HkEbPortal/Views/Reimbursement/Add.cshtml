@@ -32,12 +32,12 @@
                     @Html.DropDownList("CLIV_DropDownList", ViewData["CLIV_DropDownList"] as SelectList, new Dictionary<string, object>() { { "lay-verify", "required" } })
                 </div>
             </div>
-            <div class="layui-inline">
+            @*<div class="layui-inline">
                 <label i18n="Reimbursement.edit.no" class="layui-form-label" style="min-width:120px;">發票號</label>
                 <div class="layui-input-inline">
                     <input type="text" name="CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input" />
                 </div>
-            </div>
+            </div>*@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:120px;">發票日</label>
                 <div class="layui-input-inline">
