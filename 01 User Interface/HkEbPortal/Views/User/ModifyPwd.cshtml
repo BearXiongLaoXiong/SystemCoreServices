@@ -13,30 +13,30 @@
     
     <form class="layui-form layui-form-pane" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">原密码</label>
-            <div class="layui-input-inline">
-                <input type="text" name="oldPassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+            <label class="layui-form-label" i18n="user.modify.oldpwdtitle" style="min-width:120px;">原密码</label>
+            <div class="layui-input-inline" style="min-width:270px;">
+                <input type="text" name="oldPassword" i18n="user.modify.oldpwdprom" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">请输入原密码</div>
+            <div class="layui-form-mid layui-word-aux" i18n="user.modify.oldpwdprom">请输入原密码</div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">新密码</label>
-            <div class="layui-input-inline">
-                <input type="password" name="newPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+            <label class="layui-form-label" i18n="user.modify.newpwdtitle" style="min-width:120px;">新密码</label>
+            <div class="layui-input-inline" style="min-width:270px;">
+                <input type="password" name="newPassword" i18n="user.modify.newpwdprom" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">请输入新密码</div>
+            <div class="layui-form-mid layui-word-aux" i18n="user.modify.newpwdprom">请输入新密码</div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">确认密码</label>
-            <div class="layui-input-inline">
-                <input type="password" name="confirmPassword" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+            <label class="layui-form-label" i18n="user.modify.comfirmpwdtitle" style="min-width:120px;">确认密码</label>
+            <div class="layui-input-inline" style="min-width:270px;">
+                <input type="password" name="confirmPassword" i18n="user.modify.confirmpwdprom" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">请再次输入新密码</div>
+            <div class="layui-form-mid layui-word-aux" i18n="user.modify.confirmpwdprom">请再次输入新密码</div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" i18n="user.modify.submit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary" i18n="user.modify.reset">重置</button>
             </div>
         </div>
     </form>

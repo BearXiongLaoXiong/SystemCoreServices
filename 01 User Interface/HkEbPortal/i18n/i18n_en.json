@@ -51,6 +51,15 @@
   "user.forgot.memberId": "Insured number",
   "user.forgot.submit": "Submitted",
 
+  "user.modify.oldpwdtitle": "Old Pwd",
+  "user.modify.oldpwdprom": "Please enter the original password",
+  "user.modify.newpwdtitle": "New Pwd",
+  "user.modify.newpwdprom": "Please enter a new password",
+  "user.modify.comfirmpwdtitle": "Confirm Pwd",
+  "user.modify.confirmpwdprom": "Please enter your new password again",
+  "user.modify.submit": "Submit",
+  "user.modify.reset": "Reset",
+
   "Insurant.index.info": "Insured information",
   "Insurant.index.gpgpname": "Policyholder",
   "Insurant.index.memename": "Principal Insured",
