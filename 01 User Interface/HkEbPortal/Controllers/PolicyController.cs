@@ -13,20 +13,30 @@ using System.IO;
 
 namespace HkEbPortal.Controllers
 {
-    [Authorization]
+    //[Authorization]
     public class PolicyController : BaseController
     {
         // GET: Policy
-        public ActionResult Index(int memeKy = 0)
+        public ActionResult Index()
         {
             var selectList = new SelectList(new[] { "开放", "有效", "终止", "全部" });
             ViewData["MemeDropDownList"] = selectList;
-            ViewData["FMFM_CUR_AMT"] = UserInfo?.FMFM_CUR_AMT;
-            return View();
+
+            var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
+            {
+                pEHUSER = "88000538-000002-0"//UserInfo.USUS_ID,
+            };
+            var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
+
+            dynamic model = new ExpandoObject();
+            model.FMFM_CUR_AMT = UserInfo?.FMFM_CUR_AMT;
+            model.Names = result.ListFirst;
+            model.Tables = result.ListThird;
+            return View(model);
         }
 
         [HttpGet]
-        public JsonResult FindView(string status, string memeKy)
+        public ActionResult FindView(string status, string memeKy)
         {
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
@@ -34,7 +44,8 @@ namespace HkEbPortal.Controllers
                 pSYSV_PLPL_STS = status
             };
             var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
-            return Json(new { names = result.ListSecond.Select(x => new { MemeKy = x.MEME_KY, Name = x.MEME_NAME }).Distinct(), table = result.ListThird.Where(x => memeKy.Length > 0 ? x.MEME_KY == memeKy : x.MEME_KY == result.ListSecond.FirstOrDefault()?.MEME_KY) }, JsonRequestBehavior.AllowGet);
+            return View(new { names = result.ListSecond, tables = result.ListThird });
+            //return Json(new { names = result.ListSecond.Select(x => new { MemeKy = x.MEME_KY, Name = x.MEME_NAME }).Distinct(), table = result.ListThird.Where(x => memeKy.Length > 0 ? x.MEME_KY == memeKy : x.MEME_KY == result.ListSecond.FirstOrDefault()?.MEME_KY) }, JsonRequestBehavior.AllowGet);
         }
 
 

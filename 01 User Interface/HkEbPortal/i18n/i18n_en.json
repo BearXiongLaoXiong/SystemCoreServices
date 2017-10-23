@@ -101,6 +101,7 @@
   "Insurant.BillingInfomationDetail.comment": "Comment",
 
   "Policy.index.info": "Policy Info",
+  "Policy.index.policystatus": "Policy status",
   "Policy.index.status": "Status",
   "Policy.index.MemberName": "Member Name",
   "Policy.index.PolicyName": "Policy Name",

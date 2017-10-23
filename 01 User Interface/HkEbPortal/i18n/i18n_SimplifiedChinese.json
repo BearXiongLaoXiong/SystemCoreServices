@@ -83,7 +83,8 @@
   "Insurant.BillingInfomationDetail.comment": "备注",
 
   "Policy.index.info": "保单信息",
-  "Policy.index.status": "状态",
+  "Policy.index.policystatus": "保單狀態",
+  "Policy.index.status": "狀態",
   "Policy.index.MemberName": "人员名称",
   "Policy.index.PolicyName": "保单名称",
 

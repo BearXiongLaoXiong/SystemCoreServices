@@ -19,6 +19,7 @@ namespace HkEbPortal.Models.EB_PORTAL
     {
         public string MEME_NAME { get; set; }
         public string MEME_KY { get; set; }
+        public string SYSV_MEME_REL_CD { get; set; }
     }
 
     public class SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1

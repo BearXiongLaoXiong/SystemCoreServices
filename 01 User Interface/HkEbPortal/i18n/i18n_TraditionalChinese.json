@@ -101,6 +101,7 @@
   "Insurant.BillingInfomationDetail.comment": "備註",
 
   "Policy.index.info": "保單信息",
+  "Policy.index.policystatus": "保單狀態",
   "Policy.index.status": "狀態",
   "Policy.index.MemberName": "會員名稱",
   "Policy.index.PolicyName": "保單名稱",

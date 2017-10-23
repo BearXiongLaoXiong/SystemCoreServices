@@ -1,71 +1,77 @@
-﻿@{
+﻿@using HkEbPortal.Models.EB_PORTAL
+@{
     ViewBag.Title = "Index";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
-    <form class="layui-form " action="#">
-        <div class="layui-form-item" style="margin-bottom: 0;">
-            <fieldset class="layui-elem-field">
-                <legend i18n="Policy.index.status">状态</legend>
-                <div class="layui-field-box">
-                    <div class="layui-inline" style="margin-bottom: 0;">
-                        <div class="layui-form-mid">
-                            <input type="radio" name="radioStatus" value="O" title="开放" checked>
-                        </div>
-                        <div class="layui-form-mid">
-                            <input type="radio" name="radioStatus" value="A" title="有效">
-                        </div>
-                        <div class="layui-form-mid">
-                            <input type="radio" name="radioStatus" value="T" title="终止">
-                        </div>
-                        <div class="layui-form-mid">
-                            <input type="radio" name="radioStatus" value="" title="全部">
-                        </div>
-                    </div>
+
+    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
+        @*<span class="layui-badge-rim layui-bg-orange" i18n="policy.index.policystatus">保單狀態</span>&nbsp;@Model.FMFM_CUR_AMT  &nbsp;&nbsp;*@
+        <span class="layui-badge-rim layui-bg-orange" i18n="policy.index.CurrentPoints">当前积分</span>&nbsp;@Model.FMFM_CUR_AMT
+    </blockquote>
+    <div class="tableheight">
+        @{
+            foreach (var name in Model.Names)
+            {
+                <div style="padding-top: 10px;">
+                    @{
+                        var _color = "#c12017";
+                        var _icon = "&#xe613";
+                        var _isMaster = "";
+                        if (name.SYSV_MEME_REL_CD == "E")
+                        {
+                            _color = "#c12017";
+                            _icon = "&#xe613";
+                            _isMaster = "";
+                        }
+                        else
+                        {
+                            _color = "#FF5722";
+                            _icon = "&#xe612";
+                            _isMaster = "style='display: none;'";
+                        }
+                    }
+                    <i class="layui-icon" style="float: left;  font-size: 30px; color: @(new HtmlString(_color));">@(new HtmlString(_icon));</i><div style="float: left; line-height: 30px">@name.MEME_NAME<span class="layui-badge-rim layui-bg-orange" @(new HtmlString(_isMaster))>主</span></div>
                 </div>
-            </fieldset>
-        </div>
-    </form>
-    <fieldset class="layui-elem-field site-demo-button">
-        <legend i18n="Policy.index.MemberName">人員名稱</legend>
-        <div class="layui-inline" style="margin-bottom: 0;">
-            <div class="layui-field-box" id="divMemberNames"></div>
-        </div>
-    </fieldset>
+                <hr class="layui-bg-red" />
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="350">
+                        <col>
+                        <col width="150">
+                        <col width="80">
+                        <col width="50">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th i18n="Policy.index.Product">产品</th>
+                            <th i18n="Policy.index.Plan">计划</th>
+                            <th i18n="Policy.index.Points"><span>积分</span></th>
+                            <th i18n="Policy.index.Level"><span>级别</span></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="memberTableBody">
+                        @foreach (var item in ((List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>)Model.Tables).Where(x => x.MEME_KY == name.MEME_KY))
+                        {
+                            <tr>
+                                <td> @item.PDCT_NAME </td>
+                                <td> @item.PLAN_DESC </td>
+                                <td> @item.PLME_AMT  </td>
+                                <td> @item.LEVEL_IND </td>
+                                <td style="padding: 0px;" align="center" data-off="true">
+                                    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del" i18n="public.common.select" href="../Policy/Detail?plplKy=@item.PLPL_KY&memeKy=@item.MEME_KY&pdctId=@item.PDCT_ID">Selected</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
-
-    <div class="layui-form tableheight">
-
-        @*product 产品
-                PLAN_DESC 计划/Plan
-            LEVEL_IND 计划级别/Plan Level
-            DEFAULT_IND 默认/Default*@
-        <table class="layui-table">
-            <colgroup>
-                <col width="350">
-                <col>
-                <col width="100">
-                <col width="80">
-                <col width="80">
-                <col width="50">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th i18n="Policy.index.Product">产品</th>
-                    <th i18n="Policy.index.Plan">计划</th>
-                    <th i18n="Policy.index.Points"><span>积分</span></th>
-                    @*<th i18n="public.common.default"><span>默认</span></th>*@
-                    <th i18n="Policy.index.Level"><span>级别</span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="memberTableBody"></tbody>
-        </table>
-        <div style="float:right;">
-            <span i18n="Policy.index.CurrentPoints">当前积分：</span>@ViewData["FMFM_CUR_AMT"]
-        </div>
+                        }
+        }
     </div>
+
 </div>
 
 <script src="../Scripts/common.js"></script>

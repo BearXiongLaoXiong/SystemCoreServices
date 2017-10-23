@@ -26,11 +26,8 @@
                     <table class="layui-table">
                         <colgroup>
                             <col>
+                            <col width="150">
                             <col width="70">
-                            <col width="70">
-                            <col width="130">
-                            <col width="195">
-                            <col width="170">
                             <col width="150">
                             <col width="50">
                         </colgroup>
@@ -63,7 +60,7 @@
                                         @*<td>@info.TXTX_AMT</td>*@
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
-                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>
+                                                @*<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>*@
                                                 <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n=""  href="../Policy/ReadPDF?fName=@info.PLGP_PATH" target="_blank"  title="查看PDF">PDF</a>
                                             </div>
                                         </td>
