@@ -6,10 +6,10 @@
 
 <div class="container">
 
-    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        @*<span class="layui-badge-rim layui-bg-orange" i18n="policy.index.policystatus">保單狀態</span>&nbsp;@Model.FMFM_CUR_AMT  &nbsp;&nbsp;*@
+    @*<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
+        <span class="layui-badge-rim layui-bg-orange" i18n="policy.index.policystatus">保單狀態</span>&nbsp;@Model.FMFM_CUR_AMT  &nbsp;&nbsp;
         <span class="layui-badge-rim layui-bg-orange" i18n="policy.index.CurrentPoints">当前积分</span>&nbsp;@Model.FMFM_CUR_AMT
-    </blockquote>
+    </blockquote>*@
     <div class="tableheight">
         @{
             foreach (var name in Model.Names)
@@ -19,6 +19,7 @@
                         var _color = "#c12017";
                         var _icon = "&#xe613";
                         var _isMaster = "";
+                        //var _point = name.
                         if (name.SYSV_MEME_REL_CD == "E")
                         {
                             _color = "#c12017";
@@ -32,7 +33,7 @@
                             _isMaster = "style='display: none;'";
                         }
                     }
-                    <i class="layui-icon" style="float: left;  font-size: 30px; color: @(new HtmlString(_color));">@(new HtmlString(_icon));</i><div style="float: left; line-height: 30px">@name.MEME_NAME<span class="layui-badge-rim layui-bg-orange" @(new HtmlString(_isMaster))>主</span></div>
+                    <i class="layui-icon" style="float: left;  font-size: 30px; color: @(new HtmlString(_color));">@(new HtmlString(_icon));</i><div style="float: left; line-height: 30px"><span class="layui-badge-rim layui-bg-orange" @(new HtmlString(_isMaster))>主</span>@name.MEME_NAME &nbsp;&nbsp; <span class="layui-badge-rim layui-bg-orange" i18n="Insurant.table4.Bill">当前积分</span> &nbsp;@Model.FMFM_CUR_AMT </div>
                 </div>
                 <hr class="layui-bg-red" />
                 <table class="layui-table">

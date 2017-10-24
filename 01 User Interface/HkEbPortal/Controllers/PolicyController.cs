@@ -13,18 +13,15 @@ using System.IO;
 
 namespace HkEbPortal.Controllers
 {
-    //[Authorization]
+    [Authorization]
     public class PolicyController : BaseController
     {
         // GET: Policy
         public ActionResult Index()
         {
-            var selectList = new SelectList(new[] { "开放", "有效", "终止", "全部" });
-            ViewData["MemeDropDownList"] = selectList;
-
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
-                pEHUSER = "88000538-000002-0"//UserInfo.USUS_ID,
+                pEHUSER = UserInfo.USUS_ID
             };
             var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
 

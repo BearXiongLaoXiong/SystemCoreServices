@@ -59,9 +59,9 @@
             <div class="collapse navbar-collapse navbar-left navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li id="linkHome"><a href="../Home/Index" i18n="footer.menu.homepage">主頁</a></li>
-                    <li id="linkInsurant" @IsShow><a href="../Insurant/Index" i18n="footer.menu.member">被保險人</a></li>
-                    <li id="linkPolicy" @IsShow><a href="../Policy/Index" i18n="footer.menu.policy">保單信息</a></li>
-                    <li id="linkReim" @IsShow><a href="../Reimbursement/Index" i18n="footer.menu.claims">報銷</a></li>
+                    <li id="linkInsurant" @IsShow><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
+                    <li id="linkPolicy" @IsShow style="width: 200px;" ><a href="../Policy/Index" i18n="footer.menu.policy">福利選擇</a></li>
+                    <li id="linkReim" @IsShow><a href="../Reimbursement/Index" i18n="footer.menu.claims">彈性福利索償</a></li>
                     <li id="linkContact" @IsShow><a href="../Home/Contact" i18n="footer.menu.contact">聯係我們</a></li>
                 </ul>
             </div>
@@ -113,7 +113,7 @@
             });
             $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
             $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
-            $("[i18n]").i18n({ defaultLang: "TraditionalChinese" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date });
+            $("[i18n]").i18n({ defaultLang: "en" }); $.cookie("defaultLang", "en", { path: '/', expires: date });
         });
 
         //layui.use('form',

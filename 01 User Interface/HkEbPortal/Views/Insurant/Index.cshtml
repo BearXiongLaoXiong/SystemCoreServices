@@ -17,7 +17,7 @@
         <p> <span i18n="Insurant.index.employeelevel">员工等级</span>：@ViewData["GCGC_DESC"]</p>
 </blockquote>
 
-    <div class="layui-tab layui-tab-card" lay-filter="docDemoTabBrief" style="min-height:600px;max-height:100%;">
+    <div class="layui-tab layui-tab-card tableheight" lay-filter="docDemoTabBrief">
         <ul class="layui-tab-title">
             <li class="layui-this" i18n="Insurant.index.memeber">员工信息</li>
             <li i18n="Insurant.index.family">家庭成员</li>
@@ -172,7 +172,7 @@
                     policyInfoStr += "<td>" + row.Cert_No + "-" + row.Cert_Prefix+ "</td>";
                     //policyInfoStr += "<td>" +  + "</td>";
                     policyInfoStr += "<td>" + row.CLASS + "</td>";
-                    policyInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.edit' onclick='ShowBenefitInfo(" + row.PLPL_KY + "," + row.MEME_KY+")'>查看</a></td>";
+                    policyInfoStr += "<td><a class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowBenefitInfo(" + row.PLPL_KY + "," + row.MEME_KY + ")'>detail</a></td>";
                     policyInfoStr += "</tr>";
                 });
                 $("#policyInfoId").html(policyInfoStr);
@@ -194,7 +194,7 @@
                     billingInfoStr += "<td>" + row.Initial_Amout + "</td>";
                     billingInfoStr += "<td>" + row.Current_Points + "</td>";
                     billingInfoStr += "<td>" + row.Comment + "</td>";
-                    billingInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.edit' onclick='ShowDetail(" + row.FMAC_KY+")'>查看</a></td>";
+                    billingInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowDetail(" + row.FMAC_KY +")'>detail</a></td>";
                     billingInfoStr += "</tr>";
                 });
                 $("#BillingInformationId").html(billingInfoStr);
