@@ -20,14 +20,29 @@ layui.use(['form', 'carousel', 'laydate'], function () {
         , height: '750px'
         , interval: 5000
     });
-
+    
     form.on('submit(btnLogin)', function (data) {
         //layer.msg(JSON.stringify(data.field));
         $.post("Login",
             { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
             function (result) {
-                if (result.Code === 0)
-                    window.location.href = "../Home/Index";
+                if (result.Code === 0) {
+                    if (result.Data.USUS_FIRST_ISACTIVE == '0') {
+                        layer.confirm('系统建议首次登录后先修改密码', {
+                            btn: ['立即修改', '以后在说'], //按钮
+                            title: ' ',
+                            icon: 6,
+                            scrollbar: false,
+                            shade: false //不显示遮罩
+                        }, function () {
+                            window.location.href = "../User/ModifyPwd";
+                        }, function () {
+                            window.location.href = "../Home/Index";
+                        });
+                    } else {
+                        window.location.href = "../Home/Index";
+                    }
+                }
                 else if (result.Code === 3) {
                     layer.confirm('first login,please confirm your Email:</br>' + result.Msg, {
                         title: "Confirm",
