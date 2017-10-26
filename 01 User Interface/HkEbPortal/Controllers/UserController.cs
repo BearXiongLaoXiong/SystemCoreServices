@@ -130,7 +130,7 @@ namespace HkEbPortal.Controllers
 
                 if (insert.ReturnValue == 1)
                 {
-                    SendEmail(password, txtEmailUp);
+                    SendEmail("","",password, txtEmailUp);
                 }
 
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
@@ -192,11 +192,11 @@ namespace HkEbPortal.Controllers
         public JsonResult ForgotPassword(string policyNo, string memberId)
         {
             string password = Des.GetDesStr();
-            var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(des) };
+            var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(password) };
             var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
             if (list.Count > 0 && entity.pRTN_CD == 0)
             {
-                SendEmail(password, list.FirstOrDefault().USUS_EMAIL);
+                SendEmail("", "", password, list.FirstOrDefault().USUS_EMAIL);
             }
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }
