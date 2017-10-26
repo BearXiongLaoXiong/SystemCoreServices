@@ -68,7 +68,7 @@ namespace HkEbPortal.Controllers
 
             Session[FormsAuthentication.FormsCookieName] = userInfo;
 
-            return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME } }, JsonRequestBehavior.AllowGet);
+            return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME,userInfo.USUS_FIRST_ISACTIVE } }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ConfirmEmail(string txtpolicyNo, string txtMember, string txtPassword)
