@@ -30,8 +30,9 @@ layui.use(['form', 'carousel', 'laydate'], function () {
                     if (result.Data.USUS_FIRST_ISACTIVE == '0') {
                         layer.confirm('系统建议首次登录后先修改密码', {
                             btn: ['立即修改', '以后在说'], //按钮
-                            title: ' ',
+                            title: '',
                             icon: 6,
+                            closeBtn: 0,
                             scrollbar: false,
                             shade: false //不显示遮罩
                         }, function () {
