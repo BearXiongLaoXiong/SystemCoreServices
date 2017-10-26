@@ -27,6 +27,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string USUS_KY { get; set; }
         public string USUS_EMAIL { get; set; }
         public string USUS_EMAIL_ISACTIVE { get; set; }
+        public string USUS_FIRST_ISACTIVE { get; set; }
         public string PFPF_ID { get; set; }
         public string ENTT_CLIENT_CD { get; set; }
         public string ENTT_KY { get; set; }

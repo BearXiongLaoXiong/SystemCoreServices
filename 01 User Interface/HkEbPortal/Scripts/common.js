@@ -14,6 +14,26 @@ function ShowMsg() {
     });
 }
 
+function ShowOpen(context) {
+    layer.open({
+        type: 1
+        , title: false //不显示标题栏
+        , closeBtn: false
+        , area: '300px;'
+        , shade: 0.8
+        , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        , btn: ['火速修改', '残忍拒绝']
+        , btnAlign: 'c'
+        , moveType: 1 //拖拽模式，0或者1
+        , content: context
+        , success: function (layero) {
+            var btn = layero.find('.layui-layer-btn');
+            btn.find('.layui-layer-btn0').attr({ href: '../User/ModifyPwd', target: '_blank' });
+            btn.find('.layui-layer-btn1').attr({ href: '../Home/Index', target: '_self' });
+        }
+    });
+}
+
 function CloseMsg() {
     setTimeout(function () { layer.closeAll() }, 300);
 }

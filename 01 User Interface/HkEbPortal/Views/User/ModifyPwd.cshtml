@@ -47,15 +47,19 @@
 
             //监听提交
             form.on('submit(formDemo)', function (data) {
+                var re = /^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{6,}$/; 
                 var newPassword = data.field.newPassword;
                 var confirmPassword = data.field.confirmPassword;
-                if (newPassword != confirmPassword) {
-                    layer.msg("新密码和确认密码不匹配！");
+                if (!re.test(newPassword) || !re.test(confirmPassword)) {
+                    layer.msg("密码过于简单不符合要求！", { icon: 5 });
+                }
+                else if (newPassword != confirmPassword) {
+                    layer.msg("新密码和确认密码不匹配！", { icon: 5 });
                 } else {
                     $.post("../User/ModifyPwd", $(".layui-form").serialize(), function (data, status) {
                         if (data.Code == 0) {
-                            layer.msg(data.Msg);
-                            setTimeout(dir, 2000);
+                            layer.msg(data.Msg, { time: 2000 });
+                            location.href = "../Home/Index";
                         } else {
                             layer.msg(data.Msg);
                         }
@@ -64,9 +68,5 @@
                 return false;
             });
         });
-
-        function dir() {
-            location.href = "../Home/Index";
-        }
     </script>
 </div>
