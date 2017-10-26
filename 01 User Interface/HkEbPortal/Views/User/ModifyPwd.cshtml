@@ -58,8 +58,8 @@
                 } else {
                     $.post("../User/ModifyPwd", $(".layui-form").serialize(), function (data, status) {
                         if (data.Code == 0) {
-                            layer.msg(data.Msg);
-                            setTimeout(dir, 2000);
+                            layer.msg(data.Msg, { time: 2000 });
+                            location.href = "../Home/Index";
                         } else {
                             layer.msg(data.Msg);
                         }
@@ -68,9 +68,5 @@
                 return false;
             });
         });
-
-        function dir() {
-            location.href = "../Home/Index";
-        }
     </script>
 </div>
