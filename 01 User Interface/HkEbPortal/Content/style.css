@@ -144,6 +144,7 @@ body .layui-tree-skin-shihuang .layui-tree-branch {
 }
 
 .menu-disabled, .menu-disabled:active, .menu-disabled:hover {
+    background-color: #fff;
     color: #C9C9C9;
     cursor: not-allowed;
     opacity: 1;

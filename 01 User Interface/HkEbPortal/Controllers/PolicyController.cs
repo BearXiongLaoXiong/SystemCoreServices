@@ -10,6 +10,7 @@ using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using Newtonsoft.Json;
 using System.IO;
+using HkEbPortal.App_Start;
 
 namespace HkEbPortal.Controllers
 {
@@ -19,6 +20,10 @@ namespace HkEbPortal.Controllers
         // GET: Policy
         public ActionResult Index()
         {
+            if (new Common().IsOpenEnrollment(UserInfo.USUS_KY))
+            {
+                return View("../eflexi/Home/Index");
+            }
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
                 pEHUSER = UserInfo.USUS_ID

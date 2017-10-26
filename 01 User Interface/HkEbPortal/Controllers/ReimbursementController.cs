@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HkEbPortal.App_Start;
 
 namespace HkEbPortal.Controllers
 {
@@ -17,6 +18,10 @@ namespace HkEbPortal.Controllers
         // GET: Reimbursement
         public ActionResult Index()
         {
+            if (!new Common().IsOpenEnrollment(UserInfo.USUS_KY))
+            {
+                return View("../eflexi/Home/Index");
+            }
             string cliv_ky = Request["clivKy"];
 
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
@@ -49,7 +54,7 @@ namespace HkEbPortal.Controllers
             string ebeb_ky = form["EBEB_DropDownList"];
             string clivType = form["CLIV_DropDownList"];
             //string clivID = form["CLIV_ID"];
-            string clivDate = form["CLIV_Date"]; 
+            string clivDate = form["CLIV_Date"];
             string applyDate = DateTime.Now.ToString("yyyy-MM-dd");
             //string apply_amt = form["APPLY_AMT"];
             string cliv_chg = form["CLIV_CHG"];
@@ -73,7 +78,7 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
 
-        public ActionResult Edit(string clivKy,string plpl_ky)
+        public ActionResult Edit(string clivKy, string plpl_ky)
         {
             if (string.IsNullOrEmpty(clivKy)) return View();
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
@@ -87,7 +92,7 @@ namespace HkEbPortal.Controllers
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.First()?.MEME_KY);
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC", result?.First()?.EBEB_KY);
-            var selectIVlist = new SelectList(ivlist.Where(x=>x.value== "I"), "value", "text", result?.First()?.SYSV_CLIV_TYPE ?? "I");
+            var selectIVlist = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", result?.First()?.SYSV_CLIV_TYPE ?? "I");
             ViewData["FMFM_DropDownList"] = selectFMlist;
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;

@@ -173,14 +173,6 @@ namespace HkEbPortal.Controllers
 
         [HttpPost]
         [Authorization]
-        public JsonResult IsOpenEnrollment()
-        {
-            var isOpen = new Common().IsOpenEnrollment(UserInfo.USUS_KY);
-            return Json("");
-        }
-
-        [HttpPost]
-        [Authorization]
         public JsonResult ModifyPwd(FormCollection form)
         {
             string oldpwd = form["oldPassword"];
@@ -196,7 +188,6 @@ namespace HkEbPortal.Controllers
 
             return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
-
 
         public ActionResult ForgotPassword()
         {
