@@ -26,7 +26,8 @@ namespace HkEbPortal.Controllers
             var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
 
             dynamic model = new ExpandoObject();
-            model.FMFM_CUR_AMT = UserInfo?.FMFM_CUR_AMT;
+            model.INITIAL_AMT = result.ListFirst.Sum(x => float.Parse(x.INITIAL_AMT));
+            model.BlanAmount = result.ListFirst.Sum(x => float.Parse(x.BlanAmount));
             model.Names = result.ListFirst;
             model.Tables = result.ListThird;
             return View(model);

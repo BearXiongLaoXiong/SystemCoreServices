@@ -47,9 +47,9 @@
   "user.login.email": "e-mail address",
 
   "user.forgot.headtitle": "Please enter the policy number/insured number to retrieve the password",
-  "user.forgot.policyNo": "Policy number",
-  "user.forgot.memberId": "Insured number",
-  "user.forgot.submit": "Submitted",
+  "user.forgot.policyNo": "Policy No.",
+  "user.forgot.memberId": "Member Id",
+  "user.forgot.submit": "Submit",
 
   "user.modify.oldpwdtitle": "Old Pwd",
   "user.modify.oldpwdprom": "Please enter the original password",
@@ -120,7 +120,8 @@
   "Policy.index.Plan": "Plan",
   "Policy.index.Points": "Points Required",
   "Policy.index.Level": "Level",
-  "Policy.index.CurrentPoints": "Current Points",
+  "Policy.index.Lnitial": "Lnitial Points",
+  "Policy.index.Remaiuing": "Remaining Points",
 
   "policy.detail.membername": "Member Name",
   "policy.detail.policy": "Policy",

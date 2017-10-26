@@ -107,13 +107,11 @@
             var date = new Date();
             date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
             laodlanguage();
-            $("#SimplifiedChinese").click(function() {
-                $("[i18n]").i18n({ defaultLang: "SimplifiedChinese" });
-                $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date });
-            });
-            $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
-            $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
-            $("[i18n]").i18n({ defaultLang: "en" }); $.cookie("defaultLang", "en", { path: '/', expires: date });
+            $("#SimplifiedChinese").click(function () { $("[i18n]").i18n({ defaultLang: "SimplifiedChinese", filePath: "../i18n/"}); $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date });});
+            $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese", filePath: "../i18n/"}); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
+            $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/"}); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
+
+            //$("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/"});$.cookie("defaultLang", "en", { path: '/', expires: date });
         });
 
         //layui.use('form',

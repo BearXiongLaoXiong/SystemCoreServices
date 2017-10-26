@@ -46,9 +46,9 @@
   "user.login.forgotpwd": "忘記密碼?",
   "user.login.email": "Email地址",
 
-  "user.forgot.headtitle": "請輸入需要搵返埋晒密碼嘅保單/被保人號",
-  "user.forgot.policyNo": "保單號",
-  "user.forgot.memberId": "被保險人號",
+  "user.forgot.headtitle": "請輸入需找回密碼的保單/被保人號",
+  "user.forgot.policyNo": "保單號碼",
+  "user.forgot.memberId": "會員編號",
   "user.forgot.submit": "提交",
 
   "user.modify.oldpwdtitle": "原密碼",

@@ -118,32 +118,32 @@ namespace HkEbPortal.Controllers
             //在HK_EB_DATE中找到了对应的数据 但userId未注册
             if (userInfo.USUS_ID.Length > 0)
             {
-                string strDes = Des.GetDesStr();
+                string password = Des.GetDesStr();
                 var insert = new SPEH_USUS_EMAIL_INSERT
                 {
                     pPolicy_NO = txtPolicyUp,
                     pCert_No = txtMemberUp,
-                    pPassword = Des.Encrypt(strDes),
+                    pPassword = Des.Encrypt(password),
                     pEmail = txtEmailUp
                 };
                 _commonBl.Execute(insert);
 
                 if (insert.ReturnValue == 1)
                 {
-                    SendEmail(strDes, txtEmailUp);
+                    SendEmail(password, txtEmailUp);
                 }
 
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
             }
 
             return Json(new { Code = "999", Msg = "出现错误!" });
-        }        
-        
-        private void SendEmail(string strDes,string txtEmailUp)
+        }
+
+        private void SendEmail(string subject, string context,string password, string txtEmailUp)
         {
             EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
                                             "主题:HK_Portal 注册",
-                                            "征文:您的密码是：" + strDes,
+                                            "征文:您的密码是：" + password,
                                             new string[] { }, out string result);
             //EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
             //                       "主题:HK_Portal 注册",
@@ -175,7 +175,7 @@ namespace HkEbPortal.Controllers
             {
                 pUSUS_ID = UserInfo.USUS_ID,
                 pPassword = Des.Encrypt(oldpwd),
-                pConfirmPassword= Des.Encrypt(confirmpwd)
+                pConfirmPassword = Des.Encrypt(confirmpwd)
             };
             _commonBl.Execute(entity);
 
@@ -191,12 +191,12 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult ForgotPassword(string policyNo, string memberId)
         {
-            string des = Des.GetDesStr();
+            string password = Des.GetDesStr();
             var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(des) };
             var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
-            if (list.Count > 0 && entity.pRTN_CD ==0)
+            if (list.Count > 0 && entity.pRTN_CD == 0)
             {
-                SendEmail(des, list.FirstOrDefault().USUS_EMAIL);
+                SendEmail(password, list.FirstOrDefault().USUS_EMAIL);
             }
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }
