@@ -118,7 +118,7 @@ namespace HkEbPortal
             MailMessage mailMessage = SetMailMessage(from, tos, ccs, subject, context, files);
             using (SmtpClient smtpClient = new SmtpClient
             {
-                Host = "202.76.48.38",
+                Host = "smtp.ensurlink.com.cn",
                 Port = port,
                 Credentials = new NetworkCredential(userName, passWord)
             })

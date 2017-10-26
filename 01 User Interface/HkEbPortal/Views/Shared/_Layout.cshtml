@@ -1,4 +1,5 @@
-﻿@using HkEbPortal.Models.EB_PORTAL
+﻿@using HkEbPortal.App_Start
+@using HkEbPortal.Models.EB_PORTAL
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    
+
     <link href="../Content/style.css" rel="stylesheet" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../Scripts/css/layui.css" rel="stylesheet" />
-            
+
     <script src="../bundles/modernizr"></script>
     <script src="../Scripts/jquery-3.1.1.min.js"></script>
     <script src="../Scripts/layui.js"></script>
@@ -18,8 +19,8 @@
     <script src="../Scripts/language/laodlanguage.js"></script>
     <script src="../Scripts/jquery.cookie-1.4.1.min.js"></script>
     <link href="../Content/User/style.css" rel="stylesheet" />
-   
-   
+
+
 </head>
 <body>
 
@@ -27,6 +28,12 @@
         var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
         var IsShow = userinfo != null ? "" : "style=display:none;";
         var IsHide = userinfo != null ? "style=display:none;" : "";
+        var IsMenuDisabled = "";
+        if (userinfo != null)
+        {
+            var isOpen = new Common().IsOpenEnrollment(userinfo.USUS_KY);
+            IsMenuDisabled = isOpen ? "" : "class='menu-disabled'";
+        }
     }
     <!-- header -->
     <nav class="navbar navbar-custom  top-nav-collapse" role="navigation" style="margin-bottom: 0;padding-top:20px;">
@@ -58,9 +65,9 @@
 
             <div class="collapse navbar-collapse navbar-left navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li id="linkHome"><a href="../Home/Index" i18n="footer.menu.homepage">主頁</a></li>
+                    <li id="linkHome"><a href="../Home/Index" i18n="footer.menu.homepage" class="menu-disabled">主頁</a></li>
                     <li id="linkInsurant" @IsShow><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
-                    <li id="linkPolicy" @IsShow style="width: 200px;" ><a href="../Policy/Index" i18n="footer.menu.policy">福利選擇</a></li>
+                    <li id="linkPolicy" @IsShow style="width: 200px;"><a href="../Policy/Index" i18n="footer.menu.policy">福利選擇</a></li>
                     <li id="linkReim" @IsShow><a href="../Reimbursement/Index" i18n="footer.menu.claims">彈性福利索償</a></li>
                     <li id="linkContact" @IsShow><a href="../Home/Contact" i18n="footer.menu.contact">聯係我們</a></li>
                 </ul>
@@ -84,18 +91,18 @@
             <hr style="background-color: #C21B17;height:2px;" />
             <div class="fnav text-center" style="width: 100%;">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div  style="text-align: left;">
-                        <a href="../Text/Tems and Condition_English20141231.doc" target="_blank"i18n="footer.menu.legal">法律信息</a> |
+                    <div style="text-align: left;">
+                        <a href="../Text/Tems and Condition_English20141231.doc" target="_blank" i18n="footer.menu.legal">法律信息</a> |
                         <a href="../Text/Privacy Policy for portal English2014.docx" target="_blank" i18n="footer.menu.privacy">隱私保護</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right;"><img src="../Content/Images/logo-footer_0.png" style="width: 143px; height: 20px;"/></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right;"><img src="../Content/Images/logo-footer_0.png" style="width: 143px; height: 20px;" /></div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; font-size: 16px" i18n="footer.menu.company">版权 © 2017 忠意人寿(香港)有限公司及忠意保险有限公司 (香港分行)</div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; font-size: 16px" i18n="footer.menu.reserved">版權所有</div>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </nav>
@@ -107,9 +114,9 @@
             var date = new Date();
             date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
             laodlanguage();
-            $("#SimplifiedChinese").click(function () { $("[i18n]").i18n({ defaultLang: "SimplifiedChinese", filePath: "../i18n/"}); $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date });});
-            $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese", filePath: "../i18n/"}); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
-            $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/"}); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
+            $("#SimplifiedChinese").click(function () { $("[i18n]").i18n({ defaultLang: "SimplifiedChinese", filePath: "../i18n/" }); $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date }); });
+            $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese", filePath: "../i18n/" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
+            $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
 
             //$("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/"});$.cookie("defaultLang", "en", { path: '/', expires: date });
         });

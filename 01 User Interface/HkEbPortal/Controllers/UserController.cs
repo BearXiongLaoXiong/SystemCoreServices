@@ -8,6 +8,8 @@ using BusinessLogicRepository;
 using HkEbPortal.Models.EB_PORTAL;
 using System.IO;
 using System.Net;
+using System.Text;
+using HkEbPortal.App_Start;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using iTextSharp.tool.xml;
@@ -76,8 +78,7 @@ namespace HkEbPortal.Controllers
             var entity = new SPEH_USUS_EMAIL_ISACTIVE_UPDATE
             {
                 pPolicy_NO = txtpolicyNo,
-                pCert_No = txtMember,
-                pPassWord = Des.Encrypt(txtPassword)
+                pCert_No = txtMember
             };
             _commonBl.Execute(entity);
 
@@ -130,7 +131,17 @@ namespace HkEbPortal.Controllers
 
                 if (insert.ReturnValue == 1)
                 {
-                    SendEmail("","",password, txtEmailUp);
+                    string subject = "We Care – Flexi Portal – Password";
+                    var context = new StringBuilder();
+                    context.Append("Dear Sir/ Madam, </br>");
+                    context.Append("Thank you for registering our Flexible Benefit Portal, below is your new password: </br>");
+                    context.AppendFormat("Password: <font size='5' face='verdana'>{0}</font> </br>", password);
+                    context.Append("It is highly recommended to change your password immediately and periodically.</br>");
+                    context.Append("If you have questions regarding this portal, please feel free to contact our Member Services Hotline at(852) 3187 6831 or send email to <a href='medicalcs@generali.com.hk'>medicalcs@generali.com.hk</a> </br>");
+                    context.Append("(Please do not send email to us by replying this auto - email.) </br>");
+                    context.Append("Best regards, </br>");
+                    context.Append("Assicurazioni Generali S.p.A. – Hong Kong Branch </br>");
+                    SendEmail(subject, context.ToString(), txtEmailUp);
                 }
 
                 return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
@@ -139,16 +150,12 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = "999", Msg = "出现错误!" });
         }
 
-        private void SendEmail(string subject, string context,string password, string txtEmailUp)
+        private void SendEmail(string subject, string context, string txtEmailUp)
         {
             EmailHelper.SendSmtpMail(_host, _from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
-                                            "主题:HK_Portal 注册",
-                                            "征文:您的密码是：" + password,
-                                            new string[] { }, out string result);
-            //EmailHelper.SendSmtpMail(_from, _userName, _passWord, new[] { txtEmailUp }, new string[] { },
-            //                       "主题:HK_Portal 注册",
-            //                       "征文:您的密码是：" + strDes,
-            //                        null,out string result);
+                                    subject,
+                                    context,
+                                    new string[] { }, out string result);
         }
 
         public ActionResult Logout()
@@ -162,6 +169,14 @@ namespace HkEbPortal.Controllers
         public ActionResult ModifyPwd()
         {
             return View();
+        }
+
+        [HttpPost]
+        [Authorization]
+        public JsonResult IsOpenEnrollment()
+        {
+            var isOpen = new Common().IsOpenEnrollment(UserInfo.USUS_KY);
+            return Json("");
         }
 
         [HttpPost]
@@ -196,7 +211,17 @@ namespace HkEbPortal.Controllers
             var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
             if (list.Count > 0 && entity.pRTN_CD == 0)
             {
-                SendEmail("", "", password, list.FirstOrDefault().USUS_EMAIL);
+                string subject = "We Care – Flexi Portal – Password Reset";
+                var context = new StringBuilder();
+                context.Append("Dear Sir/ Madam, </br>");
+                context.Append("Your password has been reset.  Below is your new password: </br>");
+                context.AppendFormat("Password: <font size='5' face='verdana'>{0}</font> </br>", password);
+                context.Append("It is highly recommended to change the password immediately and periodically.</br>");
+                context.Append("If you have questions regarding this portal, please feel free to contact our Member Services Hotline at(852) 3187 6831 or send email to <a href='medicalcs@generali.com.hk'>medicalcs@generali.com.hk</a> </br>");
+                context.Append("(Please do not send email to us by replying this auto - email.) </br>");
+                context.Append("Best regards, </br>");
+                context.Append("Assicurazioni Generali S.p.A. – Hong Kong Branch </br>");
+                SendEmail(subject, context.ToString(), list.FirstOrDefault()?.USUS_EMAIL);
             }
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }

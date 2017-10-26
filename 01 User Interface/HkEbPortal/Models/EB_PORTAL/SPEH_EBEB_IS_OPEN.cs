@@ -7,11 +7,13 @@ using System.Web;
 
 namespace HkEbPortal.Models.EB_PORTAL
 {
-    public class SPEH_USUS_EMAIL_ISACTIVE_UPDATE
+    public class SPEH_EBEB_IS_OPEN
     {
-        public string pPolicy_NO { get; set; }
-        public string pCert_No { get; set; }
-        // public string pPassWord { get; set; }
+        public int pMEME_KY { get; set; }
+
+        [SqlParameter(direction: ParameterDirection.Output)]
+        public int pIsOpen { get; set; } = 0;
+        [SqlParameter(555, direction: ParameterDirection.Output)] public string pRTN_MSG { get; set; }
         [SqlParameter(direction: ParameterDirection.ReturnValue)] public int ReturnValue { get; set; }
     }
 }
