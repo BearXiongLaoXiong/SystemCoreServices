@@ -50,7 +50,7 @@
                                     //if (info.PDCT_ID != item.PDCT_ID) { continue; }
                                     <tr>
                                         @{var check = info.SELECTED == "Y" ? "checked" : "";}
-                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange i18n='public.common.default'>默认</span>" : "";}
+                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange i18n='public.common.default'>default</span>" : "";}
                                         <td><input type="radio" id="ids" name="radio@(new HtmlString(info.PDCT_ID))" title=" " value="@JsonConvert.SerializeObject(info)" @check>@info.PDPD_NAME</td>
                                         <td>@(new HtmlString(_default))</td>
                                         <td>@info.PDPD_LEVEL</td>
@@ -61,7 +61,7 @@
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
                                                 @*<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>*@
-                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n=""  href="../Policy/ReadPDF?fName=@info.PLGP_PATH" target="_blank"  title="查看PDF">PDF</a>
+                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n=""  href="../Policy/ReadPDF?fName=@info.PLGP_PATH" target="_blank"  title="View PDF">PDF</a>
                                             </div>
                                         </td>
                                     </tr>

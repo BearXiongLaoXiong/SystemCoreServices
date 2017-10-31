@@ -11,8 +11,8 @@
   "public.common.back": "Back",
 
   "footer.login": "Login",
-  "footer.logout": "Safe logout",
-  "footer.Editpwd": "Modify PWD",
+  "footer.logout": "Logout",
+  "footer.Editpwd": "Change password",
   "footer.menu.homepage": "HOME PAGE",
   "footer.menu.member": "MEMBER",
   "footer.menu.policy": "BENEFIT SELECTION",

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -17,12 +18,13 @@ namespace HkEbPortal.Controllers
     [Authorization]
     public class PolicyController : BaseController
     {
+        private static string savePath = ConfigurationManager.AppSettings["PdfSavePath"] ?? "";
         // GET: Policy
         public ActionResult Index()
         {
             if (new Common().IsOpenEnrollment(UserInfo.USUS_KY))
             {
-                return View("../eflexi/Home/Index");
+                return Redirect("../eflexi/Home/Index");
             }
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
@@ -129,9 +131,10 @@ namespace HkEbPortal.Controllers
 
         public FileStreamResult ReadPDF(string fName = "")
         {
-            if (fName.Length > 0 && System.IO.File.Exists(fName))
+            var fileName = $@"{savePath}\{fName}";
+            if (fName.Length > 0 && System.IO.File.Exists(fileName))
             {
-                FileStream fs = new FileStream(fName, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 return File(fs, "application/pdf");
             }
             return null;

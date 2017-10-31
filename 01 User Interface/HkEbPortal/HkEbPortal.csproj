@@ -207,9 +207,9 @@
     <Content Include="Content\Images\Home\landing_banner_2_70_0.jpg" />
     <Content Include="Content\Images\Home\landing_prestigio.jpg" />
     <Content Include="Content\Images\Home\landing_Sigillo-Universal-Life-Plan.jpg" />
+    <Content Include="Content\Images\Home\s7tSk8Yl.jpg" />
     <Content Include="Content\Images\humb.png" />
     <Content Include="Content\Images\iconList.png" />
-    <Content Include="Content\Images\Home\index.jpg" />
     <Content Include="Content\Images\intro-bg.jpg" />
     <Content Include="Content\Images\login_icon.png" />
     <Content Include="Content\Images\logo-footer_0.png" />
@@ -457,7 +457,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" />
+      <UserProperties i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -20,7 +20,7 @@ namespace HkEbPortal.Controllers
         {
             if (!new Common().IsOpenEnrollment(UserInfo.USUS_KY))
             {
-                return View("../eflexi/Home/Index");
+                return Redirect("../eflexi/Home/Index");
             }
             string cliv_ky = Request["clivKy"];
 
@@ -84,20 +84,20 @@ namespace HkEbPortal.Controllers
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
             var entity = new SPEH_EBEB_VALUE_LIST() { pMEME_KY = UserInfo.USUS_KY };
-            var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
+            var ebList = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
             var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = clivKy };
-            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity);
+            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity)?.FirstOrDefault();
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
-            var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.First()?.MEME_KY);
-            var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC", result?.First()?.EBEB_KY);
-            var selectIVlist = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", result?.First()?.SYSV_CLIV_TYPE ?? "I");
+            var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.MEME_KY);
+            var selectEBlist = new SelectList(ebList, "EBEB_KY", "EBEB_DESC", result?.EBEB_KY);
+            var selectIVlist = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", result?.SYSV_CLIV_TYPE ?? "I");
             ViewData["FMFM_DropDownList"] = selectFMlist;
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;
 
-            return View(result?.First());
+            return View(result);
         }
 
         [HttpPost]
@@ -105,9 +105,9 @@ namespace HkEbPortal.Controllers
         {
             if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json(new { Code = 2, Msg = "Fail" }, JsonRequestBehavior.AllowGet);
             string cliv_ky = form["CLIV_KY"];
-            string meme = form["FMFM_DropDownList"];
-            string ebeb = form["EBEB_DropDownList"];
-            string ivtype = form["CLIV_DropDownList"];
+            string meme = form["FMFMDropDownList"];
+            string ebeb = form["EBEBDropDownList"];
+            string ivtype = form["CLIVDropDownList"];
             //string ivid = form["CLIV_ID"];
             string ivdate = form["CLIV_Date"];
             //string appAMT = form["ApplyAMT"];
@@ -183,12 +183,12 @@ namespace HkEbPortal.Controllers
         [HttpPost]
         public JsonResult UploadImg(string CLIV_KY)
         {
-            string Str = "{\"result\":0,\"message\":\"全部提交成功\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}";
+            string Str = "{\"result\":0,\"message\":\"submit success\",\"filename\":\"12424.jpg\",\"fileext\":\"...\"}";
 
             //前台页面通过 < file name = "img" > 标签数组上传图片，后台根据Request.Files["img"]来接收前台上传的图片。
             System.Web.HttpFileCollection files = System.Web.HttpContext.Current.Request.Files;
             if (files.Count == 0)
-                return Json("{\"result\":-1,\"message\":\"提交失败\",\"filename\":\"12424.jpg\",\"fileext\":\"撒的撒\"}", JsonRequestBehavior.AllowGet);
+                return Json("{\"result\":-1,\"message\":\"submit failed\",\"filename\":\"12424.jpg\",\"fileext\":\"...\"}", JsonRequestBehavior.AllowGet);
 
             for (int i = 0; i < files.AllKeys.Count(); i++)
             {
@@ -217,7 +217,7 @@ namespace HkEbPortal.Controllers
                 }
                 else
                 {
-                    return Json("{\"result\":-1,\"message\":\"提交失败\",\"filename\":\"" + files[i].FileName + "\",\"fileext\":\"" + Path.GetExtension(files[i].FileName) + "\"}", JsonRequestBehavior.AllowGet);
+                    return Json("{\"result\":-1,\"message\":\"撒的撒\",\"filename\":\"" + files[i].FileName + "\",\"fileext\":\"" + Path.GetExtension(files[i].FileName) + "\"}", JsonRequestBehavior.AllowGet);
                 }
             }
 

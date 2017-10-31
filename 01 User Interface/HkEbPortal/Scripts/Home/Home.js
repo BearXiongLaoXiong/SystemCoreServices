@@ -20,26 +20,37 @@ layui.use(['form', 'carousel', 'laydate'], function () {
         , height: '750px'
         , interval: 5000
     });
-    
+
     form.on('submit(btnLogin)', function (data) {
         //layer.msg(JSON.stringify(data.field));
+        ShowLoading();
         $.post("Login",
             { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
             function (result) {
+                CloseLoading();
                 if (result.Code === 0) {
                     if (result.Data.USUS_FIRST_ISACTIVE == '0') {
-                        layer.confirm('系统建议首次登录后先修改密码', {
-                            btn: ['立即修改', '以后在说'], //按钮
-                            title: '',
-                            icon: 6,
-                            closeBtn: 0,
-                            scrollbar: false,
-                            shade: false //不显示遮罩
-                        }, function () {
-                            window.location.href = "../User/ModifyPwd";
-                        }, function () {
-                            window.location.href = "../Home/Index";
+                        var message = "Member :</br>";
+                        var memberList = result.Data.MemberList;
+                        $.each(memberList, function (i, v) {
+                            message += v.SYSV_MEME_REL_CD + " : " + v.MEME_NAME + "</br>";
                         });
+                        layeralert1(message, function () {
+                            layer.confirm('It is advisable to change the password after logging in for the first time', {
+                                btn: ['Immediately modify', 'Later said'], //按钮
+                                title: '',
+                                icon: 6,
+                                closeBtn: 0,
+                                scrollbar: false,
+                                shade: false //不显示遮罩
+                            }, function () {
+                                window.location.href = "../User/ModifyPwd";
+                            }, function () {
+                                window.location.href = "../Home/Index";
+                            });
+                        });
+
+
                     } else {
                         window.location.href = "../Home/Index";
                     }
@@ -54,11 +65,11 @@ layui.use(['form', 'carousel', 'laydate'], function () {
                             function (result) {
                                 layer.msg(result.Msg, { icon: 1 });
                             });
-                        
+
                     });
                 }
                 else
-                    layer.msg(result.Msg);
+                    layeralert(result.Msg);
             });
         return false;
     });
@@ -67,25 +78,31 @@ layui.use(['form', 'carousel', 'laydate'], function () {
         //layer.msg(JSON.stringify(data.field));
         var policyUp = data.field.txtPolicyUp;
         var meberUp = data.field.txtMemberUp;
+        ShowLoading();
         $.post("SignUp",
-            { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp },
+            { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "" },
             function (result) {
-                if (result.Code === 3) {
+                CloseLoading();
+                if (result.Code === 0) {
+                    layeralert1(result.Msg, function () { signIn(); });
+                }
+                else if (result.Code === 3) {
                     layer.msg(result.Msg);
                     $("#txtEmailUp").attr("lay-verify", "required");
                     $("#emailDiv").show();
                 }
                 else if (result.Code === 4) {
-                    layer.confirm('first login,please confirm your Email:' + result.Msg, { title: "Confirm", btn: ['OK', 'Cancel']}, function () {
-                        $.post("ConfirmEmail",
-                            { txtpolicyNo: policyUp, txtMember: meberUp, txtPassword: data.field.txtPassword },
-                            function (result) {
-                                layer.msg(result.Msg, { icon: 1 });
-                            });
-                    });
+                    layer.confirm('Please confirm your Email:</br>' + result.Msg,
+                        { title: "Confirm", btn: ['OK', 'Cancel'] },
+                        function () {
+                            $.post("SignUp",
+                                { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "confirm" },
+                                function (result) {
+                                    layeralert1(result.Msg, function () { signIn(); });
+                                });
+                        });
                 }
-                else
-                    layer.msg(result.Msg);
+                else { layeralert(result.Msg); }
             });
         return false;
     });

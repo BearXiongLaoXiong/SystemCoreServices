@@ -18,7 +18,7 @@
         <button type="button" class="layui-btn" id="selectId" i18n="Reimbursement.Upload.imageselect">多图片選擇</button>&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="layui-btn layui-btn-normal layui-btn-small" id="UploadId" i18n="Reimbursement.Upload.imageupload">上 傳</button>
         <button class="layui-btn layui-btn-primary layui-btn-small" onclick="window.location.href = 'index'" i18n="public.common.back">返回</button>
-        <textarea id="imgPathId" placeholder="這裏將顯示影響路徑" readonly class="layui-textarea"></textarea>
+        <textarea id="imgPathId" placeholder="" readonly class="layui-textarea"></textarea>
     </div>
     <hr />
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
@@ -55,7 +55,7 @@
                 var files = obj.pushFile();
                 obj.preview(function (index, file, result) {
                     $("#imgPathId").val($("#imgPathId").val() + file.name + ";");
-                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" style="width:420px;height:250px;padding-left:10px;" class="layui-upload-img">')
+                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" style="width:420px;height:250px;padding-left:10px;" class="layui-upload-img">');
                 });
             }, done: function (res, index, upload) {
                 if (res.result == 0) {
@@ -64,7 +64,7 @@
                     layer.msg("文件：" + res.filename + " ---" + res.message);
                 }
             }, error: function (index, upload) {
-                layer.msg("服务器返回错误！");
+                layer.msg("server error！");
                 layer.closeAll('loading');
             }
         });

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Web;
 using System.Linq;
@@ -47,11 +48,13 @@ namespace HkEbPortal.Controllers
                 pUSUS_PSWD = Des.Encrypt(txtPassword)
             };
             var userInfo = _commonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
+
+
             if (userInfo == null)
-                return Json(new { Code = 1, Msg = "您输入的账号不存在或者密码错误!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 1, Msg = "The account you entered does not exist or the password is incorrect!" }, JsonRequestBehavior.DenyGet);
 
             if (userInfo.USUS_EMAIL.Length == 0)
-                return Json(new { Code = 2, Msg = "没有发现您的邮箱,请到注册界面激活邮箱!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 2, Msg = "Do not find your mailbox, please go to the registration interface to activate the mailbox!" }, JsonRequestBehavior.DenyGet);
 
             if (userInfo.USUS_EMAIL_ISACTIVE == "0")
                 return Json(new { Code = 3, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
@@ -70,24 +73,36 @@ namespace HkEbPortal.Controllers
 
             Session[FormsAuthentication.FormsCookieName] = userInfo;
 
-            return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME,userInfo.USUS_FIRST_ISACTIVE } }, JsonRequestBehavior.AllowGet);
-        }
 
-        public JsonResult ConfirmEmail(string txtpolicyNo, string txtMember, string txtPassword)
-        {
-            var entity = new SPEH_USUS_EMAIL_ISACTIVE_UPDATE
+            var memberList = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0>();
+            if (userInfo.USUS_FIRST_ISACTIVE == "0")
             {
-                pPolicy_NO = txtpolicyNo,
-                pCert_No = txtMember
-            };
-            _commonBl.Execute(entity);
+                var list = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
+                {
+                    pEHUSER = UserInfo.USUS_ID
+                };
+                var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(list);
+                memberList = result.ListFirst;
+            }
 
-            return Json(new { Code = entity.ReturnValue, Msg = entity.ReturnValue == 1 ? "邮箱激活成功!" : "邮箱激活失败!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, MemberList = memberList } }, JsonRequestBehavior.AllowGet);
         }
+
+        //public JsonResult ConfirmEmail(string txtpolicyNo, string txtMember, string txtPassword)
+        //{
+        //    var entity = new SPEH_USUS_EMAIL_ISACTIVE_UPDATE
+        //    {
+        //        pPolicy_NO = txtpolicyNo,
+        //        pCert_No = txtMember
+        //    };
+        //    _commonBl.Execute(entity);
+
+        //    return Json(new { Code = entity.ReturnValue, Msg = entity.ReturnValue == 1 ? "邮箱激活成功!" : "邮箱激活失败!" }, JsonRequestBehavior.AllowGet);
+        //}
 
 
         [HttpPost]
-        public JsonResult SignUp(string txtPolicyUp, string txtMemberUp, string txtBirthday, string txtEmailUp = "")
+        public JsonResult SignUp(string txtPolicyUp, string txtMemberUp, string txtBirthday, string txtEmailUp = "", string confirmEmail = "")
         {
             var entity = new SPEH_USUS_EMAIL_SELECT_ISACTIVE
             {
@@ -96,25 +111,34 @@ namespace HkEbPortal.Controllers
             };
             var userInfo = _commonBl.QuerySingle<SPEH_USUS_EMAIL_SELECT_ISACTIVE, SPEH_USUS_EMAIL_ISACTIVE_RESULT>(entity).FirstOrDefault();
             //没有在HK_EB_DATE中找到对应的数据
-            if (userInfo == null)
-                return Json(new { Code = 1, Msg = "您输入的账号不存在!" }, JsonRequestBehavior.DenyGet);
+            if (userInfo == null) return Json(new { Code = 1, Msg = "The account you entered does not exist!" }, JsonRequestBehavior.DenyGet);
 
-            if (string.IsNullOrWhiteSpace(txtBirthday))
-                return Json(new { Code = 2, Msg = "请输入日期!" }, JsonRequestBehavior.DenyGet);
+            if (string.IsNullOrWhiteSpace(txtBirthday)) return Json(new { Code = 2, Msg = "Please enter the date of birth!" }, JsonRequestBehavior.DenyGet);
 
             //在HK_EB_DATE中找到了对应的数据 且ususID已注册 且email已注册过
-            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_SIGNUP_ISACTIVE.Equals("1"))
-                return Json(new { Code = 2, Msg = "您的账号已注册!" }, JsonRequestBehavior.DenyGet);
+            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_SIGNUP_ISACTIVE.Equals("1")) return Json(new { Code = 2, Msg = "Your account is already registered!" }, JsonRequestBehavior.DenyGet);
 
-            if (string.IsNullOrWhiteSpace(userInfo.DOB) || !userInfo.DOB.Equals(Convert.ToDateTime(txtBirthday).ToString("yyyy-MM-dd").Trim()))
-                return Json(new { Code = 1, Msg = "无此被保险人，请联系团体HR!" }, JsonRequestBehavior.DenyGet);
+            DateTime.TryParse(txtBirthday, out DateTime dob);
+            if (string.IsNullOrWhiteSpace(userInfo.DOB) || !userInfo.DOB.Equals(dob.ToString("yyyy-MM-dd").Trim()))
+                return Json(new { Code = 1, Msg = "No such insured, please contact group HR!" }, JsonRequestBehavior.DenyGet);
 
             txtEmailUp = string.IsNullOrEmpty(txtEmailUp) ? userInfo.USUS_EMAIL : txtEmailUp;
 
             if (string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && string.IsNullOrWhiteSpace(txtEmailUp))
-                return Json(new { Code = 3, Msg = "请输入你的邮件" }, JsonRequestBehavior.DenyGet);
-            else if (!string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && userInfo.USUS_EMAIL_ISACTIVE == "0")
-                return Json(new { Code = 4, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 3, Msg = "Please enter your E-mail Address" }, JsonRequestBehavior.DenyGet);
+
+            if (!string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && userInfo.USUS_EMAIL_ISACTIVE == "0")
+                if (confirmEmail == "confirm")
+                {
+                    var emialConfirm = new SPEH_USUS_EMAIL_ISACTIVE_UPDATE
+                    {
+                        pPolicy_NO = txtPolicyUp,
+                        pCert_No = txtMemberUp
+                    };
+                    _commonBl.Execute(emialConfirm);
+                }
+                else return Json(new { Code = 4, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
+
 
             //在HK_EB_DATE中找到了对应的数据 但userId未注册
             if (userInfo.USUS_ID.Length > 0)
@@ -133,21 +157,23 @@ namespace HkEbPortal.Controllers
                 {
                     string subject = "We Care – Flexi Portal – Password";
                     var context = new StringBuilder();
+                    context.Append("<div style='font-family: Arial;font-size:10px;line-height:15px;'>");
                     context.Append("Dear Sir/ Madam, </br>");
                     context.Append("Thank you for registering our Flexible Benefit Portal, below is your new password: </br>");
-                    context.AppendFormat("Password: <font size='5' face='verdana'>{0}</font> </br>", password);
+                    context.AppendFormat("Password: {0} </br>", password);
                     context.Append("It is highly recommended to change your password immediately and periodically.</br>");
                     context.Append("If you have questions regarding this portal, please feel free to contact our Member Services Hotline at(852) 3187 6831 or send email to <a href='medicalcs@generali.com.hk'>medicalcs@generali.com.hk</a> </br>");
                     context.Append("(Please do not send email to us by replying this auto - email.) </br>");
                     context.Append("Best regards, </br>");
                     context.Append("Assicurazioni Generali S.p.A. – Hong Kong Branch </br>");
+                    context.Append("</div>");
                     SendEmail(subject, context.ToString(), txtEmailUp);
                 }
 
-                return Json(new { Code = insert.ReturnValue, Msg = insert.ReturnValue == 1 ? "注册账号成功!" : "注册账号失败!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 0, Msg = insert.ReturnValue == 1 ? "Sign Up successfully!" : "Sign Up failed!" }, JsonRequestBehavior.DenyGet);
             }
 
-            return Json(new { Code = "999", Msg = "出现错误!" });
+            return Json(new { Code = "999", Msg = "error!" });
         }
 
         private void SendEmail(string subject, string context, string txtEmailUp)
@@ -204,14 +230,16 @@ namespace HkEbPortal.Controllers
             {
                 string subject = "We Care – Flexi Portal – Password Reset";
                 var context = new StringBuilder();
+                context.Append("<div style='font-family: Arial;font-size:10px;line-height:15px;'>");
                 context.Append("Dear Sir/ Madam, </br>");
                 context.Append("Your password has been reset.  Below is your new password: </br>");
-                context.AppendFormat("Password: <font size='5' face='verdana'>{0}</font> </br>", password);
+                context.AppendFormat("Password: {0} </br>", password);
                 context.Append("It is highly recommended to change the password immediately and periodically.</br>");
                 context.Append("If you have questions regarding this portal, please feel free to contact our Member Services Hotline at(852) 3187 6831 or send email to <a href='medicalcs@generali.com.hk'>medicalcs@generali.com.hk</a> </br>");
                 context.Append("(Please do not send email to us by replying this auto - email.) </br>");
                 context.Append("Best regards, </br>");
                 context.Append("Assicurazioni Generali S.p.A. – Hong Kong Branch </br>");
+                context.Append("</div>");
                 SendEmail(subject, context.ToString(), list.FirstOrDefault()?.USUS_EMAIL);
             }
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);

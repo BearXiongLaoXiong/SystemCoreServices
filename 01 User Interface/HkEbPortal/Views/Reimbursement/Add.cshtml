@@ -17,13 +17,13 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width:120px;">家庭成</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "請選擇", new Dictionary<string, object>() { { "lay-verify", "required" }, { "lay-filter", "fmfmId" } })
+                    @Html.DropDownList("FMFM_DropDownList", ViewData["FMFM_DropDownList"] as SelectList, "Please Select", new Dictionary<string, object>() { { "lay-verify", "required" }, { "lay-filter", "fmfmId" } })
                 </div>
             </div>
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.benefit" class="layui-form-label" style="min-width:120px;">福利*</label>
                 <div class="layui-input-inline">
-                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, "請選擇福利", new Dictionary<string, object>() { { "lay-verify", "required" } })
+                    @Html.DropDownList("EBEB_DropDownList", ViewData["EBEB_DropDownList"] as SelectList, "Please Select", new Dictionary<string, object>() { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
@@ -59,7 +59,7 @@
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width:120px;">發票金額</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="please enter" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="layui-form-item layui-form-text">
             <label i18n="Reimbursement.edit.comments" class="layui-form-label">説明</label>
             <div class="layui-input-block">
-                <textarea name="COMMENT" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入"autocomplete="off" class="layui-textarea"></textarea>
+                <textarea name="COMMENT" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="please enter"autocomplete="off" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">

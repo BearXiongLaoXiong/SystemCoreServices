@@ -13,6 +13,7 @@
     <link href="../Scripts/css/layui.css" rel="stylesheet" />
 
     <script src="../bundles/modernizr"></script>
+    <script src="../Scripts/common.js"></script>
     <script src="../Scripts/jquery-3.1.1.min.js"></script>
     <script src="../Scripts/layui.js"></script>
     <script src="../Scripts/language/jquery.i18n.min.js"></script>
@@ -43,11 +44,13 @@
         <div class="container">
 
             <div class="navbarhide" style="height: 50px; text-align: right; line-height: 30px; font-size: 15px;">
-                <div @IsShow id="btnLogout" class="myButton" style="width:230px;background-color: #FFFFFF;border-right: none; padding:0; cursor: pointer;" onclick="Logout();">
-                    <a i18n="footer.logout" style="padding-right: 10px;">安全退出</a>
-                    <a href="../User/ModifyPwd" i18n="footer.Editpwd" style="padding-right: 10px;">修改密碼</a>
+                <div @IsShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0;  cursor: pointer;" onclick="Logout();">
+                    <a i18n="footer.logout" style="font-size: 12px;font-weight: normal;color:#333">安全退出</a>
                 </div>
-                <div @IsHide id="btnLogin" class="myButton" style="border-right: none; padding-right: 10px; cursor: pointer;" onclick="window.open('../User/Login', '_self')">
+                <div @IsShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0; margin:0 10px 0 10px; cursor: pointer;">
+                    <a href="../User/ModifyPwd" i18n="footer.Editpwd" style="font-size: 12px;font-weight: normal;color:#333">修改密碼</a>
+                </div>
+                <div @IsHide id="btnLogin" class="myButton" style="border-right: none; padding-right: 10px; width:100px;cursor: pointer;" onclick="window.open('../User/Login', '_self')">
                     <a class="myHarf" style=""></a>
                     <a i18n="footer.login" style="color: #FFFFFF; padding-right: 10px;">登入</a>
                 </div>
@@ -117,9 +120,9 @@
             var date = new Date();
             date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
             laodlanguage();
-            $("#SimplifiedChinese").click(function () { $("[i18n]").i18n({ defaultLang: "SimplifiedChinese", filePath: "../i18n/" }); $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date }); });
-            $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese", filePath: "../i18n/" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); });
-            $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); });
+            $("#SimplifiedChinese").click(function () { $("[i18n]").i18n({ defaultLang: "SimplifiedChinese", filePath: "../i18n/" }); $.cookie("defaultLang", "SimplifiedChinese", { path: '/', expires: date }); InitializeLanguageComponent(); });
+            $("#TraditionalChinese").click(function () { $("[i18n]").i18n({ defaultLang: "TraditionalChinese", filePath: "../i18n/" }); $.cookie("defaultLang", "TraditionalChinese", { path: '/', expires: date }); InitializeLanguageComponent();});
+            $("#english").click(function () { $("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/" }); $.cookie("defaultLang", "en", { path: '/', expires: date }); InitializeLanguageComponent();});
 
             //$("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/"});$.cookie("defaultLang", "en", { path: '/', expires: date });
         });

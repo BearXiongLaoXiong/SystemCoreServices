@@ -5,13 +5,27 @@
 }
 
 function ShowMsg() {
-    layer.msg('laoding.....', {
+    layer.msg('loading.....', {
         width: '100px',
         icon: 16,
         shade: 0.2,
         time: 10000,
         anim: 5
     });
+}
+
+function ShowLoading() {
+    layer.msg('loading.....', {
+        width: '100px',
+        icon: 16,
+        shade: 0.2,
+        time: 10000,
+        anim: 5
+    });
+}
+
+function CloseLoading() {
+    layer.closeAll();
 }
 
 function ShowOpen(context) {
@@ -36,4 +50,12 @@ function ShowOpen(context) {
 
 function CloseMsg() {
     setTimeout(function () { layer.closeAll() }, 300);
+}
+
+function layeralert1(msg, fun) {
+    layer.alert(msg, { title: "Message", skin: 'layui-layer-lan', btn: 'OK', closeBtn: 0 }, function (index) { layer.close(index); fun();  });
+}
+
+function layeralert(msg) {
+    layer.alert(msg, { title: "Message", skin: 'layui-layer-lan', btn: 'OK', closeBtn: 0 });
 }
