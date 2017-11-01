@@ -13,15 +13,17 @@ using HkEbPortal.App_Start;
 namespace HkEbPortal.Controllers
 {
     [Authorization]
+    //[UserInfoIsConfirm]
+    [IsOpenEnrollment(false)]
     public class ReimbursementController : BaseController
     {
         // GET: Reimbursement
         public ActionResult Index()
         {
-            if (!new Common().IsOpenEnrollment(UserInfo.USUS_KY))
-            {
-                return Redirect("../eflexi/Home/Index");
-            }
+            //if (!new Common().IsOpenEnrollment(UserInfo.USUS_KY))
+            //{
+            //    return Redirect("../eflexi/Home/Index");
+            //}
             string cliv_ky = Request["clivKy"];
 
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
@@ -147,7 +149,7 @@ namespace HkEbPortal.Controllers
         {
             string CLIV_KY = Request["clivKy"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = CLIV_KY };
-            var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity);
+            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity)?.FirstOrDefault();
             ViewBag.LiuNo = CLIV_KY;
 
             //Image pic = Image.FromFile("");
@@ -160,8 +162,8 @@ namespace HkEbPortal.Controllers
 
             //string imgPath = @"\Upload\images\"+ pic;
 
-            ViewBag.ImagePath = list.Count > 0 ? list?.First()?.CLIV_IMG_PATH : "";
-            return View();
+            ViewBag.ImagePath = result?.CLIV_IMG_PATH ?? "";
+            return View(result);
         }
 
         public ActionResult GetImg()

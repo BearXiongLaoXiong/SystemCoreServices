@@ -6,12 +6,9 @@
 }
 
 <div class="container">
-    <span class="layui-breadcrumb">
-        <a href="index"><span i18n="Reimbursement.Index.fsaClaims">报销</span></a>
-        <a><cite i18n="Reimbursement.edit.edit">编辑</cite></a>
-    </span>
+    
     <fieldset class="layui-elem-field layui-field-title">
-        <legend i18n="Reimbursement.Index.fsaClaims">編輯報銷</legend>
+        <legend><span i18n="footer.menu.claims">彈性福利索償</span>-<span i18n="Reimbursement.edit.edit">编辑</span></legend>
     </fieldset>
 
     <form class="layui-form">
@@ -116,7 +113,10 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="btnsubmitId" i18n="public.common.save">保存</button>
+                @{
+                    var _isDisable = Model.SYSV_CLIV_STS == "00" && Model.SYSV_CLIV_STS == "01"?"": " layui-btn-disabled ";
+                }
+                <button class="layui-btn @(new HtmlString(_isDisable));" lay-submit="" lay-filter="demo1" id="btnsubmitId" i18n="public.common.save">保存</button>
                 <a class="layui-btn layui-btn-primary" onclick="window.location.href = 'index'" i18n="public.common.back">返回</a>
             </div>
         </div>
@@ -132,7 +132,8 @@
         //执行一个laydate实例
         laydate.render({
             elem: '#CLIV_Date', //指定元素
-            format: 'dd/MM/yyyy'
+            format: 'dd/MM/yyyy',
+            lang: 'en'
         });
        
         form.on('submit(demo1)', function (data) {

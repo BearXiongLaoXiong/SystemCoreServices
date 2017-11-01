@@ -51,7 +51,7 @@ namespace HkEbPortal.Controllers
 
 
             if (userInfo == null)
-                return Json(new { Code = 1, Msg = "The account you entered does not exist or the password is incorrect!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 1, Msg = "user.login.popup.noaccount" }, JsonRequestBehavior.DenyGet);
 
             if (userInfo.USUS_EMAIL.Length == 0)
                 return Json(new { Code = 2, Msg = "Do not find your mailbox, please go to the registration interface to activate the mailbox!" }, JsonRequestBehavior.DenyGet);

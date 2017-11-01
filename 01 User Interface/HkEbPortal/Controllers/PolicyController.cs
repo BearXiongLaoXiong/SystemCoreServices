@@ -16,16 +16,18 @@ using HkEbPortal.App_Start;
 namespace HkEbPortal.Controllers
 {
     [Authorization]
+    //[UserInfoIsConfirm]
+    [IsOpenEnrollment(true)]
     public class PolicyController : BaseController
     {
         private static string savePath = ConfigurationManager.AppSettings["PdfSavePath"] ?? "";
         // GET: Policy
         public ActionResult Index()
         {
-            if (new Common().IsOpenEnrollment(UserInfo.USUS_KY))
-            {
-                return Redirect("../eflexi/Home/Index");
-            }
+            //if (new Common().IsOpenEnrollment(UserInfo.USUS_KY))
+            //{
+            //    return Redirect("../eflexi/Home/Index");
+            //}
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
                 pEHUSER = UserInfo.USUS_ID

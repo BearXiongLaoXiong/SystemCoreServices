@@ -162,6 +162,8 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\AuthorizationAttribute.cs" />
     <Compile Include="Filters\Des.cs" />
+    <Compile Include="Filters\IsOpenEnrollmentAttribute.cs" />
+    <Compile Include="Filters\UserInfoIsConfirmAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -393,7 +395,7 @@
     <Content Include="Views\Reimbursement\Add.cshtml" />
     <Content Include="Views\Reimbursement\Edit.cshtml" />
     <Content Include="Views\Policy\Detail.cshtml" />
-    <Content Include="i18n\i18n_TraditionalChinese.json">
+    <Content Include="i18n\i18n_ch.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="i18n\i18n_en.json">
@@ -409,6 +411,8 @@
     <Content Include="Views\Policy\ReadPDF.cshtml" />
     <Content Include="Views\Insurant\BenefitDetail.cshtml" />
     <Content Include="Views\User\ModifyPwd.cshtml" />
+    <Content Include="Text\Privacy Policy for portal English2014.pdf" />
+    <Content Include="Text\Tems and Condition_English20141231.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

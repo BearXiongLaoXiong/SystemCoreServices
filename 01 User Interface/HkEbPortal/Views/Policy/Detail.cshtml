@@ -34,7 +34,7 @@
                         <thead>
                             <tr>
                                 <th i18n="policy.detail.Plan">計劃</th>
-                                <th i18n="public.common.default">默認</th>
+                                <th i18n="public.common.opt">默認</th>
                                 <th i18n="policy.detail.level">級別</th>
                                 <th i18n="policy.detail.total">總金額</th>
                                 @*<th i18n="policy.detail.employee">員工金額</th>
@@ -50,7 +50,7 @@
                                     //if (info.PDCT_ID != item.PDCT_ID) { continue; }
                                     <tr>
                                         @{var check = info.SELECTED == "Y" ? "checked" : "";}
-                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange i18n='public.common.default'>default</span>" : "";}
+                                        @{var _default = info.PLPD_DEF_IND == "Y" ? "<span class='layui-badge layui-bg-orange' i18n=public.common.default>default</span>" : "";}
                                         <td><input type="radio" id="ids" name="radio@(new HtmlString(info.PDCT_ID))" title=" " value="@JsonConvert.SerializeObject(info)" @check>@info.PDPD_NAME</td>
                                         <td>@(new HtmlString(_default))</td>
                                         <td>@info.PDPD_LEVEL</td>
@@ -61,7 +61,14 @@
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
                                                 @*<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n="public.common.detail" onclick="showInformation('@info.PDPD_ID')">查看</a>*@
-                                                <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" i18n=""  href="../Policy/ReadPDF?fName=@info.PLGP_PATH" target="_blank"  title="View PDF">PDF</a>
+                                                @if (info.PLGP_PATH != "")
+                                                {
+                                                    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" href="../Policy/ReadPDF?fName=@info.PLGP_PATH" target="_blank" title="View PDF">PDF</a>
+                                                }
+                                                else
+                                                { 
+                                                    <a class="layui-btn layui-btn-danger layui-btn-mini layui-btn-disabled" title="View PDF">PDF</a>
+                                                }
                                             </div>
                                         </td>
                                     </tr>

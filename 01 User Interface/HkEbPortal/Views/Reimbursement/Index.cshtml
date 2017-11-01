@@ -7,14 +7,21 @@
 
 <div class="container">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend i18n="Reimbursement.Index.fsaClaims">報銷</legend>
+        <legend i18n="footer.menu.claims">彈性福利索償</legend>
     </fieldset>
 
     <div class="layui-form tableheight">
+        <div style="width:100%">
+
+            <div style="float: right; line-height: 30px">
+                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Initial">当前积分</span> &nbsp;-
+                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span> &nbsp;-
+            </div>
+        </div>
         <table class="layui-table">
             <thead>
                 <tr>
-                    <th style="width:50px;"></th>
+                    <th style="width: 50px;"></th>
                     <th i18n="Reimbursement.Index.Applicant">家庭成員</th>
                     <th i18n="Reimbursement.Index.Status">報銷狀態</th>
                     <th i18n="Reimbursement.Index.Benefit">福利</th>
@@ -26,9 +33,9 @@
             </thead>
             <tbody>
                 @foreach (var item in Model)
-                {
+            {
                     <tr>
-                        <td><input type="radio" name="selectName" data-clivKy="@item.CLIV_KY" title=" "/></td>
+                        <td><input type="radio" name="selectName" data-clivKy="@item.CLIV_KY" data-clivSts="@item.SYSV_CLIV_STS" title=" " /></td>
                         <td>@item.MEME_NAME</td>
                         <td>@item.SYSV_CLIV_STS_DESC</td>
                         <td>@item.EBEB_DESC</td>
@@ -42,11 +49,11 @@
         </table>
     </div>
     <div class="layui-upload">
-        <button class="layui-btn  layui-btn-small" id="AddId" i18n="Reimbursement.Index.Add">新 增</button>
-        <button class="layui-btn layui-btn-warm  layui-btn-small" id="UpdateId" i18n="Reimbursement.Index.Edit">編 輯</button>
+        <button class="layui-btn layui-btn-primary layui-btn-small" id="AddId" i18n="Reimbursement.Index.Add">新 增</button>
+        <button class="layui-btn layui-btn-primary  layui-btn-small" id="UpdateId" i18n="Reimbursement.Index.Edit">編 輯</button>
         <button class="layui-btn layui-btn-danger  layui-btn-small" id="DeleteId" i18n="Reimbursement.Index.Delete">刪 除</button>
-        <button class="layui-btn layui-btn-normal  layui-btn-small" id="UploadId" i18n="Reimbursement.Index.Image">影 像</button>
-        <button class="layui-btn layui-btn-primary  layui-btn-small" id="submitId" i18n="Reimbursement.Index.Submit">提 交</button>
+        <button class="layui-btn layui-btn-primary  layui-btn-small" id="UploadId" i18n="Reimbursement.Index.Image">影 像</button>
+        <button class="layui-btn layui-btn-warm  layui-btn-small" id="submitId" i18n="Reimbursement.Index.Submit">提 交</button>
     </div>
 </div>
 <script src="../Scripts/Reimbursement/Index.js"></script>

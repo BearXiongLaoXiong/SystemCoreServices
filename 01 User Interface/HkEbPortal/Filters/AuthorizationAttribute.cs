@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,7 +28,7 @@ namespace HkEbPortal.Filters
         /// </summary>
         public AuthorizationAttribute()
         {
-            String authUrl = ConfigurationManager.AppSettings["AuthUrl"];
+            String authUrl = ConfigurationManager.AppSettings["UserLogin"];
 
             _authUrl = String.IsNullOrEmpty(authUrl) ? "../eflexi/User/Login" : authUrl;
         }
@@ -62,6 +63,7 @@ namespace HkEbPortal.Filters
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
+            Debug.WriteLine("is OnAuth");
             if (filterContext.HttpContext == null)
                 throw new Exception("此特性只适合于Web应用程序使用！");
             if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true) || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(

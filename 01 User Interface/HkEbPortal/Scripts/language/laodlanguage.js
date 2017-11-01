@@ -14,28 +14,36 @@
             console.log("i18n has been completed.");
         }
     });
-
+    InitializeLanguageComponent();
 }
 
 
-var languageJson;
+var enlanguageJson;
+var chlanguageJson;
 function InitializeLanguageComponent() {
+    $.ajaxSettings.async = false;
 
-    /*默认语言*/
+    $.getJSON("../i18n/i18n_en.json",
+        function (data) {
+            enlanguageJson = data;
+        });
+
+    $.getJSON("../i18n/i18n_ch.json",
+        function (data) {
+            chlanguageJson = data;
+        });
+
+    $.ajaxSettings.async = true;
+}
+
+function il8nMessage(key) {
     var defaultLang = "en";
     var cookie = $.cookie("defaultLang");
     if (cookie != null && cookie !== "undefined") defaultLang = cookie;
-
-    $.getJSON("../i18n/i18n_" + defaultLang + ".json",
-        function (data) {
-            languageJson = data;
-        });
-    
+    if (defaultLang === "ch")
+        return chlanguageJson[key];
+    else return enlanguageJson[key];
 }
-
-//function MessageAlert(key) {
-//        alert(languageJson[key]); //显示处理后的数据 
-//}
 
 
 

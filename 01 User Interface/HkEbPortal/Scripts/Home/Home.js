@@ -11,7 +11,8 @@ layui.use(['form', 'carousel', 'laydate'], function () {
     //轮播
     laydate.render({
         elem: '#txtDate',
-        format: 'dd/MM/yyyy'
+        format: 'dd/MM/yyyy',
+        lang: 'en'
     });
 
     carousel.render({
@@ -52,6 +53,7 @@ layui.use(['form', 'carousel', 'laydate'], function () {
 
 
                     } else {
+                        
                         window.location.href = "../Home/Index";
                     }
                 }
@@ -69,7 +71,7 @@ layui.use(['form', 'carousel', 'laydate'], function () {
                     });
                 }
                 else
-                    layeralert(result.Msg);
+                    layeralert(il8nMessage(result.Msg));
             });
         return false;
     });

@@ -6,16 +6,37 @@
 }
 <link href="../Scripts/css/layui.css" rel="stylesheet" />
 <div class="container">
-    
+
     <fieldset class="layui-elem-field layui-field-title">
-        <legend i18n="Insurant.index.info">被保险人信息</legend>
+        <legend i18n="footer.menu.member">受保人資料</legend>
     </fieldset>
-    
+
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <p><span i18n="Insurant.index.memename">主被保险人</span>：@ViewData["NAME"]</p>
-        <p><span i18n="Insurant.index.gpgpname">团体名称</span>：@ViewData["GPGP_NAME"]</p>
-        <p> <span i18n="Insurant.index.employeelevel">员工等级</span>：@ViewData["GCGC_DESC"]</p>
-</blockquote>
+        <table class="layui-table"  lay-skin="nob" style="margin:0;">
+            <colgroup>
+                <col width="100">
+                <col>
+            </colgroup>
+            <tbody>
+            <tr>
+                <td style="text-align: left;padding:5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.member">會員編號</span></span></td>
+                <td style="font-size:17.5px;padding:5px;">@ViewData["MEMBER_ID"]</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.memename">受保僱員</span></span></td>
+                <td style="font-size: 17.5px; padding: 5px;">@ViewData["NAME"]</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.gpgpname">保單持有人</span></span></td>
+                <td style="font-size: 17.5px; padding: 5px;">@ViewData["GPGP_NAME"]</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.employeelevel">附屬公司</span></span></td>
+                <td style="font-size: 17.5px; padding: 5px;">@ViewData["GCGC_DESC"]</td>
+            </tr>
+            </tbody>
+        </table>
+    </blockquote>
 
     <div class="layui-tab layui-tab-card tableheight" lay-filter="docDemoTabBrief">
         <ul class="layui-tab-title">
@@ -25,7 +46,7 @@
             <li i18n="Insurant.index.billingInformation">账单信息</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show"> 
+            <div class="layui-tab-item layui-show">
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
@@ -56,7 +77,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="layui-tab-item"> 
+            <div class="layui-tab-item">
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
@@ -92,8 +113,8 @@
                     </thead>
                     <tbody id="policyInfoId"></tbody>
                 </table>
-            </div> 
-            <div class="layui-tab-item"> 
+            </div>
+            <div class="layui-tab-item">
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
@@ -109,9 +130,9 @@
                     </thead>
                     <tbody id="BillingInformationId"></tbody>
                 </table>
-            </div> 
-         </div>
-    </div> 
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     $(function () {
@@ -161,7 +182,7 @@
             dataType: "json",
             success: function (dat, status) {
                 var policyInfoStr = "";
-                $.each(dat, function (i,row) {
+                $.each(dat, function (i, row) {
                     policyInfoStr += "<tr>";
                     policyInfoStr += "<td>" + row.PLPL_ID + "</td>";
                     policyInfoStr += "<td>" + row.SYSV_PLPL_STS + "</td>";
@@ -169,7 +190,7 @@
                     policyInfoStr += "<td>" + row.PLPL_END_DT + "</td>";
                     policyInfoStr += "<td>" + row.MEME_NAME + "</td>";
                     policyInfoStr += "<td>" + row.SYSV_MEME_REL_CD + "</td>";
-                    policyInfoStr += "<td>" + row.Cert_No + "-" + row.Cert_Prefix+ "</td>";
+                    policyInfoStr += "<td>" + row.Cert_No + "-" + row.Cert_Prefix + "</td>";
                     //policyInfoStr += "<td>" +  + "</td>";
                     policyInfoStr += "<td>" + row.CLASS + "</td>";
                     policyInfoStr += "<td><a class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowBenefitInfo(" + row.PLPL_KY + "," + row.MEME_KY + ")'>detail</a></td>";
@@ -194,7 +215,7 @@
                     billingInfoStr += "<td>" + row.Initial_Amout + "</td>";
                     billingInfoStr += "<td>" + row.Current_Points + "</td>";
                     billingInfoStr += "<td>" + row.Comment + "</td>";
-                    billingInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowDetail(" + row.FMAC_KY +")'>detail</a></td>";
+                    billingInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowDetail(" + row.FMAC_KY + ")'>detail</a></td>";
                     billingInfoStr += "</tr>";
                 });
                 $("#BillingInformationId").html(billingInfoStr);
@@ -203,29 +224,31 @@
 
     });
 
+    function ShowBenefitInfo(plplky, memeky) {
+        layer.open({
+            type: 2,
+            title: 'Benefit Info',
+            skin: 'layui-layer-demo', //样式类名
+            area: ['900px', '500px'],
+            closeBtn: 1,
+            shadeClose: true, //开启遮罩关闭
+            content: ['BenefitDetail?PLPL_KY=' + plplky + '&MEME_KY=' + memeky],
+            btnAlign: 'c'
+        });
+    }
+
     function ShowDetail(fmacky) {
         layer.open({
             type: 2,
-            title: 'BillingInfomationDetail',
+            title: 'Points Transaction Records',
             skin: 'layui-layer-demo', //样式类名
             area: ['900px', '500px'],
-            closeBtn: 1, 
+            closeBtn: 1,
             shadeClose: true, //开启遮罩关闭
             content: 'BillingInfomationDetail?FMAC_KY=' + fmacky,
             btnAlign: 'c'
         });
     }
 
-    function ShowBenefitInfo(plplky, memeky) {
-        layer.open({
-            type: 2,
-            title: 'BenefitDetail',
-            skin: 'layui-layer-demo', //样式类名
-            area: ['900px', '500px'],
-            closeBtn: 1,
-            shadeClose: true, //开启遮罩关闭
-            content: ['BenefitDetail?PLPL_KY=' + plplky + '&MEME_KY=' + memeky,'no'],
-            btnAlign: 'c'
-        });
-    }
+    
 </script>

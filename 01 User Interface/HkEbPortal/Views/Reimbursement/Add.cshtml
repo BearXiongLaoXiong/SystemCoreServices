@@ -5,12 +5,9 @@
 
 
 <div class="container">
-    <span class="layui-breadcrumb">
-        <a href="index"><span i18n="Reimbursement.Index.fsaClaims">报销</span></a>
-        <a><cite i18n="Reimbursement.Index.Add">新增</cite></a>
-    </span>
+   
     <fieldset class="layui-elem-field layui-field-title">
-        <legend i18n="Reimbursement.Index.fsaClaims">新增報銷</legend>
+        <legend><span i18n="footer.menu.claims">彈性福利索償</span>-<span i18n="Reimbursement.Index.Add">新增</span></legend>
     </fieldset>
     <form class="layui-form">
         <div class="layui-form-item">
@@ -88,7 +85,8 @@
         //执行一个laydate实例
         laydate.render({
             elem: '#CLIV_Date', //指定元素
-            format:'dd/MM/yyyy'
+            format: 'dd/MM/yyyy',
+            lang: 'en'
         });
         
         form.on('submit(demo1)', function (data) {

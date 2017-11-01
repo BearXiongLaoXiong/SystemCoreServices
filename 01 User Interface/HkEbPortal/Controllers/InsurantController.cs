@@ -18,7 +18,8 @@ namespace HkEbPortal.Controllers
         {
             // 默认返回员工详细信息
             var entity = new SPEH_FMDT_FAMILY_DETL_LIST_WEB() { pFMFM_KY = UserInfo.USUS_KY };
-            var list = CommonBl.QuerySingle<SPEH_FMDT_FAMILY_DETL_LIST_WEB,SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>(entity);
+            var list = CommonBl.QuerySingle<SPEH_FMDT_FAMILY_DETL_LIST_WEB, SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>(entity);
+            ViewData["MEMBER_ID"] = UserInfo.USUS_ID.Split('-').Length >= 2 ? UserInfo.USUS_ID.Split('-')[1] : "";
             ViewData["GPGP_NAME"] = UserInfo.GPGP_NAME;
             ViewData["NAME"] = UserInfo.NAME;
             ViewData["GCGC_DESC"] = UserInfo.GCGC_DESC;
@@ -34,7 +35,7 @@ namespace HkEbPortal.Controllers
         {
             var entity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(entity);
-            
+
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
@@ -63,7 +64,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetPolicyInfo ()
+        public JsonResult GetPolicyInfo()
         {
             var entity = new SPEH_PLFM_LIST() { pFMFM_KY = UserInfo.USUS_KY };
             var list = CommonBl.QuerySingle<SPEH_PLFM_LIST, SPEH_PLFM_LIST_RESULT>(entity);
@@ -91,7 +92,7 @@ namespace HkEbPortal.Controllers
             return View(list);
         }
 
-        public ActionResult BenefitDetail(string PLPL_KY,string MEME_KY)
+        public ActionResult BenefitDetail(string PLPL_KY, string MEME_KY)
         {
             var entity = new SPEH_PLFM_DET_LIST()
             {

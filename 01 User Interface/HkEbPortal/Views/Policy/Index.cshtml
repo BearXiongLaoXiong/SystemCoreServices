@@ -5,15 +5,11 @@
 }
 
 <div class="container">
+    
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend i18n="footer.menu.policy">福利選擇</legend>
+    </fieldset>
 
-    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <div style="width: 100%;height:18px;">
-            <div style="padding-right:0px;float:right"> 
-                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Lnitial">当前积分</span>&nbsp;@Model.INITIAL_AMT &nbsp;&nbsp;
-                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span>&nbsp;@Model.BlanAmount
-            </div>
-        </div>
-    </blockquote>
     <div class="tableheight">
         @{
             foreach (var name in Model.Names)
@@ -23,29 +19,38 @@
                         var _color = "#c12017";
                         var _icon = "&#xe613";
                         var _isMaster = "";
-                        
+
                         if (name.SYSV_MEME_REL_CD == "E")
                         {
                             _color = "#c12017";
                             _icon = "&#xe613";
-                            _isMaster = "";
+                            _isMaster = "i18n=Policy.index.Employee ";
+                        }
+                        else if (name.SYSV_MEME_REL_CD == "S")
+                        {
+                            _color = "#FF5722";
+                            _icon = "&#xe612";
+                            _isMaster = "i18n=Policy.index.Spouse ";
                         }
                         else
                         {
                             _color = "#FF5722";
                             _icon = "&#xe612";
-                            _isMaster = "style='display: none;'";
+                            _isMaster = "i18n=Policy.index.Child ";
                         }
                     }
                     <div style="width:100%">
                         <i class="layui-icon" style="float: left;  font-size: 30px; color: @(new HtmlString(_color));">@(new HtmlString(_icon));</i>
                         <div style="float: left; line-height: 30px">
-                            <span class="layui-badge-rim layui-bg-orange" @(new HtmlString(_isMaster))>E</span>@name.MEME_NAME &nbsp;&nbsp;
+                            <span class="layui-badge-rim layui-bg-orange" @_isMaster)>...</span>@name.MEME_NAME &nbsp;&nbsp;
                         </div>
-                        <div style="float: right; line-height: 30px">
-                            <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Lnitial">当前积分</span> &nbsp;@name.INITIAL_AMT
-                            <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span> &nbsp;@name.BlanAmount
-                        </div>
+                        @if (name.SYSV_MEME_REL_CD == "E")
+                        { 
+                            <div style="float: right; line-height: 30px">
+                                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Initial">当前积分</span> &nbsp;@Model.INITIAL_AMT
+                                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span> &nbsp;@Model.BlanAmount
+                            </div>
+                        }
                     </div>
                 </div>
                 <hr class="layui-bg-red" />

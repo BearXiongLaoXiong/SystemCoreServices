@@ -16,7 +16,10 @@
 
     <div class="layui-upload">
         <button type="button" class="layui-btn" id="selectId" i18n="Reimbursement.Upload.imageselect">多图片選擇</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="layui-btn layui-btn-normal layui-btn-small" id="UploadId" i18n="Reimbursement.Upload.imageupload">上 傳</button>
+        @{
+            var _isDisable = Model.SYSV_CLIV_STS == "00" && Model.SYSV_CLIV_STS == "01"?"": " layui-btn-disabled ";
+        }
+        <button class="layui-btn layui-btn-normal layui-btn-small @(new HtmlString(_isDisable));" id="UploadId" i18n="Reimbursement.Upload.imageupload">上 傳</button>
         <button class="layui-btn layui-btn-primary layui-btn-small" onclick="window.location.href = 'index'" i18n="public.common.back">返回</button>
         <textarea id="imgPathId" placeholder="" readonly class="layui-textarea"></textarea>
     </div>
