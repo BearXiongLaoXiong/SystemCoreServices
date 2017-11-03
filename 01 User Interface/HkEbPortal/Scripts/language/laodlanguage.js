@@ -11,7 +11,7 @@
         fileSuffix: "",
         forever: true,
         callback: function () {
-            console.log("i18n has been completed.");
+            console.log("language is " + defaultLang);
         }
     });
     InitializeLanguageComponent();

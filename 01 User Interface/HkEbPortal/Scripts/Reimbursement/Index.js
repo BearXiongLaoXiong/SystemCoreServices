@@ -1,93 +1,74 @@
 ﻿layui.use(['upload', 'form', 'layer'], function () {
 
-    var $ = layui.jquery, upload = layui.upload, form = layui.form, layer = layui.layer;
-
     $("#linkReim").addClass("navbarCheckIn");
-    $("#AddId").on("click", function () {
-        location.href = "../Reimbursement/Add";
+
+    var form = layui.form,
+        upload = layui.upload,
+        layer = layui.layer;
+
+    ShowLoading();
+
+    $("#btnEdit").on("click", function () {
+        var id = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        if (id == null) { layeralert("please select data！"); return false; }
+
+        location.href = "../Reimbursement/Edit?id=" + id;
+        return false;
     });
 
-    // 檢查
-    $("#UpdateId").on("click", function () {
-        var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
-        if (val == null) {
-            layer.msg("please select data！");
-        } else {
-            location.href = "../Reimbursement/Edit?clivKy=" + val;
-        }
-    });
 
-
-    $("#DeleteId").on("click", function () {
+    form.on('submit(btnDelete)', function (data) {
         var sts = $("input:radio[name='selectName']:checked").attr("data-clivSts");
-        if (sts !== "00" && sts !== "01") {
-            layer.msg("FSA Claim had been submitted,Can't delete！");
-            return;
+        if (sts == null) { layeralert("Please select the data to be deleted！"); return false; }
+
+        if (sts !== "00" && sts !== "01") { layeralert("FSA Claim had been submitted,Can't delete！"); return false; }
+
+        var id = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        layer.confirm('Confirm to delete this entry?', {
+            btn: ['Confirm', 'No'],
+            title: ' ',
+            skin: 'layui-layer-lan',
+            closeBtn: 1
+        }, function () {
+            $.post("Delete", { id: id, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() }, function (result) {
+                layeralert1(result, function () { location.reload(); });
+            });
+        });
+        return false;
+    });
+
+
+    form.on('submit(btnSubmit)', function (data) {
+        var sts = $("input:radio[name='selectName']:checked").attr("data-clivSts");
+
+        if (sts == null) {
+            layeralert("Please select the data to be operated！");
+            return false;
         }
 
-        var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
-        if (val == null) {
-            layer.msg("Please select the data to be deleted！");
-        } else {
-            layer.open({
-                id: 'one',
-                //shade: 0,
-                type: 0,
-                title: 'Delete',
-                content: 'Confirm to delete this entry?',
-                btn: ['Confirm ', 'No'],
-                btnAlign: 'c',
-                yes: function (i, l) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "../Reimbursement/Delete",
-                        data: { "CLIV_KY": val },
-                        dataType: "json",
-                        success: function (data) {
-                            location.reload();
-                            layer.msg(data);
-                        }
-                    });
-                }
-            });
+        if (sts !== "00" && sts !== "01") {
+            layeralert("FSA Claim had been submitted,Can't submit！");
+            return false;
         }
+
+        var id = $("input:radio[name='selectName']:checked").attr("data-clivKy");
+        ShowLoading();
+        $.post("EditFsaClaimStatus", { id: id, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() }, function (result) {
+            CloseLoading();
+            layeralert1(result, function () { location.reload(); });
+        });
+
+        return false;
     });
 
     $("#UploadId").on("click", function () {
         var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
         if (val == null) {
-            layer.msg("Please select the data to be operated！");
+            layeralert("Please select the data to be operated！");
         } else {
             location.href = "../Reimbursement/Upload?clivKy=" + val;
         }
     });
 
-    $("#submitId").on("click", function () {
-
-        var sts = $("input:radio[name='selectName']:checked").attr("data-clivSts");
-        if (sts !== "00" && sts !== "01") {
-            layer.msg("FSA Claim had been submitted,Can't submit！");
-            return;
-        }
-
-        var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
-        if (val == null) {
-            layer.msg("Please select the data to be operated！");
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "../Reimbursement/UpdateCLIVSTS",
-                data: { "CLIV_KY": val },
-                dataType: "json",
-                success: function (dat, status) {
-                    layeralert1(dat, function () { window.location.reload(); });
-                }
-            });
-        }
-
-    });
-
-})
-
-
-
+    CloseDelayLoading();
+});

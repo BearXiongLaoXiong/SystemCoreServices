@@ -4,6 +4,7 @@ using HkEbPortal.Models.EB_PORTAL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -28,7 +29,12 @@ namespace HkEbPortal.Controllers
 
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
-            return View(list);
+
+            dynamic model = new ExpandoObject();
+            model.Initial = UserInfo.INTIAL_AMT;
+            model.Remaining = UserInfo.FMFM_CUR_AMT;
+            model.List = list;
+            return View(model);
         }
 
         public ActionResult Add()
@@ -50,6 +56,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Add(FormCollection form)
         {
             string meme_ky = form["FMFM_DropDownList"];
@@ -80,16 +87,17 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
 
-        public ActionResult Edit(string clivKy, string plpl_ky)
+
+        public ActionResult Edit(string id)
         {
-            if (string.IsNullOrEmpty(clivKy)) return View();
+            if (string.IsNullOrEmpty(id)) return View();
             var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
             var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
             var entity = new SPEH_EBEB_VALUE_LIST() { pMEME_KY = UserInfo.USUS_KY };
             var ebList = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
             var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
-            var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = clivKy };
+            var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = id };
             var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity)?.FirstOrDefault();
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.MEME_KY);
@@ -103,7 +111,8 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditUpdate(FormCollection form)
+        [ValidateAntiForgeryToken]
+        public JsonResult Edit(FormCollection form)
         {
             if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json(new { Code = 2, Msg = "Fail" }, JsonRequestBehavior.AllowGet);
             string cliv_ky = form["CLIV_KY"];
@@ -136,13 +145,14 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
 
-        [HttpPost]
-        public JsonResult Delete(string CLIV_KY)
-        {
-            var del = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE() { pCLIV_KY = CLIV_KY };
-            CommonBl.Execute(del);
 
-            return Json(del.pRTN_MSG, JsonRequestBehavior.AllowGet);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult Delete(string id)
+        {
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE { pCLIV_KY = id };
+            CommonBl.Execute(entity);
+            return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Upload()
@@ -226,9 +236,11 @@ namespace HkEbPortal.Controllers
             return Json(Str, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateCLIVSTS(string CLIV_KY)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult EditFsaClaimStatus(string id)
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pSYSV_CLIV_STS = "02", pCLIV_KY = CLIV_KY };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE { pSYSV_CLIV_STS = "02", pCLIV_KY = id };
             CommonBl.Execute(entity);
             return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }

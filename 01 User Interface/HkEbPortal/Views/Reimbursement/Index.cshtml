@@ -1,5 +1,4 @@
 ﻿@using HkEbPortal.Models.EB_PORTAL
-@model IEnumerable<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>
 @{
     ViewBag.Title = "Index";
     Layout = "/Views/Shared/_Layout.cshtml";
@@ -11,13 +10,14 @@
     </fieldset>
 
     <div class="layui-form tableheight">
-        <div style="width:100%">
-
+        @Html.AntiForgeryToken()
+        <div style="width: 100%">
             <div style="float: right; line-height: 30px">
-                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Initial">当前积分</span> &nbsp;-
-                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span> &nbsp;-
+                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Initial">当前积分</span> &nbsp;@Model.Initial
+                <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span> &nbsp;@Model.Remaining
             </div>
         </div>
+
         <table class="layui-table">
             <thead>
                 <tr>
@@ -32,28 +32,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-            {
-                    <tr>
-                        <td><input type="radio" name="selectName" data-clivKy="@item.CLIV_KY" data-clivSts="@item.SYSV_CLIV_STS" title=" " /></td>
-                        <td>@item.MEME_NAME</td>
-                        <td>@item.SYSV_CLIV_STS_DESC</td>
-                        <td>@item.EBEB_DESC</td>
-                        <td>@item.CLIV_DT</td>
-                        <td>@item.CLIV_CHG</td>
-                        @*<td>@item.CLIV_APPLY_AMT</td>*@
-                        <td>@item.CLIV_PAYABLE</td>
-                    </tr>
+                @{
+                    var index = true;
+                    foreach (var item in Model.List)
+                    {
+                        <tr>
+                            <td><input type="radio" name="selectName" @(index ? "checked" : "") data-clivKy="@item.CLIV_KY" data-clivSts="@item.SYSV_CLIV_STS" title=" " /></td>
+                            <td>@item.MEME_NAME</td>
+                            <td>@item.SYSV_CLIV_STS_DESC</td>
+                            <td>@item.EBEB_DESC</td>
+                            <td>@item.CLIV_DT</td>
+                            <td>@item.CLIV_CHG</td>
+                            @*<td>@item.CLIV_APPLY_AMT</td>*@
+                            <td>@item.CLIV_PAYABLE</td>
+                        </tr>
+                        index = false;
+                    }
                 }
             </tbody>
         </table>
+
     </div>
-    <div class="layui-upload">
-        <button class="layui-btn layui-btn-primary layui-btn-small" id="AddId" i18n="Reimbursement.Index.Add">新 增</button>
-        <button class="layui-btn layui-btn-primary  layui-btn-small" id="UpdateId" i18n="Reimbursement.Index.Edit">編 輯</button>
-        <button class="layui-btn layui-btn-danger  layui-btn-small" id="DeleteId" i18n="Reimbursement.Index.Delete">刪 除</button>
-        <button class="layui-btn layui-btn-primary  layui-btn-small" id="UploadId" i18n="Reimbursement.Index.Image">影 像</button>
-        <button class="layui-btn layui-btn-warm  layui-btn-small" id="submitId" i18n="Reimbursement.Index.Submit">提 交</button>
+    <div>
+        <a class="layui-btn layui-btn-primary layui-btn-small" href="../Reimbursement/Add" i18n="public.common.add">新增</a>
+        <button class="layui-btn layui-btn-primary  layui-btn-small" id="btnEdit" i18n="public.common.edit">編輯</button>
+        <button class="layui-btn layui-btn-danger  layui-btn-small" lay-submit lay-filter="btnDelete" i18n="public.common.delete">刪除</button>
+        <button class="layui-btn layui-btn-primary  layui-btn-small" id="UploadId" i18n="Reimbursement.Index.Image">影像</button>
+        <button class="layui-btn layui-btn-warm  layui-btn-small" lay-submit lay-filter="btnSubmit" i18n="public.common.submit">提交</button>
     </div>
 </div>
 <script src="../Scripts/Reimbursement/Index.js"></script>

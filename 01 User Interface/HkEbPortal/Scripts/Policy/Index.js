@@ -1,11 +1,15 @@
 ﻿layui.use('element', function () {
     var element = layui.element;
-    $("#linkPolicy").addClass("navbarCheckIn");
+
 });
 
 
-layui.use('form', function () {
-    var form = layui.form;
+layui.use(['form', 'element'], function () {
+    $("#linkPolicy").addClass("navbarCheckIn");
+    var form = layui.form,
+        element = layui.element;
+    
+    ShowLoading();
     var memeKy = getUrlParam("memeKy");
     console.log("memeKy = " + memeKy);
     //laodview('', (memeKy !== null && memeKy !== "") ? memeKy : "");
@@ -15,7 +19,7 @@ layui.use('form', function () {
     //    console.log(data.value); //被点击的radio的value值
     //    laodview(data.value, "");
     //});
-
+    CloseDelayLoading();
 });
 
 
@@ -60,11 +64,4 @@ function laodview(status, memeKy) {
             });
             setTimeout(function () { layer.closeAll() }, 300);
         });
-}
-
-
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r !== null) return unescape(r[2]); return null; //返回参数值
 }

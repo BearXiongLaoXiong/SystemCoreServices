@@ -39,6 +39,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string GPGP_NAME { get; set; }
         public string FMFM_KY { get; set; }
         public string NAME { get; set; }
+        public string INTIAL_AMT { get; set; }
         public string FMFM_CUR_AMT { get; set; }
         public string GCGC_KY { get; set; }
         public string GCGC_DESC { get; set; }

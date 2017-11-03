@@ -15,14 +15,16 @@
         <span class="layui-badge-rim layui-bg-orange" i18n="policy.detail.policy">保单</span>&nbsp;@Model.Desc
     </blockquote>
     <form class="layui-form tableheight" action="">
+        @Html.AntiForgeryToken()
         @{
             //foreach (var item in Model.PlplList)
             {
                 <div>
-                    <i class="layui-icon" style="float: left;font-size: 30px;">&#xe60a;</i><div style="float: left;line-height:30px">@Model.PdctName</div>
+                    <i class="layui-icon" style="float: left; font-size: 30px;">&#xe60a;</i>
+                    <div style="float: left; line-height: 30px">@Model.PdctName</div>
                 </div>
                 <hr class="layui-bg-red">
-                <div class="layui-form" style="margin-bottom:30px;">
+                <div style="margin-bottom: 30px;">
                     <table class="layui-table">
                         <colgroup>
                             <col>
@@ -38,7 +40,7 @@
                                 <th i18n="policy.detail.level">級別</th>
                                 <th i18n="policy.detail.total">總金額</th>
                                 @*<th i18n="policy.detail.employee">員工金額</th>
-                                <th i18n="policy.detail.target">雇主金額</th>*@
+                                    <th i18n="policy.detail.target">雇主金額</th>*@
                                 @*<th i18n="policy.detail.tax">稅率金額</th>*@
                                 <th></th>
                             </tr>
@@ -56,7 +58,7 @@
                                         <td>@info.PDPD_LEVEL</td>
                                         <td>@info.PLME_AMT</td>
                                         @*<td>@info.EMP_AMT</td>
-                                        <td>@info.EMPYEE_AMT</td>*@
+                                            <td>@info.EMPYEE_AMT</td>*@
                                         @*<td>@info.TXTX_AMT</td>*@
                                         <td style="padding: 0; text-align: center" data-off="true">
                                             <div class="layui-table-cell laytable-cell-1-4">
@@ -66,24 +68,24 @@
                                                     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail" href="../Policy/ReadPDF?fName=@info.PLGP_PATH" target="_blank" title="View PDF">PDF</a>
                                                 }
                                                 else
-                                                { 
+                                                {
                                                     <a class="layui-btn layui-btn-danger layui-btn-mini layui-btn-disabled" title="View PDF">PDF</a>
                                                 }
                                             </div>
                                         </td>
                                     </tr>
-                                }
+                                            }
                             }
                         </tbody>
                     </table>
                 </div>
-            }
+                                            }
         }
 
         <div style="text-align: right;">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="submitDetailRadio"i18n="public.common.save">保存</button>
-                <a class="layui-btn layui-btn-primary" onclick="returnbackurl()" i18n="public.common.back">返回</a>
+                <button class="layui-btn layui-btn-small" lay-submit lay-filter="submitDetailRadio" i18n="public.common.save">保存</button>
+                <a class="layui-btn layui-btn-small layui-btn-primary" href="../Policy/Index" i18n="public.common.back">返回</a>
             </div>
 
         </div>
@@ -92,8 +94,3 @@
 </div>
 <script src="../Scripts/common.js"></script>
 <script src="../Scripts/Policy/Detail.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#linkPolicy").addClass("navbarCheckIn");
-    });
-</script>

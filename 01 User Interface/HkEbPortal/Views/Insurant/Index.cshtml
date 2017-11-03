@@ -1,5 +1,4 @@
 ﻿@using HkEbPortal.Models.EB_PORTAL
-@model IEnumerable<SPEH_FMDT_FAMILY_DETL_LIST_WEB_RESULT>
 @{
     ViewBag.Title = "Index";
     Layout = "/Views/Shared/_Layout.cshtml";
@@ -12,38 +11,38 @@
     </fieldset>
 
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 20px;">
-        <table class="layui-table"  lay-skin="nob" style="margin:0;">
+        <table class="layui-table" lay-skin="nob" style="margin:0;">
             <colgroup>
                 <col width="100">
                 <col>
             </colgroup>
             <tbody>
-            <tr>
-                <td style="text-align: left;padding:5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.member">會員編號</span></span></td>
-                <td style="font-size:17.5px;padding:5px;">@ViewData["MEMBER_ID"]</td>
-            </tr>
-            <tr>
-                <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.memename">受保僱員</span></span></td>
-                <td style="font-size: 17.5px; padding: 5px;">@ViewData["NAME"]</td>
-            </tr>
-            <tr>
-                <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.gpgpname">保單持有人</span></span></td>
-                <td style="font-size: 17.5px; padding: 5px;">@ViewData["GPGP_NAME"]</td>
-            </tr>
-            <tr>
-                <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.employeelevel">附屬公司</span></span></td>
-                <td style="font-size: 17.5px; padding: 5px;">@ViewData["GCGC_DESC"]</td>
-            </tr>
+                <tr>
+                    <td style="text-align: left;padding:5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.member">會員編號</span></span></td>
+                    <td style="font-size:17.5px;padding:5px;">@Model.MEMBER_ID</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.memename">受保僱員</span></span></td>
+                    <td style="font-size: 17.5px; padding: 5px;">@Model.NAME</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.gpgpname">保單持有人</span></span></td>
+                    <td style="font-size: 17.5px; padding: 5px;">@Model.GPGP_NAME</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 5px;"><span class="layui-badge-rim layui-bg-orange"><span i18n="Insurant.index.employeelevel">附屬公司</span></span></td>
+                    <td style="font-size: 17.5px; padding: 5px;">@Model.GCGC_DESC</td>
+                </tr>
             </tbody>
         </table>
     </blockquote>
 
-    <div class="layui-tab layui-tab-card tableheight" lay-filter="docDemoTabBrief">
+    <div class="layui-tab layui-tab-card tableheight" lay-filter="memberInfoTable">
         <ul class="layui-tab-title">
-            <li class="layui-this" i18n="Insurant.index.memeber">员工信息</li>
-            <li i18n="Insurant.index.family">家庭成员</li>
-            <li i18n="Insurant.index.policyInfo">保单信息</li>
-            <li i18n="Insurant.index.billingInformation">账单信息</li>
+            <li lay-id="111" class="layui-this" i18n="Insurant.index.memeber">員工資訊</li>
+            <li lay-id="222" i18n="Insurant.index.family">家庭成員</li>
+            <li lay-id="333" i18n="Insurant.index.policyInfo">福利信息</li>
+            <li lay-id="444" i18n="Insurant.index.billingInformation">積分使用記錄</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
@@ -51,27 +50,21 @@
                     <thead>
                         <tr>
                             <th hidden>KEY</th>
-                            <th i18n="Insurant.table1.employeestartdate">员工起始日</th>
-                            @*<th i18n="Insurant.table1.employeeenddate">员工终止日</th>*@
-                            <th i18n="Insurant.table1.employeemonthly">员工月薪(￥)</th>
-                            <th i18n="Insurant.table1.employeestaffdep">员工部门</th>
-                            <th i18n="Insurant.table1.employeelevel">员工等级</th>
-                            @*<th i18n="Insurant.table1.employeestaffpositions">员工职务</th>*@
-                            @*<th i18n="Insurant.table1.employeecomment">说明</th>*@
+                            <th i18n="Insurant.table1.employeestartdate">生效日</th>
+                            <th i18n="Insurant.table1.employeemonthly">基本月薪 (HK$)</th>
+                            <th i18n="Insurant.table1.employeestaffdep">員工部門</th>
+                            <th i18n="Insurant.table1.employeelevel">僱員等級</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.EmployeeInfoList)
                         {
                             <tr>
                                 <td hidden>@item.FMFM_KY</td>
                                 <td>@item.FMDT_EFF_DT</td>
-                                @*<td>@item.FMDT_TERM_DT</td>*@
                                 <td>@item.FMFM_ANNUAL_SALARY</td>
                                 <td>@item.FMFM_DEPT</td>
                                 <td>@item.GCGC_DESC</td>
-                                @*<td>@item.FMFM_POSITION</td>*@
-                                @*<td>@item.FMDT_COMMENT</td>*@
                             </tr>
                         }
                     </tbody>
@@ -82,36 +75,61 @@
                     <thead>
                         <tr>
                             <th hidden>KEY</th>
-                            <th i18n="Insurant.table2.Relationship">关系</th>
+                            <th i18n="Insurant.table2.Relationship">關係</th>
                             <th i18n="Insurant.table2.Name">姓名</th>
-                            <th i18n="Insurant.table2.IDnumber">证件号</th>
-                            <th i18n="Insurant.table2.Gender">性别</th>
-                            <th i18n="Insurant.table2.Birthday">生日</th>
-                            @*<th i18n="Insurant.table2.Phone">手机</th>*@
-                            <th i18n="Insurant.table2.Email">电子邮件</th>
-                            @*<th i18n="Insurant.table2.Zipcode">邮政编码</th>*@
+                            <th i18n="Insurant.table2.IDnumber">香港身份證/護照號碼</th>
+                            <th i18n="Insurant.table2.Gender">性別</th>
+                            <th i18n="Insurant.table2.Birthday">出生日期</th>
+                            <th i18n="Insurant.table2.Email">電子郵件</th>
                         </tr>
                     </thead>
-                    <tbody id="familyId"></tbody>
+                    <tbody id="familyId">
+                        @foreach (var item in Model.FamliyList)
+                        {
+                            <tr>
+                                <td hidden>@item.FMFM_KY</td>
+                                <td>@item.SYSV_MEME_REL_CD_DESC</td>
+                                <td>@item.MEME_NAME</td>
+                                <td>@item.MEME_CERT_ID_NUM</td>
+                                <td>@item.SYSV_SEX_DESC</td>
+                                <td>@item.MEME_BIRTH_DT</td>
+                                <td>@item.MEME_EMAIL</td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             </div>
             <div class="layui-tab-item">
                 <table class="layui-table" lay-skin="line">
                     <thead>
                         <tr>
-                            <th i18n="Insurant.table3.policyNo">保单号</th>
-                            <th i18n="Insurant.table3.policystatus">保单状态</th>
-                            <th i18n="Insurant.table3.startdate">有效日</th>
-                            <th i18n="Insurant.table3.enddate">终止日</th>
+                            <th i18n="Insurant.table3.policyNo">保單號</th>
+                            <th i18n="Insurant.table3.policystatus">保單狀態</th>
+                            <th i18n="Insurant.table3.startdate">保單生效日</th>
+                            <th i18n="Insurant.table3.enddate">保單到期日</th>
                             <th i18n="Insurant.table3.memename">姓名</th>
-                            <th i18n="Insurant.table3.relationship">家庭关系</th>
-                            <th i18n="Insurant.table3.idnumber">被保险人号</th>
-                            @*<th i18n="Insurant.table3.numberprefix">家庭码</th>*@
-                            <th i18n="Insurant.table3.type">等级</th>
+                            <th i18n="Insurant.table3.relationship">家庭關係</th>
+                            <th i18n="Insurant.table3.idnumber">會員編號</th>
+                            <th i18n="Insurant.table3.type">等級</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="policyInfoId"></tbody>
+                    <tbody id="policyInfoId">
+                        @foreach (var item in Model.BenefitInfoList)
+                        {
+                            <tr>
+                                <td hidden>@item.PLPL_ID</td>
+                                <td>@item.SYSV_PLPL_STS</td>
+                                <td>@item.PLME_STR_DT</td>
+                                <td>@item.PLPL_END_DT</td>
+                                <td>@item.MEME_NAME</td>
+                                <td>@item.SYSV_MEME_REL_CD</td>
+                                <td>@item.Cert_No - @item.Cert_Prefix</td>
+                                <td>@item.CLASS</td>
+                                <td><a class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowBenefitInfo(@item.PLPL_KY,@item.MEME_KY)'>detail</a></td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             </div>
             <div class="layui-tab-item">
@@ -119,136 +137,33 @@
                     <thead>
                         <tr>
                             <th hidden>key</th>
-                            <th i18n="Insurant.table4.PolicyID">保单号</th>
-                            <th i18n="Insurant.table4.BillingDate">起始日</th>
-                            <th i18n="Insurant.table4.Billingtype">终止日</th>
-                            <th i18n="Insurant.table4.CurrentAmount">起始分数</th>
-                            <th i18n="Insurant.table4.Bill">当前分数</th>
-                            <th i18n="Insurant.table4.Comment">备注</th>
+                            <th i18n="Insurant.table4.PolicyID">保單號</th>
+                            <th i18n="Insurant.table4.BillingDate">保單生效日</th>
+                            <th i18n="Insurant.table4.Billingtype">保單到期日</th>
+                            <th i18n="Insurant.table4.CurrentAmount">起始積分</th>
+                            <th i18n="Insurant.table4.Bill">當前積分</th>
+                            <th i18n="Insurant.table4.Comment">備註</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="BillingInformationId"></tbody>
+                    <tbody id="BillingInformationId">
+                        @foreach (var item in Model.PointsRecordsList)
+                        {
+                            <tr>
+                                <td hidden>@item.FMAC_KY</td>
+                                <td>@item.Policy_ID</td>
+                                <td>@item.Start_Date</td>
+                                <td>@item.End_Date</td>
+                                <td>@item.Initial_Amout</td>
+                                <td>@item.Current_Points</td>
+                                <td>@item.Comment</td>
+                                <td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowDetail(@item.FMAC_KY)'>detail</a></td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(function () {
-
-    });
-</script>
-<script src="../Scripts/layui.js"></script>
-<script>
-    layui.use(['element', 'form'], function () {
-        var $ = layui.jquery, element = layui.element;
-
-        $("#linkInsurant").addClass("navbarCheckIn");
-        $('.site-demo-active').on('click', function () {
-            var othis = $(this), type = othis.data('type');
-            active[type] ? active[type].call(this, othis) : '';
-        });
-    });
-
-    $(function () {
-        $.ajax({
-            type: 'POST',
-            url: "../Insurant/GetFamilyInfo",
-            dataType: "json",
-            success: function (data, status) {
-                var familyStr = "";
-                $.each(data, function (i, row) {
-                    familyStr += "<tr>";
-                    familyStr += "<td hidden>" + row.FMFM_KY + "</td>";
-                    familyStr += "<td>" + row.SYSV_MEME_REL_CD_DESC + "</td>";
-                    familyStr += "<td>" + row.MEME_NAME + "</td>";
-                    familyStr += "<td>" + row.MEME_CERT_ID_NUM + "</td>";
-                    familyStr += "<td>" + row.SYSV_SEX_DESC + "</td>";
-                    familyStr += "<td>" + row.MEME_BIRTH_DT + "</td>";
-                    //familyStr += "<td>" + row.MEME_HOM_PHONE + "</td>";
-                    familyStr += "<td>" + row.MEME_EMAIL + "</td>";
-                    //familyStr += "<td>" + row.MEME_ZIP + "</td>";
-                    familyStr += "</tr>";
-                });
-
-                $("#familyId").html(familyStr);
-            }
-        });
-
-        $.ajax({
-            type: 'POST',
-            url: "../Insurant/GetPolicyInfo",
-            dataType: "json",
-            success: function (dat, status) {
-                var policyInfoStr = "";
-                $.each(dat, function (i, row) {
-                    policyInfoStr += "<tr>";
-                    policyInfoStr += "<td>" + row.PLPL_ID + "</td>";
-                    policyInfoStr += "<td>" + row.SYSV_PLPL_STS + "</td>";
-                    policyInfoStr += "<td>" + row.PLME_STR_DT + "</td>";
-                    policyInfoStr += "<td>" + row.PLPL_END_DT + "</td>";
-                    policyInfoStr += "<td>" + row.MEME_NAME + "</td>";
-                    policyInfoStr += "<td>" + row.SYSV_MEME_REL_CD + "</td>";
-                    policyInfoStr += "<td>" + row.Cert_No + "-" + row.Cert_Prefix + "</td>";
-                    //policyInfoStr += "<td>" +  + "</td>";
-                    policyInfoStr += "<td>" + row.CLASS + "</td>";
-                    policyInfoStr += "<td><a class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowBenefitInfo(" + row.PLPL_KY + "," + row.MEME_KY + ")'>detail</a></td>";
-                    policyInfoStr += "</tr>";
-                });
-                $("#policyInfoId").html(policyInfoStr);
-            }
-        });
-
-        $.ajax({
-            type: 'POST',
-            url: "../Insurant/GetBillingInfomation",
-            dataType: "json",
-            success: function (dat, status) {
-                var billingInfoStr = "";
-                $.each(dat, function (i, row) {
-                    billingInfoStr += "<tr>";
-                    billingInfoStr += "<td hidden>" + row.FMAC_KY + "</td>";
-                    billingInfoStr += "<td>" + row.Policy_ID + "</td>";
-                    billingInfoStr += "<td>" + row.Start_Date + "</td>";
-                    billingInfoStr += "<td>" + row.End_Date + "</td>";
-                    billingInfoStr += "<td>" + row.Initial_Amout + "</td>";
-                    billingInfoStr += "<td>" + row.Current_Points + "</td>";
-                    billingInfoStr += "<td>" + row.Comment + "</td>";
-                    billingInfoStr += "<td><a href='javascript:void(0)' class='layui-btn layui-btn-danger layui-btn-mini' i18n='public.common.detail' onclick='ShowDetail(" + row.FMAC_KY + ")'>detail</a></td>";
-                    billingInfoStr += "</tr>";
-                });
-                $("#BillingInformationId").html(billingInfoStr);
-            }
-        });
-
-    });
-
-    function ShowBenefitInfo(plplky, memeky) {
-        layer.open({
-            type: 2,
-            title: 'Benefit Info',
-            skin: 'layui-layer-demo', //样式类名
-            area: ['900px', '500px'],
-            closeBtn: 1,
-            shadeClose: true, //开启遮罩关闭
-            content: ['BenefitDetail?PLPL_KY=' + plplky + '&MEME_KY=' + memeky],
-            btnAlign: 'c'
-        });
-    }
-
-    function ShowDetail(fmacky) {
-        layer.open({
-            type: 2,
-            title: 'Points Transaction Records',
-            skin: 'layui-layer-demo', //样式类名
-            area: ['900px', '500px'],
-            closeBtn: 1,
-            shadeClose: true, //开启遮罩关闭
-            content: 'BillingInfomationDetail?FMAC_KY=' + fmacky,
-            btnAlign: 'c'
-        });
-    }
-
-    
-</script>
+<script src="../Scripts/Insurant/Index.js"></script>

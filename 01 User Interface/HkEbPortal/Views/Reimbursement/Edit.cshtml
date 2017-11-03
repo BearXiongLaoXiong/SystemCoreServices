@@ -6,59 +6,60 @@
 }
 
 <div class="container">
-    
+
     <fieldset class="layui-elem-field layui-field-title">
         <legend><span i18n="footer.menu.claims">彈性福利索償</span>-<span i18n="Reimbursement.edit.edit">编辑</span></legend>
     </fieldset>
 
-    <form class="layui-form">
+    <form class="layui-form tableheight">
+        @Html.AntiForgeryToken()
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width:110px;">家庭成員</label>
+                <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width: 110px;">家庭成員</label>
                 <div class="layui-input-inline">
                     @Html.DropDownList("FMFMDropDownList", ViewData["FMFM_DropDownList"] as SelectList, new Dictionary<string, object>() { { "lay-verify", "required" }, { "lay-filter", "fmfmId" } })
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.benefit" class="layui-form-label" style="min-width:110px;">福利*</label>
+                <label i18n="Reimbursement.edit.benefit" class="layui-form-label" style="min-width: 110px;">福利*</label>
                 <div class="layui-input-inline">
                     @Html.DropDownList("EBEBDropDownList", ViewData["EBEB_DropDownList"] as SelectList, new Dictionary<string, object> { { "lay-verify", "required" } })
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.type" class="layui-form-label" style="min-width:110px;">發票類型</label>
+                <label i18n="Reimbursement.edit.type" class="layui-form-label" style="min-width: 110px;">發票類型</label>
                 <div class="layui-input-inline">
                     @Html.DropDownList("CLIVDropDownList", ViewData["CLIV_DropDownList"] as SelectList, new Dictionary<string, object> { { "lay-verify", "required" } })
                 </div>
             </div>
             @*<div class="layui-inline">
-                <label i18n="Reimbursement.edit.no" class="layui-form-label" style="min-width:110px;">發票號</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="CLIV_ID" value="@Model.CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" class="layui-input" />
-                    <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY" />
-                </div>
-            </div>*@
+                    <label i18n="Reimbursement.edit.no" class="layui-form-label" style="min-width:110px;">發票號</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="CLIV_ID" value="@Model.CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" class="layui-input" />
+                        <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY" />
+                    </div>
+                </div>*@
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width:110px;">發票日</label>
+                <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width: 110px;">發票日</label>
                 <div class="layui-input-inline">
                     <input type="text" id="CLIV_Date" name="CLIV_Date" value="@Model.CLIV_DT" class="layui-input" lay-verify="required" placeholder="DD/MM/YYYY" />
                     <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY" />
                 </div>
             </div>
             @*<div class="layui-inline">
-                <label i18n="Reimbursement.edit.application" class="layui-form-label" style="min-width:110px;">申請日</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="Apply_Date" name="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="DD/MM/YYYY" />
+                    <label i18n="Reimbursement.edit.application" class="layui-form-label" style="min-width:110px;">申請日</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="Apply_Date" name="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="DD/MM/YYYY" />
+                    </div>
                 </div>
-            </div>
+                <div class="layui-inline">
+                    <label i18n="Reimbursement.edit.apply" class="layui-form-label" style="min-width:110px;">申請金額</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ApplyAMT" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>*@
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.apply" class="layui-form-label" style="min-width:110px;">申請金額</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="ApplyAMT" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
-                </div>
-            </div>*@
-            <div class="layui-inline">
-                <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width:110px;">發票金額</label>
+                <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width: 110px;">發票金額</label>
                 <div class="layui-input-inline">
                     <input type="text" name="CLIV_CHG" value="@Model.CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
@@ -74,19 +75,19 @@
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.amount" class="layui-form-label" style="min-width:110px;">調整金額</label>
+                <label i18n="Reimbursement.edit.amount" class="layui-form-label" style="min-width: 110px;">調整金額</label>
                 <div class="layui-input-inline">
                     <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_AMT</div>
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.user" class="layui-form-label" style="min-width:110px;">調整用戶</label>
+                <label i18n="Reimbursement.edit.user" class="layui-form-label" style="min-width: 110px;">調整用戶</label>
                 <div class="layui-input-inline">
                     <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_USUS_ID</div>
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.reason" class="layui-form-label" style="min-width:110px;">調整原因</label>
+                <label i18n="Reimbursement.edit.reason" class="layui-form-label" style="min-width: 110px;">調整原因</label>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_EXEX_ID</div>
                 </div>
@@ -95,66 +96,38 @@
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.payamount" class="layui-form-label" style="min-width:110px;">报销费用</label>
+                <label i18n="Reimbursement.edit.payamount" class="layui-form-label" style="min-width: 110px;">报销费用</label>
                 <div class="layui-input-inline">
-                    <div class="layui-form-mid layui-word-aux"><span style="font-size:30px;font-weight:500; color: #C21B17;">@Model.CLIV_PAYABLE</span>  </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span style="font-size: 30px; font-weight: 500; color: #C21B17;">@Model.CLIV_PAYABLE</span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.image" class="layui-form-label" style="min-width:110px;">發票信息</label>
+                <label i18n="Reimbursement.edit.image" class="layui-form-label" style="min-width: 110px;">發票信息</label>
                 <div class="layui-input-inline">
-                    <img src="@Model.CLIV_IMG_PATH" style="width:200px;height:100px;padding-left:10px;" />
+                    <img src="@Model.CLIV_IMG_PATH" style="width: 200px; height: 100px; padding-left: 10px;" />
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                @{
-                    var _isDisable = Model.SYSV_CLIV_STS == "00" && Model.SYSV_CLIV_STS == "01"?"": " layui-btn-disabled ";
+
+                @if (Model.SYSV_CLIV_STS == "00" || Model.SYSV_CLIV_STS == "01")
+                {
+                    <button class="layui-btn layui-btn-small" lay-submit lay-filter="btnEdit" i18n="public.common.save">儲存</button>
                 }
-                <button class="layui-btn @(new HtmlString(_isDisable));" lay-submit="" lay-filter="demo1" id="btnsubmitId" i18n="public.common.save">保存</button>
-                <a class="layui-btn layui-btn-primary" onclick="window.location.href = 'index'" i18n="public.common.back">返回</a>
+                else
+                {
+                    <a class="layui-btn layui-btn-small layui-btn-disabled" i18n="public.common.save">儲存</a>
+                }
+                <a class="layui-btn layui-btn-small layui-btn-primary" href="../Reimbursement/Index" i18n="public.common.back">返回</a>
             </div>
         </div>
     </form>
 </div>
-<script src="../Scripts/language/jquery.i18n.min.js"></script>
-<script src="../Scripts/language/laodlanguage.js"></script>
-<script src="../Scripts/jquery.cookie-1.4.1.min.js"></script>
-<script type="text/javascript">
-    layui.use(['form', 'layedit', 'laydate', 'element'], function () {
-        var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
-        $("#linkReim").addClass("navbarCheckIn");
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#CLIV_Date', //指定元素
-            format: 'dd/MM/yyyy',
-            lang: 'en'
-        });
-       
-        form.on('submit(demo1)', function (data) {
-            $.ajax({
-                type: 'POST',
-                url: "../Reimbursement/EditUpdate",
-                data: $(".layui-form").serialize(),
-                dataType: "json",
-                success: function (data, status) {
-                    if (data.Code === 0) {
-                        location.href = "../Reimbursement/Index";
-                    } else {
-                        layer.msg(data.Msg);
-                    }
-                }
-            });
-            return false;
-        });
-    });
-
-    $(function () {
-        laodlanguage();
-    });
-</script>
+<script src="../Scripts/Reimbursement/Edit.js"></script>

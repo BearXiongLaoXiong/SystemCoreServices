@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    
+
     <fieldset class="layui-elem-field layui-field-title">
         <legend i18n="footer.menu.policy">福利選擇</legend>
     </fieldset>
@@ -42,10 +42,10 @@
                     <div style="width:100%">
                         <i class="layui-icon" style="float: left;  font-size: 30px; color: @(new HtmlString(_color));">@(new HtmlString(_icon));</i>
                         <div style="float: left; line-height: 30px">
-                            <span class="layui-badge-rim layui-bg-orange" @_isMaster)>...</span>@name.MEME_NAME &nbsp;&nbsp;
+                            <span class="layui-badge-rim layui-bg-orange" @_isMaster )>...</span>@name.MEME_NAME &nbsp;&nbsp;
                         </div>
                         @if (name.SYSV_MEME_REL_CD == "E")
-                        { 
+                        {
                             <div style="float: right; line-height: 30px">
                                 <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Initial">当前积分</span> &nbsp;@Model.INITIAL_AMT
                                 <span class="layui-badge-rim layui-bg-orange" i18n="Policy.index.Remaiuing">剩余积分</span> &nbsp;@Model.BlanAmount
@@ -95,8 +95,3 @@
 
 <script src="../Scripts/common.js"></script>
 <script src="../Scripts/Policy/Index.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#linkPolicy").addClass("navbarCheckIn");
-    });
-</script>

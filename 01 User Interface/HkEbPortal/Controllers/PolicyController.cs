@@ -24,10 +24,6 @@ namespace HkEbPortal.Controllers
         // GET: Policy
         public ActionResult Index()
         {
-            //if (new Common().IsOpenEnrollment(UserInfo.USUS_KY))
-            //{
-            //    return Redirect("../eflexi/Home/Index");
-            //}
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
             {
                 pEHUSER = UserInfo.USUS_ID
@@ -40,19 +36,6 @@ namespace HkEbPortal.Controllers
             model.Names = result.ListFirst;
             model.Tables = result.ListThird;
             return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult FindView(string status, string memeKy)
-        {
-            var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
-            {
-                pEHUSER = UserInfo.USUS_ID,
-                pSYSV_PLPL_STS = status
-            };
-            var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(entity);
-            return View(new { names = result.ListSecond, tables = result.ListThird });
-            //return Json(new { names = result.ListSecond.Select(x => new { MemeKy = x.MEME_KY, Name = x.MEME_NAME }).Distinct(), table = result.ListThird.Where(x => memeKy.Length > 0 ? x.MEME_KY == memeKy : x.MEME_KY == result.ListSecond.FirstOrDefault()?.MEME_KY) }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -79,7 +62,8 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
-        public string Detail(string data)
+        [ValidateAntiForgeryToken]
+        public JsonResult Detail(string data)
         {
             string result = "";
             var json = JsonConvert.DeserializeObject<List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>>(data);
@@ -108,7 +92,7 @@ namespace HkEbPortal.Controllers
                 }
                 result = insert.pRTN_MSG;
             }
-            return result;
+            return Json(result);
         }
 
 

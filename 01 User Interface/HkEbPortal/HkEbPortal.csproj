@@ -269,7 +269,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\font\iconfont.svg" />
-    <Content Include="Scripts\Home\Home.js" />
+    <Content Include="Scripts\Home\Index.js" />
     <Content Include="Scripts\images\face\0.gif" />
     <Content Include="Scripts\images\face\1.gif" />
     <Content Include="Scripts\images\face\10.gif" />
@@ -344,6 +344,7 @@
     <Content Include="Scripts\images\face\9.gif" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
+    <Content Include="Scripts\Insurant\Index.js" />
     <Content Include="Scripts\language\jquery.i18n.min.js" />
     <Content Include="Scripts\language\laodlanguage.js" />
     <Content Include="Scripts\layui.js" />
@@ -372,7 +373,12 @@
     <Content Include="Scripts\Policy\Detail.js" />
     <Content Include="Scripts\Policy\Index.datatable - 复制.js" />
     <Content Include="Scripts\Policy\Index.js" />
+    <Content Include="Scripts\Reimbursement\Add.js" />
+    <Content Include="Scripts\Reimbursement\Edit.js" />
     <Content Include="Scripts\Reimbursement\Index.js" />
+    <Content Include="Scripts\User\ChangePassword.js" />
+    <Content Include="Scripts\User\ForgotPassword.js" />
+    <Content Include="Scripts\User\Login.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -410,7 +416,7 @@
     <Content Include="Text\Privacy Policy for portal English2014.docx" />
     <Content Include="Views\Policy\ReadPDF.cshtml" />
     <Content Include="Views\Insurant\BenefitDetail.cshtml" />
-    <Content Include="Views\User\ModifyPwd.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Text\Privacy Policy for portal English2014.pdf" />
     <Content Include="Text\Tems and Condition_English20141231.pdf" />
   </ItemGroup>
@@ -461,7 +467,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" i18n_4i18n_3TraditionalChinese_1json__JSONSchema="http://json.schemastore.org/commands" />
+      <UserProperties i18n_4i18n_3SimplifiedChinese_1json__JSONSchema="http://json.schemastore.org/bowerrc" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,59 +1,30 @@
 ﻿
-layui.use(['form', 'carousel', 'laydate'], function () {
-    var form = layui.form;
-    var laydate = layui.laydate;
-    var carousel = layui.carousel;
+layui.use(['form', 'laydate'], function () {
+    var form = layui.form,
+        laydate = layui.laydate;
 
-    $("#linkHome").addClass("navbarCheckIn");
-
-    //$("#txtPolicyUp").val("30000272");
-    //$("#txtMemberUp").val("000000001995");
-    //轮播
-    laydate.render({
-        elem: '#txtDate',
-        format: 'dd/MM/yyyy',
-        lang: 'en'
-    });
-
-    carousel.render({
-        elem: '#indexcarouselimage'
-        , width: '100%'
-        , height: '750px'
-        , interval: 5000
-    });
-
+    //登陆
     form.on('submit(btnLogin)', function (data) {
         //layer.msg(JSON.stringify(data.field));
         ShowLoading();
         $.post("Login",
-            { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword },
+            { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
             function (result) {
                 CloseLoading();
                 if (result.Code === 0) {
-                    if (result.Data.USUS_FIRST_ISACTIVE == '0') {
-                        var message = "Member :</br>";
-                        var memberList = result.Data.MemberList;
-                        $.each(memberList, function (i, v) {
-                            message += v.SYSV_MEME_REL_CD + " : " + v.MEME_NAME + "</br>";
+                    if (result.Data.USUS_FIRST_ISACTIVE === '0') {
+                        //首次登陸提示修改密碼
+                        layer.confirm(il8nMessage("pop-up.user.login.firstloginconfirm"), {
+                            btn: [il8nMessage("pop-up.user.login.now"), il8nMessage("pop-up.user.login.later")], //按钮
+                            title: ' ',
+                            icon: 6,
+                            closeBtn: 0
+                        }, function () {
+                            window.location.href = "../User/ChangePassword";
+                        }, function () {
+                            window.location.href = "../Insurant/Index";
                         });
-                        layeralert1(message, function () {
-                            layer.confirm('It is advisable to change the password after logging in for the first time', {
-                                btn: ['Immediately modify', 'Later said'], //按钮
-                                title: '',
-                                icon: 6,
-                                closeBtn: 0,
-                                scrollbar: false,
-                                shade: false //不显示遮罩
-                            }, function () {
-                                window.location.href = "../User/ModifyPwd";
-                            }, function () {
-                                window.location.href = "../Home/Index";
-                            });
-                        });
-
-
                     } else {
-                        
                         window.location.href = "../Home/Index";
                     }
                 }
@@ -70,19 +41,24 @@ layui.use(['form', 'carousel', 'laydate'], function () {
 
                     });
                 }
+                else if (result.Code === 1) {
+                    //保單號碼, 會員編號或密碼不正確
+                    layeralert(il8nMessage("pop-up.user.login.noaccount"));
+                }
                 else
                     layeralert(il8nMessage(result.Msg));
             });
         return false;
     });
 
+    //注册
     form.on('submit(btnLoginUp)', function (data) {
         //layer.msg(JSON.stringify(data.field));
         var policyUp = data.field.txtPolicyUp;
         var meberUp = data.field.txtMemberUp;
         ShowLoading();
         $.post("SignUp",
-            { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "" },
+            { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "", r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
             function (result) {
                 CloseLoading();
                 if (result.Code === 0) {
@@ -98,7 +74,7 @@ layui.use(['form', 'carousel', 'laydate'], function () {
                         { title: "Confirm", btn: ['OK', 'Cancel'] },
                         function () {
                             $.post("SignUp",
-                                { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "confirm" },
+                                { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "confirm", r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
                                 function (result) {
                                     layeralert1(result.Msg, function () { signIn(); });
                                 });

@@ -1,15 +1,17 @@
 ﻿{
   "public.common.pleaseSelect": "Please select",
   "public.common.pleaseInput": "Please input",
+  "public.common.add": "Add",
   "public.common.detail": "detail",
-  "public.common.edit": "edit",
-  "public.common.delete": "delete",
+  "public.common.edit": "Edit",
+  "public.common.delete": "Delete",
   "public.common.select": "select",
   "public.common.opt": "Opt Up/Opt Down",
   "public.common.default": "default",
   "public.common.info": "Info",
   "public.common.save": "Save",
   "public.common.back": "Back",
+  "public.common.submit": "Submit",
 
   "footer.login": "Login",
   "footer.logout": "Logout",
@@ -48,7 +50,7 @@
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
   "user.login.email": "e-mail address",
-  "user.login.popup.noaccount": "Incorrect Policy No, Member ID or Password",
+
 
   "user.forgot.headtitle": "Please enter the policy number/insured number to retrieve the password",
   "user.forgot.policyNo": "Policy No.",
@@ -177,5 +179,12 @@
   "Reimbursement.Upload.imageupload": "Upload",
   "Reimbursement.Upload.cancel": "Cancel",
   "Reimbursement.Upload.previewdiagram": "Preview",
-  "Reimbursement.Upload.lastinvoiceInfo": "Last Invoice info"
+  "Reimbursement.Upload.lastinvoiceInfo": "Last Invoice info",
+
+
+  "pop-up.user.login.firstloginconfirm": "First time logon, please change your password!",
+  "pop-up.user.login.now": "Now",
+  "pop-up.user.login.later": "Later",
+  "pop-up.user.login.noaccount": "Incorrect Policy No, Member ID or Password"
+
 }

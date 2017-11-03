@@ -39,6 +39,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Login(string txtpolicyNo, string txtMember, string txtPassword)
         {
             var entity = new SPEH_FMFM_LOGIN
@@ -49,9 +50,9 @@ namespace HkEbPortal.Controllers
             };
             var userInfo = _commonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
 
-
+            //保單號碼, 會員編號或密碼不正確
             if (userInfo == null)
-                return Json(new { Code = 1, Msg = "user.login.popup.noaccount" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 1, Msg = "" }, JsonRequestBehavior.DenyGet);
 
             if (userInfo.USUS_EMAIL.Length == 0)
                 return Json(new { Code = 2, Msg = "Do not find your mailbox, please go to the registration interface to activate the mailbox!" }, JsonRequestBehavior.DenyGet);
@@ -88,20 +89,8 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, MemberList = memberList } }, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult ConfirmEmail(string txtpolicyNo, string txtMember, string txtPassword)
-        //{
-        //    var entity = new SPEH_USUS_EMAIL_ISACTIVE_UPDATE
-        //    {
-        //        pPolicy_NO = txtpolicyNo,
-        //        pCert_No = txtMember
-        //    };
-        //    _commonBl.Execute(entity);
-
-        //    return Json(new { Code = entity.ReturnValue, Msg = entity.ReturnValue == 1 ? "邮箱激活成功!" : "邮箱激活失败!" }, JsonRequestBehavior.AllowGet);
-        //}
-
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult SignUp(string txtPolicyUp, string txtMemberUp, string txtBirthday, string txtEmailUp = "", string confirmEmail = "")
         {
             var entity = new SPEH_USUS_EMAIL_SELECT_ISACTIVE
@@ -188,18 +177,19 @@ namespace HkEbPortal.Controllers
         {
             Session.RemoveAll();
             Session.Clear();
-            return Redirect("../eflexi/Home/Index");
+            return Redirect("../eflexi/User/Login");
         }
 
         [Authorization]
-        public ActionResult ModifyPwd()
+        public ActionResult ChangePassword()
         {
             return View();
         }
 
         [HttpPost]
         [Authorization]
-        public JsonResult ModifyPwd(FormCollection form)
+        [ValidateAntiForgeryToken]
+        public JsonResult ChangePassword(FormCollection form)
         {
             string oldpwd = form["oldPassword"];
             string newpwd = form["newPassword"];
@@ -221,6 +211,7 @@ namespace HkEbPortal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult ForgotPassword(string policyNo, string memberId)
         {
             string password = Des.GetDesStr();
@@ -244,6 +235,13 @@ namespace HkEbPortal.Controllers
             }
             return Json(new { Data = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+
+
 
         [HttpPost]
         public JsonResult HTMLConvertPDF()

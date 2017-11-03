@@ -52,7 +52,7 @@
                     <span class="layui-badge-rim layui-bg-gray"><a i18n="footer.logout" style="font-size: 12px;font-weight: normal;color:#333">安全退出</a></span>
                 </div>
                 <div @IsShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0; margin:0 10px 0 10px; cursor: pointer;">
-                    <span class="layui-badge-rim layui-bg-gray"><a href="../User/ModifyPwd" i18n="footer.Editpwd" style="font-size: 12px;font-weight: normal;color:#333">修改密碼</a></span>
+                    <span class="layui-badge-rim layui-bg-gray"><a href="../User/ChangePassword" i18n="footer.Editpwd" style="font-size: 12px;font-weight: normal;color:#333">修改密碼</a></span>
                 </div>
                 <div @IsHide id="btnLogin" class="myButton" style="border-right: none; padding-right: 10px; width:100px;cursor: pointer;" onclick="window.open('../User/Login', '_self')">
                     <a class="myHarf" style=""></a>
@@ -129,65 +129,6 @@
 
             //$("[i18n]").i18n({ defaultLang: "en", filePath: "../i18n/"});$.cookie("defaultLang", "en", { path: '/', expires: date });
         });
-
-        //layui.use('form',
-        //    function () {
-        //        var form = layui.form();
-        //        form.on('submit(BtnLogin)',
-        //            function (data) {
-        //                var token = $('input[name=__RequestVerificationToken]').val();
-        //                var headers = {};
-        //                headers["__RequestVerificationToken"] = token;
-        //                $.ajax({
-        //                    type: "POST",
-        //                    dataType: "json",
-        //                    url: "../Home/Login",
-        //                    cache: false,
-        //                    timeout: 10000,
-        //                    async: false,
-        //                    headers: headers,
-        //                    data: { userid: $("#userId").val(), userpwd: $("#userPwd").val() },
-        //                    success: function (data) {
-        //                        if (data.Code === 0) {
-        //                            $("#loginform").addClass("layui-hide");
-        //                            $("#logininfo").removeClass("layui-hide");
-        //                            $("#userName").html(data.Data.UserName);
-        //                            $("#groupName").html(data.Data.GroupName);
-        //                            window.location.href = "../Home/Index";
-        //                        } else {
-        //                            $("#loginform").removeClass("layui-hide");
-        //                            $("#logininfo").addClass("layui-hide");
-        //                            layer.msg(data.Msg);
-        //                        }
-        //                    },
-        //                    error: function (data) {
-        //                        $("#loginform").removeClass("layui-hide");
-        //                        $("#logininfo").addClass("layui-hide");
-        //                        layer.msg(Error);
-        //                    }
-        //                });
-
-        //                return true;
-        //            });
-        //    });
-
-        function Login() {
-            layer.open({
-                type: 2,
-                area: ['360px', '500px'],
-                skin: 'layui-layer-rim', //加上边框
-                content: ['mobile/', 'no']
-            });
-            //layer.open({
-            //    type: 2,
-            //    title: false,
-            //    area: ['500px', '400px'], //宽高
-
-            //    skin: 'yourclass',
-            //    content: $("#loginView")
-            //});
-        }
-
 
         function Logout() {
             window.location.href = "../User/Logout";
