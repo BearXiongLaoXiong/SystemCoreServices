@@ -6,21 +6,21 @@
     ShowLoading();
     //element.tabChange('memberInfoTable', "222"); 
     CloseDelayLoading();
-    element.on('tab(docDemoTabBrief)', function (data) {
-        console.log(data);
-        return false;
-    });
-    layer.confirm(il8nMessage("pop-up.user.login.firstloginconfirm"), {
-        btn: ["Confirmed", "Amendment required"], //按钮
-        title: ' ',
-        offset: '190px',
-        closeBtn: 0,
-        shade: false
-    }, function () {
-        window.location.href = "../User/ChangePassword";
-    }, function () {
-        window.location.href = "../Insurant/Index";
-    });
+    //element.on('tab(docDemoTabBrief)', function (data) {
+    //    console.log(data);
+    //    return false;
+    //});
+    //layer.confirm(il8nMessage("pop-up.user.login.firstloginconfirm"), {
+    //    btn: ["Confirmed", "Amendment required"], //按钮
+    //    title: ' ',
+    //    offset: '190px',
+    //    closeBtn: 0,
+    //    shade: false
+    //}, function () {
+    //    window.location.href = "../User/ChangePassword";
+    //}, function () {
+    //    window.location.href = "../Insurant/Index";
+    //});
     
 });
 
@@ -32,7 +32,7 @@ function ShowBenefitInfo(plplky, memeky) {
         area: ['900px', '500px'],
         closeBtn: 1,
         shadeClose: true, //开启遮罩关闭
-        content: ['BenefitDetail?PLPL_KY=' + plplky + '&MEME_KY=' + memeky],
+        content: ['BenefitDetail?plplKy=' + plplky + '&memeKy=' + memeky],
         btnAlign: 'c'
     });
 }
@@ -45,7 +45,7 @@ function ShowDetail(fmacky) {
         area: ['900px', '500px'],
         closeBtn: 1,
         shadeClose: true, //开启遮罩关闭
-        content: 'BillingInfomationDetail?FMAC_KY=' + fmacky,
+        content: 'BillingInfomationDetail?fmacKy=' + fmacky,
         btnAlign: 'c'
     });
 }

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Dynamic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using BusinessLogicRepository;
 using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using Newtonsoft.Json;
 using System.IO;
-using HkEbPortal.App_Start;
 
 namespace HkEbPortal.Controllers
 {
@@ -20,7 +15,7 @@ namespace HkEbPortal.Controllers
     [IsOpenEnrollment(true)]
     public class PolicyController : BaseController
     {
-        private static string savePath = ConfigurationManager.AppSettings["PdfSavePath"] ?? "";
+        private static readonly string SavePath = ConfigurationManager.AppSettings["PdfSavePath"] ?? "";
         // GET: Policy
         public ActionResult Index()
         {
@@ -115,9 +110,9 @@ namespace HkEbPortal.Controllers
             return View(model);
         }
 
-        public FileStreamResult ReadPDF(string fName = "")
+        public FileStreamResult ReadPdf(string fName = "")
         {
-            var fileName = $@"{savePath}\{fName}";
+            var fileName = $@"{SavePath}\{fName}";
             if (fName.Length > 0 && System.IO.File.Exists(fileName))
             {
                 FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);

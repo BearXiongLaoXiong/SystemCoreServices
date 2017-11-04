@@ -12,7 +12,7 @@
         else if (newPassword != confirmPassword) {
             layeralert("2 password input is inconsistent！", { icon: 5 });
         } else {
-            $.post("ChangePassword", data.form.serialize(), function (data, status) {
+            $.post("ChangePassword", data.field, function (data, status) {
                 if (data.Code == 0) {
                     layeralert(data.Msg, { time: 2000 });
                     location.href = "../Home/Index";

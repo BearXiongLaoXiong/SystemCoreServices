@@ -27,5 +27,5 @@ function layeralert1(msg, fun) {
 }
 
 function layeralert(msg) {
-    layer.alert(msg, { title: "Message", skin: 'layui-layer-lan', btn: 'OK', closeBtn: 0 });
+    layer.alert(msg, { title: "Message", skin: 'layui-layer-lan', btn: 'OK', closeBtn: 0, shadeClose: true });
 }

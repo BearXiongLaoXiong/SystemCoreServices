@@ -5,12 +5,10 @@ using System.Web;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessLogicRepository;
 using HkEbPortal.Models.EB_PORTAL;
 using System.IO;
 using System.Net;
 using System.Text;
-using HkEbPortal.App_Start;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using iTextSharp.tool.xml;
@@ -26,13 +24,7 @@ namespace HkEbPortal.Controllers
         private readonly string _host = ConfigurationManager.AppSettings["EmailHost"];
         private readonly string _passWord = ConfigurationManager.AppSettings["EmailPassword"];
 
-        private readonly ICommonBl _commonBl = new CommonBl();
-        // GET: User
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         public ActionResult Login()
         {
             return View();
@@ -48,7 +40,7 @@ namespace HkEbPortal.Controllers
                 pUSUS_ID = txtMember,
                 pUSUS_PSWD = Des.Encrypt(txtPassword)
             };
-            var userInfo = _commonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
+            var userInfo = CommonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
 
             //保單號碼, 會員編號或密碼不正確
             if (userInfo == null)
@@ -98,7 +90,7 @@ namespace HkEbPortal.Controllers
                 pPolicy_NO = txtPolicyUp,
                 pCert_No = txtMemberUp
             };
-            var userInfo = _commonBl.QuerySingle<SPEH_USUS_EMAIL_SELECT_ISACTIVE, SPEH_USUS_EMAIL_ISACTIVE_RESULT>(entity).FirstOrDefault();
+            var userInfo = CommonBl.QuerySingle<SPEH_USUS_EMAIL_SELECT_ISACTIVE, SPEH_USUS_EMAIL_ISACTIVE_RESULT>(entity).FirstOrDefault();
             //没有在HK_EB_DATE中找到对应的数据
             if (userInfo == null) return Json(new { Code = 1, Msg = "The account you entered does not exist!" }, JsonRequestBehavior.DenyGet);
 
@@ -124,7 +116,7 @@ namespace HkEbPortal.Controllers
                         pPolicy_NO = txtPolicyUp,
                         pCert_No = txtMemberUp
                     };
-                    _commonBl.Execute(emialConfirm);
+                    CommonBl.Execute(emialConfirm);
                 }
                 else return Json(new { Code = 4, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
@@ -140,13 +132,13 @@ namespace HkEbPortal.Controllers
                     pPassword = Des.Encrypt(password),
                     pEmail = txtEmailUp
                 };
-                _commonBl.Execute(insert);
+                CommonBl.Execute(insert);
 
                 if (insert.ReturnValue == 1)
                 {
                     string subject = "We Care – Flexi Portal – Password";
                     var context = new StringBuilder();
-                    context.Append("<div style='font-family: Arial;font-size:10px;line-height:15px;'>");
+                    context.Append("<div style='font-family: Arial;font-size:14px;line-height:30px;'>");
                     context.Append("Dear Sir/ Madam, </br>");
                     context.Append("Thank you for registering our Flexible Benefit Portal, below is your new password: </br>");
                     context.AppendFormat("Password: {0} </br>", password);
@@ -180,6 +172,7 @@ namespace HkEbPortal.Controllers
             return Redirect("../eflexi/User/Login");
         }
 
+
         [Authorization]
         public ActionResult ChangePassword()
         {
@@ -200,10 +193,12 @@ namespace HkEbPortal.Controllers
                 pPassword = Des.Encrypt(oldpwd),
                 pConfirmPassword = Des.Encrypt(confirmpwd)
             };
-            _commonBl.Execute(entity);
+            CommonBl.Execute(entity);
 
             return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
+
+
 
         public ActionResult ForgotPassword()
         {
@@ -216,12 +211,12 @@ namespace HkEbPortal.Controllers
         {
             string password = Des.GetDesStr();
             var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(password) };
-            var list = _commonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
+            var list = CommonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
             if (list.Count > 0 && entity.pRTN_CD == 0)
             {
                 string subject = "We Care – Flexi Portal – Password Reset";
                 var context = new StringBuilder();
-                context.Append("<div style='font-family: Arial;font-size:10px;line-height:15px;'>");
+                context.Append("<div style='font-family: Arial;font-size:14px;line-height:30px;'>");
                 context.Append("Dear Sir/ Madam, </br>");
                 context.Append("Your password has been reset.  Below is your new password: </br>");
                 context.AppendFormat("Password: {0} </br>", password);
@@ -242,7 +237,7 @@ namespace HkEbPortal.Controllers
 
 
 
-
+        /* //转pdf
         [HttpPost]
         public JsonResult HTMLConvertPDF()
         {
@@ -378,6 +373,6 @@ namespace HkEbPortal.Controllers
                 return new Font(bfChiness, size, style, color);
             }
         }
-
+        */
     }
 }

@@ -1,15 +1,12 @@
-﻿using BusinessLogicRepository;
-using HkEbPortal.Filters;
+﻿using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HkEbPortal.App_Start;
 
 namespace HkEbPortal.Controllers
 {
@@ -21,13 +18,7 @@ namespace HkEbPortal.Controllers
         // GET: Reimbursement
         public ActionResult Index()
         {
-            //if (!new Common().IsOpenEnrollment(UserInfo.USUS_KY))
-            //{
-            //    return Redirect("../eflexi/Home/Index");
-            //}
-            string cliv_ky = Request["clivKy"];
-
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB{ pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
 
             dynamic model = new ExpandoObject();
@@ -39,12 +30,13 @@ namespace HkEbPortal.Controllers
 
         public ActionResult Add()
         {
-            var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
-            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { pMEME_KY = UserInfo.USUS_KY };
-            var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
-            var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
-            var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
+            // 家庭成员
+            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(new SPEH_MEME_MEMBER_INFO_LIST_WEB { pEHUSER = UserInfo.USUS_ID });
+
+            var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(new SPEH_EBEB_VALUE_LIST { pMEME_KY = UserInfo.USUS_KY });
+
+            var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(new SPEH_SYSV_VALUE_LIST { pSYSV_TYPE = "SYSV_CLIV_TYPE" });
+
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME");
             var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
@@ -59,27 +51,28 @@ namespace HkEbPortal.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Add(FormCollection form)
         {
-            string meme_ky = form["FMFM_DropDownList"];
-            string ebeb_ky = form["EBEB_DropDownList"];
+            string memeKy = form["FMFM_DropDownList"];
+            string ebebKy = form["EBEB_DropDownList"];
             string clivType = form["CLIV_DropDownList"];
             //string clivID = form["CLIV_ID"];
             string clivDate = form["CLIV_Date"];
             string applyDate = DateTime.Now.ToString("yyyy-MM-dd");
             //string apply_amt = form["APPLY_AMT"];
-            string cliv_chg = form["CLIV_CHG"];
+            string clivChg = form["CLIV_CHG"];
             string comment = form["COMMENT"];
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT
             {
-                pMEME_KY = meme_ky,
+                pEHUSER = UserInfo.USUS_ID,
+                pMEME_KY = memeKy,
                 pFMFM_KY = UserInfo.USUS_KY,
                 pGPGP_KY = UserInfo.GPGP_KY,
-                pEBEB_KY = ebeb_ky,
+                pEBEB_KY = ebebKy,
                 pSYSV_CLIV_TYPE = clivType,
                 //pCLIV_ID = clivID,
                 pCLIV_DT = DateTime.ParseExact(clivDate, "dd/MM/yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-US")).ToString("yyyy-MM-dd"),
                 pCLIV_APP_DT = applyDate,
                 //pCLIV_APPLY_AMT = apply_amt,
-                pCLIV_CHG = cliv_chg,
+                pCLIV_CHG = clivChg,
                 pCLIV_COMMENT = comment
             };
             CommonBl.Execute(entity);
@@ -91,15 +84,17 @@ namespace HkEbPortal.Controllers
         public ActionResult Edit(string id)
         {
             if (string.IsNullOrEmpty(id)) return View();
-            var fmfmentity = new SPEH_MEME_MEMBER_INFO_LIST_WEB() { pEHUSER = UserInfo.USUS_ID }; // 家庭成员
-            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(fmfmentity);
-            var entity = new SPEH_EBEB_VALUE_LIST() { pMEME_KY = UserInfo.USUS_KY };
-            var ebList = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(entity);
-            var ivtype = new SPEH_SYSV_VALUE_LIST() { pSYSV_TYPE = "SYSV_CLIV_TYPE" };
-            var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(ivtype);
-            var editentity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = id };
-            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(editentity)?.FirstOrDefault();
+
+            // 家庭成员
+            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(new SPEH_MEME_MEMBER_INFO_LIST_WEB { pEHUSER = UserInfo.USUS_ID });
+
+            var ebList = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(new SPEH_EBEB_VALUE_LIST { pMEME_KY = UserInfo.USUS_KY });
+
+            var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(new SPEH_SYSV_VALUE_LIST { pSYSV_TYPE = "SYSV_CLIV_TYPE" });
+
+            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT { pCLIV_KY = id })?.FirstOrDefault();
             fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
+
             var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME", result?.MEME_KY);
             var selectEBlist = new SelectList(ebList, "EBEB_KY", "EBEB_DESC", result?.EBEB_KY);
             var selectIVlist = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", result?.SYSV_CLIV_TYPE ?? "I");
@@ -115,7 +110,7 @@ namespace HkEbPortal.Controllers
         public JsonResult Edit(FormCollection form)
         {
             if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json(new { Code = 2, Msg = "Fail" }, JsonRequestBehavior.AllowGet);
-            string cliv_ky = form["CLIV_KY"];
+            string clivKy = form["CLIV_KY"];
             string meme = form["FMFMDropDownList"];
             string ebeb = form["EBEBDropDownList"];
             string ivtype = form["CLIVDropDownList"];
@@ -128,7 +123,7 @@ namespace HkEbPortal.Controllers
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE()
             {
                 pFMFM_KY = UserInfo.USUS_KY,
-                pCLIV_KY = cliv_ky,
+                pCLIV_KY = clivKy,
                 pGPGP_KY = UserInfo.GPGP_KY,
                 pMEME_KY = meme,
                 pEBEB_KY = ebeb,
@@ -150,17 +145,17 @@ namespace HkEbPortal.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Delete(string id)
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE { pCLIV_KY = id };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE { pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
             CommonBl.Execute(entity);
             return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Upload()
         {
-            string CLIV_KY = Request["clivKy"];
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = CLIV_KY };
+            string clivKy = Request["clivKy"];
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = clivKy };
             var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity)?.FirstOrDefault();
-            ViewBag.LiuNo = CLIV_KY;
+            ViewBag.LiuNo = clivKy;
 
             //Image pic = Image.FromFile("");
             //MemoryStream ms = new MemoryStream();
@@ -223,7 +218,7 @@ namespace HkEbPortal.Controllers
                         postedfile.SaveAs(path);
                         string fex = Path.GetExtension(postedfile.FileName);
 
-                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath, pCLIV_KY = CLIV_KY };
+                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath, pCLIV_KY = CLIV_KY, pEHUSER = UserInfo.USUS_ID };
                         CommonBl.Execute(entiy);
                     }
                 }
@@ -240,7 +235,7 @@ namespace HkEbPortal.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult EditFsaClaimStatus(string id)
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE { pSYSV_CLIV_STS = "02", pCLIV_KY = id };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE { pSYSV_CLIV_STS = "02", pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
             CommonBl.Execute(entity);
             return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
         }
