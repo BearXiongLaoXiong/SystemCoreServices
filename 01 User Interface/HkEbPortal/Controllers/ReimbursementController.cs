@@ -18,7 +18,7 @@ namespace HkEbPortal.Controllers
         // GET: Reimbursement
         public ActionResult Index()
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB{ pEHUSER = UserInfo.USUS_ID };
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
 
             dynamic model = new ExpandoObject();
@@ -237,7 +237,7 @@ namespace HkEbPortal.Controllers
         {
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE { pSYSV_CLIV_STS = "02", pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
             CommonBl.Execute(entity);
-            return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
+            return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
     }
 }

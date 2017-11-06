@@ -60,7 +60,8 @@ namespace HkEbPortal.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Detail(string data)
         {
-            string result = "";
+            string code = "";
+            string msg = "";
             var json = JsonConvert.DeserializeObject<List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>>(data);
 
             foreach (var item in json)
@@ -85,9 +86,10 @@ namespace HkEbPortal.Controllers
                     };
                     CommonBl.Execute(update);
                 }
-                result = insert.pRTN_MSG;
+                code = insert.ReturnValue.ToString();
+                msg = insert.pRTN_MSG;
             }
-            return Json(result);
+            return Json(new { Code = code ,Msg = msg });
         }
 
 

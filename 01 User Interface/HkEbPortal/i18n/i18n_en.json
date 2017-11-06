@@ -142,6 +142,7 @@
   "policy.detail.employee": "Employee's Responsibility",
   "policy.detail.target": "Target Plan Points",
   "policy.detail.tax": "Tax Rate Points",
+  "policy.detail.SelectionCompleted": "Selection Completed",
 
   "Reimbursement.Index.fsaClaims": "FSA Claims",
   "Reimbursement.Index.Applicant": "Applicant",
@@ -157,6 +158,7 @@
   "Reimbursement.Index.Delete": "Delete",
   "Reimbursement.Index.Image": "Image",
   "Reimbursement.Index.Submit": "Submit",
+  "Reimbursement.Index.SubmitResult": "FSA Claims Submitted",
 
   "Reimbursement.edit.faimily": "Insured",
   "Reimbursement.edit.benefit": "Benefit",
@@ -185,6 +187,12 @@
   "pop-up.user.login.firstloginconfirm": "First time logon, please change your password!",
   "pop-up.user.login.now": "Now",
   "pop-up.user.login.later": "Later",
-  "pop-up.user.login.noaccount": "Incorrect Policy No, Member ID or Password"
+  "pop-up.user.login.noaccount": "Incorrect Policy No, Member ID or Password",
+  "pop-up.user.login.pleasesignup": "Please Sign Up First",
 
+  "pop-up.user.signup.registered": "Your account is already registered",
+  "pop-up.user.signup.inputemail": "Please enter your E-mail Address",
+  "pop-up.user.signup.confirmemail": "Please confirm your Email",
+  "pop-up.user.signup.erremail": "Please contact your Group HR for </br> email address update.",
+  "pop-up.user.signup.success": "Verification Completed, a new auto-gen password </br> will be sending to your registered e-mail."
 }

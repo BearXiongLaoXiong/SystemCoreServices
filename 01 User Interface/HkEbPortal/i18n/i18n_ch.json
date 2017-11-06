@@ -142,6 +142,7 @@
   "policy.detail.employee": "員工積分",
   "policy.detail.target": "雇主積分",
   "policy.detail.tax": "稅率積分",
+  "policy.detail.SelectionCompleted": "保險選項完成",
 
   "Reimbursement.Index.fsaClaims": "報銷",
   "Reimbursement.Index.Applicant": "家庭成員",
@@ -157,6 +158,7 @@
   "Reimbursement.Index.Delete": "删除",
   "Reimbursement.Index.Image": "圖片",
   "Reimbursement.Index.Submit": "提交",
+  "Reimbursement.Index.SubmitResult": "索償提交完成",
 
   "Reimbursement.edit.edit": "修改",
   "Reimbursement.edit.faimily": "受保成員",
@@ -187,5 +189,12 @@
   "pop-up.user.login.firstloginconfirm": "首次登錄, 請更改密碼!",
   "pop-up.user.login.now": "立即更改 ",
   "pop-up.user.login.later": "以後再改",
-  "pop-up.user.login.noaccount": "保單號碼, 會員編號或密碼不正確"
+  "pop-up.user.login.noaccount": "保單號碼, 會員編號或密碼不正確",
+  "pop-up.user.login.pleasesignup": "請先註冊",
+
+  "pop-up.user.signup.registered": "賬號已注冊",
+  "pop-up.user.signup.inputemail": "請輸入電郵",
+  "pop-up.user.signup.confirmemail": "請確認您的電郵",
+  "pop-up.user.signup.erremail": "請通知人力資源部更新電郵地址",
+  "pop-up.user.signup.success": "驗證完成,新的密碼 </br> 將發送至你的註冊電郵地址"
 }

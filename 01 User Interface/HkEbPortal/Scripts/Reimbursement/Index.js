@@ -10,7 +10,7 @@
 
     $("#btnEdit").on("click", function () {
         var id = $("input:radio[name='selectName']:checked").attr("data-clivKy");
-        if (id == null) { layeralert("please select data！"); return false; }
+        if (id === null) { layeralert("please select data！"); return false; }
 
         location.href = "../Reimbursement/Edit?id=" + id;
         return false;
@@ -19,7 +19,7 @@
 
     form.on('submit(btnDelete)', function (data) {
         var sts = $("input:radio[name='selectName']:checked").attr("data-clivSts");
-        if (sts == null) { layeralert("Please select the data to be deleted！"); return false; }
+        if (sts === null) { layeralert("Please select the data to be deleted！"); return false; }
 
         if (sts !== "00" && sts !== "01") { layeralert("FSA Claim had been submitted,Can't delete！"); return false; }
 
@@ -41,7 +41,7 @@
     form.on('submit(btnSubmit)', function (data) {
         var sts = $("input:radio[name='selectName']:checked").attr("data-clivSts");
 
-        if (sts == null) {
+        if (sts === null) {
             layeralert("Please select the data to be operated！");
             return false;
         }
@@ -53,9 +53,12 @@
 
         var id = $("input:radio[name='selectName']:checked").attr("data-clivKy");
         ShowLoading();
-        $.post("EditFsaClaimStatus", { id: id, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() }, function (result) {
+        $.post("EditFsaClaimStatus", { id: id, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() }, function (dat, result) {
             CloseLoading();
-            layeralert1(result, function () { location.reload(); });
+            if (dat.Code === 0)
+                layeralert1(il8nMessage("Reimbursement.Index.SubmitResult"), function () { location.reload(); });
+            else
+                layeralert1(dat.Msg, function () { location.reload(); });
         });
 
         return false;
@@ -63,7 +66,7 @@
 
     $("#UploadId").on("click", function () {
         var val = $("input:radio[name='selectName']:checked").attr("data-clivKy");
-        if (val == null) {
+        if (val === null) {
             layeralert("Please select the data to be operated！");
         } else {
             location.href = "../Reimbursement/Upload?clivKy=" + val;

@@ -52,6 +52,7 @@ namespace HkEbPortal.Controllers
             if (userInfo.USUS_EMAIL_ISACTIVE == "0")
                 return Json(new { Code = 3, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
+
             Session.RemoveAll();
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
                 userInfo.USUS_KY,
@@ -91,22 +92,25 @@ namespace HkEbPortal.Controllers
                 pCert_No = txtMemberUp
             };
             var userInfo = CommonBl.QuerySingle<SPEH_USUS_EMAIL_SELECT_ISACTIVE, SPEH_USUS_EMAIL_ISACTIVE_RESULT>(entity).FirstOrDefault();
-            //没有在HK_EB_DATE中找到对应的数据
-            if (userInfo == null) return Json(new { Code = 1, Msg = "The account you entered does not exist!" }, JsonRequestBehavior.DenyGet);
 
-            if (string.IsNullOrWhiteSpace(txtBirthday)) return Json(new { Code = 2, Msg = "Please enter the date of birth!" }, JsonRequestBehavior.DenyGet);
+            //没有在HK_EB_DATE中找到对应的数据,保單號碼, 會員編號或密碼不正確
+            if (userInfo == null)
+                return Json(new { Code = 1, Msg = "" }, JsonRequestBehavior.DenyGet);
 
             //在HK_EB_DATE中找到了对应的数据 且ususID已注册 且email已注册过
-            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_SIGNUP_ISACTIVE.Equals("1")) return Json(new { Code = 2, Msg = "Your account is already registered!" }, JsonRequestBehavior.DenyGet);
+            if (userInfo.USUS_ID.Length > 0 && userInfo.USUS_SIGNUP_ISACTIVE.Equals("1"))
+                return Json(new { Code = 2, Msg = "" }, JsonRequestBehavior.DenyGet);
 
+            //出身日期不一致，直接视为没找到账号
             DateTime.TryParse(txtBirthday, out DateTime dob);
             if (string.IsNullOrWhiteSpace(userInfo.DOB) || !userInfo.DOB.Equals(dob.ToString("yyyy-MM-dd").Trim()))
-                return Json(new { Code = 1, Msg = "No such insured, please contact group HR!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 1, Msg = "" }, JsonRequestBehavior.DenyGet);
 
             txtEmailUp = string.IsNullOrEmpty(txtEmailUp) ? userInfo.USUS_EMAIL : txtEmailUp;
 
+            //請輸入email
             if (string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && string.IsNullOrWhiteSpace(txtEmailUp))
-                return Json(new { Code = 3, Msg = "Please enter your E-mail Address" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 3, Msg = "" }, JsonRequestBehavior.DenyGet);
 
             if (!string.IsNullOrWhiteSpace(userInfo.USUS_EMAIL) && userInfo.USUS_EMAIL_ISACTIVE == "0")
                 if (confirmEmail == "confirm")
@@ -151,7 +155,7 @@ namespace HkEbPortal.Controllers
                     SendEmail(subject, context.ToString(), txtEmailUp);
                 }
 
-                return Json(new { Code = 0, Msg = insert.ReturnValue == 1 ? "Sign Up successfully!" : "Sign Up failed!" }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = 0, Msg = insert.ReturnValue == 1 ? "success" : "failed" }, JsonRequestBehavior.DenyGet);
             }
 
             return Json(new { Code = "999", Msg = "error!" });

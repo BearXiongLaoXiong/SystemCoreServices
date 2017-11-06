@@ -3,6 +3,12 @@ layui.use(['form', 'laydate'], function () {
     var form = layui.form,
         laydate = layui.laydate;
 
+    laydate.render({
+        elem: '#txtDate', //指定元素
+        format: 'dd/MM/yyyy',
+        lang: 'en'
+    });
+
     //登陆
     form.on('submit(btnLogin)', function (data) {
         //layer.msg(JSON.stringify(data.field));
@@ -17,6 +23,7 @@ layui.use(['form', 'laydate'], function () {
                         layer.confirm(il8nMessage("pop-up.user.login.firstloginconfirm"), {
                             btn: [il8nMessage("pop-up.user.login.now"), il8nMessage("pop-up.user.login.later")], //按钮
                             title: ' ',
+                            skin: 'layui-layer-lan',
                             icon: 6,
                             closeBtn: 0
                         }, function () {
@@ -27,6 +34,14 @@ layui.use(['form', 'laydate'], function () {
                     } else {
                         window.location.href = "../Home/Index";
                     }
+                }
+                else if (result.Code === 1) {
+                    //保單號碼, 會員編號或密碼不正確
+                    layeralert(il8nMessage("pop-up.user.login.noaccount"));
+                }
+                else if (result.Code === 2) {
+                    //沒有郵件,請先註冊
+                    layeralert(il8nMessage("pop-up.user.login.pleasesignup"));
                 }
                 else if (result.Code === 3) {
                     layer.confirm('first login,please confirm your Email:</br>' + result.Msg, {
@@ -41,10 +56,7 @@ layui.use(['form', 'laydate'], function () {
 
                     });
                 }
-                else if (result.Code === 1) {
-                    //保單號碼, 會員編號或密碼不正確
-                    layeralert(il8nMessage("pop-up.user.login.noaccount"));
-                }
+
                 else
                     layeralert(il8nMessage(result.Msg));
             });
@@ -62,22 +74,41 @@ layui.use(['form', 'laydate'], function () {
             function (result) {
                 CloseLoading();
                 if (result.Code === 0) {
-                    layeralert1(result.Msg, function () { signIn(); });
+                    layeralert1(il8nMessage("pop-up.user.signup.success"), function () { signIn(); });
+                }
+                else if (result.Code === 1) {
+                    //保單號碼, 會員編號或密碼不正確
+                    layeralert(il8nMessage("pop-up.user.login.noaccount"));
+                }
+                else if (result.Code === 2) {
+                    //賬號已注冊過
+                    layeralert1(il8nMessage("pop-up.user.signup.registered"), function () { signIn(); });
                 }
                 else if (result.Code === 3) {
-                    layer.msg(result.Msg);
+                    //请输入注册邮箱
+                    layeralert(il8nMessage("pop-up.user.signup.inputemail"));
                     $("#txtEmailUp").attr("lay-verify", "required");
                     $("#emailDiv").show();
                 }
                 else if (result.Code === 4) {
-                    layer.confirm('Please confirm your Email:</br>' + result.Msg,
-                        { title: "Confirm", btn: ['OK', 'Cancel'] },
-                        function () {
-                            $.post("SignUp",
-                                { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "confirm", r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
+                    layer.confirm(il8nMessage("pop-up.user.signup.confirmemail") + ':</br>' + result.Msg,
+                        {
+                            btn: ['OK', 'Cancel'],
+                            ttitle: ' ',
+                            skin: 'layui-layer-lan',
+                            icon: 6,
+                            closeBtn: 0
+                        }, function () {
+                            //確認email
+                            $.post("SignUp", { txtPolicyUp: policyUp, txtMemberUp: meberUp, txtBirthday: data.field.txtDate, txtEmailUp: data.field.txtEmailUp, confirmEmail: "confirm", r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
                                 function (result) {
-                                    layeralert1(result.Msg, function () { signIn(); });
+                                    if (result.Msg === "success")
+                                        layeralert1(il8nMessage("pop-up.user.signup.success"), function () { signIn(); });
+                                    else layeralert(result.Msg);
                                 });
+                        }, function () {
+                            //請通知人力資源部更新電郵地址
+                            layeralert(il8nMessage("pop-up.user.signup.erremail"));
                         });
                 }
                 else { layeralert(result.Msg); }

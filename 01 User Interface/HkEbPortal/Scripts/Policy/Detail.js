@@ -14,17 +14,17 @@
                     var json = JSON.parse(data.field[key]);
                     array.push(json);
                 }
-                catch (e) {
+                catch (e) {//
                 }
             }
         }
         ShowLoading();
         $.post("Detail", { data: JSON.stringify(array), r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() }, function (dat, status) {
             CloseLoading();
-            if (status === "success") {
-                //layeralert1(status, function () {
+            if (dat.Code === "0") {
+                layeralert1(il8nMessage("policy.detail.SelectionCompleted"), function () {
                     window.location.href = "../Policy/index";
-                //});
+                });
             } else {
                 layeralert(dat);
             }
