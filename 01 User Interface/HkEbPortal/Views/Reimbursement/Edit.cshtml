@@ -11,8 +11,9 @@
         <legend><span i18n="footer.menu.claims">彈性福利索償</span>-<span i18n="Reimbursement.edit.edit">编辑</span></legend>
     </fieldset>
 
-    <form class="layui-form tableheight">
+    <form class="layui-form tableheight" id="FsaEditForm">
         @Html.AntiForgeryToken()
+        <input type="hidden" value="@ViewBag.Id" />
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.faimily" class="layui-form-label" style="min-width: 110px;">家庭成員</label>
@@ -46,22 +47,44 @@
                     <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY" />
                 </div>
             </div>
-            @*<div class="layui-inline">
-                    <label i18n="Reimbursement.edit.application" class="layui-form-label" style="min-width:110px;">申請日</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="Apply_Date" name="Apply_Date" value="@Model.CLIV_APP_DT" autocomplete="off" class="layui-input" lay-verify="date" placeholder="DD/MM/YYYY" />
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label i18n="Reimbursement.edit.apply" class="layui-form-label" style="min-width:110px;">申請金額</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="ApplyAMT" value="@Model.CLIV_APPLY_AMT" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>*@
+
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.invoice" class="layui-form-label" style="min-width: 110px;">發票金額</label>
                 <div class="layui-input-inline">
                     <input type="text" name="CLIV_CHG" value="@Model.CLIV_CHG" lay-verify="required" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label i18n="Reimbursement.Upload.image" class="layui-form-label">發票上傳</label>
+            <div class="layui-input-block">
+                @if (Model.SYSV_CLIV_STS == "00" || Model.SYSV_CLIV_STS == "01")
+                {
+                    <div style="border: 2px dashed #CCC; text-align: center; color: #999; cursor: pointer; margin: 0 0 10px 0; padding: 10px; width: 230px; height: 100px;" id="test10">
+                        <i class="layui-icon" style="font-size: 50px; color: #009688;">&#xe681;</i>
+                        <p>点击上传，或将图片拖拽到此处</p>
+                    </div>
+                }
+                <div id="demo2" style="border: 2px dashed #CCC; min-height: 100px; padding-bottom: 10px;">
+                    @if (!string.IsNullOrEmpty(Model.CLIV_IMG_PATH))
+                    {
+                        <div class="layui-upload-img">
+                            <img src="@Model.CLIV_IMG_PATH" onclick="showimg('@Model.CLIV_IMG_PATH');" />
+                            <p>
+                                <i class="layui-icon">&#xe640;</i>
+                            </p>
+                        </div>
+                    }
+                    @*<div class="layui-upload-img"><img src="~/Content/Images/upload.jpg" onclick="showimg('../Content/Images/upload.jpg');" /><p><i class="layui-icon">&#xe640;</i></p></div>
+                        <div class="layui-upload-img">
+                            <img alt="1.png" src="~/Content/Images/upload.jpg" />
+                            <p><i class="layui-icon">&#xe640;</i></p>
+                        </div>
+                        <div class="layui-upload-img">
+                            <img alt="1.png" src="~/Content/Images/upload.jpg" />
+                            <p><i class="layui-icon">&#xe640;</i></p>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -75,19 +98,19 @@
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.amount" class="layui-form-label" style="min-width: 110px;">調整金額</label>
+                <label i18n="Reimbursement.edit.amount" class="layui-form-label">調整金額</label>
                 <div class="layui-input-inline">
                     <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_AMT</div>
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.user" class="layui-form-label" style="min-width: 110px;">調整用戶</label>
+                <label i18n="Reimbursement.edit.user" class="layui-form-label">調整用戶</label>
                 <div class="layui-input-inline">
                     <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_USUS_ID</div>
                 </div>
             </div>
             <div class="layui-inline">
-                <label i18n="Reimbursement.edit.reason" class="layui-form-label" style="min-width: 110px;">調整原因</label>
+                <label i18n="Reimbursement.edit.reason" class="layui-form-label">調整原因</label>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">@Model.CLIV_ADJ_EXEX_ID</div>
                 </div>
@@ -106,17 +129,7 @@
         </div>
 
         <div class="layui-form-item">
-            <div class="layui-inline">
-                <label i18n="Reimbursement.edit.image" class="layui-form-label" style="min-width: 110px;">發票信息</label>
-                <div class="layui-input-inline">
-                    <img src="@Model.CLIV_IMG_PATH" style="width: 200px; height: 100px; padding-left: 10px;" />
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
             <div class="layui-input-block">
-
                 @if (Model.SYSV_CLIV_STS == "00" || Model.SYSV_CLIV_STS == "01")
                 {
                     <button class="layui-btn layui-btn-small" lay-submit lay-filter="btnEdit" i18n="public.common.save">儲存</button>

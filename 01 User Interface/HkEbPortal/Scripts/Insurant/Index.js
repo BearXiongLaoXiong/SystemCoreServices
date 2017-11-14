@@ -2,26 +2,10 @@
     $("#linkInsurant").addClass("navbarCheckIn");
     var form = layui.form,
         element = layui.element;
-    
-    ShowLoading();
-    //element.tabChange('memberInfoTable', "222"); 
-    CloseDelayLoading();
-    //element.on('tab(docDemoTabBrief)', function (data) {
-    //    console.log(data);
-    //    return false;
-    //});
-    //layer.confirm(il8nMessage("pop-up.user.login.firstloginconfirm"), {
-    //    btn: ["Confirmed", "Amendment required"], //按钮
-    //    title: ' ',
-    //    offset: '190px',
-    //    closeBtn: 0,
-    //    shade: false
-    //}, function () {
-    //    window.location.href = "../User/ChangePassword";
-    //}, function () {
-    //    window.location.href = "../Insurant/Index";
-    //});
-    
+
+    //var index = ShowLoading();
+    //setTimeout(function () { layer.close(index) }, 500);
+
 });
 
 function ShowBenefitInfo(plplky, memeky) {
@@ -49,5 +33,3 @@ function ShowDetail(fmacky) {
         btnAlign: 'c'
     });
 }
-
-//function first

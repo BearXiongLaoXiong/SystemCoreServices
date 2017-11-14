@@ -24,7 +24,7 @@ namespace HkEbPortal.Controllers
         private readonly string _host = ConfigurationManager.AppSettings["EmailHost"];
         private readonly string _passWord = ConfigurationManager.AppSettings["EmailPassword"];
 
-        
+
         public ActionResult Login()
         {
             return View();
@@ -79,7 +79,7 @@ namespace HkEbPortal.Controllers
                 memberList = result.ListFirst;
             }
 
-            return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, MemberList = memberList } }, JsonRequestBehavior.AllowGet);
+            return Json(new { Code = 0, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, userInfo.USUS_INFO_IS_CONFIRM, MemberList = memberList } }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

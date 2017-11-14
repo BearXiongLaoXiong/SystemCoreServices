@@ -11,7 +11,7 @@ using System.IO;
 namespace HkEbPortal.Controllers
 {
     [Authorization]
-    //[UserInfoIsConfirm]
+    [UserInfoIsConfirm]
     [IsOpenEnrollment(true)]
     public class PolicyController : BaseController
     {

@@ -55,6 +55,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         }
         public string MEME_NAME { get; set; }
         public string SYSV_MEME_REL_CD { get; set; }
+        public string SYSV_MEME_REL_CD_ENG { get; set; }
         public string Cert_No { get; set; }
         public string Cert_Prefix { get; set; }
         public string CLASS { get; set; }

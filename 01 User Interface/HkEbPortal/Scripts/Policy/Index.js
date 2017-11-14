@@ -11,7 +11,7 @@ layui.use(['form', 'element'], function () {
     
     ShowLoading();
     var memeKy = getUrlParam("memeKy");
-    console.log("memeKy = " + memeKy);
+    //console.log("memeKy = " + memeKy);
     //laodview('', (memeKy !== null && memeKy !== "") ? memeKy : "");
 
     //form.on('radio', function (data) {

@@ -9,6 +9,14 @@ layui.use(['form', 'laydate'], function () {
         lang: 'en'
     });
 
+    form.verify({
+        required: function (value) {
+            if (value.trim().length < 1) {
+                return il8nMessage("public.common.VerifyRequired");
+            }
+        }
+    });
+
     //登陆
     form.on('submit(btnLogin)', function (data) {
         //layer.msg(JSON.stringify(data.field));
@@ -30,9 +38,12 @@ layui.use(['form', 'laydate'], function () {
                             window.location.href = "../User/ChangePassword";
                         }, function () {
                             window.location.href = "../Insurant/Index";
-                        });
-                    } else {
-                        window.location.href = "../Home/Index";
+                        }); 
+                    } else if (result.Data.USUS_INFO_IS_CONFIRM === 'Y') {
+                        window.location.href = "../Insurant/Index";
+                    }
+                    else {
+                        window.location.href = "../Insurant/Index";
                     }
                 }
                 else if (result.Code === 1) {
@@ -78,7 +89,7 @@ layui.use(['form', 'laydate'], function () {
                 }
                 else if (result.Code === 1) {
                     //保單號碼, 會員編號或密碼不正確
-                    layeralert(il8nMessage("pop-up.user.login.noaccount"));
+                    layeralert(il8nMessage("pop-up.user.signup.noaccount"));
                 }
                 else if (result.Code === 2) {
                     //賬號已注冊過

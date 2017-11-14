@@ -33,6 +33,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string GCGC_KY { get; set; }
         public string SYSV_MEME_REL_CD { get; set; }
         public string SYSV_MEME_REL_CD_DESC { get; set; }
+        public string SYSV_MEME_REL_CD_DESC_ENG { get; set; }
         public string MEME_NAME { get; set; }
         public string MEME_TITLE { get; set; }
         public string SYSV_MEME_STS { get; set; }
@@ -43,6 +44,8 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string MEME_CERT_ID_NUM { get; set; }
         public string SYSV_SEX { get; set; }
         public string SYSV_SEX_DESC { get; set; }
+        public string SYSV_SEX_DESC_ENG { get; set; }
+        
         private string meme_birth_dt;
         public string MEME_BIRTH_DT {
             get {

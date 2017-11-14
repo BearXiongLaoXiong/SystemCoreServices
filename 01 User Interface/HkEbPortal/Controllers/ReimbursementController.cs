@@ -11,15 +11,21 @@ using System.Web.Mvc;
 namespace HkEbPortal.Controllers
 {
     [Authorization]
-    //[UserInfoIsConfirm]
+    [UserInfoIsConfirm]
     [IsOpenEnrollment(false)]
     public class ReimbursementController : BaseController
     {
         // GET: Reimbursement
         public ActionResult Index()
         {
+
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB { pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB, SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB_RESULT>(entity);
+            var lang = Request.Cookies["defaultLang"]?.Value == "en";
+            if (lang) list.ForEach(x =>
+                        {
+                            x.SYSV_CLIV_STS_DESC = x.SYSV_CLIV_STS_DESC_ENG;
+                        });
 
             dynamic model = new ExpandoObject();
             model.Initial = UserInfo.INTIAL_AMT;
@@ -31,19 +37,17 @@ namespace HkEbPortal.Controllers
         public ActionResult Add()
         {
             // 家庭成员
-            var fmfmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(new SPEH_MEME_MEMBER_INFO_LIST_WEB { pEHUSER = UserInfo.USUS_ID });
+            var fmlist = CommonBl.QuerySingle<SPEH_MEME_MEMBER_INFO_LIST_WEB, SPEH_MEME_MEMBER_INFO_LIST_WEB_RESULT>(new SPEH_MEME_MEMBER_INFO_LIST_WEB { pEHUSER = UserInfo.USUS_ID });
 
-            var list = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(new SPEH_EBEB_VALUE_LIST { pMEME_KY = UserInfo.USUS_KY });
+            var eblist = CommonBl.QuerySingle<SPEH_EBEB_VALUE_LIST, SPEH_EBEB_VALUE_LIST_RESULT>(new SPEH_EBEB_VALUE_LIST { pMEME_KY = UserInfo.USUS_KY });
 
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(new SPEH_SYSV_VALUE_LIST { pSYSV_TYPE = "SYSV_CLIV_TYPE" });
 
-            fmfmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
-            var selectFMlist = new SelectList(fmfmlist, "MEME_KY", "MEME_NAME");
-            var selectEBlist = new SelectList(list, "EBEB_KY", "EBEB_DESC");
-            var selectIVlist = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", "I");
-            ViewData["FMFM_DropDownList"] = selectFMlist;
-            ViewData["EBEB_DropDownList"] = selectEBlist;
-            ViewData["CLIV_DropDownList"] = selectIVlist;
+            fmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
+            
+            ViewData["FMFM_DropDownList"] = new SelectList(fmlist, "MEME_KY", "MEME_NAME");
+            ViewData["EBEB_DropDownList"] = new SelectList(eblist, "EBEB_KY", "EBEB_DESC");
+            ViewData["CLIV_DropDownList"] = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", "I"); 
             return View();
         }
 
@@ -102,6 +106,8 @@ namespace HkEbPortal.Controllers
             ViewData["EBEB_DropDownList"] = selectEBlist;
             ViewData["CLIV_DropDownList"] = selectIVlist;
 
+            ViewBag.Id = id;
+
             return View(result);
         }
 
@@ -140,58 +146,11 @@ namespace HkEbPortal.Controllers
             return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Delete(string id)
+        public JsonResult UploadImg(string id)
         {
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE { pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
-            CommonBl.Execute(entity);
-            return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Upload()
-        {
-            string clivKy = Request["clivKy"];
-            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = clivKy };
-            var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity)?.FirstOrDefault();
-            ViewBag.LiuNo = clivKy;
-
-            //Image pic = Image.FromFile("");
-            //MemoryStream ms = new MemoryStream();
-            //pic.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //ms.Close();
-            //ms = null;
-            //pic.Dispose();
-            //pic = null;
-
-            //string imgPath = @"\Upload\images\"+ pic;
-
-            ViewBag.ImagePath = result?.CLIV_IMG_PATH ?? "";
-            return View(result);
-        }
-
-        public ActionResult GetImg()
-        {
-            var imgpath = Request["ImgPath"];
-
-            Bitmap bmp = new Bitmap(100, 35);
-            Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.White);
-            g.FillRectangle(Brushes.Red, 2, 2, 65, 31);
-            g.DrawString("学习MVC", new Font("黑体", 15f), Brushes.Yellow, new PointF(5f, 5f));
-            MemoryStream ms = new MemoryStream();
-            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            g.Dispose();
-            bmp.Dispose();
-            return File(ms.ToArray(), "image/jpeg");
-        }
-
-        [HttpPost]
-        public JsonResult UploadImg(string CLIV_KY)
-        {
-            string Str = "{\"result\":0,\"message\":\"submit success\",\"filename\":\"12424.jpg\",\"fileext\":\"...\"}";
-
+            string filePath = "";
             //前台页面通过 < file name = "img" > 标签数组上传图片，后台根据Request.Files["img"]来接收前台上传的图片。
             System.Web.HttpFileCollection files = System.Web.HttpContext.Current.Request.Files;
             if (files.Count == 0)
@@ -204,7 +163,7 @@ namespace HkEbPortal.Controllers
                     if (files[i].FileName.Length > 0)
                     {
                         System.Web.HttpPostedFile postedfile = files[i];
-                        string filePath = "";
+                        filePath = "";
                         var ext = Path.GetExtension(postedfile.FileName);
                         var fileName = DateTime.Now.Ticks.ToString() + ext;
                         // 组合文件存储的相对路径
@@ -218,8 +177,9 @@ namespace HkEbPortal.Controllers
                         postedfile.SaveAs(path);
                         string fex = Path.GetExtension(postedfile.FileName);
 
-                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath, pCLIV_KY = CLIV_KY, pEHUSER = UserInfo.USUS_ID };
+                        var entiy = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE() { pCLIV_IMG_PATH = filePath, pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
                         CommonBl.Execute(entiy);
+
                     }
                 }
                 else
@@ -227,9 +187,56 @@ namespace HkEbPortal.Controllers
                     return Json("{\"result\":-1,\"message\":\"撒的撒\",\"filename\":\"" + files[i].FileName + "\",\"fileext\":\"" + Path.GetExtension(files[i].FileName) + "\"}", JsonRequestBehavior.AllowGet);
                 }
             }
-
-            return Json(Str, JsonRequestBehavior.AllowGet);
+            return Json(new { result = 0, message = "upload success", filename = "../" + filePath, fileext = "...." });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult Delete(string id)
+        {
+            var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE { pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
+            CommonBl.Execute(entity);
+            return Json(entity.pRTN_MSG, JsonRequestBehavior.AllowGet);
+        }
+
+        //public ActionResult Upload()
+        //{
+        //    string clivKy = Request["clivKy"];
+        //    var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT() { pCLIV_KY = clivKy };
+        //    var result = CommonBl.QuerySingle<SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT, SPEH_CLIV_CLAIM_INVOICE_INFO_SELECT_RESULT>(entity)?.FirstOrDefault();
+        //    ViewBag.LiuNo = clivKy;
+
+        //    //Image pic = Image.FromFile("");
+        //    //MemoryStream ms = new MemoryStream();
+        //    //pic.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    //ms.Close();
+        //    //ms = null;
+        //    //pic.Dispose();
+        //    //pic = null;
+
+        //    //string imgPath = @"\Upload\images\"+ pic;
+
+        //    ViewBag.ImagePath = result?.CLIV_IMG_PATH ?? "";
+        //    return View(result);
+        //}
+
+        //public ActionResult GetImg()
+        //{
+        //    var imgpath = Request["ImgPath"];
+
+        //    Bitmap bmp = new Bitmap(100, 35);
+        //    Graphics g = Graphics.FromImage(bmp);
+        //    g.Clear(Color.White);
+        //    g.FillRectangle(Brushes.Red, 2, 2, 65, 31);
+        //    g.DrawString("学习MVC", new Font("黑体", 15f), Brushes.Yellow, new PointF(5f, 5f));
+        //    MemoryStream ms = new MemoryStream();
+        //    bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    g.Dispose();
+        //    bmp.Dispose();
+        //    return File(ms.ToArray(), "image/jpeg");
+        //}
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -27,19 +27,23 @@
 
     @{
         var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
-        var IsShow = userinfo != null ? "" : "style=display:none;";
-        var IsHide = userinfo != null ? "style=display:none;" : "";
-        var PolicyIsMenuDisabled = "";
-        var FSAIsMenuDisabled = "";
+        var isShow = userinfo != null ? "" : "style=display:none;";
+        var isHide = userinfo != null ? "style=display:none;" : "";
+        var homeIsMenuDisabled = "";
+        var policyIsMenuDisabled = "";
+        var fsaIsMenuDisabled = "";
+        var contactIsMenuDisabled = "";
         if (userinfo != null)
         {
-            PolicyIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Policy/Index" : " class=menu-disabled ";
-            FSAIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Reimbursement/Index" : " class=menu-disabled ";
+            homeIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Home/Index" : " class=menu-disabled ";
+            policyIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Policy/Index" : " class=menu-disabled ";
+            fsaIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Reimbursement/Index" : " class=menu-disabled ";
+            contactIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Home/Contact" : " class=menu-disabled ";
             if (userinfo.USUS_INFO_IS_CONFIRM == "Y")
             {
                 var isOpen = new Common().IsOpenEnrollment(userinfo.USUS_KY);
-                PolicyIsMenuDisabled = isOpen ? " class=menu-disabled " : "href = ../Policy/Index";
-                FSAIsMenuDisabled = isOpen ? "href = ../Reimbursement/Index" : " class=menu-disabled ";
+                policyIsMenuDisabled = isOpen ? " class=menu-disabled " : "href = ../Policy/Index";
+                fsaIsMenuDisabled = isOpen ? "href = ../Reimbursement/Index" : " class=menu-disabled ";
             }
         }
     }
@@ -48,17 +52,17 @@
         <div class="container">
 
             <div class="navbarhide" style="height: 50px; text-align: right; line-height: 30px; font-size: 15px;">
-                <div @IsShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0;  cursor: pointer;" onclick="Logout();">
+                <div @isShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0;  cursor: pointer;" onclick="Logout();">
                     <span class="layui-badge-rim layui-bg-gray"><a i18n="footer.logout" style="font-size: 12px;font-weight: normal;color:#333">安全退出</a></span>
                 </div>
-                <div @IsShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0; margin:0 10px 0 10px; cursor: pointer;">
+                <div @isShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0; margin:0 10px 0 10px; cursor: pointer;">
                     <span class="layui-badge-rim layui-bg-gray"><a href="../User/ChangePassword" i18n="footer.Editpwd" style="font-size: 12px;font-weight: normal;color:#333">修改密碼</a></span>
                 </div>
-                <div @IsHide id="btnLogin" class="myButton" style="border-right: none; padding-right: 10px; width:100px;cursor: pointer;" onclick="window.open('../User/Login', '_self')">
+                <div @isHide id="btnLogin" class="myButton" style="border-right: none; padding-right: 10px; width:100px;cursor: pointer;" onclick="window.open('../User/Login', '_self')">
                     <a class="myHarf" style=""></a>
                     <a i18n="footer.login" style="color: #FFFFFF; padding-right: 10px;">登入</a>
                 </div>
-                <div @IsHide class="center" style="border-right: none; padding-right: 10px;">
+                <div @isHide class="center" style="border-right: none; padding-right: 10px;">
                     <a style="background: url(../Content/Images/iconList.png) 2px -1713px no-repeat; width: 25px; height: 30px; display: block;"></a>
                 </div>
 
@@ -74,11 +78,11 @@
 
             <div class="collapse navbar-collapse navbar-left navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li id="linkHome"><a href="../Home/Index" i18n="footer.menu.homepage">主頁</a></li>
-                    <li id="linkInsurant" @IsShow><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
-                    <li id="linkPolicy" @IsShow style="width: 200px;"><a i18n="footer.menu.policy" @PolicyIsMenuDisabled>福利選擇</a></li>
-                    <li id="linkReim" @IsShow><a i18n="footer.menu.claims" @FSAIsMenuDisabled>彈性福利索償</a></li>
-                    <li id="linkContact" @IsShow><a href="../Home/Contact" i18n="footer.menu.contact">聯係我們</a></li>
+                    <li id="linkHome" @isShow><a i18n="footer.menu.homepage" @homeIsMenuDisabled>主頁</a></li>
+                    <li id="linkInsurant" @isShow><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
+                    <li id="linkPolicy" @isShow style="width: 200px;"><a i18n="footer.menu.policy" @policyIsMenuDisabled>福利選擇</a></li>
+                    <li id="linkReim" @isShow><a i18n="footer.menu.claims" @fsaIsMenuDisabled>彈性福利索償</a></li>
+                    <li id="linkContact" @isShow><a i18n="footer.menu.contact" @contactIsMenuDisabled>聯係我們</a></li>
                 </ul>
             </div>
 

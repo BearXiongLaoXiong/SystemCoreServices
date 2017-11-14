@@ -2,7 +2,7 @@
   "public.common.pleaseSelect": "Please select",
   "public.common.pleaseInput": "Please input",
   "public.common.add": "Add",
-  "public.common.detail": "detail",
+  "public.common.detail": "Detail",
   "public.common.edit": "Edit",
   "public.common.delete": "Delete",
   "public.common.select": "select",
@@ -12,6 +12,10 @@
   "public.common.save": "Save",
   "public.common.back": "Back",
   "public.common.submit": "Submit",
+  "public.common.Confirmed": "Confirmed",
+  "public.common.required": "Amendment required",
+  "public.common.VerifyRequired": "Please provide information",
+
 
   "footer.login": "Login",
   "footer.logout": "Logout",
@@ -50,6 +54,9 @@
   "user.login.password": "Password",
   "user.login.forgotpwd": "Forgot Password?",
   "user.login.email": "e-mail address",
+  "user.login.verify.policy": "Please provide Policy No.",
+  "user.login.verify.member": "Please provide Member ID",
+  "user.login.verify.password": "Please provide PassWord",
 
 
   "user.forgot.headtitle": "Please enter the policy number/insured number to retrieve the password",
@@ -184,15 +191,24 @@
   "Reimbursement.Upload.lastinvoiceInfo": "Last Invoice info",
 
 
-  "pop-up.user.login.firstloginconfirm": "First time logon, please change your password!",
+  "pop-up.user.login.firstloginconfirm": "First time logon, </br>please change your password!",
   "pop-up.user.login.now": "Now",
   "pop-up.user.login.later": "Later",
   "pop-up.user.login.noaccount": "Incorrect Policy No, Member ID or Password",
   "pop-up.user.login.pleasesignup": "Please Sign Up First",
 
+  "pop-up.user.signup.noaccount": "Incorrect Policy No, Member ID or Date of Birth",
   "pop-up.user.signup.registered": "Your account is already registered",
   "pop-up.user.signup.inputemail": "Please enter your E-mail Address",
   "pop-up.user.signup.confirmemail": "Please confirm your Email",
   "pop-up.user.signup.erremail": "Please contact your Group HR for </br> email address update.",
-  "pop-up.user.signup.success": "Verification Completed, a new auto-gen password </br> will be sending to your registered e-mail."
+  "pop-up.user.signup.success": "Verification Completed, a new auto-gen password </br> will be sending to your registered e-mail.",
+
+  "pop-up.Insurant.index.confirmEmployee": "Please confirm Employee information",
+  "pop-up.Insurant.index.confirmFamily": "Please confirm Family members",
+  "pop-up.Insurant.index.confirmBenefit": "Please confirm Benefit Info",
+  "pop-up.Insurant.index.confirmRequired": "Please inform your HR to update the member </br> information",
+
+  "pop-up.fsa.index.DeleteTips": "Cannot Delete FSA claims",
+  "pop-up.fsa.index.SubmitTips": "FSA claims already submitted"
 }

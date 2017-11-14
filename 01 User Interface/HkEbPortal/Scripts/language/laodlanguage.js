@@ -3,6 +3,11 @@
     var defaultLang = "en";
     var cookie = $.cookie("defaultLang");
     if (cookie != null && cookie !== "undefined") defaultLang = cookie;
+    else {
+        var date = new Date();//如果没有获取到默认语言,则设置默认en
+        date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
+        $.cookie("defaultLang", "en", { path: '/', expires: date });
+    }
 
     $("[i18n]").i18n({
         defaultLang: defaultLang,
@@ -39,6 +44,7 @@ function InitializeLanguageComponent() {
 function il8nMessage(key) {
     var defaultLang = "en";
     var cookie = $.cookie("defaultLang");
+
     if (cookie != null && cookie !== "undefined") defaultLang = cookie;
     if (defaultLang === "ch")
         return chlanguageJson[key];

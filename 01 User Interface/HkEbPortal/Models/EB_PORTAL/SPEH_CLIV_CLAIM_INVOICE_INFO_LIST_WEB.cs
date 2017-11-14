@@ -33,6 +33,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string SYSV_CLIV_TYPE_DESC { get; set; }
         public string SYSV_CLIV_STS { get; set; }
         public string SYSV_CLIV_STS_DESC { get; set; }
+        public string SYSV_CLIV_STS_DESC_ENG { get; set; }
         public string CLIV_STS_RSN { get; set; }
         public string CLIV_STS_DTM { get; set; }
         private string cliv_dt;

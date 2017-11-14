@@ -69,17 +69,19 @@
     @{
         var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
 
-        var PolicyIsMenuDisabled = "href = ../Policy/Index";
-        var FSAIsMenuDisabled = "href = ../Reimbursement/Index";
+        var policyIsMenuDisabled = "";
+        var fsaIsMenuDisabled = "";
+        var contactIsMenuDisabled = "";
         if (userinfo != null)
         {
-            PolicyIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Policy/Index" : "   class=menu-disabled ";
-            FSAIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Reimbursement/Index" : "   class=menu-disabled ";
+            policyIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Policy/Index" : " class=menu-disabled ";
+            fsaIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Reimbursement/Index" : " class=menu-disabled ";
+            contactIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Home/Contact" : " class=menu-disabled ";
             if (userinfo.USUS_INFO_IS_CONFIRM == "Y")
             {
                 var isOpen = new Common().IsOpenEnrollment(userinfo.USUS_KY);
-                PolicyIsMenuDisabled = isOpen ? " href = # class=menu-disabled " : "href = ../Policy/Index";
-                FSAIsMenuDisabled = isOpen ? "href = ../Reimbursement/Index" : " href = # class=menu-disabled ";
+                policyIsMenuDisabled = isOpen ? " href = # class=menu-disabled " : "href = ../Policy/Index";
+                fsaIsMenuDisabled = isOpen ? "href = ../Reimbursement/Index" : " href = # class=menu-disabled ";
             }
         }
     }
@@ -87,12 +89,12 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-color: #C21B17;">
         <div class="col-md-12 line">
             <h3 i18n="footer.menu.member" style="color: white">受保人資料</h3>
-            <p><span style="color: white">我们渴望听到你的。要求对我们的产品和服务的信息，请使用下面的表格，提出问题的韦莱集团，或给我们反馈或投诉</span>
+            <p><span style="color: white"> </span>
             </p>
             <br>
-            <p class="more">
+            @*<p class="more">
                 <a href="../Insurant/Index" style="color: white; padding: 12px 35px 12px 25px; border: 1px solid white; font-size: 18px; font-weight: 100;">Read More ></a>
-            </p>
+            </p>*@
         </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -100,29 +102,28 @@
             <h3 i18n="footer.menu.policy">福利選擇</h3>
             <p><span></span>
             </p><br><br><br>
-            <p class="more">
-                <a @PolicyIsMenuDisabled >Read More ></a>
-            </p>
+            @*<p class="more">
+                <a @policyIsMenuDisabled >Read More ></a>
+            </p>*@
         </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="col-md-12 line">
             <h3 i18n="footer.menu.claims">彈性福利索償</h3>
-            <p><span>稳健保障 世界运行不息</span>
-            </p><br>
-            <p class="more">
-                <a @FSAIsMenuDisabled>Read More ></a>
-            </p>
+            <p><span></span></p><br>
+            @*<p class="more">
+                <a @fsaIsMenuDisabled>Read More ></a>
+            </p>*@
         </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-color: #F2F2F2; margin-bottom: 30px;">
         <div class="col-md-12 line">
             <h3 i18n="footer.menu.contact" style="color: #C21B17">聯絡我們</h3>
-            <p><span style="color: #C21B17">我们渴望听到你的。要求对我们的产品和服务的信息，请使用下面的表格，提出问题的韦莱集团，或给我们反馈或投诉</span>
+            <p><span style="color: #C21B17"></span>
             </p>
-            <p class="more">
-                <a href="../Home/Contact">Read More ></a>
-            </p>
+            @*<p class="more">
+                <a @contactIsMenuDisabled>Read More ></a>
+            </p>*@
         </div>
     </div>
 

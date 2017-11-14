@@ -23,7 +23,7 @@ namespace HkEbPortal.App_Start
                 pMEME_KY = meKy
             };
             _commonBl.Execute(entity);
-            return entity.pIsOpen > 0;
+            return entity.pIsOpen == 0;
         }
     }
 }

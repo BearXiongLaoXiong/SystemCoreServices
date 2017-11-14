@@ -191,6 +191,8 @@
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_SELECT_ISACTIVE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_INSERT.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_USUS_IS_CONFIRM_SELECT.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_USUS_IS_CONFIRM_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_USER_PWD_INFO_SELECT.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_USER_PWD_INFO_UPDATE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -339,6 +341,7 @@
     <Content Include="Scripts\images\face\71.gif" />
     <Content Include="Scripts\images\face\8.gif" />
     <Content Include="Scripts\images\face\9.gif" />
+    <Content Include="Scripts\Insurant\ConfirmInfo.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
     <Content Include="Scripts\Insurant\Index.js" />
@@ -405,7 +408,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Insurant\Index.cshtml" />
-    <Content Include="Views\Reimbursement\Upload.cshtml" />
     <Content Include="Views\Policy\Information.cshtml" />
     <Content Include="Views\Insurant\BillingInfomationDetail.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />

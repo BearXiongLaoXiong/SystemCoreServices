@@ -20,8 +20,8 @@ namespace HkEbPortal.Controllers
 
             return View();
         }
-
-        [Authorization]
+        
+        [UserInfoIsConfirm]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
