@@ -211,6 +211,8 @@
   "pop-up.user.signup.erremail": "Please contact your Group HR for </br> email address update.",
   "pop-up.user.signup.success": "Verification Completed, a new auto-gen password </br> will be sending to your registered e-mail.",
 
+  "pop-up.user.changepwd.OldPassWordErr": "Old PassWord error,please try again",
+
   "pop-up.Insurant.index.confirmEmployee": "Please confirm Employee information",
   "pop-up.Insurant.index.confirmFamily": "Please confirm Family members",
   "pop-up.Insurant.index.confirmBenefit": "Please confirm Benefit Info",

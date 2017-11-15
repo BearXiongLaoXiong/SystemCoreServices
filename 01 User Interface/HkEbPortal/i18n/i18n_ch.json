@@ -212,6 +212,8 @@
   "pop-up.user.signup.erremail": "請通知人力資源部更新電郵地址",
   "pop-up.user.signup.success": "驗證完成,新的密碼 </br> 將發送至你的註冊電郵地址",
 
+  "pop-up.user.changepwd.OldPassWordErr": "原密碼錯誤,請重試",
+
   "pop-up.Insurant.index.confirmEmployee": "請確認員工資訊",
   "pop-up.Insurant.index.confirmFamily": "請確認家庭成員",
   "pop-up.Insurant.index.confirmBenefit": "請確認福利信息",

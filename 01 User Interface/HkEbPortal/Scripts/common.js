@@ -9,7 +9,7 @@ function ShowLoading() {
         width: '100px',
         icon: 16,
         shade: 0.2,
-        time: 10000,
+        time: 60000,
         anim: 5
     });
     return index;

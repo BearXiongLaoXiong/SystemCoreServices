@@ -4,6 +4,16 @@
         , layedit = layui.layedit
         , laydate = layui.laydate;
 
+
+    form.verify({
+        required: function (value) {
+            if (value.trim().length < 1) {
+                return il8nMessage("public.common.VerifyRequired");
+            }
+        }
+    });
+
+
     form.on('submit(btnSubmit)', function (data) {
         ShowLoading();
 
