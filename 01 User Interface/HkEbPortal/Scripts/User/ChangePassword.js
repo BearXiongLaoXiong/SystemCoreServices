@@ -11,7 +11,7 @@
 
     //监听提交
     form.on('submit(formDemo)', function (data) {
-
+       
         var verify = false,
             oldVerify = false,
             newVerify = false,
@@ -34,21 +34,27 @@
                 $("#confirmPassword").focus();
                 return false;
             }
-
+            ShowLoading();
             verify = oldVerify && newVerify && confirmVerify;
             if (verify) {
                 $.post("ChangePassword", data.field, function (data, status) {
+                    CloseLoading();
                     if (data.Code === 0) {
-                        layeralert(data.Msg, function() {
-                            location.href = "../Home/Index";
+                        layeralert1(data.Msg, function () {
+                            window.location.href = "../Insurant/Index";
                         });
-                    } else {
+                    }
+                    else if (data.Code === 9) {
+                        layeralert(il8nMessage("pop-up.user.changepwd.OldPassWordErr"));
+                    }
+                    else {
                         layeralert(data.Msg);
                     }
                 });
             }
         } catch (e) {
         }
+        CloseLoading();
         return false;
     });
 

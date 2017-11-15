@@ -191,7 +191,7 @@ namespace HkEbPortal.Controllers
             string oldpwd = form["oldPassword"];
             string newpwd = form["newPassword"];
             string confirmpwd = form["confirmPassword"];
-            var entity = new SPEH_USUS_USER_PWD_INFO_UPDATE()
+            var entity = new SPEH_USUS_USER_PWD_INFO_UPDATE
             {
                 pUSUS_ID = UserInfo.USUS_ID,
                 pPassword = Des.Encrypt(oldpwd),
@@ -214,7 +214,7 @@ namespace HkEbPortal.Controllers
         public JsonResult ForgotPassword(string policyNo, string memberId)
         {
             string password = Des.GetDesStr();
-            var entity = new SPEH_USUS_USER_PWD_INFO_SELECT() { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(password) };
+            var entity = new SPEH_USUS_USER_PWD_INFO_SELECT { pPLPL_NO = policyNo, pMEME_ID = memberId, pPassword = Des.Encrypt(password) };
             var list = CommonBl.QuerySingle<SPEH_USUS_USER_PWD_INFO_SELECT, SPEH_USUS_USER_PWD_INFO_SELECT_RESULT>(entity);
             if (list.Count > 0 && entity.pRTN_CD == 0)
             {
