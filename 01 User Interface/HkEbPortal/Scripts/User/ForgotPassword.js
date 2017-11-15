@@ -11,12 +11,18 @@
             { policyNo: data.field.policyNo, memberId: data.field.memberId, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
             function (result) {
                 CloseLoading();
-                if (result.Data === 0) {
+                if (result.Data === 1) {
                     layeralert1(result.Msg, function () {
                         window.location.href = "../User/Login";
                     });
-                } else {
-                    layeralert(result.Msg);
+                } else if (result.Data === 2){
+                    layeralert(il8nMessage("pop-up.user.forgotpassword.notExistAccount"));
+                } else if (result.Data === 3) {
+                    layeralert(il8nMessage("pop-up.user.forgotpassword.noMailboxs"));
+                } else if (result.Data === 4) {
+                    layeralert(il8nMessage("pop-up.user.forgotpassword.mailboxnotactive"));
+                } else if (result.Data === 5) {
+                    layeralert(il8nMessage("pop-up.user.forgotpassword.notRegistered"));
                 }
             });
         return false;

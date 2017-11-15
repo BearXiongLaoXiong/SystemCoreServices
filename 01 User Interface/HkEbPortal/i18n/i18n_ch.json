@@ -204,6 +204,7 @@
   "pop-up.user.login.later": "以後再改",
   "pop-up.user.login.noaccount": "保單號碼, 會員編號或密碼不正確",
   "pop-up.user.login.pleasesignup": "請先註冊",
+  "pop-up.user.login.pleasepassworderror": "密码错误3次，不允许再登录，请去找回密码",
 
   "pop-up.user.signup.noaccount": "保單號碼, 會員編號或出生日期不正確",
   "pop-up.user.signup.registered": "賬號已註冊",
@@ -218,5 +219,10 @@
   "pop-up.Insurant.index.confirmRequired": "請通知人力資源部更新會員資料",
 
   "pop-up.fsa.index.DeleteTips": "不能刪除FSA索償",
-  "pop-up.fsa.index.SubmitTips": "FSA索償已經提交"
+  "pop-up.fsa.index.SubmitTips": "FSA索償已經提交",
+
+  "pop-up.user.forgotpassword.notExistAccount": "帳號不存在",
+  "pop-up.user.forgotpassword.noMailboxs": "沒有郵箱",
+  "pop-up.user.forgotpassword.mailboxnotactive": "郵箱沒有啟動",
+  "pop-up.user.forgotpassword.notRegistered": "沒有註冊"
 }

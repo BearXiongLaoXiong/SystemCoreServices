@@ -43,13 +43,13 @@ namespace HkEbPortal.Controllers
             var userInfo = CommonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
 
             //保單號碼, 會員編號或密碼不正確
-            if (userInfo == null)
-                return Json(new { Code = 1, Msg = "" }, JsonRequestBehavior.DenyGet);
+            if (userInfo == null || string.IsNullOrWhiteSpace(userInfo?.USUS_ID))
+                return Json(new { Code = entity.ReturnValue, Msg = "" }, JsonRequestBehavior.DenyGet);
 
-            if (userInfo.USUS_EMAIL.Length == 0)
+            if (userInfo?.USUS_EMAIL?.Length == 0)
                 return Json(new { Code = 2, Msg = "Do not find your mailbox, please go to the registration interface to activate the mailbox!" }, JsonRequestBehavior.DenyGet);
 
-            if (userInfo.USUS_EMAIL_ISACTIVE == "0")
+            if (userInfo?.USUS_EMAIL_ISACTIVE == "0")
                 return Json(new { Code = 3, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
 

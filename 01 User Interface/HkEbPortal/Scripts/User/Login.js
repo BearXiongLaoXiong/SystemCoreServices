@@ -53,6 +53,9 @@ layui.use(['form', 'laydate'], function () {
                 else if (result.Code === 2) {
                     //沒有郵件,請先註冊
                     layeralert(il8nMessage("pop-up.user.login.pleasesignup"));
+                } else if (result.Code === 9) {
+                    //沒有郵件,請先註冊
+                    layeralert1(il8nMessage("pop-up.user.login.pleasepassworderror"), function () { window.location.href = "../User/ForgotPassword"});
                 }
                 else if (result.Code === 3) {
                     layer.confirm('first login,please confirm your Email:</br>' + result.Msg, {
