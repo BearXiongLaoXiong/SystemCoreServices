@@ -203,7 +203,7 @@
   "pop-up.user.login.later": "Later",
   "pop-up.user.login.noaccount": "Incorrect Policy No, Member ID or Password",
   "pop-up.user.login.pleasesignup": "Please Sign Up First",
-  "pop-up.user.login.pleasepassworderror": "Password Error 3 times, do not allow login, please go back to password",
+  "pop-up.user.login.pleasepassworderror": "User Account blocked, please press </br> \"Forgot Password\"",
 
   "pop-up.user.signup.noaccount": "Incorrect Policy No, Member ID or Date of Birth",
   "pop-up.user.signup.registered": "Your account is already registered",

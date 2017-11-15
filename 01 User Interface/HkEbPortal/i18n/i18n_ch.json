@@ -204,7 +204,7 @@
   "pop-up.user.login.later": "以後再改",
   "pop-up.user.login.noaccount": "保單號碼, 會員編號或密碼不正確",
   "pop-up.user.login.pleasesignup": "請先註冊",
-  "pop-up.user.login.pleasepassworderror": "密码错误3次，不允许再登录，请去找回密码",
+  "pop-up.user.login.pleasepassworderror": "用戶帳號需重新啟用,請按 \"忘記密碼\"鍵",
 
   "pop-up.user.signup.noaccount": "保單號碼, 會員編號或出生日期不正確",
   "pop-up.user.signup.registered": "賬號已註冊",
