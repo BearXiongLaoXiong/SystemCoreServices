@@ -25,7 +25,7 @@ layui.use(['form', 'laydate'], function () {
             { txtpolicyNo: data.field.txtpolicyNo, txtMember: data.field.txtMember, txtPassword: data.field.txtPassword, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() },
             function (result) {
                 CloseLoading();
-                if (result.Code === 0) {
+                if (result.Code === 1) {
                     if (result.Data.USUS_FIRST_ISACTIVE === '0') {
                         //首次登陸提示修改密碼
                         layer.confirm(il8nMessage("pop-up.user.login.firstloginconfirm"), {
@@ -46,7 +46,7 @@ layui.use(['form', 'laydate'], function () {
                         window.location.href = "../Insurant/Index";
                     }
                 }
-                else if (result.Code === 1) {
+                else if (result.Code === 8) {
                     //保單號碼, 會員編號或密碼不正確
                     layeralert(il8nMessage("pop-up.user.login.noaccount"));
                 }
