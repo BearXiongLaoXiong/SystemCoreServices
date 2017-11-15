@@ -33,6 +33,8 @@
                     layeralert(il8nMessage("pop-up.user.forgotpassword.mailboxnotactive"));
                 } else if (result.Data === 5) {
                     layeralert(il8nMessage("pop-up.user.forgotpassword.notRegistered"));
+                } else {
+                    layeralert(result.Msg);
                 }
             });
         return false;
