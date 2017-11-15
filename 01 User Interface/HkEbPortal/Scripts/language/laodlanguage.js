@@ -19,7 +19,8 @@
             console.log("language is " + defaultLang);
         }
     });
-    InitializeLanguageComponent();
+    if (enlanguageJson != null && chlanguageJson != null && enlanguageJson.length > 0 && chlanguageJson.length > 0)
+    { } else { InitializeLanguageComponent(); }
 }
 
 

@@ -72,6 +72,13 @@
   "user.modify.confirmpwdprom": "Please enter your new password again",
   "user.modify.submit": "Submit",
   "user.modify.reset": "Reset",
+  "user.modify.pwdLength": "The length is [8~16] characters",
+  "user.modify.pwdSpace": "No spaces allowed",
+  "user.modify.pwdNumbers": "At least one numbers",
+  "user.modify.pwdUpper": "At least one upper case character",
+  "user.modify.pwdLower": "At least one lower case character",
+  "user.modify.pwdPunctuation": "At least one punctuation",
+  "user.modify.pwdSame": "The password entered twice must be the same",
 
   "Insurant.index.info": "Insured information",
   "Insurant.index.member": "MemberId",

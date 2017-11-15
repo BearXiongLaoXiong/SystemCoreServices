@@ -177,7 +177,7 @@ namespace HkEbPortal.Controllers
         }
 
 
-        [Authorization]
+        //[Authorization]
         public ActionResult ChangePassword()
         {
             return View();

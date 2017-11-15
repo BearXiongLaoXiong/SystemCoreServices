@@ -45,13 +45,50 @@
 .textcenter:hover {
     text-decoration: none;
 }
+
 .textcenter:visited {
     font-size: 20px;
     color: #C21B17;
     text-decoration: none;
 }
+
 .textcenter:link {
     font-size: 20px;
     color: #C21B17;
     text-decoration: none;
-} 
+}
+
+/*修改密码验证popup*/
+.pwd-checklist-def {
+    color: #666;
+}
+
+    .pwd-checklist-def > i {
+        font-size: 10px;
+        padding-right: 5px;
+        color: #666;
+    }
+
+/*修改密码验证popup*/
+.pwd-checklist-suc {
+    color: #666;
+}
+
+    .pwd-checklist-suc > i {
+        font-size: 10px;
+        padding-right: 5px;
+        color: #5BC92E;
+        font-weight: bold;
+    }
+
+/*修改密码验证popup*/
+.pwd-checklist-err {
+    color: #fc4343;
+}
+
+    .pwd-checklist-err > i {
+        font-size: 10px;
+        padding-right: 5px;
+        color: #FC4343;
+        font-weight: bold;
+    }

@@ -71,6 +71,13 @@
   "user.modify.confirmpwdprom": "請再次輸入新密碼",
   "user.modify.submit": "立即提交",
   "user.modify.reset": "重置",
+  "user.modify.pwdLength": "長度為[8~16]個字符",
+  "user.modify.pwdSpace": "不允許有空格",
+  "user.modify.pwdNumbers": "至少有一個數字",
+  "user.modify.pwdUpper": "至少有一個大寫字母",
+  "user.modify.pwdLower": "至少有一個小寫字母",
+  "user.modify.pwdPunctuation": "至少有一個標點符號",
+  "user.modify.pwdSame": "2次輸入的密碼必須一致",
 
   "Insurant.index.info": "被保險人資訊",
   "Insurant.index.member": "會員編號",
