@@ -1,9 +1,7 @@
 ﻿layui.use(['form', 'element'], function () {
     var form = layui.form,
         element = layui.element;
-    console.log(layui.element);
-
-
+    
     reloadIsConfirm();
 });
 
