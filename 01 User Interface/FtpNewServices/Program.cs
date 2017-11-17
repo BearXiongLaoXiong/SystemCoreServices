@@ -10,7 +10,7 @@ namespace FtpNewServices
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             string path = $@"{AppDomain.CurrentDomain.BaseDirectory}\{ConfigurationManager.AppSettings["FtpServiceConfig"] ?? ""}";
             if (!File.Exists(path))
