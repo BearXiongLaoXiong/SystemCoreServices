@@ -43,7 +43,7 @@ namespace HkEbPortal.Controllers
             var userInfo = CommonBl.QuerySingle<SPEH_FMFM_LOGIN, UserInfo>(entity).FirstOrDefault();
 
             //保單號碼, 會員編號或密碼不正確
-            if (userInfo == null || string.IsNullOrWhiteSpace(userInfo?.USUS_ID))
+            if (string.IsNullOrWhiteSpace(userInfo?.USUS_ID))
                 return Json(new { Code = entity.ReturnValue, Msg = "" }, JsonRequestBehavior.DenyGet);
 
             if (userInfo?.USUS_EMAIL?.Length == 0)

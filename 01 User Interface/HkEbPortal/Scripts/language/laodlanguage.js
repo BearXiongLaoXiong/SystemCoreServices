@@ -27,19 +27,37 @@
 var enlanguageJson;
 var chlanguageJson;
 function InitializeLanguageComponent() {
-    $.ajaxSettings.async = false;
+    //$.ajaxSettings.async = false;
 
-    $.getJSON("../i18n/i18n_en.json",
-        function (data) {
+    //$.getJSON("../i18n/i18n_en.json",
+    //    function (data) {
+    //        enlanguageJson = data;
+    //    });
+
+    //$.getJSON("../i18n/i18n_ch.json",
+    //    function (data) {
+    //        chlanguageJson = data;
+    //    });
+
+    //$.ajaxSettings.async = true;
+
+    $.ajax({
+        type: "get",
+        url: "../i18n/i18n_en.json",
+        async: true,
+        success: function(data) {
             enlanguageJson = data;
-        });
+        }
+    });
 
-    $.getJSON("../i18n/i18n_ch.json",
-        function (data) {
+    $.ajax({
+        type: "get",
+        url: "../i18n/i18n_ch.json",
+        async: true,
+        success: function (data) {
             chlanguageJson = data;
-        });
-
-    $.ajaxSettings.async = true;
+        }
+    });
 }
 
 function il8nMessage(key) {
