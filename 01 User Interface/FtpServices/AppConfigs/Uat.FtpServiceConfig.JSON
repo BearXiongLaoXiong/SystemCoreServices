@@ -1,9 +1,9 @@
 ﻿[
   {
-    "Ip": "192.168.100.28",
+    "Ip": "192.168.102.238",
     "Port": 21,
-    "Uid": "xiezhu_trns",
-    "Pwd": "xiezhu_e_trns",
+    "Uid": "liqie",
+    "Pwd": "li123456",
     "RemoteFolder": "clm",
     "RemoteBackupFolder": "",
     "MessageQueuePath": "",
@@ -17,10 +17,10 @@
   },
   {
 
-    "Ip": "192.168.100.28",
+    "Ip": "192.168.102.238",
     "Port": 21,
-    "Uid": "xiezhu_ext_trns",
-    "Pwd": "xiezhu_2_trns",
+    "Uid": "liqie",
+    "Pwd": "li123456",
     "RemoteFolder": "claim_img",
     "RemoteBackupFolder": "ClaimImageBackup",
     "MessageQueuePath": "",
@@ -33,10 +33,10 @@
     "MaxDegreeOfParallelism": 16
   },
   {
-    "Ip": "192.168.100.28",
+    "Ip": "192.168.102.238",
     "Port": 21,
-    "Uid": "xiezhu_ext_trns",
-    "Pwd": "xiezhu_2_trns",
+    "Uid": "liqie",
+    "Pwd": "li123456",
     "RemoteFolder": "claim_file",
     "RemoteBackupFolder": "",
     "MessageQueuePath": "",
