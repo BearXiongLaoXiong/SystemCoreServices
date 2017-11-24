@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Dynamic;
 using System.Linq;
@@ -33,9 +35,21 @@ namespace HkEbPortal.Controllers
             return View(model);
         }
 
-
-        public ActionResult Detail(string plplKy, string memeKy, string pdctId)
+        public ActionResult Detail([PolicyNo]string plplKy, [Faimly]string memeKy, string pdctId)
         {
+            dynamic model = new ExpandoObject();
+            model.PdctName = "";
+            model.Name = "";
+            model.Desc = "";
+            model.PlplInfoList = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>();
+            model.PLGP_PATH = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>();
+
+            var plKyIsValid = ParameterValidato.GetParameterValidator<PolicyController, PolicyNoAttribute>(nameof(plplKy), nameof(Detail), new[] { typeof(string), typeof(string), typeof(string) }).IsValid(plplKy, UserInfo.USUS_ID);
+            var meKyIsValid = ParameterValidato.GetParameterValidator<PolicyController, FaimlyAttribute>(nameof(memeKy), nameof(Detail), new[] { typeof(string), typeof(string), typeof(string) }).IsValid(memeKy, UserInfo.USUS_KY);
+
+            if (!plKyIsValid || !meKyIsValid) return View(model);
+
+            if (!ModelState.IsValidField("plplKy")) return null;
             var entity = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2
             {
                 pEHUSER = UserInfo.USUS_ID,
@@ -46,7 +60,6 @@ namespace HkEbPortal.Controllers
             var result = CommonBl.QuerySingle<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT4>(entity);
             var pdctIdList = result.Select(x => x.PDCT_ID);
 
-            dynamic model = new ExpandoObject();
             model.PdctName = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PDCT_NAME;
             model.Name = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.MEME_NAME;
             model.Desc = result.FirstOrDefault(x => x.PLPL_KY == plplKy)?.PLPL_ID;
@@ -89,7 +102,7 @@ namespace HkEbPortal.Controllers
                 code = insert.ReturnValue.ToString();
                 msg = insert.pRTN_MSG;
             }
-            return Json(new { Code = code ,Msg = msg });
+            return Json(new { Code = code, Msg = msg });
         }
 
 

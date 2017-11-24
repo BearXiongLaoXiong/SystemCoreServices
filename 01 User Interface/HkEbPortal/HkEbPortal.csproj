@@ -163,6 +163,9 @@
     <Compile Include="Filters\AuthorizationAttribute.cs" />
     <Compile Include="Filters\Des.cs" />
     <Compile Include="Filters\IsOpenEnrollmentAttribute.cs" />
+    <Compile Include="Filters\FaimlyAttribute.cs" />
+    <Compile Include="Filters\ParameterValidato.cs" />
+    <Compile Include="Filters\PolicyNoAttribute.cs" />
     <Compile Include="Filters\UserInfoIsConfirmAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -175,6 +178,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_EBEB_IS_OPEN.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_EBEB_VALUE_LIST.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_FAIMLY_AUTHORIZE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMAD_ACCOUNT_DET_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_FMDT_FAMILY_DETL_LIST_WEB.cs" />
@@ -187,6 +191,7 @@
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_MEM_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB2.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_PLPL_AUTHORIZE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_SYSV_VALUE_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_ISACTIVE_UPDATE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_USUS_EMAIL_SELECT_ISACTIVE.cs" />
@@ -219,6 +224,7 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\memberId.png" />
     <Content Include="Content\Images\message.jpg" />
+    <Content Include="Content\Images\page404.jpg" />
     <Content Include="Content\Images\pages.jpg" />
     <Content Include="Content\Images\password.png" />
     <Content Include="Content\Images\policyNo.png" />
@@ -380,6 +386,7 @@
     <Content Include="Scripts\User\ChangePassword.js" />
     <Content Include="Scripts\User\ForgotPassword.js" />
     <Content Include="Scripts\User\Login.js" />
+    <Content Include="Page404.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

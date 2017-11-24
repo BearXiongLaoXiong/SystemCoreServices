@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Web;
 using System.Linq;
 using System.Web.Mvc;
@@ -27,6 +28,7 @@ namespace HkEbPortal.Controllers
 
         public ActionResult Login()
         {
+            //Debug.WriteLine("=====================referrer = "+HttpContext.Request.UrlReferrer?.ToString());
             return View();
         }
 
@@ -59,12 +61,12 @@ namespace HkEbPortal.Controllers
                 DateTime.Now,
                 DateTime.Now.AddHours(12),
                 false,//將管理者登入的 Cookie 設定成 Session Cookie
-                userInfo.NAME + "\t" + userInfo.GPGP_NAME,//userdata看你想存放啥
+                userInfo.NAME,//userdata看你想存放啥
                 FormsAuthentication.FormsCookiePath);
 
             string encTicket = FormsAuthentication.Encrypt(ticket);
+            //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
             Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
-
             Session[FormsAuthentication.FormsCookieName] = userInfo;
 
 
@@ -177,7 +179,7 @@ namespace HkEbPortal.Controllers
         }
 
 
-        //[Authorization]
+        [Authorization]
         public ActionResult ChangePassword()
         {
             return View();

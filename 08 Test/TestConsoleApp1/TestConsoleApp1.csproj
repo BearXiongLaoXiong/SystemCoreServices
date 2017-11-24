@@ -51,6 +51,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_01.OcrRpcTest.cs" />
+    <Compile Include="_02.AbbributeParameterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
