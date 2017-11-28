@@ -33,9 +33,8 @@ namespace HkEbPortal.App_Start
 
         public static void RequestUrlReferrerCheck(Uri url, Uri referrer , HttpApplication app)
         {
-            var u = url.AbsolutePath.ToLower();
             if (UrlRef.Contains(url.AbsolutePath.ToLower())) return;
-            if (referrer == null || url.Authority != referrer.Authority)
+            if (referrer == null || url.Host != referrer.Host)
             {
                 Debug.WriteLine("Authority  不相同,直接reutrn ");
                 app.Response.Redirect(Page404);
