@@ -21,25 +21,45 @@
 </head>
 <body style="padding:0;">
     <div class="container">
-        <table class="layui-table" style="min-width:100px;max-width:1200px;min-height:100px;max-height:600px;">
+        <table class="layui-table" style="min-width: 100px; max-width: 1200px; min-height: 100px;">
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col width="50">
+            </colgroup>
             <thead>
-                <tr>
-                    <th i18n="Policy.index.Product">产品</th>
-                    <th i18n="Policy.index.Plan">计划</th>
-                    <th i18n="Policy.index.Points">积分</th>
-                    <th i18n="Policy.index.Level">级别</th>
-                </tr>
+            <tr>
+                <th i18n="Policy.index.Product">产品</th>
+                <th i18n="Policy.index.Plan">计划</th>
+                <th i18n="Policy.index.Points">积分</th>
+                <th i18n="Policy.index.Level">级别</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.PDCT_LONG_NAME</td>
-                        <td>@item.PDPD_LONG_NAME</td>
-                        <td>@item.PLME_AMT</td>
-                        <td>@item.PDPD_LEVEL</td>
-                    </tr>
-                }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PDCT_LONG_NAME</td>
+                    <td>@item.PDPD_LONG_NAME</td>
+                    <td>@item.PLME_AMT</td>
+                    <td>@item.PDPD_LEVEL</td>
+                    <td>
+                        <div class="layui-table-cell laytable-cell-1-4">
+                            @if (item.PDPD_LINK != "")
+                            {
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail" href="../Insurant/ReadPdf?fName=@item.PDPD_LINK" target="_blank" title="View PDF">PDF</a>
+                            }
+                            else
+                            {
+                                <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-disabled" title="View PDF">PDF</a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>

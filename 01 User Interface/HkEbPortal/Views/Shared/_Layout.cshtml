@@ -31,12 +31,14 @@
         var homeIsMenuDisabled = "";
         var policyIsMenuDisabled = "";
         var fsaIsMenuDisabled = "";
+        var downCenterDisabled = "";
         var contactIsMenuDisabled = "";
         if (userinfo != null)
         {
             homeIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Home/Index" : " class=menu-disabled ";
             policyIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Policy/Index" : " class=menu-disabled ";
             fsaIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Reimbursement/Index" : " class=menu-disabled ";
+            downCenterDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../DownlaodCenter/Index" : " class=menu-disabled ";
             contactIsMenuDisabled = userinfo.USUS_INFO_IS_CONFIRM == "Y" ? "href = ../Home/Contact" : " class=menu-disabled ";
             if (userinfo.USUS_INFO_IS_CONFIRM == "Y")
             {
@@ -81,6 +83,7 @@
                     <li id="linkInsurant" @isShow><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
                     <li id="linkPolicy" @isShow style="width: 200px;"><a i18n="footer.menu.policy" @policyIsMenuDisabled>福利選擇</a></li>
                     <li id="linkReim" @isShow><a i18n="footer.menu.claims" @fsaIsMenuDisabled>彈性福利索償</a></li>
+                    <li id="linkDownCenter" @isShow style="width: 200px;"><a i18n="footer.menu.downCenter" @downCenterDisabled>下載中心</a></li>
                     <li id="linkContact" @isShow><a i18n="footer.menu.contact" @contactIsMenuDisabled>聯係我們</a></li>
                 </ul>
             </div>

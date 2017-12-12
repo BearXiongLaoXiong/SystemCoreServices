@@ -1,6 +1,9 @@
-﻿using HkEbPortal.Filters;
+﻿using System.Configuration;
+using System.Diagnostics;
+using HkEbPortal.Filters;
 using HkEbPortal.Models.EB_PORTAL;
 using System.Dynamic;
+using System.IO;
 using System.Web.Mvc;
 
 namespace HkEbPortal.Controllers
@@ -8,6 +11,8 @@ namespace HkEbPortal.Controllers
     [Authorization]
     public class InsurantController : BaseController
     {
+        private static readonly string PolicyDocPath = ConfigurationManager.AppSettings["PolicyDocPath"] ?? "";
+        private static readonly string SavePath = ConfigurationManager.AppSettings["PdpdPdfSavePath"] ?? "";
         // GET: Insurant
         public ActionResult Index()
         {
@@ -29,7 +34,6 @@ namespace HkEbPortal.Controllers
                         {
                             x.SYSV_MEME_REL_CD = x.SYSV_MEME_REL_CD_ENG;
                         });
-
 
             //积分使用记录
             var pointsRecordsList = CommonBl.QuerySingle<SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB, SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB_RESULT>(new SPEH_FMAC_FAM_ACCOUNT_INFO_LIST_WEB { pFMFM_KY = UserInfo.USUS_KY });
@@ -66,14 +70,14 @@ namespace HkEbPortal.Controllers
 
         public ActionResult BillingInfomationDetail(string fmacKy)
         {
-            var entity = new SPEH_FMAD_ACCOUNT_DET_LIST() { pFMAC_KY = fmacKy, pEHUSER = UserInfo.USUS_ID };
+            var entity = new SPEH_FMAD_ACCOUNT_DET_LIST { pFMAC_KY = fmacKy, pEHUSER = UserInfo.USUS_ID };
             var list = CommonBl.QuerySingle<SPEH_FMAD_ACCOUNT_DET_LIST, SPEH_FMAD_ACCOUNT_DET_LIST_RESULT>(entity);
             return View(list);
         }
 
         public ActionResult BenefitDetail(string plplKy, string memeKy)
         {
-            var entity = new SPEH_PLFM_DET_LIST()
+            var entity = new SPEH_PLFM_DET_LIST
             {
                 pPLPL_KY = plplKy,
                 pMEME_KY = memeKy,
@@ -81,6 +85,29 @@ namespace HkEbPortal.Controllers
             };
             var list = CommonBl.QuerySingle<SPEH_PLFM_DET_LIST, SPEH_PLFM_DET_LIST_RESULT>(entity);
             return View(list);
+        }
+
+        public void Doc(string id)
+        {
+            string fileName = $@"{PolicyDocPath}\{UserInfo.GPGP_KY}\{id}";
+            if (System.IO.File.Exists(fileName))
+            {
+                Response.ContentType = "application/x-compress";
+                Response.AddHeader("Content-Disposition", $"attachment;filename={id}");
+                Response.TransmitFile(fileName);
+                Response.End();
+            }
+        }
+
+        public FileStreamResult ReadPdf(string fName = "")
+        {
+            var fileName = $@"{SavePath}\{fName}";
+            if (fName.Length > 0 && System.IO.File.Exists(fileName))
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                return File(fs, "application/pdf");
+            }
+            return null;
         }
     }
 }

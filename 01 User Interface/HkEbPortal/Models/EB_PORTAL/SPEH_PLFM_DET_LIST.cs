@@ -13,7 +13,7 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string pMEME_KY { get; set; }
         public string pEHUSER { get; set; }
 
-        [SqlParameter(0, direction: ParameterDirection.Output)]
+        [SqlParameter(direction: ParameterDirection.Output)]
         public int pRTN_CD { get; set; }
 
         [SqlParameter(255, direction: ParameterDirection.Output)]
@@ -29,5 +29,6 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string PDPD_LONG_NAME { get; set; }
         public string PLME_AMT { get; set; }
         public string PDPD_LEVEL { get; set; }
+        public string PDPD_LINK { get; set; }
     }
 }
