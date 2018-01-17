@@ -91,7 +91,7 @@ namespace Ftp.BusinessLogic.Implementation
 
             var list = list1.Join(list2, x => new { x.Name, x.Size }, y => new { y.Name, y.Size },
                     (x, y) => new FileStruct { IsDirectory = x.IsDirectory, Name = x.Name, CreateTime = x.CreateTime, FullName = x.FullName, Size = x.Size, IsSuccess = false })
-                .Where(x => x.IsDirectory == ftpConfig.IsDirectory && int.TryParse(x.Size, out int size) && size > 0).ToList();
+                .Where(x => x.IsDirectory == ftpConfig.IsDirectory).ToList(); //&& int.TryParse(x.Size, out int size) && size > 0
 
             string time = DateTime.Now.ToString("yyyy-MM-dd");
             var messageList = new List<string>();

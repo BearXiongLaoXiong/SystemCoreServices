@@ -91,7 +91,7 @@
             var trStr = "";
             var resul = result.TartData;
             $.each(resul, function (index, item) {
-                trStr += "<tr><td><input type='checkbox' name='ky["+ item.Ky +"]' lay-skin='primary'></td><td>" + item.Name + "</td><td>" + item.Type + "</td></tr>";
+                trStr += "<tr><td><input type='checkbox' value='"+ item.Ky +"' lay-skin='primary'></td><td>" + item.Name + "</td><td>" + item.Type + "</td></tr>";
             });
 
             $("#targetId").append(trStr);
@@ -149,25 +149,41 @@
                 var i = index;
                 var m = item;
                 if (item.checked) {
-                    targetArray[index] = item.Ky+"";
+                    targetArray[index] = item.value + "";
                 }
             });
             // 2. 有没有选择要同步的码值
-            var codeArray = [];
-            $("#CodeValuesId>tbody").find("input").each(function (index,item) {
-                var i = index;
-                var m = item;
-                if (item.checked) {
-                    codeArray[index] = i+"";
+            var codeArray = new Array();
+            $("#CodeValuesId tr").each(function (trindex, tritem) {
+                codeArray[trindex] = new Array();
+                if ($(this).find("input").prop("checked")) {
+                    $(tritem).find("td").each(function (tdindex, tditem) {
+                        codeArray[trindex][tdindex] = $(tditem).text();
+                    });
                 }
             });
+
+            for (var i = 0; i < codeArray.length; i++) {
+                if (codeArray[i]) {
+                    alert("123");
+                } else
+                    alert("3456");
+            }
+            //$("#CodeValuesId tbody tr").each(function (index,item) {
+            //    var i = index;
+            //    var m = item;
+            //    codeArray.push(item)
+            //    //if (item.checked) {
+            //    //    codeArray[index] = item.value + "";
+            //    //}
+            //});
 
             if (targetArray.length <= 0) {
                 layer.msg("请选择要同步的环境！", { icon: 5 });
             } else if (codeArray.length <= 0) {
                 layer.msg("请选择要同步的码值！", { icon: 5 });
             } else {
-                $.post("/SystemSetting/SynChronCodeByTarget", { "TargetArray": targetArray, "CodeArray": codeArray }, function (data,status) {
+                $.post("/SystemSetting/SynChronCodeByTarget", { "TargetArray": targetArray, "CodeArray": JSON.stringify(codeArray) }, function (data,status) {
                     var da = data;
                     if (status == "success") {
                         layer.msg(data, { icon: 6 });
@@ -198,7 +214,7 @@
                     $.each(data, function (index, item) {
                         var i = index;
                         var m = item;
-                        result += "<tr><td><input type=\"checkbox\" lay-skin=\"primary\"></td><td>"+item.HPHP_ID+"</td><td>"+item.HPHP_Name+"</td><td>"+item.HPHP_Address+"</td><td>"+item.HPHP_No+"</td></tr>";
+                        result += "<tr><td><input type=\"checkbox\" value='" + item.HPHP_ID+"' lay-skin=\"primary\"></td><td>"+item.HPHP_ID+"</td><td>"+item.HPHP_Name+"</td><td>"+item.HPHP_Address+"</td><td>"+item.HPHP_No+"</td></tr>";
                     });
                     break;
                 case "DADA":// 诊断码
