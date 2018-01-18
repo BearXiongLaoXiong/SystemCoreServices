@@ -56,15 +56,15 @@
                                 <div class="layui-table-cell">
                                     @if (item.SYSV_CLIV_STS == "00" || item.SYSV_CLIV_STS == "01")
                                     {
-                                        <a class="layui-btn layui-btn-mini layui-btn-primary" lay-event="detail" i18n="public.common.edit" href="../Reimbursement/Edit?id=@item.CLIV_KY">Edit</a>
-                                        <a class="layui-btn layui-btn-mini " lay-event="detail" i18n="public.common.delete" onclick="onDelete('@item.CLIV_KY')">Delete</a>
-                                        <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="detail" i18n="public.common.submit" onclick="onSubmit('@item.CLIV_KY')">Submit</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail" i18n="public.common.edit" href="../Reimbursement/Edit?id=@item.CLIV_KY">Edit</a>
+                                        <a class="layui-btn layui-btn-xs " lay-event="detail" i18n="public.common.delete" onclick="onDelete('@item.CLIV_KY')">Delete</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="detail" i18n="public.common.submit" onclick="onSubmit('@item.CLIV_KY')">Submit</a>
                                     }
                                     else
                                     {
-                                        <a class="layui-btn layui-btn-mini layui-btn-primary" lay-event="detail" i18n="public.common.detail" href="../Reimbursement/Edit?id=@item.CLIV_KY">Detail</a>
-                                        <a class="layui-btn layui-btn-mini layui-btn-disabled layuiDelete" lay-event="detail" i18n="public.common.delete" onclick="onDeleteTips(this)">Delete</a>
-                                        <a class="layui-btn layui-btn-mini layui-btn-danger layui-btn-disabled layuiSubmit" lay-event="detail" i18n="public.common.submit"  onclick="onSubmitTips(this)">Submit</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail" i18n="public.common.detail" href="../Reimbursement/Edit?id=@item.CLIV_KY">Detail</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-disabled layuiDelete" lay-event="detail" i18n="public.common.delete" onclick="onDeleteTips(this)">Delete</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-danger layui-btn-disabled layuiSubmit" lay-event="detail" i18n="public.common.submit"  onclick="onSubmitTips(this)">Submit</a>
                                     }
                                 </div>
                             </td>
@@ -74,7 +74,7 @@
                 }
             </tbody>
         </table>
-        <a class="layui-btn layui-btn-warm layui-btn-small" href="../Reimbursement/Add" i18n="public.common.add">新增</a>
+        <a class="layui-btn layui-btn-warm layui-btn-sm" href="../Reimbursement/Add" i18n="public.common.add">新增</a>
     </form>
 </div>
 <script src="../Scripts/Reimbursement/Index.js"></script>

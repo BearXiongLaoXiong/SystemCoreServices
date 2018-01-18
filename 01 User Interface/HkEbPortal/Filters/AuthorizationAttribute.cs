@@ -63,7 +63,6 @@ namespace HkEbPortal.Filters
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            Debug.WriteLine("is OnAuth");
             if (filterContext.HttpContext == null)
                 throw new Exception("此特性只适合于Web应用程序使用！");
             if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true) || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(

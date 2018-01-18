@@ -24,6 +24,7 @@
   "footer.menu.member": "MEMBER",
   "footer.menu.policy": "BENEFIT SELECTION",
   "footer.menu.claims": "FSA CLAIMS",
+  "footer.menu.downCenter": "DOWNLOAD CENTER",
   "footer.menu.contact": "CONTACT US",
   "footer.menu.legal": "LEGAL INFORMATION",
   "footer.menu.privacy": "PRIVACY",
@@ -91,6 +92,7 @@
   "Insurant.index.memeberArea": "Insured areas",
   "Insurant.index.policyInfo": "Benefit Info",
   "Insurant.index.billingInformation": "Points Transaction Records",
+  "Insurant.index.policyData": "Download Center",
 
   "Insurant.table1.employeestartdate": "Effective Date",
   "Insurant.table1.employeeenddate": "Expiry Date",
@@ -196,6 +198,11 @@
   "Reimbursement.Upload.cancel": "Cancel",
   "Reimbursement.Upload.previewdiagram": "Preview",
   "Reimbursement.Upload.lastinvoiceInfo": "Last Invoice info",
+
+  "DwonlaodCenter.Index.BBS": "BBS",
+  "DwonlaodCenter.Index.Admin": "Admin",
+
+
 
 
   "pop-up.user.login.firstloginconfirm": "First time logon, </br>please change your password!",

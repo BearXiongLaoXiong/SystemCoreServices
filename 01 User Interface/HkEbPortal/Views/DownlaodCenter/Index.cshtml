@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/res/global.css" rel="stylesheet" />
+<div class="container">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend i18n="footer.menu.downCenter">下載中心</legend>
+    </fieldset>
+
+    <form class="layui-form tableheight" id="fsaform">
+        <div class="fly-panel" style="margin-bottom: 0; -webkit-box-sizing: content-box; box-sizing: content-box;">
+            <ul class="fly-list" style="-webkit-box-sizing: content-box; box-sizing: content-box;">
+            @foreach (var item in Model)
+            {
+                <li style="-webkit-box-sizing: content-box;box-sizing: content-box">
+                    <a class="fly-avatar">
+                        <i class="layui-icon" style="font-size: 50px; color: #393D49;padding-top:15px; display: block;width: 45px;height: 45px;margin: 0;border-radius: 2px">&#xe624;</i>  
+                    </a>
+                    <h2 style="line-height:normal">
+                        <a class="layui-badge" i18n="DwonlaodCenter.Index.BBS">BBS</a>
+                        <a href='../Insurant/Doc?id=@item.DOC_PATH' target="_blank">@item.TITLE</a>
+                    </h2>
+                    <div class="fly-list-info">
+                        <a link="">
+                            <cite i18n="DwonlaodCenter.Index.Admin">Admin</cite>
+                            <i class="iconfont icon-renzheng"></i>
+                            @*<i class="layui-badge fly-badge-vip">管理員</i>*@
+                        </a>
+                        <span  title="Create Date">@item.CREATE_DATE</span>
+                        <i class="layui-icon" style="font-size: 20px; color: #FFB800;">&#xe756;</i>  
+                        <span title="File Size" class="layui-badge fly-badge-accept layui-hide-xs" style="background-color: #5FB878" >@item.SIZE</span>
+                    </div>
+                    <div class="fly-list-badge">
+                        <span class="layui-badge layui-bg-red" title="File Type">@item.Extension</span>
+                    </div>
+                   
+                </li>
+            }
+            </ul>
+
+        </div>
+    </form>
+   
+
+</div>
+<script src="../Scripts/DownlaodCenter/Index.js"></script>
+

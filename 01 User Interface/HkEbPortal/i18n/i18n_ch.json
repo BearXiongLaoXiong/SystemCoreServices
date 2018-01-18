@@ -23,6 +23,7 @@
   "footer.menu.member": "受保人資料",
   "footer.menu.policy": "福利選擇",
   "footer.menu.claims": "彈性福利索償",
+  "footer.menu.downCenter": "下載中心",
   "footer.menu.contact": "聯絡我們",
   "footer.menu.legal": "法律信息",
   "footer.menu.privacy": "私隱保護",
@@ -90,6 +91,7 @@
   "Insurant.index.memeberArea": "被保險人地區",
   "Insurant.index.policyInfo": "福利信息",
   "Insurant.index.billingInformation": "積分使用記錄",
+  "Insurant.index.policyData": "下載中心",
 
   "Insurant.table1.employeestartdate": "生效日",
   "Insurant.table1.employeeenddate": "員工終止日",
@@ -197,6 +199,10 @@
   "Reimbursement.Upload.cancel": "返回",
   "Reimbursement.Upload.previewdiagram": "預覽圖",
   "Reimbursement.Upload.lastinvoiceInfo": "上次收據資訊",
+
+  "DwonlaodCenter.Index.BBS": "公告",
+  "DwonlaodCenter.Index.Admin": "管理員",
+
 
 
   "pop-up.user.login.firstloginconfirm": "首次登錄, 請更改密碼!",
