@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SystemCore.Entities.SystemSetting
 {
-    [DatabaseConnection(ConnectionEnum.CustomizeConnectionString)]
+    [DatabaseConnection(ConnectionEnum.CustomizeConnectionString,typeof(SPEH_DASY_DATA_SYNC_INSERT))]
     public class SPEH_DASY_DATA_SYNC_INSERT: ICustomizeConnectionString
     {
         public string pDASY_KY { get; set; }

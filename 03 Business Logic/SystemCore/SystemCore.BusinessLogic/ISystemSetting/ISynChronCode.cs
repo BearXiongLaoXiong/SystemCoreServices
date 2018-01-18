@@ -14,5 +14,7 @@ namespace SystemCore.BusinessLogic.ISystemSetting
         List<SPEH_DASY_SYNC_CODE_LIST_RESULT> GetSynChronTarget();
 
         List<SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC_RESULT> GetHPHPCodeByCondition(string synchronContent, string source, string codeValue, string startDate, string endDate);
+
+        string InsertCode(string[] TargetArray, string CodeArray);
     }
 }

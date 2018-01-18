@@ -155,35 +155,37 @@
             // 2. 有没有选择要同步的码值
             var codeArray = new Array();
             $("#CodeValuesId tr").each(function (trindex, tritem) {
-                codeArray[trindex] = new Array();
                 if ($(this).find("input").prop("checked")) {
+                    var hphpid = '', hphpname = '', hphpadd = '', dasyky = '', dasytype = '', dasyoprt = '', dasyid = '', dasyuser = '';
                     $(tritem).find("td").each(function (tdindex, tditem) {
-                        codeArray[trindex][tdindex] = $(tditem).text();
+                        //codeArray[index][tdindex - 1] = tditem.innerHTML;
+                        if (tdindex === 1)
+                            hphpid = tditem.innerHTML;
+                        else if (tdindex === 2)
+                            hphpname = tditem.innerHTML;
+                        else if (tdindex === 3)
+                            hphpadd = tditem.innerHTML;
+                        else if (tdindex === 4)
+                            dasyky = tditem.innerHTML;
+                        else if (tdindex === 5)
+                            dasytype = tditem.innerHTML;
+                        else if (tdindex === 6)
+                            dasyoprt = tditem.innerHTML;
+                        else if (tdindex === 7)
+                            dasyid = tditem.innerHTML;
+                        else if (tdindex === 8)
+                            dasyuser = tditem.innerHTML;
                     });
+                    codeArray.push({ HPHP_ID: hphpid, HPHP_Name: hphpname, HPHP_Address: hphpadd, DASY_KY: dasyky, DASY_TYPE: dasytype, DASY_OPRT: dasyoprt, DASY_ID: dasyid, DASY_OPRT_USER: dasyuser });
                 }
             });
-
-            for (var i = 0; i < codeArray.length; i++) {
-                if (codeArray[i]) {
-                    alert("123");
-                } else
-                    alert("3456");
-            }
-            //$("#CodeValuesId tbody tr").each(function (index,item) {
-            //    var i = index;
-            //    var m = item;
-            //    codeArray.push(item)
-            //    //if (item.checked) {
-            //    //    codeArray[index] = item.value + "";
-            //    //}
-            //});
 
             if (targetArray.length <= 0) {
                 layer.msg("请选择要同步的环境！", { icon: 5 });
             } else if (codeArray.length <= 0) {
                 layer.msg("请选择要同步的码值！", { icon: 5 });
             } else {
-                $.post("/SystemSetting/SynChronCodeByTarget", { "TargetArray": targetArray, "CodeArray": JSON.stringify(codeArray) }, function (data,status) {
+                $.post("/SystemSetting/SynChronCodeByTarget", { "TargetArray": targetArray, "CodeArray": JSON.stringify(codeArray) }, function (data, status) {
                     var da = data;
                     if (status == "success") {
                         layer.msg(data, { icon: 6 });
@@ -210,11 +212,11 @@
             switch (type) {
                 case "HPHP":  // 医院码
                     result += "<colgroup><col width=\"40\"><col><col><col><col></colgroup><thead>";
-                    result += "<tr><th><input type=\"checkbox\" onclick=\"FlowEdit(this)\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>医院编号</th><th>医院名称</th><th>医院地址</th><th>编号</th></tr></thead><tbody>";
+                    result += "<tr><th><input type=\"checkbox\" onclick=\"FlowEdit(this)\" lay-skin=\"primary\" lay-filter=\"allChoose\"></th><th>医院编号</th><th>医院名称</th><th>医院地址</th><th>DASY_KY</th><th>DASY_TYPE</th><th>DASY_OPRT</th><th>DASY_ID</th><th>DASY_OPRT_USER</th></tr></thead><tbody>";
                     $.each(data, function (index, item) {
                         var i = index;
                         var m = item;
-                        result += "<tr><td><input type=\"checkbox\" value='" + item.HPHP_ID+"' lay-skin=\"primary\"></td><td>"+item.HPHP_ID+"</td><td>"+item.HPHP_Name+"</td><td>"+item.HPHP_Address+"</td><td>"+item.HPHP_No+"</td></tr>";
+                        result += "<tr><td><input type=\"checkbox\" value='" + item.HPHP_ID + "' lay-skin=\"primary\"></td><td>" + item.HPHP_ID + "</td><td>" + item.HPHP_Name + "</td><td>" + item.HPHP_Address + "</td><td>" + item.DASY_KY + "</td><td>" + item.DASY_TYPE + "</td><td>" + item.DASY_OPRT + "</td><td>" + item.DASY_ID + "</td><td>" + item.DASY_OPRT_USER +"</td></tr>";
                     });
                     break;
                 case "DADA":// 诊断码

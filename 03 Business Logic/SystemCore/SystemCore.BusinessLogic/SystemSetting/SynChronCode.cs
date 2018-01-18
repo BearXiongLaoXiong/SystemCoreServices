@@ -1,4 +1,5 @@
 ﻿using BusinessLogicRepository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -374,36 +375,39 @@ namespace SystemCore.BusinessLogic
         /// </summary>
         /// <param name="TargetArray"></param>
         /// <param name="CodeArray"></param>
-        public string InsertCode(string[] TargetArray, string[] CodeArray)
+        public string InsertCode(string[] TargetArray, string CodeArray)
         {
+            var list = JsonConvert.DeserializeObject<List<HPHP>>(CodeArray);
+
             foreach (string target in TargetArray) // 循环目标地址
             {
+                if (string.IsNullOrWhiteSpace(target)) continue;
                 // 找出 目标环境，然后修改目标地址
                 SPEH_DASY_SYNC_CODE_LIST_RESULT baseStr = GetSynChronTarget()?.Where(x => x.Id.Equals(target))?.First();
                 if (baseStr == null) continue;
-                foreach (var code in CodeArray)
+                foreach (var code in list)
                 {
                     // 找出 code 具体所有详细信息
-                    var singcode = GetHPHPByID(code);
+                    var singcode = GetHPHPByID(code.DASY_ID);
                     if (baseStr.Comment.Contains("WorkFlow"))
                     {
 
                         SPEH_DASY_DATA_SYNC_INSERT entityDasy = new SPEH_DASY_DATA_SYNC_INSERT()
                         {
                             ConnectionString = baseStr.DataBaseStr,
-                            //pDASY_KY = singcode.DASY_KY,
-                            ////pDASY_DTM = coder.DASY_DTM,
-                            //pDASY_TYPE = singcode.DASY_TYPE,
-                            //pDASY_OPRT = singcode.DASY_OPRT,
-                            //pDASY_ID = singcode.DASY_ID,
-                            pDASY_OPRT_USER = ""
+                            pDASY_KY = code.DASY_KY,
+                            //pDASY_DTM = coder.DASY_DTM,
+                            pDASY_TYPE = code.DASY_TYPE,
+                            pDASY_OPRT = code.DASY_OPRT,
+                            pDASY_ID = code.DASY_ID,
+                            pDASY_OPRT_USER = code.DASY_OPRT_USER
                         };
 
                         //TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
                         _commonBl.Execute(entityDasy);
 
                         // 同步医院的增量 或者 诊疗的增量
-                        TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = code };
+                        TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = code.DASY_ID };
                     }
 
                     //TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));

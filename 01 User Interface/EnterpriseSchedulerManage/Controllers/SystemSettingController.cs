@@ -349,8 +349,7 @@ namespace EnterpriseSchedulerManage.Controllers
         [HttpPost]
         public JsonResult SynChronCodeByTarget(string[] TargetArray,string CodeArray)
         {
-            var asdf = CodeArray?.Replace("[],", "").Replace(",[]", "");
-            var list = JsonConvert.DeserializeObject<List<HPHP>>(asdf);
+            SysChronCode.InsertCode(TargetArray,CodeArray);
             return Json("更新成功", JsonRequestBehavior.AllowGet);
         }
     }
