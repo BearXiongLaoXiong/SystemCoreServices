@@ -1,4 +1,5 @@
 ﻿using BusinessLogicRepository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,11 +7,12 @@ using System.Framework.Aop;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.BusinessLogic.ISystemSetting;
 using SystemCore.Entities.SystemSetting;
 
 namespace SystemCore.BusinessLogic
 {
-    public class SynChronCode
+    public class SynChronCode : ISynChronCode
     {
         private readonly ICommonBl _commonBl = new CommonBl();
         #region  获取同步目标环境
@@ -63,6 +65,16 @@ namespace SystemCore.BusinessLogic
                 pDASY_END_DATE = endDate
             };
             return _commonBl.QuerySingle<SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC, SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC_RESULT>(entity);
+        }
+
+        public SPEH_HPHP_HOSPITAL_INFO_WEB_LIST_RESULT GetHPHPByID(string hphid)
+        {
+            SPEH_HPHP_HOSPITAL_INFO_WEB_LIST entity = new SPEH_HPHP_HOSPITAL_INFO_WEB_LIST()
+            {
+                pHPHP_ID = hphid
+            };
+
+            return _commonBl.QuerySingle<SPEH_HPHP_HOSPITAL_INFO_WEB_LIST, SPEH_HPHP_HOSPITAL_INFO_WEB_LIST_RESULT>(entity).First();
         }
         #endregion
 
@@ -363,148 +375,85 @@ namespace SystemCore.BusinessLogic
         /// </summary>
         /// <param name="TargetArray"></param>
         /// <param name="CodeArray"></param>
-        /// <param name="data"></param>
-        public string InsertHPHP(string[] TargetArray, string[] CodeArray, List<SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC_RESULT> data)
+        public string InsertCode(string[] TargetArray, string CodeArray)
         {
-            foreach (string target in TargetArray)
+            var list = JsonConvert.DeserializeObject<List<HPHP>>(CodeArray);
+
+            foreach (string target in TargetArray) // 循环目标地址
             {
-                switch (target)
+                if (string.IsNullOrWhiteSpace(target)) continue;
+                // 找出 目标环境，然后修改目标地址
+                SPEH_DASY_SYNC_CODE_LIST_RESULT baseStr = GetSynChronTarget()?.Where(x => x.Id.Equals(target))?.First();
+                if (baseStr == null) continue;
+                foreach (var code in list)
                 {
-                    case "1":  // 初审-复星(永安)生产
-                        foreach (SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC_RESULT item in data)
+                    // 找出 code 具体所有详细信息
+                    var singcode = GetHPHPByID(code.DASY_ID);
+                    if (baseStr.Comment.Contains("WorkFlow"))
+                    {
+
+                        SPEH_DASY_DATA_SYNC_INSERT entityDasy = new SPEH_DASY_DATA_SYNC_INSERT()
                         {
-                            // 找出 目标环境，然后修改目标地址
-                            List<SPEH_DASY_SYNC_CODE_LIST_RESULT> baseStr = GetSynChronTarget();
-                            SPEH_DASY_SYNC_CODE_LIST_RESULT first = baseStr?.Where(x => x.Id.Equals(target))?.First();
-                            if (CodeArray.Contains(item.SEQ))
-                            {
+                            ConnectionString = baseStr.DataBaseStr,
+                            pDASY_KY = code.DASY_KY,
+                            //pDASY_DTM = coder.DASY_DTM,
+                            pDASY_TYPE = code.DASY_TYPE,
+                            pDASY_OPRT = code.DASY_OPRT,
+                            pDASY_ID = code.DASY_ID,
+                            pDASY_OPRT_USER = code.DASY_OPRT_USER
+                        };
 
-                                SPEH_DASY_DATA_SYNC_INSERT entityDasy = new SPEH_DASY_DATA_SYNC_INSERT()
-                                {
-                                    ConnectionString = first.DataBaseStr,
-                                    pDASY_KY = item.DASY_KY,
-                                    //pDASY_DTM = coder.DASY_DTM,
-                                    pDASY_TYPE = item.DASY_TYPE,
-                                    pDASY_OPRT = item.DASY_OPRT,
-                                    pDASY_ID = item.DASY_ID,
-                                    pDASY_OPRT_USER = ""
-                                };
+                        //TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
+                        _commonBl.Execute(entityDasy);
 
-                                //TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(first.DataBaseStr));
-                                _commonBl.Execute(entityDasy);
+                        // 同步医院的增量 或者 诊疗的增量
+                        TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = code.DASY_ID };
+                    }
 
-                                // 同步医院的增量 或者 诊疗的增量
-                                TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = item.HPHP_ID };
-                            }
-
-                            //TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(first.DataBaseStr));
-                            SPEH_HPHP_HOSPITAL_INFO_INSERT entityHPHP = new SPEH_HPHP_HOSPITAL_INFO_INSERT()
-                            {
-                                ConnectionString = first.DataBaseStr,
-                                pBKBK_ID = item.BKBK_ID,
-                                pENTT_LANG_ID1 = item.ENTT_LANG_ID1,
-                                pENTT_LANG_ID2 = item.ENTT_LANG_ID2,
-                                pENTT_LANG_ID3 = item.ENTT_LANG_ID3,
-                                pHPHP_ACCT_CONFM_DT = item.HPHP_ACCT_CONFM_DT,
-                                pHPHP_ACCT_NAME = item.HPHP_ACCT_NAME,
-                                pHPHP_ACCT_NO = item.HPHP_ACCT_NO,
-                                pHPHP_ADDR = item.HPHP_ADDR,
-                                pHPHP_ADDR_ENG = item.HPHP_ADDR_ENG,
-                                pHPHP_CONTACT_NAME = item.HPHP_CONTACT_NAME,
-                                pHPHP_EFT_IND = item.HPHP_EFT_IND,
-                                pHPHP_EMAIL = item.HPHP_EMAIL,
-                                pHPHP_FAX = item.HPHP_FAX,
-                                pHPHP_FRN_SCCT_ID = item.HPHP_FRN_SCCT_ID,
-                                pHPHP_ID = item.HPHP_ID,
-                                pHPHP_NAME = item.HPHP_NAME,
-                                pHPHP_NAME_FST = item.HPHP_NAME_FST,
-                                pHPHP_NAME_FUL = item.HPHP_NAME_FUL,
-                                pHPHP_NHI = item.HPHP_NHI,
-                                pHPHP_OTH_NAME = item.HPHP_OTH_NAME,
-                                pHPHP_PAY_HOLD_DT = item.HPHP_PAY_HOLD_DT,
-                                pHPHP_PHONE = item.HPHP_PHONE,
-                                pHPHP_PREAUTH_IND = item.HPHP_PREAUTH_IND,
-                                pHPHP_SCCT_ID = item.HPHP_SCCT_ID,
-                                pHPHP_SHIP_IND = item.HPHP_SHIP_IND,
-                                pHPHP_WEBSIT = item.HPHP_WEBSIT,
-                                pHPHP_ZIP = item.HPHP_ZIP,
-                                pHPPN_ID = item.HPPN_ID,
-                                //pREF_HPHP_ID = item.REF_HPHP_ID,
-                                //pREF_IND = item.REF_IND,
-                                pSHSH_KY = item.SHSH_KY,
-                                pSYSV_BKBK_TYPE = item.SYSV_BKBK_TYPE,
-                                pSYSV_HPHP_CLASS = item.SYSV_HPHP_CLASS,
-                                pSYSV_HPHP_CL_STS = item.SYSV_HPHP_CL_STS,
-                                pSYSV_HPHP_SUB_CLASS = item.SYSV_HPHP_SUB_CLASS,
-                                pSYSV_HPHP_TYPE = item.SYSV_HPHP_TYPE,
-                                pTAX_ID = item.TAX_ID,
-                                pHPHP_COMMENT = item.HPHP_COMMENT
-                            };
-                            _commonBl.Execute(entityHPHP);
-                        }
-                        break;
-                    case "2":  // 核心-复星(永安)生产
-                        break;
-                    case "3":  // 初审-复星(永安)测试
-                        break;
-                    case "4":  // 核心-复星(永安)测试
-                        break;
-                    case "5":  // 初审-西安生产
-                        break;
-                    case "6":  // 核心-西安生产
-                        break;
-                    case "7":  // GCL初审开发环境
-                        break;
-                    case "8":  // GCL核心开发环境
-                        break;
-                    case "9":  // GCL试用环境
-                        break;
-                    case "10": // 泰国初审开发
-                        break;
-                    case "11": // 泰国核心开发
-                        break;
-                    case "12":// 泰国初审生产
-                        break;
-                    case "13": // 泰国核心生产
-                        break;
-                    case "14": // 中文新初审DEMO(兼太平开发)
-                        break;
-                    case "15": // 中文核心DEMO(兼太平开发)
-                        break;
-                    case "16": // 太平新初审UAT
-                        break;
-                    case "17": // 太平核心UAT
-                        break;
-                    case "18": // 太平新初审生产
-                        break;
-                    case "19": // 太平核心生产
-                        break;
-                    case "20": // 皓为新初审测试
-                        break;
-                    case "21": // 皓为核心测试
-                        break;
-                    case "22": // 皓为新初审生产
-                        break;
-                    case "23": // 皓为核心生产
-                        break;
-                    case "24": // 新初审UAT
-                        break;
-                    case "25": // 新核心UAT
-                        break;
-                    case "26": // 英文新初审DEMO
-                        break;
-                    case "27": // 英文核心DEMO
-                        break;
-                    case "28": // 云南初审开发
-                        break;
-                    case "29": // 云南核心开发
-                        break;
-                    case "30": // 丘博初审开发
-                        break;
-                    case "31": // 云南丘博核心开发
-                        break;
-                    default:
-                        break;
+                    //TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
+                    SPEH_HPHP_HOSPITAL_INFO_INSERT entityHPHP = new SPEH_HPHP_HOSPITAL_INFO_INSERT()
+                    {
+                        ConnectionString = baseStr.DataBaseStr,
+                        pBKBK_ID = singcode.BKBK_ID,
+                        pENTT_LANG_ID1 = singcode.ENTT_LANG_ID1,
+                        pENTT_LANG_ID2 = singcode.ENTT_LANG_ID2,
+                        pENTT_LANG_ID3 = singcode.ENTT_LANG_ID3,
+                        pHPHP_ACCT_CONFM_DT = singcode.HPHP_ACCT_CONFM_DT,
+                        pHPHP_ACCT_NAME = singcode.HPHP_ACCT_NAME,
+                        pHPHP_ACCT_NO = singcode.HPHP_ACCT_NO,
+                        pHPHP_ADDR = singcode.HPHP_ADDR,
+                        pHPHP_ADDR_ENG = singcode.HPHP_ADDR_ENG,
+                        pHPHP_CONTACT_NAME = singcode.HPHP_CONTACT_NAME,
+                        pHPHP_EFT_IND = singcode.HPHP_EFT_IND,
+                        pHPHP_EMAIL = singcode.HPHP_EMAIL,
+                        pHPHP_FAX = singcode.HPHP_FAX,
+                        pHPHP_FRN_SCCT_ID = singcode.HPHP_FRN_SCCT_ID,
+                        pHPHP_ID = singcode.HPHP_ID,
+                        pHPHP_NAME = singcode.HPHP_NAME,
+                        pHPHP_NAME_FST = singcode.HPHP_NAME_FST,
+                        pHPHP_NAME_FUL = singcode.HPHP_NAME_FUL,
+                        pHPHP_NHI = singcode.HPHP_NHI,
+                        pHPHP_OTH_NAME = singcode.HPHP_OTH_NAME,
+                        pHPHP_PAY_HOLD_DT = singcode.HPHP_PAY_HOLD_DT,
+                        pHPHP_PHONE = singcode.HPHP_PHONE,
+                        pHPHP_PREAUTH_IND = singcode.HPHP_PREAUTH_IND,
+                        pHPHP_SCCT_ID = singcode.HPHP_SCCT_ID,
+                        pHPHP_SHIP_IND = singcode.HPHP_SHIP_IND,
+                        pHPHP_WEBSIT = singcode.HPHP_WEBSIT,
+                        pHPHP_ZIP = singcode.HPHP_ZIP,
+                        pHPPN_ID = singcode.HPPN_ID,
+                        //pREF_HPHP_ID = singcode.REF_HPHP_ID,
+                        //pREF_IND = singcode.REF_IND,
+                        pSHSH_KY = singcode.SHSH_KY,
+                        pSYSV_BKBK_TYPE = singcode.SYSV_BKBK_TYPE,
+                        pSYSV_HPHP_CLASS = singcode.SYSV_HPHP_CLASS,
+                        pSYSV_HPHP_CL_STS = singcode.SYSV_HPHP_CL_STS,
+                        pSYSV_HPHP_SUB_CLASS = singcode.SYSV_HPHP_SUB_CLASS,
+                        pSYSV_HPHP_TYPE = singcode.SYSV_HPHP_TYPE,
+                        pTAX_ID = singcode.TAX_ID,
+                        pHPHP_COMMENT = singcode.HPHP_COMMENT
+                    };
+                    _commonBl.Execute(entityHPHP);
                 }
             }
             return "同步医院码成功！";

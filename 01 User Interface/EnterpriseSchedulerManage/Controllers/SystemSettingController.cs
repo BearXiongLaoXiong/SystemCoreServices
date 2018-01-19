@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using SystemCore.BusinessLogic;
+using SystemCore.BusinessLogic.ISystemSetting;
+using SystemCore.Entities.SystemSetting;
 
 namespace EnterpriseSchedulerManage.Controllers
 {
     public class SystemSettingController : Controller
     {
+        private ISynChronCode SysChronCode = new SynChronCode();
         // GET: SystemSetting
         public ActionResult Index()
         {
@@ -28,18 +33,13 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <returns></returns>
         public JsonResult GetSyschronContext()
         {
-            string option = "<option value='HPHP'>医院码</option>";
-            option+= "<option value='DADA'>诊断码</option>";
-            option += "<option value='SPSP'>诊疗码</option>";
-            option += "<option value='SPCT'>药品码</option>";
-            option += "<option value='DIDI'>药品适应症</option>";
-            option += "<option value='DNDN'>药品码别名</option>";
-            option += "<option value='SPON'>诊疗码别名</option>";
-            option += "<option value='DODO'>剂型码</option>";
-            option += "<option value='DOOT'>剂型别名</option>";
-            option += "<option value='SHLS'>诊疗目录</option>";
-            option += "<option value='STSP'>服务诊疗匹配</option>";
-            option += "<option value='DCDC'>药品分类</option>";
+            string option = "";
+            var syschr = SysChronCode.GetSynChronContent();
+            foreach (var item in syschr)
+            {
+                option += "<option value='" + item.value + "'>" + item.text + "</option>";
+            }
+
             return Json(new { Option = option }, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -51,13 +51,8 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <returns></returns>
         public JsonResult GetTargetData()
         {
-            List<TargetSource> targetSource = new List<TargetSource>();
-            targetSource.Add(new TargetSource {Ky =1, Name = "初审-复星(永安)生产", Type = "WorkFlow" });
-            targetSource.Add(new TargetSource {Ky =2, Name = "核心-复星(永安)生产", Type = "eHealth" });
-            targetSource.Add(new TargetSource { Ky = 3, Name = "初审-复星(永安)测试", Type = "WorkFlow" });
-            targetSource.Add(new TargetSource { Ky = 4, Name = "核心-复星(永安)测试", Type = "eHealth" });
-            targetSource.Add(new TargetSource { Ky = 5, Name = "初审-西安生产", Type = "WorkFlow" });
-            targetSource.Add(new TargetSource { Ky = 6, Name = "核心-西安生产", Type = "eHealth" });
+            List<TargetSource> targetSource = SysChronCode.GetSynChronTarget().Select(row => new TargetSource(row)).ToList();
+
             return Json(new { TartData = targetSource }, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -73,12 +68,7 @@ namespace EnterpriseSchedulerManage.Controllers
             switch (synchronContent)
             {
                 case "HPHP": // 医院码
-                    List<HPHP> hphp = new List<HPHP>();
-                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312612", HPHP_Name = "东方儿童医院2", HPHP_Address = "上海浦东新区东方路666号2", HPHP_No = "15646862" });
-                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312613", HPHP_Name = "东方儿童医院3", HPHP_Address = "上海浦东新区东方路666号3", HPHP_No = "15646863" });
-                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312614", HPHP_Name = "东方儿童医院4", HPHP_Address = "上海浦东新区东方路666号4", HPHP_No = "15646864" });
-                    hphp.Add(new HPHP() { HPHP_ID = "HP4264312615", HPHP_Name = "东方儿童医院5", HPHP_Address = "上海浦东新区东方路666号5", HPHP_No = "15646865" });
-                    resultStr = hphp;
+                    resultStr = SysChronCode.GetHPHPCodeByCondition(synchronContent, source, codeValue, startDate, endDate).Select(x => new HPHP(x)).ToList();
                     break;
                 case "DADA": // 诊断码
                     List<DADA> dada = new List<DADA>();
@@ -357,28 +347,13 @@ namespace EnterpriseSchedulerManage.Controllers
         #endregion
 
         [HttpPost]
-        public JsonResult SynChronCodeByTarget(string[] TargetArray,string[] CodeArray)
+        public JsonResult SynChronCodeByTarget(string[] TargetArray,string CodeArray)
         {
-
+            SysChronCode.InsertCode(TargetArray,CodeArray);
             return Json("更新成功", JsonRequestBehavior.AllowGet);
         }
     }
 
-
-    public class TargetSource
-    {
-        public int Ky { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-    }
-
-    public class HPHP
-    {
-        public string HPHP_ID { get; set; }
-        public string HPHP_Name { get; set; }
-        public string HPHP_Address { get; set; }
-        public string HPHP_No { get; set; }
-    }
 
     public class DADA
     {

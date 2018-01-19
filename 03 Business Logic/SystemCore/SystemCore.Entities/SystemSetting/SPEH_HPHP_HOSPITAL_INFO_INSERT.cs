@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SystemCore.Entities.SystemSetting
 {
-    [DatabaseConnection(ConnectionEnum.CustomizeConnectionString)]
+    [DatabaseConnection(ConnectionEnum.CustomizeConnectionString,typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT))]
     public class SPEH_HPHP_HOSPITAL_INFO_INSERT: ICustomizeConnectionString
     {
         [SqlParameter(255)]

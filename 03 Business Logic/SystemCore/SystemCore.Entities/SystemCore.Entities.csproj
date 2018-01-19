@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SystemSetting\HPHP.cs" />
     <Compile Include="SystemSetting\SPEH_DADA_DIAGNOSIS_INFO_LIST_SYNC.cs" />
     <Compile Include="SystemSetting\SPEH_DASY_DATA_SYNC_INSERT.cs" />
     <Compile Include="SystemSetting\SPEH_DASY_SYNC_CODE_LIST.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="SystemSetting\SPEH_DOOT_INFO_LIST_SYNC.cs" />
     <Compile Include="SystemSetting\SPEH_HPHP_HOSPITAL_INFO_INSERT.cs" />
     <Compile Include="SystemSetting\SPEH_HPHP_HOSPITAL_INFO_LIST_SYNC.cs" />
+    <Compile Include="SystemSetting\SPEH_HPHP_HOSPITAL_INFO_WEB_LIST.cs" />
     <Compile Include="SystemSetting\SPEH_SHLS_INFO_LIST_SYNC.cs" />
     <Compile Include="SystemSetting\SPEH_SPCT_INFO_LIST_SYNC.cs" />
     <Compile Include="SystemSetting\SPEH_SPON_INFO_LIST_SYNC.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="SystemSetting\SPEH_STSP_INFO_LIST_SYNC.cs" />
     <Compile Include="SystemSetting\SPEH_SYSV_VALUE_LIST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemSetting\TargetSource.cs" />
     <Compile Include="SystemSetting\TMP_HPHP_INSERT.cs" />
   </ItemGroup>
   <ItemGroup>
