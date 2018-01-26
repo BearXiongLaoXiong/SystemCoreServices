@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Framework.Aop;
-using System.Linq;
-using System.Web;
 
 namespace HkEbPortal.Models.EB_PORTAL
 {
     public class SPEH_FMFM_LOGIN
     {
-        public string @pPOLICYNO { get; set; }
+        public string pPOLICYNO { get; set; }
         public string pUSUS_ID { get; set; }
         public string pUSUS_PSWD { get; set; }
 
@@ -48,5 +45,43 @@ namespace HkEbPortal.Models.EB_PORTAL
         public string MEME_NAME { get; set; }
         public string MEME_CERT_ID_NUM { get; set; }
         public string ENTT_LANG_ID { get; set; }
+        public string ENTT_DPT_ID { get; set; }
+        public UserType UserType
+        {
+            get
+            {
+                switch (ENTT_DPT_ID)
+                {
+                    case "CS": return UserType.Cs;
+                    case "": return UserType.Member;
+                    default: return UserType.Bk;
+                }
+            }
+        }
     }
+
+    /// <summary>
+    /// 用户类型
+    /// </summary>
+    [Flags]
+    public enum UserType
+    {
+        /// <summary>
+        /// 匿名用户
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// 被保险人
+        /// </summary>
+        Member = 1,
+        /// <summary>
+        /// 保险公司用户
+        /// </summary>
+        Cs = 2,
+        /// <summary>
+        /// 经纪人
+        /// </summary>
+        Bk = 4
+    }
+
 }

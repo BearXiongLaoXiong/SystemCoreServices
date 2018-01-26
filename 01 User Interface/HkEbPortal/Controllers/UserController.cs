@@ -1,30 +1,23 @@
-﻿using System;
+﻿using HkEbPortal.Filters;
+using HkEbPortal.Models.EB_PORTAL;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
-using System.Web;
+using System.Dynamic;
 using System.Linq;
+using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using HkEbPortal.Models.EB_PORTAL;
-using System.IO;
-using System.Net;
-using System.Text;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using iTextSharp.tool.xml;
-using HkEbPortal.Filters;
 
 namespace HkEbPortal.Controllers
 {
     public class UserController : BaseController
     {
-
         private readonly string _from = ConfigurationManager.AppSettings["EmailFrom"];
         private readonly string _userName = ConfigurationManager.AppSettings["EmailUsername"];
         private readonly string _host = ConfigurationManager.AppSettings["EmailHost"];
         private readonly string _passWord = ConfigurationManager.AppSettings["EmailPassword"];
-
 
         public ActionResult Login()
         {
@@ -54,21 +47,96 @@ namespace HkEbPortal.Controllers
             if (userInfo?.USUS_EMAIL_ISACTIVE == "0")
                 return Json(new { Code = 3, Msg = userInfo.USUS_EMAIL }, JsonRequestBehavior.DenyGet);
 
-
             Session.RemoveAll();
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                userInfo.USUS_KY,
-                DateTime.Now,
-                DateTime.Now.AddHours(12),
-                false,//將管理者登入的 Cookie 設定成 Session Cookie
-                userInfo.NAME,//userdata看你想存放啥
-                FormsAuthentication.FormsCookiePath);
 
-            string encTicket = FormsAuthentication.Encrypt(ticket);
-            //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
-            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+            if (userInfo.UserType == UserType.Member)
+            {
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+                    userInfo.USUS_KY,
+                    DateTime.Now,
+                    DateTime.Now.AddHours(12),
+                    false,//將管理者登入的 Cookie 設定成 Session Cookie
+                    userInfo.NAME,//userdata看你想存放啥
+                    FormsAuthentication.FormsCookiePath);
+
+                string encTicket = FormsAuthentication.Encrypt(ticket);
+                //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
+                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                Session[FormsAuthentication.FormsCookieName] = userInfo;
+
+                var memberList = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0>();
+                if (userInfo.USUS_FIRST_ISACTIVE == "0")
+                {
+                    var list = new SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB
+                    {
+                        pEHUSER = UserInfo.USUS_ID
+                    };
+                    var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(list);
+                    memberList = result.ListFirst;
+                }
+                return Json(new { Code = 1, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, userInfo.USUS_INFO_IS_CONFIRM, MemberList = memberList } }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+                    userInfo.USUS_KY,
+                    DateTime.Now,
+                    DateTime.Now.AddHours(12),
+                    false,//將管理者登入的 Cookie 設定成 Session Cookie
+                    userInfo.NAME,//userdata看你想存放啥
+                    FormsAuthentication.FormsCookiePath);
+
+                string encTicket = FormsAuthentication.Encrypt(ticket);
+                //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
+                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                Session[FormsAuthentication.FormsCookieName] = userInfo;
+
+                return Json(new { Code = 11, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, userInfo.USUS_INFO_IS_CONFIRM } }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [Authorization(UserType = UserType.Cs | UserType.Bk)]
+        public ActionResult Broker()
+        {
+            dynamic model = new ExpandoObject();
+            model.Title = UserInfo.UserType == UserType.Cs ? "Cs" :
+                          UserInfo.UserType == UserType.Bk ? UserInfo.ENTT_DPT_ID : "";
+            //从数据库取List，CS取全部,Bk 取==ENTT_DPT_ID的
+            model.PolicyList = UserInfo.GPGP_NAME;
+            //新开函数 根据DropList 从数据库取Member
+            model.MemberList = UserInfo.NAME;
+
+            var policyList = new List<PolicyList>();
+            switch (UserInfo.UserType)
+            {
+                case UserType.Cs: policyList = CommonBl.QuerySingle<SPEH_BROKER_POLICY_CS_LIST, PolicyList>(new SPEH_BROKER_POLICY_CS_LIST()); break;
+                case UserType.Bk: policyList = CommonBl.QuerySingle<SPEH_BROKER_POLICY_BK_LIST, PolicyList>(new SPEH_BROKER_POLICY_BK_LIST { pUSUS_ID = UserInfo.USUS_ID }); break;
+            }
+
+            ViewData["PolicyList"] = new SelectList(policyList, "value", "text");
+
+            return View(model);
+        }
+
+        public JsonResult FindMemberList(string id)
+        {
+            int.TryParse(id, out int plplKy);
+            var list = CommonBl.QuerySingle<SPEH_BROKER_MEMBER_LIST_BY_POLICY, MemberListByPolicyNo>(new SPEH_BROKER_MEMBER_LIST_BY_POLICY { pPLPL_KY = plplKy });
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization(UserType = UserType.Cs | UserType.Bk)]
+        [ValidateAntiForgeryToken]
+        public JsonResult BrokerReplaceToMember(int id)
+        {
+            var entity = new SPEH_BROKER_MEMBER_LOGIN
+            {
+                pMEME_KY = id
+            };
+            var userInfo = CommonBl.QuerySingle<SPEH_BROKER_MEMBER_LOGIN, UserInfo>(entity).FirstOrDefault();
             Session[FormsAuthentication.FormsCookieName] = userInfo;
-
 
             var memberList = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0>();
             if (userInfo.USUS_FIRST_ISACTIVE == "0")
@@ -80,7 +148,6 @@ namespace HkEbPortal.Controllers
                 var result = CommonBl.QueryMultiple<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT1, SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT2>(list);
                 memberList = result.ListFirst;
             }
-
             return Json(new { Code = 1, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, userInfo.USUS_INFO_IS_CONFIRM, MemberList = memberList } }, JsonRequestBehavior.AllowGet);
         }
 

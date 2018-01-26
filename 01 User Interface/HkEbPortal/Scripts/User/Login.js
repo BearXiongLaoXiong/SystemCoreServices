@@ -46,6 +46,10 @@ layui.use(['form', 'laydate'], function () {
                         window.location.href = "../Insurant/Index";
                     }
                 }
+                else if (result.Code === 11) {
+                    //经纪人、保险公司用户登陆
+                    window.location.href = "../User/Broker";
+                }
                 else if (result.Code === 8) {
                     //保單號碼, 會員編號或密碼不正確
                     layeralert(il8nMessage("pop-up.user.login.noaccount"));

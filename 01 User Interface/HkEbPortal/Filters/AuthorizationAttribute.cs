@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using HkEbPortal.Models.EB_PORTAL;
 
 namespace HkEbPortal.Filters
 {
@@ -17,10 +18,10 @@ namespace HkEbPortal.Filters
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
     public class AuthorizationAttribute : FilterAttribute, IAuthorizationFilter
     {
-        ///// <summary>
-        ///// 角色名称
-        ///// </summary>
-        //public UserType UserType = UserType.None;
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public UserType UserType = UserType.Member;
 
         /// <inheritdoc />
         /// <summary>
@@ -76,26 +77,20 @@ namespace HkEbPortal.Filters
                     //无访问此Action权限
                     filterContext.Result = new RedirectResult(_authUrl);
                 }
-                //else
-                //{
-                //    if (HasFlag(filterContext.HttpContext.Session[FormsAuthentication.FormsCookieName])) return;
-                //    //无访问此Action权限
-                //    filterContext.Result = new RedirectResult(_authUrl);
-                //}
+                else
+                {
+                    if (HasFlag(filterContext.HttpContext.Session[FormsAuthentication.FormsCookieName])) return;
+                    //无访问此Action权限
+                    filterContext.Result = new RedirectResult(_authUrl);
+                }
             }
 
         }
 
-        //private bool HasFlag(object session)
-        //{
-        //    var userInfo = session as UserInfo;
-        //    UserType userType = UserType.None;
-        //    switch (userInfo?.UserType.ToUpper())
-        //    {
-        //        case "G": userType = UserType.Group; break;
-        //        case "MG": userType = UserType.Member; break;
-        //    }
-        //    return UserType != UserType.None && UserType.HasFlag(userType);
-        //}
+        private bool HasFlag(object session)
+        {
+            var userInfo = session as UserInfo;
+            return UserType != UserType.None && UserType.HasFlag(userInfo.UserType);
+        }
     }
 }

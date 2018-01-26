@@ -24,14 +24,12 @@ namespace HkEbPortal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
         }
 
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
             if (sender is HttpApplication app)
             {
-
                 //移除Server
                 app.Context.Response.Headers.Remove("Server");
                 //修改Server的值

@@ -172,6 +172,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EB_PORTAL\SPEH_AQHT_HTML_INFO_INSERT.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_BROKER_POLICY_BK_LIST.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_BROKER_MEMBER_LIST_BY_POLICY.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_BROKER_MEMBER_LOGIN.cs" />
+    <Compile Include="Models\EB_PORTAL\SPEH_BROKER_POLICY_CS_LIST.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_INSERT.cs" />
     <Compile Include="Models\EB_PORTAL\SPEH_CLIV_CLAIM_INVOICE_INFO_LIST_WEB.cs" />
@@ -387,6 +391,7 @@
     <Content Include="Scripts\Reimbursement\Add.js" />
     <Content Include="Scripts\Reimbursement\Edit.js" />
     <Content Include="Scripts\Reimbursement\Index.js" />
+    <Content Include="Scripts\User\Broker.js" />
     <Content Include="Scripts\User\ChangePassword.js" />
     <Content Include="Scripts\User\ForgotPassword.js" />
     <Content Include="Scripts\User\Login.js" />
@@ -431,6 +436,7 @@
     <Content Include="Text\Privacy Policy for portal English2014.pdf" />
     <Content Include="Text\Tems and Condition_English20141231.pdf" />
     <Content Include="Views\DownlaodCenter\Index.cshtml" />
+    <Content Include="Views\User\Broker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
