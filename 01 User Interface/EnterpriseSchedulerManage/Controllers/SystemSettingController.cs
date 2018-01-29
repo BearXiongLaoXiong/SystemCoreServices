@@ -349,8 +349,8 @@ namespace EnterpriseSchedulerManage.Controllers
         [HttpPost]
         public JsonResult SynChronCodeByTarget(string[] TargetArray,string CodeArray)
         {
-            SysChronCode.InsertCode(TargetArray,CodeArray);
-            return Json("更新成功", JsonRequestBehavior.AllowGet);
+            string str = SysChronCode.InsertCode(TargetArray,CodeArray);
+            return Json(str, JsonRequestBehavior.AllowGet);
         }
     }
 
