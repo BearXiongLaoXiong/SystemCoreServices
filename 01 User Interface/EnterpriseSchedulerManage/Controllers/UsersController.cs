@@ -1,4 +1,5 @@
-﻿using EnterpriseSchedulerManage.Models.Users;
+﻿using EnterpriseSchedulerManage.Filters;
+using EnterpriseSchedulerManage.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,6 @@ namespace EnterpriseSchedulerManage.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public JsonResult Login(string TxtNameId,string TxtPwdId)
         {
             Session.RemoveAll();

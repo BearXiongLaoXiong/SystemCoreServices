@@ -123,6 +123,7 @@
     <Compile Include="Controllers\SystemSettingController.cs" />
     <Compile Include="Controllers\TaskSchedulerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filters\UserInfoConfirmAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

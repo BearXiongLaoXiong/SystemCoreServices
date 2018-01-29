@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EnterpriseSchedulerManage.Filters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace EnterpriseSchedulerManage.Controllers
     public class SystemSettingController : Controller
     {
         private ISynChronCode SysChronCode = new SynChronCode();
-        // GET: SystemSetting
+
+        [UserInfoConfirm]
         public ActionResult Index()
         {
             return View();
         }
 
+        [UserInfoConfirm]
         public ActionResult PersonalInfo()
         {
             return View();
@@ -31,6 +34,7 @@ namespace EnterpriseSchedulerManage.Controllers
         ///  获取同步内容
         /// </summary>
         /// <returns></returns>
+        [UserInfoConfirm]
         public JsonResult GetSyschronContext()
         {
             string option = "";
@@ -49,6 +53,7 @@ namespace EnterpriseSchedulerManage.Controllers
         ///  获取同步目标环境
         /// </summary>
         /// <returns></returns>
+        [UserInfoConfirm]
         public JsonResult GetTargetData()
         {
             List<TargetSource> targetSource = SysChronCode.GetSynChronTarget().Select(row => new TargetSource(row)).ToList();
@@ -62,6 +67,7 @@ namespace EnterpriseSchedulerManage.Controllers
         /// 根据参数获取对应的值
         /// </summary>
         /// <returns></returns>
+        [UserInfoConfirm]
         public JsonResult GetSynchronValues(string synchronContent,string source,string codeValue,string startDate,string endDate)
         {
             object resultStr = null;
@@ -121,6 +127,7 @@ namespace EnterpriseSchedulerManage.Controllers
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
+        [UserInfoConfirm]
         public string GetHPHP_List(string codeValue, string startDate, string endDate)
         {
             string targetOption ="<colgroup><col width = '50' ><col width = '150' ><col width = '150'><col width = '200'><col></colgroup>";
@@ -347,6 +354,7 @@ namespace EnterpriseSchedulerManage.Controllers
         #endregion
 
         [HttpPost]
+        [UserInfoConfirm]
         public JsonResult SynChronCodeByTarget(string[] TargetArray,string CodeArray)
         {
             string str = SysChronCode.InsertCode(TargetArray,CodeArray);
