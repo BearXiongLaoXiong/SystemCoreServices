@@ -16,5 +16,14 @@ namespace EnterpriseSchedulerManage.Controllers
         {
             return View();
         }
+
+
+
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            return Redirect("../Users/Index");
+        }
     }
 }
