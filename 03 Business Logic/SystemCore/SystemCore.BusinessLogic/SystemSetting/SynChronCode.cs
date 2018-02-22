@@ -379,84 +379,91 @@ namespace SystemCore.BusinessLogic
         {
             var list = JsonConvert.DeserializeObject<List<HPHP>>(CodeArray);
 
-            foreach (string target in TargetArray) // 循环目标地址
+            try
             {
-                if (string.IsNullOrWhiteSpace(target)) continue;
-                // 找出 目标环境，然后修改目标地址
-                SPEH_DASY_SYNC_CODE_LIST_RESULT baseStr = GetSynChronTarget()?.Where(x => x.Id.Equals(target))?.First();
-                if (baseStr == null) continue;
-                foreach (var code in list)
+                foreach (string target in TargetArray) // 循环目标地址
                 {
-                    // 找出 code 具体所有详细信息
-                    var singcode = GetHPHPByID(code.DASY_ID);
-                    if (baseStr.Comment.Contains("WorkFlow"))
+                    if (string.IsNullOrWhiteSpace(target)) continue;
+                    // 找出 目标环境，然后修改目标地址
+                    SPEH_DASY_SYNC_CODE_LIST_RESULT baseStr = GetSynChronTarget()?.Where(x => x.Id.Equals(target))?.First();
+                    if (baseStr == null) continue;
+                    foreach (var code in list)
                     {
+                        // 找出 code 具体所有详细信息
+                        var singcode = GetHPHPByID(code.DASY_ID);
+                        if (baseStr.Comment.Contains("WorkFlow"))
+                        {
 
-                        SPEH_DASY_DATA_SYNC_INSERT entityDasy = new SPEH_DASY_DATA_SYNC_INSERT()
+                            SPEH_DASY_DATA_SYNC_INSERT entityDasy = new SPEH_DASY_DATA_SYNC_INSERT()
+                            {
+                                ConnectionString = baseStr.DataBaseStr,
+                                pDASY_KY = code.DASY_KY,
+                                //pDASY_DTM = coder.DASY_DTM,
+                                pDASY_TYPE = code.DASY_TYPE,
+                                pDASY_OPRT = code.DASY_OPRT,
+                                pDASY_ID = code.DASY_ID,
+                                pDASY_OPRT_USER = code.DASY_OPRT_USER
+                            };
+
+                            //TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
+                            _commonBl.Execute(entityDasy);
+
+                            // 同步医院的增量 或者 诊疗的增量
+                            TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = code.DASY_ID };
+                        }
+
+                        //TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
+                        SPEH_HPHP_HOSPITAL_INFO_INSERT entityHPHP = new SPEH_HPHP_HOSPITAL_INFO_INSERT()
                         {
                             ConnectionString = baseStr.DataBaseStr,
-                            pDASY_KY = code.DASY_KY,
-                            //pDASY_DTM = coder.DASY_DTM,
-                            pDASY_TYPE = code.DASY_TYPE,
-                            pDASY_OPRT = code.DASY_OPRT,
-                            pDASY_ID = code.DASY_ID,
-                            pDASY_OPRT_USER = code.DASY_OPRT_USER
+                            pBKBK_ID = singcode.BKBK_ID,
+                            pENTT_LANG_ID1 = singcode.ENTT_LANG_ID1,
+                            pENTT_LANG_ID2 = singcode.ENTT_LANG_ID2,
+                            pENTT_LANG_ID3 = singcode.ENTT_LANG_ID3,
+                            pHPHP_ACCT_CONFM_DT = singcode.HPHP_ACCT_CONFM_DT,
+                            pHPHP_ACCT_NAME = singcode.HPHP_ACCT_NAME,
+                            pHPHP_ACCT_NO = singcode.HPHP_ACCT_NO,
+                            pHPHP_ADDR = singcode.HPHP_ADDR,
+                            pHPHP_ADDR_ENG = singcode.HPHP_ADDR_ENG,
+                            pHPHP_CONTACT_NAME = singcode.HPHP_CONTACT_NAME,
+                            pHPHP_EFT_IND = singcode.HPHP_EFT_IND,
+                            pHPHP_EMAIL = singcode.HPHP_EMAIL,
+                            pHPHP_FAX = singcode.HPHP_FAX,
+                            pHPHP_FRN_SCCT_ID = singcode.HPHP_FRN_SCCT_ID,
+                            pHPHP_ID = singcode.HPHP_ID,
+                            pHPHP_NAME = singcode.HPHP_NAME,
+                            pHPHP_NAME_FST = singcode.HPHP_NAME_FST,
+                            pHPHP_NAME_FUL = singcode.HPHP_NAME_FUL,
+                            pHPHP_NHI = singcode.HPHP_NHI,
+                            pHPHP_OTH_NAME = singcode.HPHP_OTH_NAME,
+                            pHPHP_PAY_HOLD_DT = singcode.HPHP_PAY_HOLD_DT,
+                            pHPHP_PHONE = singcode.HPHP_PHONE,
+                            pHPHP_PREAUTH_IND = singcode.HPHP_PREAUTH_IND,
+                            pHPHP_SCCT_ID = singcode.HPHP_SCCT_ID,
+                            pHPHP_SHIP_IND = singcode.HPHP_SHIP_IND,
+                            pHPHP_WEBSIT = singcode.HPHP_WEBSIT,
+                            pHPHP_ZIP = singcode.HPHP_ZIP,
+                            pHPPN_ID = singcode.HPPN_ID,
+                            //pREF_HPHP_ID = singcode.REF_HPHP_ID,
+                            //pREF_IND = singcode.REF_IND,
+                            pSHSH_KY = singcode.SHSH_KY,
+                            pSYSV_BKBK_TYPE = singcode.SYSV_BKBK_TYPE,
+                            pSYSV_HPHP_CLASS = singcode.SYSV_HPHP_CLASS,
+                            pSYSV_HPHP_CL_STS = singcode.SYSV_HPHP_CL_STS,
+                            pSYSV_HPHP_SUB_CLASS = singcode.SYSV_HPHP_SUB_CLASS,
+                            pSYSV_HPHP_TYPE = singcode.SYSV_HPHP_TYPE,
+                            pTAX_ID = singcode.TAX_ID,
+                            pHPHP_COMMENT = singcode.HPHP_COMMENT
                         };
-
-                        //TypeDescriptor.AddAttributes(typeof(SPEH_DASY_DATA_SYNC_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
-                        _commonBl.Execute(entityDasy);
-
-                        // 同步医院的增量 或者 诊疗的增量
-                        TMP_HPHP_INSERT hphp = new TMP_HPHP_INSERT() { pHPHP_ID = code.DASY_ID };
+                        _commonBl.Execute(entityHPHP);
                     }
-
-                    //TypeDescriptor.AddAttributes(typeof(SPEH_HPHP_HOSPITAL_INFO_INSERT), new DatabaseConnectionAttribute(singcode.DataBaseStr));
-                    SPEH_HPHP_HOSPITAL_INFO_INSERT entityHPHP = new SPEH_HPHP_HOSPITAL_INFO_INSERT()
-                    {
-                        ConnectionString = baseStr.DataBaseStr,
-                        pBKBK_ID = singcode.BKBK_ID,
-                        pENTT_LANG_ID1 = singcode.ENTT_LANG_ID1,
-                        pENTT_LANG_ID2 = singcode.ENTT_LANG_ID2,
-                        pENTT_LANG_ID3 = singcode.ENTT_LANG_ID3,
-                        pHPHP_ACCT_CONFM_DT = singcode.HPHP_ACCT_CONFM_DT,
-                        pHPHP_ACCT_NAME = singcode.HPHP_ACCT_NAME,
-                        pHPHP_ACCT_NO = singcode.HPHP_ACCT_NO,
-                        pHPHP_ADDR = singcode.HPHP_ADDR,
-                        pHPHP_ADDR_ENG = singcode.HPHP_ADDR_ENG,
-                        pHPHP_CONTACT_NAME = singcode.HPHP_CONTACT_NAME,
-                        pHPHP_EFT_IND = singcode.HPHP_EFT_IND,
-                        pHPHP_EMAIL = singcode.HPHP_EMAIL,
-                        pHPHP_FAX = singcode.HPHP_FAX,
-                        pHPHP_FRN_SCCT_ID = singcode.HPHP_FRN_SCCT_ID,
-                        pHPHP_ID = singcode.HPHP_ID,
-                        pHPHP_NAME = singcode.HPHP_NAME,
-                        pHPHP_NAME_FST = singcode.HPHP_NAME_FST,
-                        pHPHP_NAME_FUL = singcode.HPHP_NAME_FUL,
-                        pHPHP_NHI = singcode.HPHP_NHI,
-                        pHPHP_OTH_NAME = singcode.HPHP_OTH_NAME,
-                        pHPHP_PAY_HOLD_DT = singcode.HPHP_PAY_HOLD_DT,
-                        pHPHP_PHONE = singcode.HPHP_PHONE,
-                        pHPHP_PREAUTH_IND = singcode.HPHP_PREAUTH_IND,
-                        pHPHP_SCCT_ID = singcode.HPHP_SCCT_ID,
-                        pHPHP_SHIP_IND = singcode.HPHP_SHIP_IND,
-                        pHPHP_WEBSIT = singcode.HPHP_WEBSIT,
-                        pHPHP_ZIP = singcode.HPHP_ZIP,
-                        pHPPN_ID = singcode.HPPN_ID,
-                        //pREF_HPHP_ID = singcode.REF_HPHP_ID,
-                        //pREF_IND = singcode.REF_IND,
-                        pSHSH_KY = singcode.SHSH_KY,
-                        pSYSV_BKBK_TYPE = singcode.SYSV_BKBK_TYPE,
-                        pSYSV_HPHP_CLASS = singcode.SYSV_HPHP_CLASS,
-                        pSYSV_HPHP_CL_STS = singcode.SYSV_HPHP_CL_STS,
-                        pSYSV_HPHP_SUB_CLASS = singcode.SYSV_HPHP_SUB_CLASS,
-                        pSYSV_HPHP_TYPE = singcode.SYSV_HPHP_TYPE,
-                        pTAX_ID = singcode.TAX_ID,
-                        pHPHP_COMMENT = singcode.HPHP_COMMENT
-                    };
-                    _commonBl.Execute(entityHPHP);
                 }
+                return "同步成功";
             }
-            return "同步医院码成功！";
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
         }
 
 

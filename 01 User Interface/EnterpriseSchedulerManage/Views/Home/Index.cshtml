@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <a href="#" class="btn btn-default btn-flat">个人中心</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">退出</a>
+                                        <a href="/Home/Logout" class="btn btn-default btn-flat">退出</a>
                                     </div>
                                 </li>
                             </ul>
@@ -478,31 +478,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   text: "系统设置",
                   icon: "fa fa-bookmark-o",
                   children: [
-                    { id: "10021", text: "个人信息", targetType: "iframe-tab", url: "/SystemSetting/PersonalInfo", icon: "fa fa-spinner" },
-                    { id: "10022", text: "权限管理", targetType: "iframe-tab", url: "../admin/index.html", icon: "fa fa-refresh" },
-                    { id: "10023", text: "用户管理", targetType: "iframe-tab", url: "../admin/index_page.html", icon: "fa fa-refresh" },
-                    { id: "10024", text: "解锁设置", targetType: "iframe-tab", url: "../admin/index_iframe.html", icon: "fa fa-spinner" },
-                    { id: "10025", text: "刷新内存", targetType: "iframe-tab", url: "../admin/index.html", icon: "fa fa-refresh" },
-                    { id: "10026", text: "任务调度中心", targetType: "iframe-tab", url: "TaskScheduler/Index", icon: "fa fa-refresh" },
+                    //{ id: "10021", text: "个人信息", targetType: "iframe-tab", url: "/SystemSetting/PersonalInfo", icon: "fa fa-spinner" },
+                    //{ id: "10022", text: "权限管理", targetType: "iframe-tab", url: "../admin/index.html", icon: "fa fa-refresh" },
+                    //{ id: "10023", text: "用户管理", targetType: "iframe-tab", url: "../admin/index_page.html", icon: "fa fa-refresh" },
+                    //{ id: "10024", text: "解锁设置", targetType: "iframe-tab", url: "../admin/index_iframe.html", icon: "fa fa-spinner" },
+                    //{ id: "10025", text: "刷新内存", targetType: "iframe-tab", url: "../admin/index.html", icon: "fa fa-refresh" },
+                    //{ id: "10026", text: "任务调度中心", targetType: "iframe-tab", url: "TaskScheduler/Index", icon: "fa fa-refresh" },
                     { id: "10027", text: "同步码库", targetType: "iframe-tab", url: "/SystemSetting/Index", icon: "fa fa-spinner" }
                   ]
-              },
-              {
-                  id: "10030",
-                  text: "同步码库",
-                  icon: "fa fa-circle-o",
-                  children: [
-                      { id: "10031", text: "按钮组件", targetType: "iframe-tab", url: "../components/buttons.html", icon: "fa fa-square" },
-                      { id: "10032", text: "常用组件", targetType: "iframe-tab", url: "../components/general.html", icon: "fa fa-list-alt" },
-                      { id: "10033", text: "图标图库", targetType: "iframe-tab", url: "../components/icons.html", icon: "fa fa-circle-o" },
-                      { id: "10034", text: "表单组件", targetType: "iframe-tab", url: "../forms/general.html", icon: "fa fa-plus-square-o" },
-                      { id: "10035", text: "表单组件", targetType: "iframe-tab", url: "../forms/advanced.html", icon: "fa fa-plus-square-o" },
-                      { id: "10036", text: "Block UI", targetType: "iframe-tab", url: "../components/blockui.html", icon: "fa fa-spinner" },
-                      { id: "10037", text: "slid组件", targetType: "iframe-tab", tips: 5, url: "../components/sliders.html", icon: "fa fa-list-ol" },
-                      { id: "10038", text: "swit按钮", targetType: "iframe-tab", url: "../components/bootstrapswitch.html", icon: "fa fa-toggle-on" },
-                      { id: "10039", text: "面板组件", targetType: "iframe-tab", url: "../components/widgets.html", icon: "fa fa-circle-o" }
-                  ]
-              }
+             }
+            //,
+            //  {
+            //      id: "10030",
+            //      text: "同步码库",
+            //      icon: "fa fa-circle-o",
+            //      children: [
+            //          { id: "10031", text: "按钮组件", targetType: "iframe-tab", url: "../components/buttons.html", icon: "fa fa-square" },
+            //          { id: "10032", text: "常用组件", targetType: "iframe-tab", url: "../components/general.html", icon: "fa fa-list-alt" },
+            //          { id: "10033", text: "图标图库", targetType: "iframe-tab", url: "../components/icons.html", icon: "fa fa-circle-o" },
+            //          { id: "10034", text: "表单组件", targetType: "iframe-tab", url: "../forms/general.html", icon: "fa fa-plus-square-o" },
+            //          { id: "10035", text: "表单组件", targetType: "iframe-tab", url: "../forms/advanced.html", icon: "fa fa-plus-square-o" },
+            //          { id: "10036", text: "Block UI", targetType: "iframe-tab", url: "../components/blockui.html", icon: "fa fa-spinner" },
+            //          { id: "10037", text: "slid组件", targetType: "iframe-tab", tips: 5, url: "../components/sliders.html", icon: "fa fa-list-ol" },
+            //          { id: "10038", text: "swit按钮", targetType: "iframe-tab", url: "../components/bootstrapswitch.html", icon: "fa fa-toggle-on" },
+            //          { id: "10039", text: "面板组件", targetType: "iframe-tab", url: "../components/widgets.html", icon: "fa fa-circle-o" }
+            //      ]
+            //  }
               //{
               //    id: "10202",
               //    text: "插件",

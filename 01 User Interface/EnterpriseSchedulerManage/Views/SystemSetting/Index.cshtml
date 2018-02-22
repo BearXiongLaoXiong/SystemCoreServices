@@ -20,7 +20,7 @@
             <div class="layui-input-inline">
                 <select name="modules"  lay-filter="DataSource">
                     <option value="">请选择数据来源</option>
-                    <option value="1">核心-复兴配置</option>
+                    <option value="1">内部编码环境</option>
                 </select>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <div class="layui-input-inline">
                 <input type="text" id="dateEndId" placeholder="请选择截止日" class="layui-input" onclick="layui.laydate({elem: this})">
             </div>
-            <button class="layui-btn" id="SynchronSearchId">查 询</button>
+            <button class="layui-btn" id="SynchronSearchId" id-type ="">查 询</button>
             <button class="layui-btn" id="SynchronId">同 步</button>
             
         </div>
@@ -117,6 +117,7 @@
             } else if (dataSource == "") {
                 layer.msg("请选择数据来源！", { icon: 5 });
             } else {
+                $(this).attr("id-type", selectval);
                 var index = layer.load(0, { time: 30000 });
                 var code = $("#codeId").val();
                 var startDate = $("#dateStartId").val();
@@ -143,6 +144,8 @@
         // 同步代码
         $("#SynchronId").on("click", function () {
             var index = layer.load(0, { time: 30000 });
+            // 获取同步类型
+            var typeObj = $('#SynchronSearchId').attr('id-type');
             // 1. 有没有选择同步环境地址
             var targetArray = [];
             $("#targetId input").each(function (index, item) {
@@ -154,31 +157,11 @@
             });
             // 2. 有没有选择要同步的码值
             var codeArray = new Array();
-            $("#CodeValuesId tr").each(function (trindex, tritem) {
-                if ($(this).find("input").prop("checked")) {
-                    var hphpid = '', hphpname = '', hphpadd = '', dasyky = '', dasytype = '', dasyoprt = '', dasyid = '', dasyuser = '';
-                    $(tritem).find("td").each(function (tdindex, tditem) {
-                        //codeArray[index][tdindex - 1] = tditem.innerHTML;
-                        if (tdindex === 1)
-                            hphpid = tditem.innerHTML;
-                        else if (tdindex === 2)
-                            hphpname = tditem.innerHTML;
-                        else if (tdindex === 3)
-                            hphpadd = tditem.innerHTML;
-                        else if (tdindex === 4)
-                            dasyky = tditem.innerHTML;
-                        else if (tdindex === 5)
-                            dasytype = tditem.innerHTML;
-                        else if (tdindex === 6)
-                            dasyoprt = tditem.innerHTML;
-                        else if (tdindex === 7)
-                            dasyid = tditem.innerHTML;
-                        else if (tdindex === 8)
-                            dasyuser = tditem.innerHTML;
-                    });
-                    codeArray.push({ HPHP_ID: hphpid, HPHP_Name: hphpname, HPHP_Address: hphpadd, DASY_KY: dasyky, DASY_TYPE: dasytype, DASY_OPRT: dasyoprt, DASY_ID: dasyid, DASY_OPRT_USER: dasyuser });
-                }
-            });
+            if (typeObj == 'HPHP') {
+                codeArray = HPHP_JSON();
+            } else if (typeObj == 'SPSP') {
+
+            }
 
             if (targetArray.length <= 0) {
                 layer.msg("请选择要同步的环境！", { icon: 5 });
@@ -274,5 +257,37 @@
             $("#CodeValuesId>tbody").find("input").removeProp('checked');
         }
     }
+
+    // 封装 HPHP json 对象
+    function HPHP_JSON() {
+        var array = new Array();
+        $("#CodeValuesId tr").each(function (trindex, tritem) {
+            if ($(this).find("input").prop("checked")) {
+                var hphpid = '', hphpname = '', hphpadd = '', dasyky = '', dasytype = '', dasyoprt = '', dasyid = '', dasyuser = '';
+                $(tritem).find("td").each(function (tdindex, tditem) {
+                    //codeArray[index][tdindex - 1] = tditem.innerHTML;
+                    if (tdindex === 1)
+                        hphpid = tditem.innerHTML;
+                    else if (tdindex === 2)
+                        hphpname = tditem.innerHTML;
+                    else if (tdindex === 3)
+                        hphpadd = tditem.innerHTML;
+                    else if (tdindex === 4)
+                        dasyky = tditem.innerHTML;
+                    else if (tdindex === 5)
+                        dasytype = tditem.innerHTML;
+                    else if (tdindex === 6)
+                        dasyoprt = tditem.innerHTML;
+                    else if (tdindex === 7)
+                        dasyid = tditem.innerHTML;
+                    else if (tdindex === 8)
+                        dasyuser = tditem.innerHTML;
+                });
+                array.push({ HPHP_ID: hphpid, HPHP_Name: hphpname, HPHP_Address: hphpadd, DASY_KY: dasyky, DASY_TYPE: dasytype, DASY_OPRT: dasyoprt, DASY_ID: dasyid, DASY_OPRT_USER: dasyuser });
+            }
+        });
+        return array;
+    }
+
 </script>
 <script src="~/Scripts/custom/SynchronCustom.js"></script>
