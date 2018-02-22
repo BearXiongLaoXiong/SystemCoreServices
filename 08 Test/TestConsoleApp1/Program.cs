@@ -15,6 +15,13 @@ namespace TestConsoleApp1
 
         static void Main(string[] args)
         {
+
+
+
+
+
+
+
             var list = Enumerable.Range(0, 10).ToDictionary(i => i, j => 0);
             var taskList = new List<Task>();
             ICommonBl _commonBl = new CommonBl();
