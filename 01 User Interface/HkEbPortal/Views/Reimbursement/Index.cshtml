@@ -36,11 +36,12 @@
                     <th i18n="Reimbursement.Index.ApplyDate">申請日</th>
                     <th i18n="Reimbursement.Index.Invoice">發票金額</th>
                     <th i18n="Reimbursement.Index.Paid">實際報銷費用</th>
-                    <th ></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @{
+                    var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
                     var index = true;
                     foreach (var item in Model.List)
                     {
@@ -52,19 +53,28 @@
                             <td>@item.CLIV_CHG</td>
                             <td>@item.CLIV_PAYABLE</td>
                             @*<td><input type="radio" name="selectName" @(index ? "checked" : "") data-clivKy="@item.CLIV_KY" data-clivSts="@item.SYSV_CLIV_STS" title=" " /></td>*@
-                            <td  style="padding: 0; text-align: center" data-off="true">
+                            <td style="padding: 0; text-align: center" data-off="true">
                                 <div class="layui-table-cell">
                                     @if (item.SYSV_CLIV_STS == "00" || item.SYSV_CLIV_STS == "01")
                                     {
-                                        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail" i18n="public.common.edit" href="../Reimbursement/Edit?id=@item.CLIV_KY">Edit</a>
-                                        <a class="layui-btn layui-btn-xs " lay-event="detail" i18n="public.common.delete" onclick="onDelete('@item.CLIV_KY')">Delete</a>
-                                        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="detail" i18n="public.common.submit" onclick="onSubmit('@item.CLIV_KY')">Submit</a>
+                                        if (userinfo.IsMember)
+                                        {
+                                            <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail" i18n="public.common.edit" href="../Reimbursement/Edit?id=@item.CLIV_KY">Edit</a>
+                                            <a class="layui-btn layui-btn-xs " lay-event="detail" i18n="public.common.delete" onclick="onDelete('@item.CLIV_KY')">Delete</a>
+                                            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="detail" i18n="public.common.submit" onclick="onSubmit('@item.CLIV_KY')">Submit</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail" i18n="public.common.edit" href="../Reimbursement/Edit?id=@item.CLIV_KY">Edit</a>
+                                            <a class="layui-btn layui-btn-xs  layuiDelete" lay-event="detail" i18n="public.common.delete" onclick="onInsufficientTips(this)">Delete</a>
+                                            <a class="layui-btn layui-btn-xs layui-btn-danger  layuiSubmit" lay-event="detail" i18n="public.common.submit" onclick="onInsufficientTips(this)">Submit</a>
+                                        }
                                     }
                                     else
                                     {
                                         <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail" i18n="public.common.detail" href="../Reimbursement/Edit?id=@item.CLIV_KY">Detail</a>
                                         <a class="layui-btn layui-btn-xs layui-btn-disabled layuiDelete" lay-event="detail" i18n="public.common.delete" onclick="onDeleteTips(this)">Delete</a>
-                                        <a class="layui-btn layui-btn-xs layui-btn-danger layui-btn-disabled layuiSubmit" lay-event="detail" i18n="public.common.submit"  onclick="onSubmitTips(this)">Submit</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-danger layui-btn-disabled layuiSubmit" lay-event="detail" i18n="public.common.submit" onclick="onSubmitTips(this)">Submit</a>
                                     }
                                 </div>
                             </td>

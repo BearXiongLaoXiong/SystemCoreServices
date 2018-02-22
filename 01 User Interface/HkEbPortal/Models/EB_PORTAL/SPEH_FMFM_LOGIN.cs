@@ -52,12 +52,23 @@ namespace HkEbPortal.Models.EB_PORTAL
             {
                 switch (ENTT_DPT_ID)
                 {
+                    case "Observer": return UserType.Observer;
                     case "CS": return UserType.Cs;
                     case "": return UserType.Member;
                     default: return UserType.Bk;
                 }
             }
         }
+
+        /// <summary>
+        /// 对 bk  cs 隐藏菜单
+        /// </summary>
+        public bool IsDisabledByBk => UserType == UserType.Member || UserType == UserType.Observer;
+
+        /// <summary>
+        /// 除了Member其他不具写权限
+        /// </summary>
+        public bool IsMember =>  UserType == UserType.Member;
     }
 
     /// <summary>
@@ -81,7 +92,11 @@ namespace HkEbPortal.Models.EB_PORTAL
         /// <summary>
         /// 经纪人
         /// </summary>
-        Bk = 4
+        Bk = 4,
+        /// <summary>
+        /// 只有查看权限,cs、bk选择用户后转化成此权限
+        /// </summary>
+        Observer = 8,
     }
 
 }

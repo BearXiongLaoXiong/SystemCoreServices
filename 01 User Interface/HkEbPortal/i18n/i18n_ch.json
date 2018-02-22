@@ -205,6 +205,9 @@
 
 
 
+
+  "pop-up.public.Insufficient": "權限不足,拒絕操作",
+
   "pop-up.user.login.firstloginconfirm": "首次登錄, 請更改密碼!",
   "pop-up.user.login.now": "立即更改 ",
   "pop-up.user.login.later": "以後再改",

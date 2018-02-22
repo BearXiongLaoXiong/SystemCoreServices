@@ -8,7 +8,7 @@
 
     ShowLoading();
 
-    
+
     CloseDelayLoading();
 });
 
@@ -36,7 +36,7 @@ function onSubmit(id) {
         closeBtn: 1
     }, function () {
         ShowLoading();
-        $.post("EditFsaClaimStatus", { id: id, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', data.form).val() }, function (dat, result) {
+        $.post("EditFsaClaimStatus", { id: id, r: Math.random(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', $("#fsaform")).val() }, function (dat, result) {
             CloseLoading();
             if (dat.Code === 0)
                 layeralert1(il8nMessage("Reimbursement.Index.SubmitResult"), function () { location.reload(); });
@@ -55,6 +55,12 @@ function onDeleteTips(val) {
 
 function onSubmitTips(val) {
     layer.tips(il8nMessage("pop-up.fsa.index.SubmitTips"), val, {
+        tips: [4, '#78BA32']
+    });
+}
+
+function onInsufficientTips(val) {
+    layer.tips(il8nMessage("pop-up.public.Insufficient"), val, {
         tips: [4, '#78BA32']
     });
 }

@@ -33,13 +33,7 @@
                     @Html.DropDownList("CLIVDropDownList", ViewData["CLIV_DropDownList"] as SelectList, new Dictionary<string, object> { { "lay-verify", "required" } })
                 </div>
             </div>
-            @*<div class="layui-inline">
-                    <label i18n="Reimbursement.edit.no" class="layui-form-label" style="min-width:110px;">發票號</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="CLIV_ID" value="@Model.CLIV_ID" i18n="public.common.pleaseInput" i18n-only="placeholder" placeholder="请输入" lay-verify="required" class="layui-input" />
-                        <input type="hidden" name="CLIV_KY" value="@Model.CLIV_KY" />
-                    </div>
-                </div>*@
+
             <div class="layui-inline">
                 <label i18n="Reimbursement.edit.service" class="layui-form-label" style="min-width: 110px;">發票日</label>
                 <div class="layui-input-inline">
@@ -59,7 +53,8 @@
         <div class="layui-form-item layui-form-text">
             <label i18n="Reimbursement.Upload.image" class="layui-form-label">發票上傳</label>
             <div class="layui-input-block">
-                @if (Model.SYSV_CLIV_STS == "00" || Model.SYSV_CLIV_STS == "01")
+                @{ var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo; }
+                @if (userinfo.IsMember && (Model.SYSV_CLIV_STS == "00" || Model.SYSV_CLIV_STS == "01"))
                 {
                     <div style="border: 2px dashed #CCC; text-align: center; color: #999; cursor: pointer; margin: 0 0 10px 0; padding: 10px; width: 230px; height: 100px;" id="test10">
                         <i class="layui-icon" style="font-size: 50px; color: #009688;">&#xe681;</i>
@@ -132,7 +127,14 @@
             <div class="layui-input-block">
                 @if (Model.SYSV_CLIV_STS == "00" || Model.SYSV_CLIV_STS == "01")
                 {
-                    <button class="layui-btn layui-btn-sm" lay-submit lay-filter="btnEdit" i18n="public.common.save">儲存</button>
+                    if (userinfo.IsMember)
+                    {
+                        <button class="layui-btn layui-btn-sm" lay-submit lay-filter="btnEdit" i18n="public.common.save">儲存</button>
+                    }
+                    else
+                    {
+                        <a class="layui-btn layui-btn-sm layui-btn-disabled" i18n="public.common.save" onclick="onInsufficientTips(this)">儲存</a>
+                    }
                 }
                 else
                 {

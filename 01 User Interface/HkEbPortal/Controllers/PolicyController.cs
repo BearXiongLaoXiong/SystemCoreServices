@@ -71,6 +71,7 @@ namespace HkEbPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorization(UserType = UserType.Member)]
         public JsonResult Detail(string data)
         {
             string code = "";

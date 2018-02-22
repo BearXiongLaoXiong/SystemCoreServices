@@ -26,6 +26,7 @@
 
     @{
         var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
+        var isBroker = userinfo != null && userinfo.IsDisabledByBk ? "" : "style=display:none;";
         var isShow = userinfo != null ? "" : "style=display:none;";
         var isHide = userinfo != null ? "style=display:none;" : "";
         var homeIsMenuDisabled = "";
@@ -54,7 +55,7 @@
 
             <div class="navbarhide" style="height: 50px; text-align: right; line-height: 30px; font-size: 15px;">
                 <div @isShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0;  cursor: pointer;" onclick="Logout();">
-                    <span class="layui-badge-rim layui-bg-gray"><a i18n="footer.logout" style="font-size: 12px;font-weight: normal;color:#333">安全退出</a></span>
+                    <span class="layui-badge-rim layui-bg-gray"><a i18n="footer.logout" style="font-size: 12px;font-weight: normal;color:#333">登出</a></span>
                 </div>
                 <div @isShow id="btnLogout" class="myButton" style="background-color: #FFFFFF;border-right: none; padding:0; margin:0 10px 0 10px; cursor: pointer;">
                     <span class="layui-badge-rim layui-bg-gray"><a href="../User/ChangePassword" i18n="footer.Editpwd" style="font-size: 12px;font-weight: normal;color:#333">修改密碼</a></span>
@@ -79,12 +80,12 @@
 
             <div class="collapse navbar-collapse navbar-left navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li id="linkHome" @isShow><a i18n="footer.menu.homepage" @homeIsMenuDisabled>主頁</a></li>
-                    <li id="linkInsurant" @isShow><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
-                    <li id="linkPolicy" @isShow style="width: 200px;"><a i18n="footer.menu.policy" @policyIsMenuDisabled>福利選擇</a></li>
-                    <li id="linkReim" @isShow><a i18n="footer.menu.claims" @fsaIsMenuDisabled>彈性福利索償</a></li>
-                    <li id="linkDownCenter" @isShow style="width: 200px;"><a i18n="footer.menu.downCenter" @downCenterDisabled>下載中心</a></li>
-                    <li id="linkContact" @isShow><a i18n="footer.menu.contact" @contactIsMenuDisabled>聯係我們</a></li>
+                    <li id="linkHome" @isShow @isBroker><a i18n="footer.menu.homepage" @homeIsMenuDisabled>主頁</a></li>
+                    <li id="linkInsurant" @isShow @isBroker><a href="../Insurant/Index" i18n="footer.menu.member">受保人資料</a></li>
+                    <li id="linkPolicy" @isShow @isBroker style="width: 200px;"><a i18n="footer.menu.policy" @policyIsMenuDisabled>福利選擇</a></li>
+                    <li id="linkReim" @isShow @isBroker><a i18n="footer.menu.claims" @fsaIsMenuDisabled>彈性福利索償</a></li>
+                    <li id="linkDownCenter" @isShow @isBroker style="width: 200px;"><a i18n="footer.menu.downCenter" @downCenterDisabled>下載中心</a></li>
+                    <li id="linkContact" @isShow @isBroker><a i18n="footer.menu.contact" @contactIsMenuDisabled>聯係我們</a></li>
                 </ul>
             </div>
 

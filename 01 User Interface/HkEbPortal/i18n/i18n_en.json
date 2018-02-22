@@ -205,6 +205,8 @@
 
 
 
+  "pop-up.public.Insufficient": "Insufficient permissions",
+
   "pop-up.user.login.firstloginconfirm": "First time logon, </br>please change your password!",
   "pop-up.user.login.now": "Now",
   "pop-up.user.login.later": "Later",

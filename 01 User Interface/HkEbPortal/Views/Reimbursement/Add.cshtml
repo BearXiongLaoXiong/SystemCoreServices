@@ -1,4 +1,5 @@
-﻿@{
+﻿@using HkEbPortal.Models.EB_PORTAL
+@{
     ViewBag.Title = "Add";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
@@ -55,7 +56,16 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-sm" lay-submit lay-filter="btnAdd" i18n="public.common.save">儲存</button>
+                @{ var userinfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
+                    if (userinfo.IsMember)
+                    {
+                        <button class="layui-btn layui-btn-sm" lay-submit lay-filter="btnAdd" i18n="public.common.save">儲存</button>
+                    }
+                    else
+                    {
+                        <a class="layui-btn layui-btn-sm layui-btn-disabled" i18n="public.common.save" onclick="onInsufficientTips(this)">儲存</a>
+                    }
+                }
                 <a class="layui-btn layui-btn-small layui-btn-sm " href="../Reimbursement/Index" i18n="public.common.back">返回</a>
             </div>
         </div>

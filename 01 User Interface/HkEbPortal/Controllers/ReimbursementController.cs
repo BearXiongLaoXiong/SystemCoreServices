@@ -45,15 +45,16 @@ namespace HkEbPortal.Controllers
             var ivlist = CommonBl.QuerySingle<SPEH_SYSV_VALUE_LIST, SPEH_SYSV_VALUE_LIST_RESULT>(new SPEH_SYSV_VALUE_LIST { pSYSV_TYPE = "SYSV_CLIV_TYPE" });
 
             fmlist.ForEach(x => { x.MEME_NAME = x.SYSV_MEME_REL_CD_DESC + "-" + x.MEME_NAME; });
-            
+
             ViewData["FMFM_DropDownList"] = new SelectList(fmlist, "MEME_KY", "MEME_NAME");
             ViewData["EBEB_DropDownList"] = new SelectList(eblist, "EBEB_KY", "EBEB_DESC");
-            ViewData["CLIV_DropDownList"] = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", "I"); 
+            ViewData["CLIV_DropDownList"] = new SelectList(ivlist.Where(x => x.value == "I"), "value", "text", "I");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorization(UserType = UserType.Member)]
         public JsonResult Add(FormCollection form)
         {
             string memeKy = form["FMFM_DropDownList"];
@@ -114,6 +115,7 @@ namespace HkEbPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorization(UserType = UserType.Member)]
         public JsonResult Edit(FormCollection form)
         {
             if (string.IsNullOrEmpty(form["CLIV_KY"])) return Json(new { Code = 2, Msg = "Fail" }, JsonRequestBehavior.AllowGet);
@@ -149,6 +151,7 @@ namespace HkEbPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorization(UserType = UserType.Member)]
         public JsonResult UploadImg(string id)
         {
             string filePath = "";
@@ -193,6 +196,7 @@ namespace HkEbPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorization(UserType = UserType.Member)]
         public JsonResult Delete(string id)
         {
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_DELETE { pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };
@@ -241,6 +245,7 @@ namespace HkEbPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorization(UserType = UserType.Member)]
         public JsonResult EditFsaClaimStatus(string id)
         {
             var entity = new SPEH_CLIV_CLAIM_INVOICE_INFO_UPDATE { pSYSV_CLIV_STS = "02", pCLIV_KY = id, pEHUSER = UserInfo.USUS_ID };

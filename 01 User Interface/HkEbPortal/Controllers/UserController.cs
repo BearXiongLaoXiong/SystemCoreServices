@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -49,19 +50,19 @@ namespace HkEbPortal.Controllers
 
             Session.RemoveAll();
 
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+                userInfo.USUS_KY,
+                DateTime.Now,
+                DateTime.Now.AddHours(12),
+                false,//將管理者登入的 Cookie 設定成 Session Cookie
+                userInfo.NAME,//userdata看你想存放啥
+                FormsAuthentication.FormsCookiePath);
+
+            string encTicket = FormsAuthentication.Encrypt(ticket);
+            //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
+            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
             if (userInfo.UserType == UserType.Member)
             {
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                    userInfo.USUS_KY,
-                    DateTime.Now,
-                    DateTime.Now.AddHours(12),
-                    false,//將管理者登入的 Cookie 設定成 Session Cookie
-                    userInfo.NAME,//userdata看你想存放啥
-                    FormsAuthentication.FormsCookiePath);
-
-                string encTicket = FormsAuthentication.Encrypt(ticket);
-                //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
-                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
                 Session[FormsAuthentication.FormsCookieName] = userInfo;
 
                 var memberList = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0>();
@@ -78,17 +79,6 @@ namespace HkEbPortal.Controllers
             }
             else
             {
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                    userInfo.USUS_KY,
-                    DateTime.Now,
-                    DateTime.Now.AddHours(12),
-                    false,//將管理者登入的 Cookie 設定成 Session Cookie
-                    userInfo.NAME,//userdata看你想存放啥
-                    FormsAuthentication.FormsCookiePath);
-
-                string encTicket = FormsAuthentication.Encrypt(ticket);
-                //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Path = "/", Expires = DateTime.Now.AddHours(1), HttpOnly = true, Secure = true });
-                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
                 Session[FormsAuthentication.FormsCookieName] = userInfo;
 
                 return Json(new { Code = 11, Msg = "", Data = new { userInfo.NAME, userInfo.GPGP_NAME, userInfo.USUS_FIRST_ISACTIVE, userInfo.USUS_INFO_IS_CONFIRM } }, JsonRequestBehavior.AllowGet);
@@ -99,8 +89,8 @@ namespace HkEbPortal.Controllers
         public ActionResult Broker()
         {
             dynamic model = new ExpandoObject();
-            model.Title = UserInfo.UserType == UserType.Cs ? "Cs" :
-                          UserInfo.UserType == UserType.Bk ? UserInfo.ENTT_DPT_ID : "";
+            model.Title = UserInfo.UserType == UserType.Cs ? $"CS-{UserInfo.NAME}" :
+                          UserInfo.UserType == UserType.Bk ? $"{UserInfo.ENTT_DPT_ID}-{UserInfo.NAME}" : "";
             //从数据库取List，CS取全部,Bk 取==ENTT_DPT_ID的
             model.PolicyList = UserInfo.GPGP_NAME;
             //新开函数 根据DropList 从数据库取Member
@@ -118,6 +108,7 @@ namespace HkEbPortal.Controllers
             return View(model);
         }
 
+        [Authorization(UserType = UserType.Cs | UserType.Bk)]
         public JsonResult FindMemberList(string id)
         {
             int.TryParse(id, out int plplKy);
@@ -136,6 +127,8 @@ namespace HkEbPortal.Controllers
                 pMEME_KY = id
             };
             var userInfo = CommonBl.QuerySingle<SPEH_BROKER_MEMBER_LOGIN, UserInfo>(entity).FirstOrDefault();
+            var brokerUserInfo = Session[FormsAuthentication.FormsCookieName] as UserInfo;
+            userInfo.ENTT_DPT_ID = "Observer";
             Session[FormsAuthentication.FormsCookieName] = userInfo;
 
             var memberList = new List<SPEH_PLME_PLOCY_MEME_INFO_LIST_WEB_RESULT0>();
@@ -245,32 +238,61 @@ namespace HkEbPortal.Controllers
             return Redirect("../eflexi/User/Login");
         }
 
-
-        [Authorization]
+        [Authorization(UserType = UserType.Member | UserType.Cs | UserType.Bk)]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorization]
+        [Authorization(UserType = UserType.Member | UserType.Cs | UserType.Bk)]
         [ValidateAntiForgeryToken]
         public JsonResult ChangePassword(FormCollection form)
         {
             string oldpwd = form["oldPassword"];
-            string newpwd = form["newPassword"];
-            string confirmpwd = form["confirmPassword"];
-            var entity = new SPEH_USUS_USER_PWD_INFO_UPDATE
+            string newpwd = form["newPassword"] ?? "";
+            string confirmpwd = form["confirmPassword"] ?? "";
+
+            var equals = false;
+            var length = false;
+            var haveSpace = false;
+            var number = false;
+            var upper = false;
+            var lower = false;
+            var punctuation = false;
+            var lv = 0;
+
+            equals = newpwd.Equals(confirmpwd);
+            length = confirmpwd.Length >= 8 && confirmpwd.Length <= 16;
+            haveSpace = !Regex.IsMatch(confirmpwd, @"([\s])");
+
+            number = Regex.IsMatch(confirmpwd, @"([0-9])");
+            upper = Regex.IsMatch(confirmpwd, @"([A-Z])");
+            lower = Regex.IsMatch(confirmpwd, @"([a-z])");
+            punctuation = Regex.IsMatch(confirmpwd, "([~!@#$%^&*()_+{}|:<>?=;',.\"/\\[\\]\\-])");
+
+            if (number) lv++;
+            if (upper) lv++;
+            if (lower) lv++;
+            if (punctuation) lv++;
+
+            if (equals && length && haveSpace && lv > 2)
             {
-                pUSUS_ID = UserInfo.USUS_ID,
-                pPassword = Des.Encrypt(oldpwd),
-                pConfirmPassword = Des.Encrypt(confirmpwd)
-            };
-            CommonBl.Execute(entity);
+                var entity = new SPEH_USUS_USER_PWD_INFO_UPDATE
+                {
+                    pUSUS_ID = UserInfo.USUS_ID,
+                    pPassword = Des.Encrypt(oldpwd),
+                    pConfirmPassword = Des.Encrypt(confirmpwd)
+                };
+                CommonBl.Execute(entity);
 
-            return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
+                return Json(new { Code = entity.pRTN_CD, Msg = entity.pRTN_MSG }, JsonRequestBehavior.DenyGet);
+            }
+            else
+            {
+                return Json(new { Code = 99, Msg = "new password error" }, JsonRequestBehavior.DenyGet);
+            }
         }
-
 
 
         public ActionResult ForgotPassword()

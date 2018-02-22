@@ -91,3 +91,10 @@ function showimg(img) {
         //content: $('#tong')
     });
 }
+
+
+function onInsufficientTips(val) {
+    layer.tips(il8nMessage("pop-up.public.Insufficient"), val, {
+        tips: [4, '#78BA32']
+    });
+}

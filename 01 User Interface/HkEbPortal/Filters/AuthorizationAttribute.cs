@@ -21,7 +21,7 @@ namespace HkEbPortal.Filters
         /// <summary>
         /// 角色名称
         /// </summary>
-        public UserType UserType = UserType.Member;
+        public UserType UserType = UserType.Member | UserType.Observer;
 
         /// <inheritdoc />
         /// <summary>
@@ -61,7 +61,6 @@ namespace HkEbPortal.Filters
             }
         }
 
-
         public void OnAuthorization(AuthorizationContext filterContext)
         {
             if (filterContext.HttpContext == null)
@@ -84,7 +83,6 @@ namespace HkEbPortal.Filters
                     filterContext.Result = new RedirectResult(_authUrl);
                 }
             }
-
         }
 
         private bool HasFlag(object session)
