@@ -73,10 +73,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\03 Business Logic\CommunicationInterface\Ftp.New.BusinessLogic\Ftp.New.BusinessLogic.csproj">
-      <Project>{d62f3ca2-88e3-4965-b08a-36fbd6a7e123}</Project>
-      <Name>Ftp.New.BusinessLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Autofac\System.Framework.Autofac.csproj">
       <Project>{62a00c54-143d-4f30-97d4-28a2605c06b5}</Project>
       <Name>System.Framework.Autofac</Name>
