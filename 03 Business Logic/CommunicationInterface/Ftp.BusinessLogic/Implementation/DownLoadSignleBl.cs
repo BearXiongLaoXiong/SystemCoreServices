@@ -61,10 +61,10 @@ namespace Ftp.BusinessLogic.Implementation
                 while (true) BeginWork(f);
             }, 1)));
 
-            //taskList.Add(Task.Factory.StartNew(x =>
-            //{
-            //    while (true) _inputDataBase.BeginWork();
-            //}, 1));
+            taskList.Add(Task.Factory.StartNew(x =>
+            {
+                while (true) _inputDataBase.BeginWork();
+            }, 1));
 
             Task.WaitAll(taskList.ToArray());
         }
