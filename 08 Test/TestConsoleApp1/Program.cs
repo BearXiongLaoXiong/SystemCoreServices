@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Framework.Aop;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +16,6 @@ namespace TestConsoleApp1
 
         static void Main(string[] args)
         {
-
-
-
-
-
-
-
             var list = Enumerable.Range(0, 10).ToDictionary(i => i, j => 0);
             var taskList = new List<Task>();
             ICommonBl _commonBl = new CommonBl();
@@ -59,7 +53,7 @@ namespace TestConsoleApp1
             foreach (var item in list)
                 Console.WriteLine($"{item.Key}:\t{item.Value}");
 
-            
+
             TestBll tb = new TestBll();
 
             Console.ReadLine();
