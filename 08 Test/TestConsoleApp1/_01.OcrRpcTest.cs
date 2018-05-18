@@ -13,6 +13,7 @@ namespace TestConsoleApp1
     {
         public bool Send()
         {
+
             string server = "192.168.102.188";
             string port = "8888";
             string user = "share";
