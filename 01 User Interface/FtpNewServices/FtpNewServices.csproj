@@ -73,13 +73,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\04 Framework\System.Framework\System.Framework.Autofac\System.Framework.Autofac.csproj">
       <Project>{62a00c54-143d-4f30-97d4-28a2605c06b5}</Project>
       <Name>System.Framework.Autofac</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
