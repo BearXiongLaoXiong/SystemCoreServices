@@ -22,9 +22,9 @@ namespace Ftp.BusinessLogic.Implementation
 
         private readonly List<FtpConfig> _ftpConfigs;
 
-        public DownLoadSignleBl(string jsonConfig)
+        public DownLoadSignleBl(Configs jsonConfig)
         {
-            _ftpConfigs = jsonConfig.FromJson<List<FtpConfig>>();
+            _ftpConfigs = jsonConfig.DownloadConfigs;
         }
 
         public void InitializeComponent(string path)

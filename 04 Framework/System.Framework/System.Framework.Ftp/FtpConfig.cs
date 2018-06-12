@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace System.Framework.Ftp
 {
-    public struct FtpConfig
+    public class Configs
+    {
+        public List<FtpConfig> DownloadConfigs { get; set; }
+    }
+
+    public class FtpConfig
     {
         /// <summary>
         /// 下载类型

@@ -26,9 +26,9 @@ namespace Ftp.BusinessLogic.Implementation
 
         private readonly List<FtpConfig> _ftpConfigs;
 
-        public DownLoadWholeBl(string jsonConfig)
+        public DownLoadWholeBl(Configs jsonConfig)
         {
-            _ftpConfigs = jsonConfig.FromJson<List<FtpConfig>>();
+            _ftpConfigs = jsonConfig.DownloadConfigs;
         }
 
         public void InitializeComponent(string path)

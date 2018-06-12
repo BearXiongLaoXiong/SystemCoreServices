@@ -1,0 +1,36 @@
+﻿{
+  "DownloadConfigs": [
+    {
+      "Ip": "10.128.34.81",
+      "Port": 21,
+      "Uid": "Wayne",
+      "Pwd": "Dxs999999",
+      "RemoteFolder": "claim_img",
+      "RemoteBackupFolder": "ClaimImageBackup",
+      "MessageQueuePath": "",
+      "LocalDirectory": "D:\\FTP\\Ftpbackup",
+      "LocalBackupFolder": "",
+      "NameContains": "_END",
+      "FileType": "_04图片导入",
+      "IsDirectory": true,
+      "ThreadMillisecondsTimeout": 60000,
+      "MaxDegreeOfParallelism": 16
+    },
+    {
+      "Ip": "10.128.34.81",
+      "Port": 21,
+      "Uid": "Wayne",
+      "Pwd": "Dxs999999",
+      "RemoteFolder": "claim_file",
+      "RemoteBackupFolder": "",
+      "MessageQueuePath": "",
+      "LocalDirectory": "D:\\FTP\\Ftpbackup",
+      "LocalBackupFolder": "",
+      "NameContains": "",
+      "FileType": "_05录入信息导入",
+      "IsDirectory": false,
+      "ThreadMillisecondsTimeout": 60000,
+      "MaxDegreeOfParallelism": 8
+    }
+  ]
+}

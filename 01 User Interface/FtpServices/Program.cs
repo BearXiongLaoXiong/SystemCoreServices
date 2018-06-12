@@ -4,8 +4,10 @@ using System;
 using System.Configuration;
 using System.Framework.Autofac;
 using System.Framework.Common;
+using System.Framework.Ftp;
 using System.IO;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace FtpServices
 {
@@ -13,17 +15,17 @@ namespace FtpServices
     {
         static void Main()
         {
-            string path = $@"{AppDomain.CurrentDomain.BaseDirectory}\{ConfigurationManager.AppSettings["FtpServiceConfig"] ?? ""}";
-            if (!File.Exists(path))
-            {
-                Console.WriteLine($"ftpConfig:{path}");
-                Console.WriteLine("请提供Ftp配置文件,5秒后程序将自动退出...");
-                Thread.Sleep(5000);
-                return;
-            }
-            Console.WriteLine($"配置环境:{Path.GetFileName(path).Left(3)}");
-            string config = File.ReadAllText(path).Replace("\r\n", "");
-            var dl = Containers.Resolve<IDownLoadBl>(new NamedParameter("jsonConfig", config));
+           
+            Console.WriteLine($"配置环境:{ConfigurationManager.AppSettings["AppConfig"] ?? "".Left(3)}");
+
+            var configs = new ConfigurationBuilder()                                    //构建ConfigurationBuilder实例
+                .AddInMemoryCollection()                                                //提供内容内存类型的提供程序
+                //.SetBasePath(Directory.GetCurrentDirectory())                           //指定配置文件所在的目录
+                .AddJsonFile(ConfigurationManager.AppSettings["AppConfig"] ?? "")                                  //加载配置文件
+                .Build()
+                .Get<Configs>();
+
+            var dl = Containers.Resolve<IDownLoadBl>(new NamedParameter("jsonConfig", configs));
             dl.InitializeComponent(@".\private$\FtpDownloadServiceQueue");
             //dl.InitializeComponent(@".\private$\FtpDownloadWholeServiceQueue");
 

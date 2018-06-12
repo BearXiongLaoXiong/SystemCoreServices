@@ -1,0 +1,23 @@
+﻿{
+  "defaultAssembly": "Ftp.BusinessLogic",
+  "components": [
+    {
+      "type": "Ftp.BusinessLogic.Implementation.DownLoadBatchBl, Ftp.BusinessLogic",
+      "services": [
+        {
+          "type": "Ftp.BusinessLogic._Interface.IDownLoadBl, Ftp.BusinessLogic"
+        }
+      ],
+      "injectProperties": false
+    },
+    {
+      "type": "System.Framework.Ftp.Ftp, System.Framework.Ftp",
+      "services": [
+        {
+          "type": "System.Framework.Ftp.IFtp, System.Framework.Ftp"
+        }
+      ],
+      "injectProperties": false
+    }
+  ]
+}
