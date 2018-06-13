@@ -10,6 +10,10 @@ namespace EnterpriseSchedulerService
 {
     class Program
     {
+
+
+
+
         static void Main()
         {
             //LogProvider.SetCurrentLogProvider(new ColouredConsoleLogProvider());
