@@ -1,1 +1,1 @@
-纯开源，随便用
+everyone can use this source
